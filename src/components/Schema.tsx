@@ -19,8 +19,15 @@ export function BlogPostSchema({
   slug,
   content,
 }: BlogPostSchemaProps): ReactNode {
-  const isoDate = new Date(date).toISOString();
-  const readTimeMinutes = parseInt(readTime.split(" ")[0]);
+  let isoDate: string;
+  try {
+    const d = new Date(date);
+    isoDate = !isNaN(d.getTime()) ? d.toISOString() : new Date().toISOString();
+  } catch (e) {
+    isoDate = new Date().toISOString();
+  }
+  
+  const readTimeMinutes = parseInt(readTime.split(" ")[0]) || 5;
   const baseUrl = "https://lumina.mx"; // Update with your domain
 
   const schema = {

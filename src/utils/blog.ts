@@ -16,10 +16,12 @@ export interface BlogPost extends BlogPostMeta {
   content: string;
 }
 
-const BLOG_DIR = path.join(process.cwd(), "public", "blog");
+const BLOG_DIR = path.join(process.cwd(), "src", "content", "blog");
 
 export function getBlogPosts(): BlogPost[] {
+  // Asegurarse de que el directorio existe antes de intentar leerlo
   if (!fs.existsSync(BLOG_DIR)) {
+    console.warn(`Warning: Blog directory not found at ${BLOG_DIR}`);
     return [];
   }
 

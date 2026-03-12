@@ -14,11 +14,14 @@ export interface BlogPostCardProps {
 export default function BlogPostCard(props: BlogPostCardProps) {
   const { slug, title, description, date, author, category, readTime } = props;
 
-  const formattedDate = new Date(date).toLocaleDateString("es-MX", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const dateObj = new Date(date);
+  const formattedDate = isNaN(dateObj.getTime())
+    ? date
+    : dateObj.toLocaleDateString("es-MX", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
 
   return (
     <article className="bg-surface border border-borderDark rounded-2xl p-6 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">

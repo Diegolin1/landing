@@ -41,11 +41,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const formattedDate = new Date(post.date).toLocaleDateString("es-MX", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const dateObj = new Date(post.date);
+  const formattedDate = isNaN(dateObj.getTime())
+    ? post.date
+    : dateObj.toLocaleDateString("es-MX", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
 
   // Get related posts (same category)
   const allPosts = getBlogPosts();
