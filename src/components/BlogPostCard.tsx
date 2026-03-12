@@ -1,10 +1,14 @@
 import Link from "next/link";
 import { CalendarIcon, UserIcon, TagIcon, ClockIcon } from "lucide-react";
-import { BlogPostMeta } from "@/utils/blog";
 
-export interface BlogPostCardProps extends BlogPostMeta {
+export interface BlogPostCardProps {
   slug: string;
+  title: string;
   description?: string;
+  date: string;
+  author: string;
+  category: string;
+  readTime: string;
 }
 
 export default function BlogPostCard(props: BlogPostCardProps) {
