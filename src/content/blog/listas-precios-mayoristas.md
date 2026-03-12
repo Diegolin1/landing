@@ -1,21 +1,21 @@
----
-title: "Cómo Estructurar Listas de Precios Mayoristas Que Realmente Venden"
-description: "Estrategia de precios para B2B: márgenes, volúmenes y segmentación. Aumenta ventas en 30% sin bajar precios."
+﻿---
+title: "CÃ³mo Estructurar Listas de Precios Mayoristas Que Realmente Venden"
+description: "Estrategia de precios para B2B: mÃ¡rgenes, volÃºmenes y segmentaciÃ³n. Aumenta ventas en 30% sin bajar precios."
 date: "2026-03-10"
 author: "Lumina"
 category: "Precios"
 readTime: "7 min"
 ---
 
-# Listas de Precios Mayoristas: Cómo Vender Más Sin Bajar Precios
+# Listas de Precios Mayoristas: CÃ³mo Vender MÃ¡s Sin Bajar Precios
 
-Uno de los mayores errores en B2B es **no tener una estructura de precios clara**. Los vendedores improvisan, cada uno cotiza diferente, y los clientes desconfían.
+Uno de los mayores errores en B2B es **no tener una estructura de precios clara**. Los vendedores improvisan, cada uno cotiza diferente, y los clientes desconfÃ­an.
 
-Aquí te muestro cómo estructurar precios que **aumenten ventas en 30%** sin tocar el costo unitario.
+AquÃ­ te muestro cÃ³mo estructurar precios que **aumenten ventas en 30%** sin tocar el costo unitario.
 
 ## El Problema: Precios Inconsistentes
 
-Escenario típico en una PYME mexicana:
+Escenario tÃ­pico en una PYME mexicana:
 
 **Martes 10 AM:**
 - Cliente X pregunta precio de zapatos formato 36-42
@@ -25,64 +25,64 @@ Escenario típico en una PYME mexicana:
 - Cliente Y pregunta el *mismo producto* en *mayor volumen*
 - Vendedor B: "A ti te los puedo dejar en $130"
 
-**Miércoles:**
-- Cliente X se entera (por otra fuente) que le cobraron más
+**MiÃ©rcoles:**
+- Cliente X se entera (por otra fuente) que le cobraron mÃ¡s
 - Desconfianza. Cambia de proveedor.
 
 **Costo:** 1 cliente perdido = $2,500-5,000/mes en ingresos
 
-## La Solución: 4 Listas de Precios Claras
+## La SoluciÃ³n: 4 Listas de Precios Claras
 
 En lugar de negociar caso-por-caso, tienes **4 segmentos con precios fijos**:
 
 ### 1. MINORISTA
-- **Quién:** Pequeño vendedor, tienda local
+- **QuiÃ©n:** PequeÃ±o vendedor, tienda local
 - **Volumen:** 1-20 pares/mes
 - **Precio:** $150/par (Lista Base)
 - **Margen para ti:** 40%
-- **Ventaja:** Acceso fácil. No requiere relación comercial previa.
+- **Ventaja:** Acceso fÃ¡cil. No requiere relaciÃ³n comercial previa.
 
 ### 2. DISTRIBUIDOR
-- **Quién:** Intermediario que revende a otros
+- **QuiÃ©n:** Intermediario que revende a otros
 - **Volumen:** 50-200 pares/mes
 - **Precio:** $120/par (20% descuento)
 - **Margen para ti:** 35%
-- **Ventaja:** Volumen garantizado. Relación comercial a largo plazo.
+- **Ventaja:** Volumen garantizado. RelaciÃ³n comercial a largo plazo.
 
 ### 3. MAYORISTA
-- **Quién:** Empresa que revende en múltiples locales
+- **QuiÃ©n:** Empresa que revende en mÃºltiples locales
 - **Volumen:** 200+ pares/mes
 - **Precio:** $100/par (33% descuento)
 - **Margen para ti:** 30%
-- **Ventaja:** Volumen alto. Predictibilidad en producción.
+- **Ventaja:** Volumen alto. Predictibilidad en producciÃ³n.
 
 ### 4. VIP (Solo clientes especiales)
-- **Quién:** Cadena grande, cliente histórico, relación estratégica
+- **QuiÃ©n:** Cadena grande, cliente histÃ³rico, relaciÃ³n estratÃ©gica
 - **Volumen:** 500+ pares/mes
 - **Precio:** $85/par (43% descuento)
 - **Margen para ti:** 25%
 - **Ventaja:** Volumen masivo. Acceso a nuevos mercados.
 
-## Por Qué Esto Funciona Psicológicamente
+## Por QuÃ© Esto Funciona PsicolÃ³gicamente
 
 1. **Claridad = Confianza**
    - Cliente sabe su precio desde el inicio
-   - Sin sorpresas ni negociaciones difíciles
-   - Decide basado en información, no en "si me quieren"
+   - Sin sorpresas ni negociaciones difÃ­ciles
+   - Decide basado en informaciÃ³n, no en "si me quieren"
 
 2. **Incentivo de Crecimiento**
    - Si un distribuidor aumenta volumen, accede a mejor precio
-   - Natural progression: Minorista → Distribuidor → Mayorista
+   - Natural progression: Minorista â†’ Distribuidor â†’ Mayorista
    - Cliente se siente recompensado por lealtad
 
 3. **Predictibilidad**
-   - Tu vendedor sabe qué precio ofrecer (sin improviso)
+   - Tu vendedor sabe quÃ© precio ofrecer (sin improviso)
    - Cliente sabe su segmento (sin confusion)
    - Margen consistente en contabilidad
 
-## Ejemplo Práctico: Zapatos de Cuero
+## Ejemplo PrÃ¡ctico: Zapatos de Cuero
 
-**Costo de producción:** $60/par
+**Costo de producciÃ³n:** $60/par
 
 **Estructura de precios:**
 
@@ -94,27 +94,27 @@ En lugar de negociar caso-por-caso, tienes **4 segmentos con precios fijos**:
 | VIP | $85 | $25 | 29% | Con volumen, ganas |
 
 **Nota:** Incluso en VIP tienes 25% margen. Pero ganas por volumen:
-- VIP: 500 pares × $25 = $12,500/mes
-- Minorista: 10 pares × $90 = $900/mes
+- VIP: 500 pares Ã— $25 = $12,500/mes
+- Minorista: 10 pares Ã— $90 = $900/mes
 
 **1 cliente VIP = 14 clientes minoristas**
 
-## Strategy: Cómo Llegar a Clientes VIP
+## Strategy: CÃ³mo Llegar a Clientes VIP
 
-No esperes que un VIP llegue mágicamente. **Cultívalos:**
+No esperes que un VIP llegue mÃ¡gicamente. **CultÃ­valos:**
 
-1. **Identifica tu mejor cliente actual** (el que más compra)
-2. **Ofrécele un plan especial:** "Si haces pedido de 500 pares, baja el precio a $85"
-3. **Comprométete:** Tiempo de entrega garantizado, soporte exclusivo
+1. **Identifica tu mejor cliente actual** (el que mÃ¡s compra)
+2. **OfrÃ©cele un plan especial:** "Si haces pedido de 500 pares, baja el precio a $85"
+3. **CompromÃ©tete:** Tiempo de entrega garantizado, soporte exclusivo
 4. **Expande:** Se vuelve referencia para otros grandes
 
 En 6-12 meses, puedes tener 2-3 clientes VIP = $25,000-37,500/mes garantizados.
 
-## Implementación Práctica
+## ImplementaciÃ³n PrÃ¡ctica
 
 ### Sin Sistema:
 - Cada vendedor improvisa precios
-- Inconsistencia → desconfianza
+- Inconsistencia â†’ desconfianza
 - Margen variable (de 20% a 60%)
 - Contabilidad confusa
 
@@ -122,51 +122,49 @@ En 6-12 meses, puedes tener 2-3 clientes VIP = $25,000-37,500/mes garantizados.
 - Precios centralizados en plataforma
 - Cliente VE su precio antes de pedir
 - Margen siempre consistente
-- Contabilidad automática
+- Contabilidad automÃ¡tica
 
 **Tiempo de setup:** 30 minutos (una sola vez)
 
-## Bonus: Descuentos x Volumen + Duración
+## Bonus: Descuentos x Volumen + DuraciÃ³n
 
-Puedes ir más allá y crear "super-descuentos" por comportamiento:
+Puedes ir mÃ¡s allÃ¡ y crear "super-descuentos" por comportamiento:
 
 ```
 PB normal: $100 (Mayorista)
-↓
+â†“
 "Cliente que pide 200+ TODOS los meses": $95
-↓
+â†“
 "Cliente que paga 2 semanas antes": $90
-↓
-"Cliente de 2+ años": $88
+â†“
+"Cliente de 2+ aÃ±os": $88
 ```
 
-Cada incentivo es pequeño (2-5% extra), pero combinados = lealtad total.
+Cada incentivo es pequeÃ±o (2-5% extra), pero combinados = lealtad total.
 
-## Checklist: ¿Está Tu Estructura Lista?
+## Checklist: Â¿EstÃ¡ Tu Estructura Lista?
 
 - [ ] Definiste 3-4 segmentos de clientes
-- [ ] Cada segmento tiene precio fijo (sin negociación)
+- [ ] Cada segmento tiene precio fijo (sin negociaciÃ³n)
 - [ ] Todos tus vendedores saben los precios
-- [ ] El sistema registra qué cliente está en qué segmento
+- [ ] El sistema registra quÃ© cliente estÃ¡ en quÃ© segmento
 - [ ] Contabilidad ve el margen claro por cliente
 
-Si tienes todo, **tu conversion subirá automáticamente 30%** porque:
-- Clientes sin confusión = decisión más rápida
+Si tienes todo, **tu conversion subirÃ¡ automÃ¡ticamente 30%** porque:
+- Clientes sin confusiÃ³n = decisiÃ³n mÃ¡s rÃ¡pida
 - Precios claros = confianza
 - Incentivos = lealtad
 
----
 
 ##  Acciones Hoy
 
 1. **Escribe tus 4 segmentos** (Minorista, Distribuidor, Mayorista, VIP)
-2. **Define volúmenes realistas** para cada uno
-3. **Calcula margen** (Precio - Costo Producción)
+2. **Define volÃºmenes realistas** para cada uno
+3. **Calcula margen** (Precio - Costo ProducciÃ³n)
 4. **Comunica a tu equipo:** Todos deben saber estos precios
 5. **Implementa en tu plataforma** (si tienes)
 
-[En Lumina, esto toma 15 minutos.](/) Prueba 14 días gratis.
+[En Lumina, esto toma 15 minutos.](/) Prueba 14 dÃ­as gratis.
 
----
 
-**¿Ya tienes estructura de precios?** [Cuéntanos](mailto:soporte@lumina.mx) — Te ayudamos a validarla y mejorar márgenes.
+**Â¿Ya tienes estructura de precios?** [CuÃ©ntanos](mailto:soporte@lumina.mx) â€” Te ayudamos a validarla y mejorar mÃ¡rgenes.
