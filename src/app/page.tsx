@@ -57,6 +57,16 @@ const ObjectionsHandler = dynamic(() => import("../components/ObjectionsHandler"
   ssr: true,
 });
 
+const WorkflowDiagram = dynamic(() => import("../components/WorkflowDiagram"), {
+  loading: () => <div className="h-96 bg-surface/30 rounded-2xl animate-pulse" />,
+  ssr: true,
+});
+
+const LimitedTimeOffer = dynamic(() => import("../components/LimitedTimeOffer"), {
+  loading: () => <div className="h-96 bg-surface/30 rounded-2xl animate-pulse" />,
+  ssr: true,
+});
+
 const Pricing = dynamic(() => import("../components/Pricing"), {
   loading: () => <div className="h-96 bg-surface/30 rounded-2xl animate-pulse" />,
   ssr: true,
@@ -78,7 +88,9 @@ export default function Home() {
       <Navbar />
       <Hero />
       <SocialProof />
+      <LimitedTimeOffer />
       <BeforeAfter />
+      <WorkflowDiagram />
       <FeaturesBento />
       <Integrations />
       <Industries />
