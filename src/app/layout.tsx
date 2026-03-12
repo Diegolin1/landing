@@ -10,46 +10,90 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Lumina | El ShowRoom B2B Inteligente",
-  description: "Digitaliza tus ventas mayoristas. Catálogos inteligentes, control de vendedores y facturación automática en un solo lugar.",
-  keywords: "B2B, catálogo digital, facturación CFDI, vendedores, México, SaaS",
-  authors: [{ name: "Lumina" }],
+  metadataBase: new URL('https://lumina.mx'),
+  title: {
+    default: "Lumina B2B | Plataforma de Ventas Mayoristas para Fabricantes Mexicanos",
+    template: "%s | Lumina B2B"
+  },
+  description: "Plataforma SaaS #1 para fabricantes mexicanos. Catálogo digital B2B, facturación CFDI 4.0 automática, CRM de vendedores y listas de precios. Aumenta 30% tus ventas mayoristas.",
+  keywords: [
+    "plataforma B2B México",
+    "catálogo digital mayoristas",
+    "facturación CFDI 4.0",
+    "software fabricantes México",
+    "showroom digital",
+    "CRM vendedores B2B",
+    "pedidos mayoreo",
+    "calzado León Guanajuato",
+    "distribución mayorista",
+    "SaaS México",
+    "factura automática SAT",
+    "listas de precios B2B",
+    "gate B2B",
+    "portal mayoristas"
+  ],
+  authors: [{ name: "Lumina", url: "https://lumina.mx" }],
   creator: "Lumina",
   publisher: "Lumina",
+  applicationName: "Lumina B2B",
+  referrer: "origin-when-cross-origin",
   formatDetection: {
     email: false,
     telephone: false,
     address: false,
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
+  category: "Business Software",
+  classification: "B2B SaaS Platform",
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://lumina.mx',
+    languages: {
+      'es-MX': 'https://lumina.mx',
+    },
   },
   icons: {
     icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
   openGraph: {
     type: "website",
     locale: "es_MX",
-    url: "https://lumina.vercel.app",
-    siteName: "Lumina ShowRoom B2B",
-    title: "Lumina | El ShowRoom B2B Inteligente para México",
-    description: "Plataforma SaaS para digitalizar catálogos mayoristas, gestionar vendedores y facturar en CFDI automáticamente.",
+    url: "https://lumina.mx",
+    siteName: "Lumina B2B",
+    title: "Lumina B2B | Showroom Digital para Fabricantes Mexicanos",
+    description: "Automatiza tus ventas mayoristas con catálogo digital, facturación CFDI 4.0 y CRM de vendedores. Solución #1 para fabricantes de León, Guanajuato. Prueba gratis 14 días.",
     images: [
       {
-        url: "https://lumina.vercel.app/og-image.png",
+        url: "https://lumina.mx/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Lumina ShowRoom B2B",
+        alt: "Lumina B2B - Plataforma de Ventas Mayoristas para México",
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lumina | ShowRoom B2B para México",
-    description: "Digitaliza tu operación mayorista con CFDI integrado",
+    site: "@LuminaMX",
+    creator: "@LuminaMX",
+    title: "Lumina B2B | Showroom Digital + CFDI 4.0 para Fabricantes",
+    description: "Automatiza tus ventas mayoristas. Catálogo digital, facturación CFDI automática y CRM de vendedores. Prueba gratis 14 días.",
+    images: ["https://lumina.mx/twitter-image.png"],
+  },
+  verification: {
+    google: "tu-codigo-google-search-console",
   },
 };
 
