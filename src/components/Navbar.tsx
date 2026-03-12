@@ -16,6 +16,7 @@ export default function Navbar() {
         <a href="#solucion" className="hover:text-primary transition-colors">La Solución</a>
         <a href="#caracteristicas" className="hover:text-primary transition-colors">Características</a>
         <a href="#precios" className="hover:text-primary transition-colors">Planes</a>
+        <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
       </nav>
 
       <div className="hidden md:flex gap-4">
