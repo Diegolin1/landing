@@ -1,8 +1,3 @@
-import "server-only";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-
 export interface BlogPostMeta {
   title: string;
   description: string;
@@ -17,14 +12,27 @@ export interface BlogPost extends BlogPostMeta {
   content: string;
 }
 
-const BLOG_DIR = path.join(process.cwd(), "public", "blog");
+// Función auxiliar para verificar si estamos en el servidor
+const isServer = typeof window === 'undefined';
 
 export function getBlogPosts(): BlogPost[] {
+  // Si estamos en el cliente, retornar array vacío
+  if (!isServer) {
+    return [];
+  }
+
+  // Importaciones dinámicas solo en servidor
+  const fs = require("fs");
+  const path = require("path");
+  const matter = require("gray-matter");
+
+  const BLOG_DIR = path.join(process.cwd(), "public", "blog");
+
   if (!fs.existsSync(BLOG_DIR)) {
     return [];
   }
 
-  const files = fs.readdirSync(BLOG_DIR).filter((file) => file.endsWith(".md"));
+  const files = fs.readdirSync(BLOG_DIR).filter((file: string) => file.endsWith(".md"));
 
   const posts = files.map((file) => {
     const slug = file.replace(".md", "");
@@ -46,6 +54,15 @@ export function getBlogPosts(): BlogPost[] {
 }
 
 export function getBlogPost(slug: string): BlogPost | null {
+  if (!isServer) {
+    return null;
+  }
+
+  const fs = require("fs");
+  const path = require("path");
+  const matter = require("gray-matter");
+
+  const BLOG_DIR = path.join(process.cwd(), "public", "blog");
   const filePath = path.join(BLOG_DIR, `${slug}.md`);
 
   if (!fs.existsSync(filePath)) {
