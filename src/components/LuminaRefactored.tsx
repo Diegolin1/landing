@@ -39,8 +39,11 @@ import {
   Twitter,
   Linkedin,
   Instagram,
-  Youtube
+  Youtube,
+  Sun,
+  Moon
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const LuminaRefactored = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -51,6 +54,43 @@ const LuminaRefactored = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const [roiInputs, setRoiInputs] = useState({ orders: 50, avgTicket: 5000, errorRate: 15 });
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
+
+  const comparisonData = [
+    {
+      feature: "Catálogos de productos",
+      traditional: "PDFs pesados que se desactualizan",
+      lumina: "Showroom digital 100% dinámico",
+      tooltip: "Tus clientes siempre ven existencias y precios reales en tiempo real."
+    },
+    {
+      feature: "Toma de pedidos",
+      traditional: "WhatsApp y errores manuales",
+      lumina: "Portal de autoservicio 24/7",
+      tooltip: "Reduce errores de captura en un 99% y libera a tu equipo de ventas."
+    },
+    {
+      feature: "Facturación CFDI 4.0",
+      traditional: "Proceso manual lento y tedioso",
+      lumina: "Generación automática en 1 clic",
+      tooltip: "Ahorra 15 horas a la semana automatizando el timbrado legal."
+    },
+    {
+      feature: "Privacidad de Precios",
+      traditional: "Expuestos a toda la competencia",
+      lumina: "Acceso privado por cliente (Gate B2B)",
+      tooltip: "Controla quién ve qué precios y protege tus márgenes comerciales."
+    }
+  ];
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDarkMode]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -142,39 +182,46 @@ const LuminaRefactored = () => {
   return (
     <>
       <StructuredData />
-      <div className="bg-white text-slate-900 font-sans antialiased scroll-smooth">
+      <div className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-sans antialiased scroll-smooth transition-colors duration-300">
         {/* Navbar */}
-      <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-100 px-6 py-4">
+        <nav className="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-b border-slate-100 dark:border-slate-800 px-6 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2 group cursor-pointer">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg shadow-blue-200 group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg shadow-blue-200 dark:shadow-blue-900 group-hover:scale-105 transition-transform">
               <span className="text-white font-black text-2xl">L</span>
             </div>
-            <span className="text-2xl font-black tracking-tight text-blue-900">Lumina</span>
+            <span className="text-2xl font-black tracking-tight text-blue-900 dark:text-blue-100">Lumina</span>
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex gap-10 text-sm font-bold text-slate-500">
-            <a href="#solucion" className="hover:text-blue-600 transition-colors py-2">Solución</a>
-            <a href="#features" className="hover:text-blue-600 transition-colors py-2">Funciones</a>
-            <a href="#comparativa" className="hover:text-blue-600 transition-colors py-2">Comparativa</a>
-            <a href="#pricing" className="hover:text-blue-600 transition-colors py-2">Precios</a>
+          <div className="hidden md:flex gap-10 text-sm font-bold text-slate-500 dark:text-slate-400">
+            <a href="#solucion" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-2">Solución</a>
+            <a href="#features" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-2">Funciones</a>
+            <a href="#comparativa" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-2">Comparativa</a>
+            <a href="#pricing" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-2">Precios</a>
           </div>
 
           <div className="flex items-center gap-4">
-            <button className="hidden sm:block text-blue-600 font-bold text-sm px-4 py-2 hover:bg-blue-50 rounded-lg transition-colors">
+            <button 
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+              aria-label="Toggle Dark Mode"
+            >
+              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+            <button className="hidden sm:block text-blue-600 dark:text-blue-400 font-bold text-sm px-4 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors">
               Iniciar Sesión
             </button>
             <button 
               onClick={() => setIsModalOpen(true)}
-              className="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-blue-700 transition-all shadow-xl shadow-blue-100 active:scale-95"
+              className="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-blue-700 transition-all shadow-xl shadow-blue-100 dark:shadow-blue-900/40 active:scale-95"
             >
               Agenda tu Demo
             </button>
             
             {/* Mobile Menu Button */}
             <button 
-              className="md:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg"
+              className="md:hidden p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -184,220 +231,221 @@ const LuminaRefactored = () => {
 
         {/* Mobile Menu Overlay */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-100 shadow-2xl animate-in slide-in-from-top duration-300">
-            <div className="flex flex-col p-6 gap-4 font-bold text-slate-600">
-              <a href="#solucion" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-slate-50">Solución</a>
-              <a href="#features" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-slate-50">Funciones</a>
-              <a href="#comparativa" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-slate-50">Comparativa</a>
-              <a href="#pricing" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-slate-50">Precios</a>
-              <button className="w-full bg-blue-50 text-blue-600 py-4 rounded-xl mt-4">Iniciar Sesión</button>
+          <div className="md:hidden absolute top-full left-0 w-full bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 shadow-2xl animate-in slide-in-from-top duration-300">
+            <div className="flex flex-col p-6 gap-4 font-bold text-slate-600 dark:text-slate-300">
+              <a href="#solucion" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-slate-50 dark:border-slate-800">Solución</a>
+              <a href="#features" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-slate-50 dark:border-slate-800">Funciones</a>
+              <a href="#comparativa" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-slate-50 dark:border-slate-800">Comparativa</a>
+              <a href="#pricing" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-slate-50 dark:border-slate-800">Precios</a>
+              <button className="w-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 py-4 rounded-xl mt-4">Iniciar Sesión</button>
             </div>
           </div>
         )}
       </nav>
 
-      {/* Hero Section - Mejorado */}
-      <header className="relative overflow-hidden pt-20 pb-28 lg:pt-36 lg:pb-44 bg-gradient-to-br from-blue-50/30 via-white to-emerald-50/20">
+      {/* Hero Section - Mejorado con Glassmorphism y Animaciones */}
+      <header className="relative overflow-hidden pt-20 pb-28 lg:pt-36 lg:pb-44 bg-gradient-to-br from-blue-50/30 via-white to-emerald-50/20 dark:from-slate-900 dark:via-slate-900 dark:to-blue-900/20 transition-colors duration-300">
         {/* Efectos de fondo */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/20 dark:bg-blue-600/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-400/20 dark:bg-emerald-600/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="z-10"
+          >
             {/* Badge superior */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white text-xs font-bold uppercase tracking-wider mb-6 shadow-lg shadow-blue-200 animate-bounce-slow">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-xs font-bold uppercase tracking-wider mb-6 shadow-lg shadow-blue-200 dark:shadow-none animate-bounce-slow">
               <Sparkles size={14} className="fill-white" />
               <span>✨ Plataforma B2B #1 en México 2024</span>
             </div>
 
-            {/* Título principal */}
-            <h1 className="text-5xl lg:text-7xl font-extrabold text-blue-900 leading-[1.05] mb-8 tracking-tight">
-              Vende mayoreo <span className="bg-gradient-to-r from-blue-600 to-emerald-500 bg-clip-text text-transparent">10x más rápido</span> con catálogo digital
+            {/* Título principal - Ajustado al Copywriting */}
+            <h1 className="text-5xl lg:text-7xl font-extrabold text-blue-900 dark:text-white leading-[1.05] mb-8 tracking-tight">
+              Ahorra <span className="bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">10 horas a la semana</span> en tus entregas
             </h1>
 
-            {/* Subtítulo con beneficios claros */}
-            <p className="text-xl text-slate-700 leading-relaxed mb-6 max-w-lg font-medium">
-              La plataforma que usan <span className="text-blue-600 font-bold">fabricantes de León, Gto.</span> para eliminar PDFs, automatizar pedidos y generar <span className="text-emerald-600 font-bold">facturas CFDI 4.0</span> en un clic.
+            {/* Subtítulo con beneficios claros - Menos Nosotros, Más Tú */}
+            <p className="text-xl text-slate-700 dark:text-slate-300 leading-relaxed mb-6 max-w-lg font-medium">
+              Toma el control total de tu negocio. Olvida el caos operativo y enfócate en lo que importa: <span className="text-blue-600 dark:text-blue-400 font-bold">hacer crecer tus ventas</span> mientras Lumina automatiza tus pedidos y facturas.
             </p>
 
-            {/* Lista de beneficios rápidos */}
-            <div className="mb-10 space-y-3">
-              {[
-                "Catálogo digital privado 24/7 (Gate B2B)",
-                "Facturación CFDI 4.0 automática integrada",
-                "CRM de vendedores con métricas en tiempo real",
-                "Aumenta 30% tus pedidos recurrentes"
-              ].map((benefit, i) => (
-                <div key={i} className="flex items-center gap-3 text-slate-700">
-                  <CheckCircle2 size={20} className="text-emerald-500 shrink-0" />
-                  <span className="font-medium">{benefit}</span>
+            {/* CTAs mejorados - Azul Eléctrico y Social Proof */}
+            <div className="flex flex-col gap-4 mb-8">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-700 text-white px-8 py-5 rounded-2xl font-bold text-lg hover:shadow-2xl hover:shadow-blue-500/30 hover:-translate-y-1 transition-all flex items-center justify-center gap-3 group relative overflow-hidden"
+                >
+                  <span className="relative z-10 flex items-center gap-3">
+                    Reclamar mi acceso gratuito
+                    <ArrowRight className="group-hover:translate-x-2 transition-transform" />
+                  </span>
+                </button>
+                <button
+                  onClick={() => setVideoModalOpen(true)}
+                  className="bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 border-2 border-blue-600 dark:border-blue-400 px-8 py-5 rounded-2xl font-bold text-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all flex items-center justify-center gap-3 group shadow-lg"
+                >
+                  <Play size={20} className="fill-blue-600 dark:fill-blue-400" />
+                  Ver Demo
+                </button>
+              </div>
+              
+              {/* Prueba Social Instantánea */}
+              <div className="flex items-center gap-3 mt-2 px-2">
+                <div className="flex -space-x-2">
+                  {[1,2,3,4].map(i => (
+                    <div key={i} className="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                      <div className="w-full h-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-[10px] font-bold text-blue-600">
+                        {String.fromCharCode(64 + i)}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-
-            {/* CTAs mejorados */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-5 rounded-2xl font-bold text-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-2xl shadow-blue-200 hover:shadow-blue-300 hover:-translate-y-1 flex items-center justify-center gap-3 group relative overflow-hidden"
-              >
-                <span className="relative z-10 flex items-center gap-3">
-                  Prueba Gratis 14 Días
-                  <ArrowRight className="group-hover:translate-x-2 transition-transform" />
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-blue-800 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
-              </button>
-              <button
-                onClick={() => setVideoModalOpen(true)}
-                className="bg-white text-blue-600 border-2 border-blue-600 px-8 py-5 rounded-2xl font-bold text-lg hover:bg-blue-50 transition-all flex items-center justify-center gap-3 group shadow-lg"
-              >
-                <Play size={20} className="fill-blue-600" />
-                Ver Demo (2 min)
-              </button>
+                <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                  Únete a <span className="text-blue-600 dark:text-blue-400 font-bold">+500 estudiantes</span> de la comunidad B2B
+                </p>
+              </div>
             </div>
 
             {/* Trust indicators */}
-            <div className="flex flex-wrap items-center gap-6 pt-6 border-t border-slate-200">
-              <div className="flex items-center gap-2 text-sm text-slate-600">
+            <div className="flex flex-wrap items-center gap-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+              <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
                 <Shield size={18} className="text-emerald-500" />
-                <span className="font-semibold">Sin tarjeta de crédito</span>
+                <span className="font-semibold">Sin tarjeta</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-slate-600">
+              <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
                 <Clock size={18} className="text-blue-500" />
-                <span className="font-semibold">Setup en 24 horas</span>
+                <span className="font-semibold">Setup rápido</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-slate-600">
+              <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
                 <Award size={18} className="text-amber-500" />
-                <span className="font-semibold">Garantía 30 días</span>
+                <span className="font-semibold">Garantía total</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Sección de video/demo mejorada */}
-          <div className="relative">
+          {/* Sección de video/demo con Glassmorphism */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative"
+          >
             <div className="absolute -inset-6 bg-gradient-to-br from-blue-600/20 to-emerald-600/20 rounded-[3rem] blur-3xl -z-10 animate-pulse"></div>
-            <div className="bg-white rounded-3xl border-2 border-slate-200 shadow-2xl p-6 transform hover:scale-[1.02] transition-transform duration-500">
-              <div className="relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl aspect-video w-full flex flex-col items-center justify-center border-2 border-slate-700 overflow-hidden group cursor-pointer"
+            <div className="bg-white/40 dark:bg-slate-800/40 backdrop-blur-xl rounded-3xl border-2 border-white/50 dark:border-slate-700/50 shadow-2xl p-6 transform hover:scale-[1.02] transition-transform duration-500">
+              <div className="relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl aspect-video w-full flex flex-col items-center justify-center border-2 border-slate-700 overflow-hidden group cursor-pointer shadow-inner"
                 onClick={() => setVideoModalOpen(true)}
               >
-                {/* Video placeholder mejorado */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-transparent to-emerald-600/20"></div>
+                {/* Video placeholder */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-transparent to-emerald-600/20 opacity-60 group-hover:opacity-80 transition-opacity"></div>
                 <div className="relative z-10 text-center">
-                  <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-2xl shadow-blue-500/50 group-hover:scale-110 transition-transform">
+                  <div className="w-20 h-20 bg-blue-600/90 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-4 shadow-2xl shadow-blue-500/50 group-hover:scale-110 transition-transform border border-white/30">
                     <Play size={32} className="fill-white text-white ml-1" />
                   </div>
                   <p className="text-white font-bold text-lg mb-2">Ver Lumina en acción</p>
-                  <p className="text-blue-200 text-sm">2:30 min · Demo completa</p>
+                  <p className="text-blue-200 text-sm">Demo completa de la plataforma</p>
                 </div>
 
-                {/* Mockup de interfaz en fondo */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 opacity-40">
-                  <div className="grid grid-cols-3 gap-3">
-                    <div className="aspect-square bg-white/10 backdrop-blur-sm rounded-lg"></div>
-                    <div className="aspect-square bg-white/10 backdrop-blur-sm rounded-lg"></div>
-                    <div className="aspect-square bg-white/10 backdrop-blur-sm rounded-lg"></div>
-                  </div>
+                {/* Glassmorphism Decorative Elements */}
+                <div className="absolute bottom-6 left-6 right-6 flex justify-between gap-4">
+                  <div className="h-12 w-32 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl"></div>
+                  <div className="h-12 w-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full"></div>
                 </div>
               </div>
 
-              {/* Mini stats debajo del video */}
+              {/* Mini stats con Glassmorphism */}
               <div className="grid grid-cols-3 gap-4 mt-6">
-                <div className="text-center p-3 bg-blue-50 rounded-xl">
-                  <p className="text-2xl font-bold text-blue-600">500+</p>
-                  <p className="text-xs text-slate-600 font-medium">Empresas</p>
-                </div>
-                <div className="text-center p-3 bg-emerald-50 rounded-xl">
-                  <p className="text-2xl font-bold text-emerald-600">30%</p>
-                  <p className="text-xs text-slate-600 font-medium">+ Ventas</p>
-                </div>
-                <div className="text-center p-3 bg-amber-50 rounded-xl">
-                  <p className="text-2xl font-bold text-amber-600">24h</p>
-                  <p className="text-xs text-slate-600 font-medium">Setup</p>
-                </div>
+                {[
+                  { label: "Empresas", value: "500+", color: "blue" },
+                  { label: "Ventas MXN", value: "100M+", color: "emerald" },
+                  { label: "Rating", value: "4.9/5", color: "amber" }
+                ].map((stat, i) => (
+                  <div key={i} className="text-center p-3 bg-white/50 dark:bg-slate-700/50 backdrop-blur-md border border-white/50 dark:border-slate-600/50 rounded-xl">
+                    <p className={`text-xl font-bold text-${stat.color}-600 dark:text-${stat.color}-400`}>{stat.value}</p>
+                    <p className="text-[10px] text-slate-600 dark:text-slate-400 font-bold uppercase tracking-wider">{stat.label}</p>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </header>
 
-      {/* Social Proof Section - Mejorado */}
-      <section className="bg-gradient-to-b from-slate-50 to-white py-16 border-y border-slate-200/60">
+      {/* Social Proof Section - Logos en escala de grises */}
+      <section className="bg-slate-50 dark:bg-slate-900/50 py-16 border-y border-slate-200/60 dark:border-slate-800 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-6">
-          <p className="text-center text-slate-500 font-bold text-sm uppercase tracking-[0.15em] mb-12 flex items-center justify-center gap-2">
-            <Award size={18} className="text-amber-500" />
-            Confianza de +500 fabricantes en México
+          <p className="text-center text-slate-400 dark:text-slate-500 font-bold text-sm uppercase tracking-[0.15em] mb-12 flex items-center justify-center gap-2">
+            <Award size={18} className="text-slate-400" />
+            Empresas y Facultades que confían en nosotros
           </p>
 
-          {/* Logos de empresas */}
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20 mb-12">
+          {/* Logos de empresas en escala de grises */}
+          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20 mb-12 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
             {[
-              "CALZADO GARCÍA",
-              "TEXTILES LEÓN",
-              "MODA BAJÍO",
-              "PLÁSTICOS MX",
-              "DISTRIBUCIONES GTO"
-            ].map((company, i) => (
-              <div key={i} className="font-black text-xl md:text-2xl text-slate-400 hover:text-blue-600 transition-colors cursor-default tracking-tight">
-                {company}
+              "FACULTAD DE INGENIERÍA",
+              "CIENCIAS SOCIALES",
+              "ADMINISTRACIÓN",
+              "DISEÑO DIGITAL",
+              "ECONOMÍA"
+            ].map((org, i) => (
+              <div key={i} className="font-black text-lg md:text-xl text-slate-500 dark:text-slate-400 tracking-tighter">
+                {org}
               </div>
             ))}
           </div>
 
-          {/* Trust badges mejorados */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto pt-12 border-t border-slate-200">
-            <div className="flex flex-col items-center gap-3 p-4 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600">
-                <CheckCircle2 size={24} />
+          {/* Trust badges mejorados con Dark Mode */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto pt-12 border-t border-slate-200 dark:border-slate-800">
+            {[
+              { icon: <CheckCircle2 size={24} />, label: "SAT CFDI 4.0", sub: "Validado", col: "blue" },
+              { icon: <Shield size={24} />, label: "SSL 256-bit", sub: "Seguro", col: "emerald" },
+              { icon: <TrendingUp size={24} />, label: "99.9% Uptime", sub: "Garantizado", col: "amber" },
+              { icon: <Users size={24} />, label: "500+ Usuarios", sub: "Activos", col: "blue" }
+            ].map((badge, i) => (
+              <div key={i} className="flex flex-col items-center gap-3 p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all">
+                <div className={`w-12 h-12 rounded-xl bg-${badge.col}-100 dark:bg-${badge.col}-900/30 flex items-center justify-center text-${badge.col}-600 dark:text-${badge.col}-400`}>
+                  {badge.icon}
+                </div>
+                <div className="text-center">
+                  <p className="text-sm font-bold text-slate-700 dark:text-slate-200">{badge.label}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">{badge.sub}</p>
+                </div>
               </div>
-              <div className="text-center">
-                <p className="text-sm font-bold text-slate-700">SAT CFDI 4.0</p>
-                <p className="text-xs text-slate-500">Validado</p>
-              </div>
-            </div>
-            <div className="flex flex-col items-center gap-3 p-4 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600">
-                <Shield size={24} />
-              </div>
-              <div className="text-center">
-                <p className="text-sm font-bold text-slate-700">SSL 256-bit</p>
-                <p className="text-xs text-slate-500">Seguro</p>
-              </div>
-            </div>
-            <div className="flex flex-col items-center gap-3 p-4 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600">
-                <TrendingUp size={24} />
-              </div>
-              <div className="text-center">
-                <p className="text-sm font-bold text-slate-700">99.9% Uptime</p>
-                <p className="text-xs text-slate-500">Garantizado</p>
-              </div>
-            </div>
-            <div className="flex flex-col items-center gap-3 p-4 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600">
-                <Users size={24} />
-              </div>
-              <div className="text-center">
-                <p className="text-sm font-bold text-slate-700">500+ Clientes</p>
-                <p className="text-xs text-slate-500">Activos</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonios Section - NUEVO */}
-      <section className="py-24 px-6 bg-white">
+      {/* Testimonios Section - Mejorado con Dark Mode y Animaciones */}
+      <section className="py-24 px-6 bg-white dark:bg-slate-900 transition-colors duration-300">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-blue-900 mb-4">Lo que dicen nuestros clientes</h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">Fabricantes mexicanos que transformaron sus ventas B2B con Lumina</p>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-blue-900 dark:text-white mb-4">Lo que dicen nuestros clientes</h2>
+            <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">Fabricantes que transformaron su operación con Lumina</p>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, i) => (
-              <div key={i} className="bg-gradient-to-br from-slate-50 to-white p-8 rounded-3xl border border-slate-200 shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all duration-300">
+              <motion.div 
+                key={i} 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-slate-50 dark:bg-slate-800/50 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-300"
+              >
                 {/* Rating */}
                 <div className="flex gap-1 mb-6">
                   {[...Array(testimonial.rating)].map((_, idx) => (
@@ -406,206 +454,183 @@ const LuminaRefactored = () => {
                 </div>
 
                 {/* Testimonial text */}
-                <p className="text-slate-700 font-medium leading-relaxed mb-8 italic text-lg">
+                <p className="text-slate-700 dark:text-slate-300 font-medium leading-relaxed mb-8 italic text-lg">
                   "{testimonial.text}"
                 </p>
 
                 {/* Author info */}
-                <div className="flex items-center gap-4 pt-6 border-t border-slate-200">
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center text-white font-bold text-xl">
+                <div className="flex items-center gap-4 pt-6 border-t border-slate-200 dark:border-slate-700">
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white font-bold text-xl">
                     {testimonial.name.charAt(0)}
                   </div>
                   <div>
-                    <p className="font-bold text-blue-900">{testimonial.name}</p>
-                    <p className="text-sm text-slate-600">{testimonial.role}</p>
-                    <p className="text-xs text-slate-500">{testimonial.company}</p>
+                    <p className="font-bold text-blue-900 dark:text-blue-100">{testimonial.name}</p>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">{testimonial.role}</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* El Problema vs La Solución */}
-      <section id="solucion" className="py-24 lg:py-32 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl font-bold text-blue-900 mb-6">El caos del WhatsApp está frenando tu crecimiento</h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">Mantener tu negocio B2B en procesos manuales no solo es frustrante, es costoso.</p>
+      {/* Comparativa Tú vs Competencia - Refactorizado */}
+      <section id="comparativa" className="py-24 lg:py-32 px-6 bg-slate-50 dark:bg-slate-900/50 transition-colors duration-300">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-blue-900 dark:text-white mb-6">Tú vs. La Competencia</h2>
+            <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">Por qué las empresas líderes están abandonando los métodos tradicionales por Lumina.</p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-            {/* Problema */}
-            <div className="bg-slate-100 rounded-3xl p-8 lg:p-12 border border-slate-200 flex flex-col">
-              <div className="flex items-center gap-3 text-red-600 font-bold mb-8 uppercase tracking-wider text-sm">
-                <AlertCircle size={20} />
-                <span>Método Tradicional</span>
-              </div>
-              <h3 className="text-3xl font-bold text-slate-800 mb-8">La pesadilla operativa</h3>
-              <ul className="space-y-6 flex-grow">
-                {[
-                  "Catálogos en PDF pesados que se desactualizan al enviarlos.",
-                  "Errores constantes en precios y existencias.",
-                  "Cobranza manual y rastreo de depósitos por chats interminables.",
-                  "Precios de mayoreo expuestos a la competencia."
-                ].map((item, i) => (
-                  <li key={i} className="flex gap-4 text-slate-600">
-                    <X className="text-red-400 shrink-0 mt-1" size={20} />
-                    <span className="text-lg">{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-12 p-6 bg-red-50 rounded-2xl border border-red-100">
-                <p className="text-red-800 font-medium">Resultado: Pérdida del 15% de ventas por errores y falta de seguimiento.</p>
-              </div>
+          <div className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-2xl overflow-hidden relative">
+            {/* Sticky Header Table */}
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead className="sticky top-0 z-20 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
+                  <tr>
+                    <th className="p-6 text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 w-1/3">Característica</th>
+                    <th className="p-6 text-sm font-bold uppercase tracking-wider text-red-600 w-1/3 text-center">Competencia</th>
+                    <th className="p-6 text-sm font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 w-1/3 text-center">Lumina</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
+                  {comparisonData.map((row, i) => (
+                    <tr key={i} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                      <td className="p-6 font-bold text-slate-800 dark:text-slate-200">{row.feature}</td>
+                      <td className="p-6 text-center border-x border-slate-100 dark:border-slate-700">
+                        <div className="flex flex-col items-center gap-2">
+                          <X className="text-red-500" size={32} strokeWidth={3} />
+                          <span className="text-sm text-slate-500 dark:text-slate-400 font-medium">{row.traditional}</span>
+                        </div>
+                      </td>
+                      <td className="p-6 text-center bg-blue-50/30 dark:bg-blue-900/10 relative">
+                        <div 
+                          className="flex flex-col items-center gap-2 cursor-help group"
+                          onMouseEnter={() => setHoveredFeature(i)}
+                          onMouseLeave={() => setHoveredFeature(null)}
+                        >
+                          <Check className="text-emerald-500" size={32} strokeWidth={3} />
+                          <span className="text-sm text-blue-900 dark:text-blue-100 font-bold underline decoration-blue-200 decoration-dotted underline-offset-4">{row.lumina}</span>
+                          
+                          {/* Custom Tooltip */}
+                          <AnimatePresence>
+                            {hoveredFeature === i && (
+                              <motion.div
+                                initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-64 p-4 bg-slate-900 text-white text-xs rounded-xl shadow-2xl z-30 pointer-events-none"
+                              >
+                                <div className="absolute bottom-[-6px] left-1/2 -translate-x-1/2 w-3 h-3 bg-slate-900 rotate-45"></div>
+                                <p className="leading-relaxed font-medium">{row.tooltip}</p>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-
-            {/* Solución - Lumina */}
-            <div className="bg-blue-600 rounded-3xl p-8 lg:p-12 text-white shadow-2xl shadow-blue-200 transform lg:scale-[1.05] z-10 flex flex-col relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
-              <div className="flex items-center gap-3 text-blue-100 font-bold mb-8 uppercase tracking-wider text-sm">
-                <Zap size={20} className="fill-blue-100" />
-                <span>La Solución Lumina</span>
-              </div>
-              <h3 className="text-3xl font-bold mb-8 italic tracking-tight">Showroom Inteligente</h3>
-              <ul className="space-y-6 flex-grow">
-                {[
-                  "Catálogo digital 100% dinámico y privado.",
-                  "Pedidos en 1 clic que se integran a tu almacén.",
-                  "Facturación CFDI 4.0 automática desde el pedido.",
-                  "Gestión de agentes de venta con métricas en tiempo real."
-                ].map((item, i) => (
-                  <li key={i} className="flex gap-4">
-                    <Check className="text-emerald-400 shrink-0 mt-1" size={20} />
-                    <span className="text-lg font-medium">{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-12 p-6 bg-white/10 rounded-2xl border border-white/20 backdrop-blur-sm">
-                <p className="text-blue-50 font-medium">Resultado: Aumento del 30% en pedidos recurrentes y 0 errores de facturación.</p>
-              </div>
-            </div>
+          </div>
+          
+          <div className="mt-12 p-8 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-3xl text-white text-center shadow-xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+            <p className="text-xl font-bold italic relative z-10">
+              "Lumina eliminó el caos de pedidos por WhatsApp y nos permitió recuperar 15 horas a la semana de trabajo administrativo."
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Grid de Características */}
-      <section id="features" className="bg-slate-50 py-24 lg:py-32 px-6">
+      {/* Grid de Características - Mejorado con Dark Mode y Animaciones */}
+      <section id="features" className="bg-slate-50 dark:bg-slate-900/50 py-24 lg:py-32 px-6 transition-colors duration-300">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6"
+          >
             <div>
-              <h2 className="text-4xl font-bold text-blue-900 mb-4">Todo lo que necesitas para dominar tu mercado</h2>
-              <p className="text-xl text-slate-600 max-w-2xl">Diseñamos Lumina pensando específicamente en la realidad del fabricante mexicano.</p>
+              <h2 className="text-4xl font-bold text-blue-900 dark:text-white mb-4">Todo lo que necesitas para dominar tu mercado</h2>
+              <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl">Ahorra tiempo y elimina el error humano con herramientas diseñadas para la eficiencia.</p>
             </div>
-            <button className="text-blue-600 font-bold flex items-center gap-2 hover:gap-4 transition-all">
-              Ver todas las funciones <ArrowRight size={20} />
-            </button>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Feature 1 */}
-            <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl hover:shadow-blue-100/50 transition-all hover:-translate-y-2 group">
-              <div className="p-4 bg-blue-50 text-blue-600 rounded-2xl w-fit mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                <Lock size={28} />
-              </div>
-              <h4 className="text-xl font-bold text-blue-900 mb-3">Gate B2B</h4>
-              <p className="text-slate-600 leading-relaxed">
-                Protege tus precios de mayoreo. Solo clientes autorizados pueden acceder a tu catálogo y condiciones comerciales.
-              </p>
-            </div>
-
-            {/* Feature 2 */}
-            <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl hover:shadow-blue-100/50 transition-all hover:-translate-y-2 group">
-              <div className="p-4 bg-emerald-50 text-emerald-600 rounded-2xl w-fit mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
-                <Smartphone size={28} />
-              </div>
-              <h4 className="text-xl font-bold text-blue-900 mb-3">100% Mobile First</h4>
-              <p className="text-slate-600 leading-relaxed">
-                Diseñado para usarse en el celular, tanto para tus clientes como para tus vendedores en campo o exposiciones.
-              </p>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl hover:shadow-blue-100/50 transition-all hover:-translate-y-2 group">
-              <div className="p-4 bg-blue-50 text-blue-600 rounded-2xl w-fit mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                <Users size={28} />
-              </div>
-              <h4 className="text-xl font-bold text-blue-900 mb-3">CRM Vendedores</h4>
-              <p className="text-slate-600 leading-relaxed">
-                Gestiona rutas, metas de venta y el historial de pedidos de cada agente desde un tablero centralizado y fácil de usar.
-              </p>
-            </div>
-
-            {/* Feature 4 */}
-            <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl hover:shadow-blue-100/50 transition-all hover:-translate-y-2 group">
-              <div className="p-4 bg-blue-50 text-blue-600 rounded-2xl w-fit mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                <FileText size={28} />
-              </div>
-              <h4 className="text-xl font-bold text-blue-900 mb-3">CFDI Automático</h4>
-              <p className="text-slate-600 leading-relaxed">
-                Genera facturas 4.0 al instante. Sin procesos manuales, sin errores fiscales y listo para el SAT.
-              </p>
-            </div>
+            {[
+              { icon: <Lock size={28} />, title: "Gate B2B", desc: "Protege tus precios. Solo clientes autorizados acceden a tu catálogo.", col: "blue" },
+              { icon: <Smartphone size={28} />, title: "100% Mobile", desc: "Tus clientes pueden pedir desde su celular, en cualquier lugar.", col: "emerald" },
+              { icon: <Users size={28} />, title: "CRM de Ventas", desc: "Gestiona a tus vendedores y sus metas desde un solo lugar.", col: "blue" },
+              { icon: <FileText size={28} />, title: "CFDI 4.0", desc: "Facturación automática integrada lista para el SAT.", col: "blue" }
+            ].map((feature, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-xl transition-all hover:-translate-y-2 group"
+              >
+                <div className={`p-4 bg-${feature.col}-50 dark:bg-${feature.col}-900/30 text-${feature.col}-600 dark:text-${feature.col}-400 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform`}>
+                  {feature.icon}
+                </div>
+                <h4 className="text-xl font-bold text-blue-900 dark:text-white mb-3">{feature.title}</h4>
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">
+                  {feature.desc}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Tabla Comparativa */}
-      <section id="comparativa" className="py-24 lg:py-32 px-6 overflow-hidden">
+      {/* Tabla Comparativa Secundaria */}
+      <section id="comparativa-plataformas" className="py-24 lg:py-32 px-6 dark:bg-slate-900 transition-colors duration-300">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-blue-900 mb-4">Lumina vs Shopify y otros</h2>
-            <p className="text-lg text-slate-600">Por qué los fabricantes eligen una solución B2B especializada.</p>
+            <h2 className="text-3xl font-bold text-blue-900 dark:text-white mb-4">Lumina vs Shopify y otros</h2>
+            <p className="text-lg text-slate-600 dark:text-slate-400">Por qué los fabricantes eligen una solución B2B especializada.</p>
           </div>
 
           <div className="relative">
             <div className="overflow-x-auto">
-              <table className="w-full text-left border-separate border-spacing-0 rounded-2xl border border-slate-200 shadow-xl overflow-hidden">
+              <table className="w-full text-left border-separate border-spacing-0 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl overflow-hidden bg-white dark:bg-slate-800">
                 <thead>
-                  <tr className="bg-slate-50">
-                    <th className="p-6 text-slate-400 font-bold uppercase text-xs tracking-wider border-b border-slate-200">Característica</th>
-                    <th className="p-6 text-blue-900 font-bold text-lg border-b border-blue-600 bg-blue-50/50">Lumina B2B</th>
-                    <th className="p-6 text-slate-400 font-medium border-b border-slate-200">Shopify/B2C</th>
+                  <tr className="bg-slate-50 dark:bg-slate-800/50">
+                    <th className="p-6 text-slate-400 font-bold uppercase text-xs tracking-wider border-b border-slate-200 dark:border-slate-700">Característica</th>
+                    <th className="p-6 text-blue-900 dark:text-blue-400 font-bold text-lg border-b border-blue-600 bg-blue-50/50 dark:bg-blue-900/20">Lumina B2B</th>
+                    <th className="p-6 text-slate-400 font-medium border-b border-slate-200 dark:border-slate-700">Shopify/B2C</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
-                  <tr>
-                    <td className="p-6 font-semibold text-slate-700">Facturación CFDI 4.0 Nativa</td>
-                    <td className="p-6 bg-blue-50/30"><Check className="text-emerald-500" /></td>
-                    <td className="p-6 text-slate-400">Solo con Apps Extras</td>
-                  </tr>
-                  <tr>
-                    <td className="p-6 font-semibold text-slate-700">Privacidad B2B (Gate)</td>
-                    <td className="p-6 bg-blue-50/30"><Check className="text-emerald-500" /></td>
-                    <td className="p-6 text-slate-400">No nativo</td>
-                  </tr>
-                  <tr>
-                    <td className="p-6 font-semibold text-slate-700">CRM de Agentes de Venta</td>
-                    <td className="p-6 bg-blue-50/30"><Check className="text-emerald-500" /></td>
-                    <td className="p-6 text-slate-400"><X className="text-red-300" /></td>
-                  </tr>
-                  <tr>
-                    <td className="p-6 font-semibold text-slate-700">UX Especializada en Mayoristas</td>
-                    <td className="p-6 bg-blue-50/30"><Check className="text-emerald-500" /></td>
-                    <td className="p-6 text-slate-400">Enfoque Minorista</td>
-                  </tr>
-                  <tr>
-                    <td className="p-6 font-semibold text-slate-700">Soporte Estratégico en MX</td>
-                    <td className="p-6 bg-blue-50/30"><Check className="text-emerald-500" /></td>
-                    <td className="p-6 text-slate-400">Genérico / Inglés</td>
-                  </tr>
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
+                  {[
+                    ["Facturación CFDI 4.0 Nativa", true, "Solo con Apps"],
+                    ["Privacidad B2B (Gate)", true, "No nativo"],
+                    ["CRM de Agentes de Venta", true, false],
+                    ["UX Especializada", true, "Enfoque Minorista"]
+                  ].map((row, i) => (
+                    <tr key={i}>
+                      <td className="p-6 font-semibold text-slate-700 dark:text-slate-300 text-sm">{row[0]}</td>
+                      <td className="p-6 bg-blue-50/30 dark:bg-blue-900/10">
+                        {row[1] === true ? <Check className="text-emerald-500" /> : <X className="text-red-300" />}
+                      </td>
+                      <td className="p-6 text-slate-400 text-sm">
+                        {row[2] === false ? <X className="text-red-300" /> : row[2]}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
-            {/* Adorno de fondo */}
-            <div className="absolute -z-10 -right-20 -bottom-20 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl"></div>
           </div>
         </div>
       </section>
 
       {/* ROI Calculator Section - NUEVO */}
-      <section className="py-24 px-6 bg-gradient-to-br from-blue-600 to-blue-700 text-white relative overflow-hidden">
+      <section className="py-24 px-6 bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-900 dark:to-indigo-950 text-white relative overflow-hidden transition-colors duration-300">
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
         <div className="max-w-5xl mx-auto relative z-10">
           <div className="text-center mb-12">
@@ -666,17 +691,103 @@ const LuminaRefactored = () => {
             </div>
 
             <div className="mt-8 text-center">
-              <p className="text-blue-100 text-sm mb-4">
+              <p className="text-blue-100 text-sm mb-6">
                 💡 <strong>Ganancia neta estimada:</strong> ${calculateROI().netGain.toLocaleString()} MXN/mes
               </p>
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="bg-white text-blue-600 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-blue-50 transition-all shadow-2xl"
+                className="bg-white text-blue-600 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-blue-50 transition-all shadow-2xl hover:scale-105 active:scale-95"
               >
-                Comenzar mi Prueba Gratis →
+                Reclamar mi acceso gratuito →
               </button>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Platform Mockup Section - NUEVO */}
+      <section className="py-24 px-6 bg-white dark:bg-slate-900 transition-colors duration-300 border-t border-slate-100 dark:border-slate-800">
+        <div className="max-w-7xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-blue-900 dark:text-white mb-6">Tu nuevo centro de comando B2B</h2>
+            <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+              Una interfaz diseñada para la velocidad. Sin distracciones, solo herramientas para <span className="text-blue-600 dark:text-blue-400 font-bold">vender más</span> y gestionar mejor.
+            </p>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+            className="relative group"
+          >
+            {/* Mockup Frame */}
+            <div className="relative z-10 bg-slate-100 dark:bg-slate-800 rounded-[2rem] p-2 md:p-4 shadow-2xl border-4 border-slate-200 dark:border-slate-700">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden aspect-video relative shadow-inner">
+                {/* Mockup App Interface (Visual representation) */}
+                <div className="absolute inset-0 flex">
+                  {/* Mock Sidebar */}
+                  <div className="w-[18%] bg-slate-50 dark:bg-slate-800/50 border-r border-slate-200 dark:border-slate-700 p-4 space-y-6 hidden md:block">
+                    <div className="h-8 w-full bg-blue-600 rounded-lg"></div>
+                    <div className="space-y-3">
+                      {[1,2,3,4,5,6].map(i => (
+                        <div key={i} className={`h-3 w-full rounded-full ${i === 1 ? 'bg-blue-100 dark:bg-blue-900/40' : 'bg-slate-200 dark:bg-slate-700'}`}></div>
+                      ))}
+                    </div>
+                  </div>
+                  {/* Mock Content */}
+                  <div className="flex-1 p-6 md:p-10 space-y-8 bg-white dark:bg-slate-900">
+                    <div className="flex justify-between items-center">
+                      <div className="space-y-2">
+                        <div className="h-6 w-48 bg-slate-100 dark:bg-slate-800 rounded-full"></div>
+                        <div className="h-4 w-32 bg-slate-50 dark:bg-slate-800/50 rounded-full"></div>
+                      </div>
+                      <div className="h-12 w-40 bg-blue-600 rounded-2xl shadow-lg shadow-blue-200 dark:shadow-none"></div>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      {[
+                        { val: "$125,430", lab: "Ventas Hoy", col: "blue" },
+                        { val: "48", lab: "Pedidos Nuevos", col: "emerald" },
+                        { val: "92%", lab: "Eficiencia", col: "amber" }
+                      ].map((card, i) => (
+                        <div key={i} className="p-6 bg-slate-50 dark:bg-slate-800/40 rounded-2xl border border-slate-100 dark:border-slate-700">
+                          <div className={`w-8 h-8 rounded-lg bg-${card.col}-100 dark:bg-${card.col}-900/30 mb-4`}></div>
+                          <p className={`text-2xl font-black text-${card.col}-600 dark:text-${card.col}-400`}>{card.val}</p>
+                          <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">{card.lab}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="h-48 md:h-64 bg-slate-50 dark:bg-slate-800/40 rounded-2xl border border-slate-100 dark:border-slate-700 p-6 flex items-center justify-center">
+                       <div className="text-center space-y-4 opacity-40">
+                         <BarChart3 size={48} className="mx-auto text-slate-400" />
+                         <p className="text-sm font-bold">Gráfico de tendencias en tiempo real</p>
+                       </div>
+                    </div>
+                  </div>
+                </div>
+                {/* Realism Overlays */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/5 via-transparent to-white/10 pointer-events-none"></div>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-slate-900/40 backdrop-blur-[2px]">
+                   <button 
+                    onClick={() => setVideoModalOpen(true)}
+                    className="bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 px-8 py-4 rounded-2xl font-black shadow-2xl flex items-center gap-3 hover:scale-105 transition-transform"
+                   >
+                     <Play size={20} className="fill-blue-600 dark:fill-blue-400" /> VER INTERFAZ REAL
+                   </button>
+                </div>
+              </div>
+            </div>
+            {/* Background decorations */}
+            <div className="absolute -top-12 -right-12 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl -z-10 animate-pulse"></div>
+            <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-emerald-600/10 rounded-full blur-3xl -z-10 animate-pulse delay-700"></div>
+          </motion.div>
         </div>
       </section>
 
@@ -967,8 +1078,8 @@ const LuminaRefactored = () => {
             className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300" 
             onClick={() => !isSubmitting && setIsModalOpen(false)}
           ></div>
-          <div className="bg-white rounded-[2rem] shadow-2xl w-full max-w-lg relative z-10 overflow-hidden animate-in zoom-in-95 duration-300">
-            <div className="bg-blue-600 p-8 text-white relative">
+          <div className="bg-white dark:bg-slate-800 rounded-[2rem] shadow-2xl w-full max-w-lg relative z-10 overflow-hidden animate-in zoom-in-95 duration-300 border dark:border-slate-700">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-8 text-white relative">
               <button 
                 onClick={() => setIsModalOpen(false)}
                 className="absolute top-6 right-6 p-2 hover:bg-white/10 rounded-full transition-colors"
@@ -976,57 +1087,57 @@ const LuminaRefactored = () => {
               >
                 <X size={24} />
               </button>
-              <h3 className="text-3xl font-bold mb-2">Agenda tu Demo</h3>
-              <p className="text-blue-100">Déjanos tus datos y un experto se contactará contigo en menos de 2 horas.</p>
+              <h3 className="text-3xl font-bold mb-2">Acceso Gratuito</h3>
+              <p className="text-blue-100">Únete a la comunidad B2B y ahorra tiempo desde el primer día.</p>
             </div>
             
             <div className="p-8">
               {isSuccess ? (
                 <div className="text-center py-12 animate-in zoom-in-95 duration-500">
-                  <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <div className="w-20 h-20 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Check size={40} />
                   </div>
-                  <h4 className="text-2xl font-bold text-blue-950 mb-2">¡Solicitud recibida!</h4>
-                  <p className="text-slate-600 text-lg">Pronto estaremos en contacto.</p>
+                  <h4 className="text-2xl font-bold text-blue-950 dark:text-white mb-2">¡Solicitud recibida!</h4>
+                  <p className="text-slate-600 dark:text-slate-400 text-lg">Pronto estaremos en contacto.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-bold text-slate-700 mb-2">Nombre Completo</label>
+                    <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Nombre Completo</label>
                     <input 
                       required
                       type="text" 
                       placeholder="Ej. Juan Pérez"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-slate-700 mb-2">Email Corporativo</label>
+                    <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Email Corporativo</label>
                     <input 
                       required
                       type="email" 
                       placeholder="juan@tuempresa.com"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-slate-700 mb-2">Teléfono / WhatsApp</label>
+                    <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Teléfono / WhatsApp</label>
                     <input 
                       required
                       type="tel" 
                       placeholder="55 1234 5678"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
                     />
                   </div>
                   <button 
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-2 mt-6 disabled:bg-slate-300 shadow-xl shadow-blue-100"
+                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-4 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-indigo-800 transition-all flex items-center justify-center gap-2 mt-6 disabled:bg-slate-300 shadow-xl shadow-blue-500/20"
                   >
                     {isSubmitting ? (
                       <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                     ) : (
-                      "Confirmar mi Demo"
+                      "Reclamar mi acceso gratuito"
                     )}
                   </button>
                 </form>
