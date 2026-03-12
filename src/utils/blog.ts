@@ -49,7 +49,7 @@ export function getBlogPosts(): BlogPost[] {
 
   // Sort by date descending
   return posts.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a: BlogPost, b: BlogPost) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 }
 
