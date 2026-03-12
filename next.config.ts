@@ -16,9 +16,6 @@ const nextConfig: NextConfig = {
   // Compression
   compress: true,
 
-  // Powering Framer Motion optimization
-  swcMinify: true,
-
   // Headers for caching strategy
   async headers() {
     return [
