@@ -12,6 +12,7 @@ Disallow: /private/
 # Let search engines know about the sitemap
 Sitemap: https://lumina.vercel.app/sitemap.xml
 Sitemap: https://lumina.vercel.app/sitemap.txt
+Sitemap: https://lumina.vercel.app/api/blog-sitemap
 
 # Crawl delay for respectful indexing (optional)
 Crawl-delay: 1

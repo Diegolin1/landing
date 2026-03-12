@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { ArrowLeftIcon, CalendarIcon, UserIcon, ClockIcon, ShareIcon } from "lucide-react";
 import { getBlogPost, getBlogPosts } from "@/utils/blog";
 import Markdown from "markdown-to-jsx";
+import { BlogPostSchema } from "@/components/Schema";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -53,6 +55,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <div className="min-h-screen bg-background text-white">
+      <BlogPostSchema
+        title={post.title}
+        description={post.description}
+        author={post.author}
+        date={post.date}
+        readTime={post.readTime}
+        slug={slug}
+        content={post.content}
+      />
+      
       {/* Header */}
       <header className="bg-surface border-b border-borderDark sticky top-0 z-50">
         <nav className="container mx-auto px-6 py-6 flex items-center justify-between">
@@ -193,6 +205,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
           </section>
         )}
+
+        {/* Newsletter Section */}
+        <section className="mt-20 border-t border-borderDark pt-12">
+          <NewsletterSignup />
+        </section>
       </main>
     </div>
   );

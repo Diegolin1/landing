@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeftIcon, SearchIcon } from "lucide-react";
 import BlogPostCard from "@/components/BlogPostCard";
+import NewsletterSignup from "@/components/NewsletterSignup";
 import { getBlogPosts } from "@/utils/blog";
 
 export default function BlogPage() {
@@ -105,6 +106,11 @@ export default function BlogPage() {
             <p className="text-white/60 text-lg">No hay artículos que coincidan con tu búsqueda.</p>
           </section>
         )}
+
+        {/* Newsletter Section */}
+        <section className="mt-20 max-w-2xl mx-auto">
+          <NewsletterSignup />
+        </section>
       </main>
     </div>
   );
