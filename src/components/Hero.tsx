@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, ShoppingCart, BarChart3, ShieldCheck } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
+import { scrollToDemoBooking } from "../utils/scroll";
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
@@ -69,11 +70,17 @@ export default function Hero() {
           variants={itemVariants}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <button className="relative w-full sm:w-auto px-8 py-4 rounded-lg bg-primary hover:bg-primary-hover text-background font-bold text-lg transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(245,158,11,0.4)] hover:shadow-[0_0_30px_rgba(245,158,11,0.6)]">
+          <button 
+            onClick={() => scrollToDemoBooking()}
+            className="relative w-full sm:w-auto px-8 py-4 rounded-lg bg-primary hover:bg-primary-hover text-background font-bold text-lg transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(245,158,11,0.4)] hover:shadow-[0_0_30px_rgba(245,158,11,0.6)]"
+          >
             <span className="absolute inset-0 rounded-lg bg-primary opacity-0 group-hover:opacity-20 transition-opacity" />
             Comienza tu Prueba Gratis <ArrowRight className="w-5 h-5" />
           </button>
-          <button className="w-full sm:w-auto px-8 py-4 rounded-lg bg-surface border border-borderDark hover:bg-surfaceHover hover:border-primary text-white font-medium text-lg transition-all">
+          <button 
+            onClick={() => scrollToDemoBooking()}
+            className="w-full sm:w-auto px-8 py-4 rounded-lg bg-surface border border-borderDark hover:bg-surfaceHover hover:border-primary text-white font-medium text-lg transition-all"
+          >
             Agendar Demostración
           </button>
         </motion.div>

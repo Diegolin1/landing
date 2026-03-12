@@ -59,7 +59,7 @@ export default function DemoBooking() {
   };
 
   return (
-    <section className="py-16 px-6 lg:px-12 bg-gradient-to-b from-background to-surface/30">
+    <section id="demo-booking" className="py-16 px-6 lg:px-12 bg-gradient-to-b from-background to-surface/30">
       <motion.div
         variants={containerVariants}
         initial="hidden"

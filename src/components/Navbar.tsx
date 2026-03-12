@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X, ChevronDown, BookOpenIcon, GiftIcon } from "lucide-react";
+import { scrollToDemoBooking } from "../utils/scroll";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -87,10 +88,16 @@ export default function Navbar() {
 
       {/* Desktop Right Buttons */}
       <div className="hidden lg:flex gap-3 items-center">
-        <button className="text-sm font-medium text-textMuted hover:text-white transition-colors px-4 py-2 rounded-lg hover:bg-surface">
+        <a 
+          href="/login"
+          className="text-sm font-medium text-textMuted hover:text-white transition-colors px-4 py-2 rounded-lg hover:bg-surface"
+        >
           Iniciar Sesión
-        </button>
-        <button className="text-sm bg-primary text-background font-bold px-6 py-2.5 rounded-lg hover:bg-primary/90 transition-all shadow-[0_0_15px_rgba(245,158,11,0.2)] hover:shadow-[0_0_25px_rgba(245,158,11,0.3)] hover:scale-105">
+        </a>
+        <button 
+          onClick={() => scrollToDemoBooking()}
+          className="text-sm bg-primary text-background font-bold px-6 py-2.5 rounded-lg hover:bg-primary/90 transition-all shadow-[0_0_15px_rgba(245,158,11,0.2)] hover:shadow-[0_0_25px_rgba(245,158,11,0.3)] hover:scale-105"
+        >
           Prueba Gratis
         </button>
       </div>
@@ -152,10 +159,19 @@ export default function Navbar() {
               >
                 📦 Descargar Guía Gratuita
               </Link>
-              <button className="w-full text-sm font-medium text-textMuted hover:text-white transition-colors px-3 py-2 rounded hover:bg-surface">
+              <a 
+                href="/login"
+                className="block w-full text-sm font-medium text-textMuted hover:text-white transition-colors px-3 py-2 rounded hover:bg-surface"
+              >
                 Iniciar Sesión
-              </button>
-              <button className="w-full text-sm bg-primary text-background font-bold px-4 py-2.5 rounded hover:bg-primary/90 transition-all">
+              </a>
+              <button 
+                onClick={() => {
+                  scrollToDemoBooking();
+                  setIsOpen(false);
+                }}
+                className="w-full text-sm bg-primary text-background font-bold px-4 py-2.5 rounded hover:bg-primary/90 transition-all"
+              >
                 Prueba Gratis
               </button>
             </div>

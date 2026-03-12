@@ -4,7 +4,7 @@ import { Lock, Smartphone, Users, FileText, TrendingUp, Shield } from "lucide-re
 
 export default function FeaturesBento() {
   return (
-    <section id="solucion" className="py-24 px-6 max-w-7xl mx-auto">
+    <section id="caracteristicas" className="py-24 px-6 max-w-7xl mx-auto">
       <div className="text-center mb-16">
         <h2 className="text-3xl md:text-5xl font-bold mb-4">Construido para el <span className="text-primary">B2B Latino</span></h2>
         <p className="text-textMuted max-w-2xl mx-auto text-lg">Entendemos cómo haces negocios. Herramientas diseñadas para agilizar tu operación sin complicar a tus clientes.</p>

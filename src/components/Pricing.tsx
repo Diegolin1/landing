@@ -1,5 +1,6 @@
 "use client";
 import { Check } from "lucide-react";
+import { scrollToDemoBooking } from "../utils/scroll";
 
 const plans = [
   {
@@ -51,7 +52,10 @@ export default function Pricing() {
             </div>
             <p className="text-sm text-textMuted mb-8 h-10">{plan.desc}</p>
             
-            <button className={`w-full py-3 rounded-lg font-medium mb-8 transition-colors ${plan.popular ? 'bg-primary text-background hover:bg-primary-hover' : 'bg-transparent border border-borderDark hover:border-textMuted'}`}>
+            <button 
+              onClick={() => scrollToDemoBooking()}
+              className={`w-full py-3 rounded-lg font-medium mb-8 transition-colors ${plan.popular ? 'bg-primary text-background hover:bg-primary-hover' : 'bg-transparent border border-borderDark hover:border-textMuted'}`}
+            >
               {plan.cta}
             </button>
 

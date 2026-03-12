@@ -34,7 +34,7 @@ export default function FAQ() {
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-24 px-6 bg-background">
+    <section id="faq" className="py-24 px-6 bg-background">
       <div className="max-w-3xl mx-auto">
         {/* Heading */}
         <motion.div 
