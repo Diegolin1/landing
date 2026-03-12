@@ -1,3 +1,7 @@
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+
 export interface BlogPostMeta {
   title: string;
   description: string;
@@ -12,22 +16,9 @@ export interface BlogPost extends BlogPostMeta {
   content: string;
 }
 
-// Función auxiliar para verificar si estamos en el servidor
-const isServer = typeof window === 'undefined';
+const BLOG_DIR = path.join(process.cwd(), "public", "blog");
 
 export function getBlogPosts(): BlogPost[] {
-  // Si estamos en el cliente, retornar array vacío
-  if (!isServer) {
-    return [];
-  }
-
-  // Importaciones dinámicas solo en servidor
-  const fs = require("fs");
-  const path = require("path");
-  const matter = require("gray-matter");
-
-  const BLOG_DIR = path.join(process.cwd(), "public", "blog");
-
   if (!fs.existsSync(BLOG_DIR)) {
     return [];
   }
@@ -44,25 +35,15 @@ export function getBlogPosts(): BlogPost[] {
       slug,
       content,
       ...(data as BlogPostMeta),
-    };
+    } as BlogPost;
   });
 
-  // Sort by date descending
   return posts.sort(
     (a: BlogPost, b: BlogPost) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 }
 
 export function getBlogPost(slug: string): BlogPost | null {
-  if (!isServer) {
-    return null;
-  }
-
-  const fs = require("fs");
-  const path = require("path");
-  const matter = require("gray-matter");
-
-  const BLOG_DIR = path.join(process.cwd(), "public", "blog");
   const filePath = path.join(BLOG_DIR, `${slug}.md`);
 
   if (!fs.existsSync(filePath)) {
@@ -76,16 +57,16 @@ export function getBlogPost(slug: string): BlogPost | null {
     slug,
     content,
     ...(data as BlogPostMeta),
-  };
+  } as BlogPost;
 }
 
 export function getBlogCategories(): string[] {
   const posts = getBlogPosts();
-  const categories = new Set(posts.map((post) => post.category));
+  const categories = new Set(posts.map((post: BlogPost) => post.category));
   return Array.from(categories).sort();
 }
 
 export function getBlogPostsByCategory(category: string): BlogPost[] {
   const posts = getBlogPosts();
-  return posts.filter((post) => post.category === category);
+  return posts.filter((post: BlogPost) => post.category === category);
 }
