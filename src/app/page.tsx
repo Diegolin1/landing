@@ -67,6 +67,11 @@ const LimitedTimeOffer = dynamic(() => import("../components/LimitedTimeOffer"),
   ssr: true,
 });
 
+const InfrastructureMetrics = dynamic(() => import("../components/InfrastructureMetrics"), {
+  loading: () => <div className="h-96 bg-surface/30 rounded-2xl animate-pulse" />,
+  ssr: true,
+});
+
 const Pricing = dynamic(() => import("../components/Pricing"), {
   loading: () => <div className="h-96 bg-surface/30 rounded-2xl animate-pulse" />,
   ssr: true,
@@ -97,6 +102,7 @@ export default function Home() {
       <WhyLumina />
       <ROICalculator />
       <SecurityTrust />
+      <InfrastructureMetrics />
       <MoneyBackGuarantee />
       
       {/* Banner de urgencia */}
