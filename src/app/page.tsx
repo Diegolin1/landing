@@ -47,6 +47,16 @@ const Industries = dynamic(() => import("../components/Industries"), {
   ssr: true,
 });
 
+const MoneyBackGuarantee = dynamic(() => import("../components/MoneyBackGuarantee"), {
+  loading: () => <div className="h-96 bg-surface/30 rounded-2xl animate-pulse" />,
+  ssr: true,
+});
+
+const ObjectionsHandler = dynamic(() => import("../components/ObjectionsHandler"), {
+  loading: () => <div className="h-96 bg-surface/30 rounded-2xl animate-pulse" />,
+  ssr: true,
+});
+
 const Pricing = dynamic(() => import("../components/Pricing"), {
   loading: () => <div className="h-96 bg-surface/30 rounded-2xl animate-pulse" />,
   ssr: true,
@@ -75,6 +85,7 @@ export default function Home() {
       <WhyLumina />
       <ROICalculator />
       <SecurityTrust />
+      <MoneyBackGuarantee />
       
       {/* Banner de urgencia */}
       <section className="bg-gradient-to-r from-primary to-primary/80 text-background py-16 px-6 text-center relative overflow-hidden">
@@ -94,6 +105,7 @@ export default function Home() {
       <BlogHighlights />
       <SuccessStories />
       <DemoBooking />
+      <ObjectionsHandler />
       <Pricing />
       <FAQ />
       <Footer />
