@@ -1,8 +1,8 @@
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import FeaturesBento from "@/components/FeaturesBento";
-import Pricing from "@/components/Pricing";
-import Footer from "@/components/Footer";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
+import FeaturesBento from "../components/FeaturesBento";
+import Pricing from "../components/Pricing";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (
