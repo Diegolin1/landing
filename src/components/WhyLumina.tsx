@@ -153,19 +153,22 @@ export default function WhyLumina() {
         <div className="grid md:grid-cols-3 gap-6 mb-16">
           {[
             {
-              title: "Hecho en México",
-              description: "Por mexicanos que entienden tu operación B2B. No traducimos soluciones gringas.",
+              title: "Hecho en México, para México",
+              description: "Nativo en CFDI 4.0, pesos MXN, horarios zona MX. Soporte en español por mexicanos que entienden tu industria.",
               icon: "🇲🇽",
+              highlight: "No es traducción",
             },
             {
-              title: "% Costo (90% menos que Shopify)",
-              description: "Desde $499/mes vs $2,000+ en plataformas internacionales.",
+              title: "90% Más Barato que Shopify",
+              description: "Desde $499/mes vs $2,000+ en plataformas internacionales. Incluye Facturación, CRM y WhatsApp.",
               icon: "💰",
+              highlight: "$1,500 de ahorro/mes",
             },
             {
-              title: "Ahorro de Tiempo (85%)",
-              description: "De 2 horas/día facturando a totalmente automático. Vendedores finalizan pedidos en 1 min.",
-              icon: "⚡",
+              title: "4 Horas/Día Recuperadas",
+              description: "Vendedores pasan de 2+ horas facturando a 1 minuto por pedido. Automatización completa de flujos.",
+              icon: "⏰",
+              highlight: "85% menos tiempo",
             },
           ].map((item, idx) => (
             <motion.div
@@ -174,11 +177,14 @@ export default function WhyLumina() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
               viewport={{ once: true }}
-              className="bg-surface border border-borderDark rounded-xl p-8 hover:border-primary/50 transition-colors"
+              className="bg-surface border border-borderDark rounded-xl p-8 hover:border-primary/50 transition-all hover:shadow-lg hover:shadow-primary/10 group"
             >
-              <div className="text-4xl mb-4">{item.icon}</div>
+              <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">{item.icon}</div>
+              <div className="mb-3">
+                <p className="text-xs font-bold text-primary uppercase tracking-wider">{item.highlight}</p>
+              </div>
               <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-              <p className="text-textMuted text-sm">{item.description}</p>
+              <p className="text-textMuted text-sm leading-relaxed">{item.description}</p>
             </motion.div>
           ))}
         </div>

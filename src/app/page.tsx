@@ -4,6 +4,7 @@ import Hero from "../components/Hero";
 import SocialProof from "../components/SocialProof";
 import BlogHighlights from "../components/BlogHighlights";
 import TrustSignals from "../components/TrustSignals";
+import SuccessStories from "../components/SuccessStories";
 
 // Lazy load heavy components that aren't in viewport on first load
 const BeforeAfter = dynamic(() => import("../components/BeforeAfter"), {
@@ -31,6 +32,21 @@ const SecurityTrust = dynamic(() => import("../components/SecurityTrust"), {
   ssr: true,
 });
 
+const Integrations = dynamic(() => import("../components/Integrations"), {
+  loading: () => <div className="h-96 bg-surface/30 rounded-2xl animate-pulse" />,
+  ssr: true,
+});
+
+const DemoBooking = dynamic(() => import("../components/DemoBooking"), {
+  loading: () => <div className="h-96 bg-surface/30 rounded-2xl animate-pulse" />,
+  ssr: true,
+});
+
+const Industries = dynamic(() => import("../components/Industries"), {
+  loading: () => <div className="h-96 bg-surface/30 rounded-2xl animate-pulse" />,
+  ssr: true,
+});
+
 const Pricing = dynamic(() => import("../components/Pricing"), {
   loading: () => <div className="h-96 bg-surface/30 rounded-2xl animate-pulse" />,
   ssr: true,
@@ -54,6 +70,8 @@ export default function Home() {
       <SocialProof />
       <BeforeAfter />
       <FeaturesBento />
+      <Integrations />
+      <Industries />
       <WhyLumina />
       <ROICalculator />
       <SecurityTrust />
@@ -74,6 +92,8 @@ export default function Home() {
 
       <TrustSignals />
       <BlogHighlights />
+      <SuccessStories />
+      <DemoBooking />
       <Pricing />
       <FAQ />
       <Footer />
