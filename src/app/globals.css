@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 body {
-  background-color: theme('colors.background');
-  color: theme('colors.textMain');
+  background-color: #0A0A0B;
+  color: #FDFDFD;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
 ::selection {
-  background-color: theme('colors.primary.DEFAULT');
+  background-color: #F59E0B;
   color: #000;
 }
