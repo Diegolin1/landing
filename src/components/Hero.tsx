@@ -23,25 +23,26 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
           className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-textMuted"
         >
-          Tus ventas mayoristas,<br className="hidden md:block"/> 
-          <span className="text-primary">al fin bajo control.</span>
+          Crece como los grandes,<br className="hidden md:block"/> 
+          <span className="text-primary">sin dejar de ser PYME.</span>
         </motion.h1>
 
         <motion.p 
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}
           className="max-w-2xl mx-auto text-lg md:text-xl text-textMuted mb-10 leading-relaxed"
         >
-          Despídete de los PDFs desactualizados y los pedidos perdidos en WhatsApp. Lumina es tu ShowRoom interactivo B2B con gestión de vendedores y facturación automática.
+          Infraestructura digital hecha en México para México. Factura en CFDI lo que usualmente pedías por WhatsApp. Crece de 10 a 50 clientes mayoristas sin triplicar tu trabajo.
         </motion.p>
 
         <motion.div 
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <button className="w-full sm:w-auto px-8 py-4 rounded-lg bg-primary hover:bg-primary-hover text-background font-bold text-lg transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(245,158,11,0.3)] hover:shadow-[0_0_25px_rgba(245,158,11,0.5)]">
+          <button className="relative w-full sm:w-auto px-8 py-4 rounded-lg bg-primary hover:bg-primary-hover text-background font-bold text-lg transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(245,158,11,0.4)] hover:shadow-[0_0_30px_rgba(245,158,11,0.6)]">
+            <span className="absolute inset-0 rounded-lg bg-primary opacity-0 group-hover:opacity-20 transition-opacity" />
             Comenzar Prueba Gratis <ArrowRight className="w-5 h-5" />
           </button>
-          <button className="w-full sm:w-auto px-8 py-4 rounded-lg bg-surface border border-borderDark hover:bg-surfaceHover text-white font-medium text-lg transition-all">
+          <button className="w-full sm:w-auto px-8 py-4 rounded-lg bg-surface border border-borderDark hover:bg-surfaceHover hover:border-primary text-white font-medium text-lg transition-all">
             Agendar Demostración
           </button>
         </motion.div>

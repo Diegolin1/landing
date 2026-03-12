@@ -22,7 +22,7 @@ export default function Navbar() {
         <button className="text-sm font-medium text-textMuted hover:text-white transition-colors">
           Iniciar Sesión
         </button>
-        <button className="text-sm bg-surface border border-borderDark px-4 py-2 rounded-md hover:border-primary hover:text-primary transition-colors">
+        <button className="text-sm bg-primary text-background font-bold px-5 py-2 rounded-md hover:bg-primary-hover transition-all shadow-[0_0_15px_rgba(245,158,11,0.2)] hover:shadow-[0_0_20px_rgba(245,158,11,0.3)]">
           Prueba Gratis
         </button>
       </div>
