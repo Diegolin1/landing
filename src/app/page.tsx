@@ -1,4 +1,3 @@
-import dynamic from "next/dynamic";
 import LuminaRefactored from "../components/LuminaRefactored";
 
 export default function Home() {
