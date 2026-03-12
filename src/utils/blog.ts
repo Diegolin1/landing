@@ -34,7 +34,7 @@ export function getBlogPosts(): BlogPost[] {
 
   const files = fs.readdirSync(BLOG_DIR).filter((file: string) => file.endsWith(".md"));
 
-  const posts = files.map((file) => {
+  const posts = files.map((file: string) => {
     const slug = file.replace(".md", "");
     const filePath = path.join(BLOG_DIR, file);
     const fileContent = fs.readFileSync(filePath, "utf-8");
