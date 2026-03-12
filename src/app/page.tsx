@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import SocialProof from "../components/SocialProof";
 import BlogHighlights from "../components/BlogHighlights";
+import TrustSignals from "../components/TrustSignals";
 
 // Lazy load heavy components that aren't in viewport on first load
 const BeforeAfter = dynamic(() => import("../components/BeforeAfter"), {
@@ -71,6 +72,7 @@ export default function Home() {
         </div>
       </section>
 
+      <TrustSignals />
       <BlogHighlights />
       <Pricing />
       <FAQ />
