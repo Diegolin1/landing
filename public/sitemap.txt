@@ -1,0 +1,6 @@
+# Sitemap
+This sitemap helps search engines discover all pages of Lumina.
+
+https://lumina.vercel.app
+https://lumina.vercel.app#solucion
+https://lumina.vercel.app#precios

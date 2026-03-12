@@ -1,14 +1,48 @@
+import dynamic from "next/dynamic";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import SocialProof from "../components/SocialProof";
-import BeforeAfter from "../components/BeforeAfter";
-import FeaturesBento from "../components/FeaturesBento";
-import WhyLumina from "../components/WhyLumina";
-import ROICalculator from "../components/ROICalculator";
-import SecurityTrust from "../components/SecurityTrust";
-import Pricing from "../components/Pricing";
-import FAQ from "../components/FAQ";
-import Footer from "../components/Footer";
+
+// Lazy load heavy components that aren't in viewport on first load
+const BeforeAfter = dynamic(() => import("../components/BeforeAfter"), {
+  loading: () => <div className="h-96 bg-surface/30 rounded-2xl animate-pulse" />,
+  ssr: true,
+});
+
+const FeaturesBento = dynamic(() => import("../components/FeaturesBento"), {
+  loading: () => <div className="h-96 bg-surface/30 rounded-2xl animate-pulse" />,
+  ssr: true,
+});
+
+const WhyLumina = dynamic(() => import("../components/WhyLumina"), {
+  loading: () => <div className="h-96 bg-surface/30 rounded-2xl animate-pulse" />,
+  ssr: true,
+});
+
+const ROICalculator = dynamic(() => import("../components/ROICalculator"), {
+  loading: () => <div className="h-96 bg-surface/30 rounded-2xl animate-pulse" />,
+  ssr: true,
+});
+
+const SecurityTrust = dynamic(() => import("../components/SecurityTrust"), {
+  loading: () => <div className="h-96 bg-surface/30 rounded-2xl animate-pulse" />,
+  ssr: true,
+});
+
+const Pricing = dynamic(() => import("../components/Pricing"), {
+  loading: () => <div className="h-96 bg-surface/30 rounded-2xl animate-pulse" />,
+  ssr: true,
+});
+
+const FAQ = dynamic(() => import("../components/FAQ"), {
+  loading: () => <div className="h-96 bg-surface/30 rounded-2xl animate-pulse" />,
+  ssr: true,
+});
+
+const Footer = dynamic(() => import("../components/Footer"), {
+  loading: () => <div className="h-32 bg-surface/30 animate-pulse" />,
+  ssr: true,
+});
 
 export default function Home() {
   return (

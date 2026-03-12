@@ -1,15 +1,46 @@
 "use client";
 import { motion } from "framer-motion";
 import { ArrowRight, ShoppingCart, BarChart3, ShieldCheck } from "lucide-react";
+import { useReducedMotion } from "framer-motion";
 
 export default function Hero() {
+  const shouldReduceMotion = useReducedMotion();
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: shouldReduceMotion ? 0 : 0.1,
+        delayChildren: 0,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
+
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center pt-20 pb-32">
       <div className="absolute inset-0 bg-hero-glow z-0" />
       
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+      <motion.div 
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+        className="relative z-10 max-w-5xl mx-auto px-6 text-center"
+      >
         <motion.div 
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+          variants={itemVariants}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface border border-borderDark text-sm text-primary mb-8"
         >
           <span className="relative flex h-2 w-2">
@@ -20,7 +51,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.h1 
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
+          variants={itemVariants}
           className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-textMuted"
         >
           Crece como los grandes,<br className="hidden md:block"/> 
@@ -28,14 +59,14 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p 
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}
+          variants={itemVariants}
           className="max-w-2xl mx-auto text-lg md:text-xl text-textMuted mb-10 leading-relaxed"
         >
           Infraestructura digital hecha en México para México. Factura en CFDI lo que usualmente pedías por WhatsApp. Crece de 10 a 50 clientes mayoristas sin triplicar tu trabajo.
         </motion.p>
 
         <motion.div 
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}
+          variants={itemVariants}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <button className="relative w-full sm:w-auto px-8 py-4 rounded-lg bg-primary hover:bg-primary-hover text-background font-bold text-lg transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(245,158,11,0.4)] hover:shadow-[0_0_30px_rgba(245,158,11,0.6)]">
@@ -48,14 +79,14 @@ export default function Hero() {
         </motion.div>
 
         <motion.div 
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.8 }}
+          variants={itemVariants}
           className="mt-16 flex flex-wrap justify-center gap-8 text-textMuted text-sm font-medium"
         >
           <div className="flex items-center gap-2"><ShoppingCart className="w-4 h-4 text-primary"/> Pedidos a WhatsApp</div>
           <div className="flex items-center gap-2"><BarChart3 className="w-4 h-4 text-primary"/> CRM de Vendedores</div>
           <div className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-primary"/> CFDI 4.0 Integrado</div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }
