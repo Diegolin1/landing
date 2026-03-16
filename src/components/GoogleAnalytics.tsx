@@ -26,7 +26,6 @@ export function GoogleAnalytics() {
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
         strategy="afterInteractive"
-        async
       />
       <Script
         id="google-analytics"
@@ -39,7 +38,7 @@ export function GoogleAnalytics() {
             gtag('config', '${gaId}', {
               page_path: window.location.pathname,
               anonymize_ip: true,
-              cookie_flags: 'SameSite=None;Secure'
+              cookie_flags: 'SameSite=Lax;Secure'
             });
           `,
         }}

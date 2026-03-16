@@ -244,7 +244,7 @@ const LuminaRefactored = () => {
       </nav>
 
       {/* Hero Section - Mejorado con Glassmorphism y Animaciones */}
-      <header className="relative overflow-hidden pt-20 pb-28 lg:pt-36 lg:pb-44 bg-gradient-to-br from-blue-50/30 via-white to-emerald-50/20 dark:from-slate-900 dark:via-slate-900 dark:to-blue-900/20 transition-colors duration-300">
+      <header id="solucion" className="relative overflow-hidden pt-20 pb-28 lg:pt-36 lg:pb-44 bg-gradient-to-br from-blue-50/30 via-white to-emerald-50/20 dark:from-slate-900 dark:via-slate-900 dark:to-blue-900/20 transition-colors duration-300">
         {/* Efectos de fondo */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
           <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/20 dark:bg-blue-600/10 rounded-full blur-3xl animate-pulse"></div>
@@ -308,7 +308,7 @@ const LuminaRefactored = () => {
                   ))}
                 </div>
                 <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
-                  Únete a <span className="text-blue-600 dark:text-blue-400 font-bold">+500 estudiantes de Ingeniería y Negocios</span>
+                  Únete a <span className="text-blue-600 dark:text-blue-400 font-bold">+500 fabricantes y distribuidores</span>
                 </p>
               </div>
             </div>
@@ -709,8 +709,10 @@ const LuminaRefactored = () => {
                 <label className="block text-sm font-bold mb-3 text-blue-100">Pedidos por mes</label>
                 <input
                   type="number"
+                  min="1"
                   value={roiInputs.orders}
                   onChange={(e) => setRoiInputs({...roiInputs, orders: Number(e.target.value)})}
+                  onBlur={(e) => setRoiInputs((prev) => ({...prev, orders: Math.max(1, Number(e.target.value) || 1)}))}
                   className="w-full px-4 py-3 rounded-xl bg-white/20 border-2 border-white/30 text-white text-lg font-bold focus:border-white focus:ring-4 focus:ring-white/20 outline-none transition-all"
                 />
               </div>
@@ -718,8 +720,10 @@ const LuminaRefactored = () => {
                 <label className="block text-sm font-bold mb-3 text-blue-100">Ticket promedio (MXN)</label>
                 <input
                   type="number"
+                  min="1"
                   value={roiInputs.avgTicket}
                   onChange={(e) => setRoiInputs({...roiInputs, avgTicket: Number(e.target.value)})}
+                  onBlur={(e) => setRoiInputs((prev) => ({...prev, avgTicket: Math.max(1, Number(e.target.value) || 1)}))}
                   className="w-full px-4 py-3 rounded-xl bg-white/20 border-2 border-white/30 text-white text-lg font-bold focus:border-white focus:ring-4 focus:ring-white/20 outline-none transition-all"
                 />
               </div>
@@ -727,8 +731,11 @@ const LuminaRefactored = () => {
                 <label className="block text-sm font-bold mb-3 text-blue-100">% de errores/pérdidas</label>
                 <input
                   type="number"
+                  min="0"
+                  max="100"
                   value={roiInputs.errorRate}
                   onChange={(e) => setRoiInputs({...roiInputs, errorRate: Number(e.target.value)})}
+                  onBlur={(e) => setRoiInputs((prev) => ({...prev, errorRate: Math.min(100, Math.max(0, Number(e.target.value) || 0))}))}
                   className="w-full px-4 py-3 rounded-xl bg-white/20 border-2 border-white/30 text-white text-lg font-bold focus:border-white focus:ring-4 focus:ring-white/20 outline-none transition-all"
                 />
               </div>
@@ -968,29 +975,29 @@ const LuminaRefactored = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 lg:py-32 bg-slate-50 px-4 sm:px-6">
+      <section className="py-24 lg:py-32 bg-slate-50 dark:bg-slate-900/50 px-4 sm:px-6 transition-colors duration-300">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-blue-900 mb-4">Preguntas Frecuentes</h2>
-            <p className="text-lg text-slate-600">Todo lo que necesitas saber sobre Lumina B2B.</p>
+            <h2 className="text-4xl font-bold text-blue-900 dark:text-white mb-4">Preguntas Frecuentes</h2>
+            <p className="text-lg text-slate-600 dark:text-slate-400">Todo lo que necesitas saber sobre Lumina B2B.</p>
           </div>
           <div className="space-y-4">
             {faqs.map((faq, index) => (
               <div 
                 key={index} 
-                className="bg-white rounded-2xl border border-slate-200 overflow-hidden transition-all shadow-sm hover:shadow-md"
+                className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden transition-all shadow-sm hover:shadow-md"
               >
                 <button 
                   onClick={() => toggleFaq(index)}
                   className="w-full px-8 py-6 text-left flex justify-between items-center gap-4"
                 >
-                  <span className="font-bold text-lg text-blue-950">{faq.q}</span>
-                  <ChevronDown className={`shrink-0 text-blue-600 transition-transform duration-300 ${openFaqIndex === index ? 'rotate-180' : ''}`} />
+                  <span className="font-bold text-lg text-blue-950 dark:text-white">{faq.q}</span>
+                  <ChevronDown className={`shrink-0 text-blue-600 dark:text-blue-400 transition-transform duration-300 ${openFaqIndex === index ? 'rotate-180' : ''}`} />
                 </button>
                 <div 
                   className={`px-8 transition-all duration-300 ease-in-out overflow-hidden ${openFaqIndex === index ? 'pb-8 max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}
                 >
-                  <p className="text-slate-600 leading-relaxed border-t border-slate-50 pt-4">
+                  <p className="text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700 pt-4">
                     {faq.a}
                   </p>
                 </div>
@@ -1029,7 +1036,7 @@ const LuminaRefactored = () => {
           <p className="text-blue-100 text-xs mb-6">
             ✅ Setup gratis en 24 horas. No necesitas tarjeta de crédito para comenzar.
           </p>
-          <p className="text-blue-200 text-sm flex items-center justify-center gap-4 hidden">
+          <p className="text-blue-200 text-sm flex items-center justify-center gap-4">
             <span>✓ Sin tarjeta de crédito</span>
             <span>•</span>
             <span>✓ Garantía 30 días</span>
@@ -1196,7 +1203,7 @@ const LuminaRefactored = () => {
           <div className="border-t border-slate-800 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-sm text-slate-500 text-center md:text-left">
-                © 2024 Lumina B2B. Todos los derechos reservados. Hecho con ❤️ en México.
+                © {new Date().getFullYear()} Lumina B2B. Todos los derechos reservados. Hecho con ❤️ en México.
               </p>
               <div className="flex items-center gap-6 text-sm">
                 <a href="#" className="hover:text-blue-400 transition-colors">Términos</a>
