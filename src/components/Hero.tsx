@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { ArrowRight, ShoppingCart, BarChart3, ShieldCheck } from "lucide-react";
+import { ArrowRight, ShoppingCart, BarChart3, ShieldCheck, Lock, FileText, TrendingUp } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
 import { scrollToDemoBooking } from "../utils/scroll";
 
@@ -66,50 +66,44 @@ export default function Hero() {
           <strong>Recupera 12 horas semanales</strong> en facturas manuales y pedidos en WhatsApp. Unifica tu catálogo digital, automatiza CFDI 4.0, y <strong className="text-white">aumenta pedidos recurrentes en 35% el primer trimestre.</strong>
         </motion.p>
 
-        <motion.div 
+        <motion.div
           variants={itemVariants}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <button 
+          <button
             onClick={() => scrollToDemoBooking()}
             className="relative w-full sm:w-auto px-8 py-4 rounded-lg bg-primary hover:bg-primary-hover text-background font-bold text-lg transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(245,158,11,0.4)] hover:shadow-[0_0_30px_rgba(245,158,11,0.6)]"
           >
             <span className="absolute inset-0 rounded-lg bg-primary opacity-0 group-hover:opacity-20 transition-opacity" />
-            Comienza tu Prueba Gratis <ArrowRight className="w-5 h-5" />
-          </button>
-          <button 
-            onClick={() => scrollToDemoBooking()}
-            className="w-full sm:w-auto px-8 py-4 rounded-lg bg-surface border border-borderDark hover:bg-surfaceHover hover:border-primary text-white font-medium text-lg transition-all"
-          >
-            Agendar Demostración
+            👉 QUIERO MI SHOWROOM EN 24 HORAS
           </button>
         </motion.div>
 
-        <motion.p 
+        <motion.p
           variants={itemVariants}
           className="text-sm text-white/60 mt-4"
         >
-          ✓ 14 días gratis  •  ✓ Sin tarjeta de crédito  •  ✓ Soporte en español
+          ✅ Setup gratis en 24 horas  •  ✓ Sin tarjeta de crédito  •  ✓ Soporte en español
         </motion.p>
 
-        <motion.div 
+        <motion.div
           variants={itemVariants}
           className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto"
         >
-          <div className="bg-surface/50 border border-borderDark rounded-lg p-4 text-center hover:border-primary/30 transition-all">
-            <ShoppingCart className="w-6 h-6 text-primary mx-auto mb-2" />
-            <p className="font-semibold text-white">WhatsApp a Órdenes</p>
-            <p className="text-xs text-white/60 mt-1">Procesa pedidos en segundos</p>
+          <div className="bg-surface/50 border border-borderDark rounded-lg p-4 text-center hover:border-primary/30 hover:bg-primary/10 transition-all cursor-pointer">
+            <Lock className="w-6 h-6 text-primary mx-auto mb-2" />
+            <p className="font-semibold text-white">Catálogo Privado 24/7</p>
+            <p className="text-xs text-white/60 mt-1">Tus clientes ven precios únicos</p>
           </div>
-          <div className="bg-surface/50 border border-borderDark rounded-lg p-4 text-center hover:border-primary/30 transition-all">
-            <BarChart3 className="w-6 h-6 text-primary mx-auto mb-2" />
-            <p className="font-semibold text-white">CRM + Reportes</p>
-            <p className="text-xs text-white/60 mt-1">Ve quién vende qué</p>
+          <div className="bg-surface/50 border border-borderDark rounded-lg p-4 text-center hover:border-primary/30 hover:bg-primary/10 transition-all cursor-pointer">
+            <FileText className="w-6 h-6 text-primary mx-auto mb-2" />
+            <p className="font-semibold text-white">Factura en 1 Click</p>
+            <p className="text-xs text-white/60 mt-1">CFDI 4.0 automático</p>
           </div>
-          <div className="bg-surface/50 border border-borderDark rounded-lg p-4 text-center hover:border-primary/30 transition-all">
-            <ShieldCheck className="w-6 h-6 text-primary mx-auto mb-2" />
-            <p className="font-semibold text-white">CFDI 4.0</p>
-            <p className="text-xs text-white/60 mt-1">Facturación SAT integrada</p>
+          <div className="bg-surface/50 border border-borderDark rounded-lg p-4 text-center hover:border-primary/30 hover:bg-primary/10 transition-all cursor-pointer">
+            <TrendingUp className="w-6 h-6 text-primary mx-auto mb-2" />
+            <p className="font-semibold text-white">CRM de Vendedores</p>
+            <p className="text-xs text-white/60 mt-1">Ve quién vende qué en vivo</p>
           </div>
         </motion.div>
       </motion.div>
