@@ -51,19 +51,19 @@ export default function Hero() {
           Plataforma B2B para Fabricantes en México
         </motion.div>
 
-        <motion.h1 
+        <motion.h1
           variants={itemVariants}
           className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-textMuted"
         >
-          Vende por Mayoreo,<br className="hidden md:block"/> 
-          <span className="text-primary">sin dejar de ser ágil.</span>
+          Adiós al caos.<br className="hidden md:block"/>
+          <span className="text-primary">Bienvenido a ventas B2B ordenadas.</span>
         </motion.h1>
 
-        <motion.p 
+        <motion.p
           variants={itemVariants}
           className="max-w-2xl mx-auto text-lg md:text-xl text-textMuted mb-8 leading-relaxed"
         >
-          <strong>De pedidos en WhatsApp a operación profesional.</strong> Facturación CFDI automática, gestión de vendedores, y seguimiento de clientes. <strong className="text-white">Duplica ingresos sin triplicar operación.</strong>
+          <strong>Recupera 12 horas semanales</strong> en facturas manuales y pedidos en WhatsApp. Unifica tu catálogo digital, automatiza CFDI 4.0, y <strong className="text-white">aumenta pedidos recurrentes en 35% el primer trimestre.</strong>
         </motion.p>
 
         <motion.div 

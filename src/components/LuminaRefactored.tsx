@@ -251,7 +251,7 @@ const LuminaRefactored = () => {
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-400/20 dark:bg-emerald-600/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -308,7 +308,7 @@ const LuminaRefactored = () => {
                   ))}
                 </div>
                 <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
-                  Únete a <span className="text-blue-600 dark:text-blue-400 font-bold">+500 estudiantes</span> de la comunidad B2B
+                  Únete a <span className="text-blue-600 dark:text-blue-400 font-bold">+500 estudiantes de Ingeniería y Negocios</span>
                 </p>
               </div>
             </div>
@@ -345,12 +345,48 @@ const LuminaRefactored = () => {
               >
                 {/* Video placeholder */}
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-transparent to-emerald-600/20 opacity-60 group-hover:opacity-80 transition-opacity"></div>
-                <div className="relative z-10 text-center">
-                  <div className="w-20 h-20 bg-blue-600/90 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-4 shadow-2xl shadow-blue-500/50 group-hover:scale-110 transition-transform border border-white/30">
-                    <Play size={32} className="fill-white text-white ml-1" />
+                
+                {/* Dashboard Mockup Simulation Behind */}
+                <div className="absolute inset-0 p-6 opacity-30 flex flex-col gap-4">
+                  <div className="flex justify-between items-center border-b border-white/10 pb-4">
+                    <div className="flex gap-2">
+                      <div className="w-3 h-3 bg-red-500/50 rounded-full"></div>
+                      <div className="w-3 h-3 bg-amber-500/50 rounded-full"></div>
+                      <div className="w-3 h-3 bg-emerald-500/50 rounded-full"></div>
+                    </div>
+                    <div className="h-4 w-24 bg-white/20 rounded-full"></div>
                   </div>
-                  <p className="text-white font-bold text-lg mb-2">Ver Lumina en acción</p>
-                  <p className="text-blue-200 text-sm">Demo completa de la plataforma</p>
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="h-16 bg-blue-500/20 rounded-xl border border-white/10"></div>
+                    <div className="h-16 bg-white/10 rounded-xl border border-white/10"></div>
+                    <div className="h-16 bg-white/10 rounded-xl border border-white/10"></div>
+                  </div>
+                  <div className="flex-1 bg-white/5 rounded-xl border border-white/10 p-4">
+                    <div className="w-full h-full border-t border-l border-white/10 rounded-tl-lg"></div>
+                  </div>
+                </div>
+
+                <div className="relative z-10 text-center">
+                  <p className="text-white font-bold text-base mb-6">3 Momentos que van a cambiar tu negocio:</p>
+                  <div className="grid grid-cols-3 gap-3 max-w-xl mx-auto">
+                    {[
+                      { icon: Lock, title: "Catálogo Privado 24/7", desc: "Tus clientes ven precios únicos" },
+                      { icon: FileText, title: "Factura en 1 Click", desc: "CFDI 4.0 automático" },
+                      { icon: TrendingUp, title: "CRM de Vendedores", desc: "Ve quién vende qué en vivo" }
+                    ].map((item, idx) => (
+                      <div
+                        key={idx}
+                        onClick={() => setVideoModalOpen(true)}
+                        className="p-4 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-blue-400/50 rounded-lg cursor-pointer transition-all transform hover:scale-105 group"
+                      >
+                        <div className="w-10 h-10 bg-blue-600/60 rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <item.icon size={20} className="text-white" />
+                        </div>
+                        <p className="text-white font-semibold text-xs mb-1">{item.title}</p>
+                        <p className="text-blue-200 text-[11px]">{item.desc}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Glassmorphism Decorative Elements */}
@@ -363,12 +399,12 @@ const LuminaRefactored = () => {
               {/* Mini stats con Glassmorphism */}
               <div className="grid grid-cols-3 gap-4 mt-6">
                 {[
-                  { label: "Empresas", value: "500+", color: "blue" },
-                  { label: "Ventas MXN", value: "100M+", color: "emerald" },
-                  { label: "Rating", value: "4.9/5", color: "amber" }
+                  { label: "Empresas", value: "500+", textColor: "text-blue-600 dark:text-blue-400" },
+                  { label: "Ventas MXN", value: "100M+", textColor: "text-emerald-600 dark:text-emerald-400" },
+                  { label: "Rating", value: "4.9/5", textColor: "text-amber-600 dark:text-amber-400" }
                 ].map((stat, i) => (
                   <div key={i} className="text-center p-3 bg-white/50 dark:bg-slate-700/50 backdrop-blur-md border border-white/50 dark:border-slate-600/50 rounded-xl">
-                    <p className={`text-xl font-bold text-${stat.color}-600 dark:text-${stat.color}-400`}>{stat.value}</p>
+                    <p className={`text-xl font-bold ${stat.textColor}`}>{stat.value}</p>
                     <p className="text-[10px] text-slate-600 dark:text-slate-400 font-bold uppercase tracking-wider">{stat.label}</p>
                   </div>
                 ))}
@@ -380,7 +416,7 @@ const LuminaRefactored = () => {
 
       {/* Social Proof Section - Logos en escala de grises */}
       <section className="bg-slate-50 dark:bg-slate-900/50 py-16 border-y border-slate-200/60 dark:border-slate-800 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <p className="text-center text-slate-400 dark:text-slate-500 font-bold text-sm uppercase tracking-[0.15em] mb-12 flex items-center justify-center gap-2">
             <Award size={18} className="text-slate-400" />
             Empresas y Facultades que confían en nosotros
@@ -404,13 +440,13 @@ const LuminaRefactored = () => {
           {/* Trust badges mejorados con Dark Mode */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto pt-12 border-t border-slate-200 dark:border-slate-800">
             {[
-              { icon: <CheckCircle2 size={24} />, label: "SAT CFDI 4.0", sub: "Validado", col: "blue" },
-              { icon: <Shield size={24} />, label: "SSL 256-bit", sub: "Seguro", col: "emerald" },
-              { icon: <TrendingUp size={24} />, label: "99.9% Uptime", sub: "Garantizado", col: "amber" },
-              { icon: <Users size={24} />, label: "500+ Usuarios", sub: "Activos", col: "blue" }
+              { icon: <CheckCircle2 size={24} />, label: "SAT CFDI 4.0", sub: "Validado", bg: "bg-blue-100 dark:bg-blue-900/30", text: "text-blue-600 dark:text-blue-400" },
+              { icon: <Shield size={24} />, label: "SSL 256-bit", sub: "Seguro", bg: "bg-emerald-100 dark:bg-emerald-900/30", text: "text-emerald-600 dark:text-emerald-400" },
+              { icon: <TrendingUp size={24} />, label: "99.9% Uptime", sub: "Garantizado", bg: "bg-amber-100 dark:bg-amber-900/30", text: "text-amber-600 dark:text-amber-400" },
+              { icon: <Users size={24} />, label: "500+ Usuarios", sub: "Activos", bg: "bg-blue-100 dark:bg-blue-900/30", text: "text-blue-600 dark:text-blue-400" }
             ].map((badge, i) => (
               <div key={i} className="flex flex-col items-center gap-3 p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all">
-                <div className={`w-12 h-12 rounded-xl bg-${badge.col}-100 dark:bg-${badge.col}-900/30 flex items-center justify-center text-${badge.col}-600 dark:text-${badge.col}-400`}>
+                <div className={`w-12 h-12 rounded-xl ${badge.bg} flex items-center justify-center ${badge.text}`}>
                   {badge.icon}
                 </div>
                 <div className="text-center">
@@ -424,7 +460,7 @@ const LuminaRefactored = () => {
       </section>
 
       {/* Testimonios Section - Mejorado con Dark Mode y Animaciones */}
-      <section className="py-24 px-6 bg-white dark:bg-slate-900 transition-colors duration-300">
+      <section className="py-24 px-4 sm:px-6 bg-white dark:bg-slate-900 transition-colors duration-300">
         <div className="max-w-7xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -475,7 +511,7 @@ const LuminaRefactored = () => {
       </section>
 
       {/* Comparativa Tú vs Competencia - Refactorizado */}
-      <section id="comparativa" className="py-24 lg:py-32 px-6 bg-slate-50 dark:bg-slate-900/50 transition-colors duration-300">
+      <section id="comparativa" className="py-24 lg:py-32 px-4 sm:px-6 bg-slate-50 dark:bg-slate-900/50 transition-colors duration-300">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-blue-900 dark:text-white mb-6">Tú vs. La Competencia</h2>
@@ -545,7 +581,7 @@ const LuminaRefactored = () => {
       </section>
 
       {/* Grid de Características - Mejorado con Dark Mode y Animaciones */}
-      <section id="features" className="bg-slate-50 dark:bg-slate-900/50 py-24 lg:py-32 px-6 transition-colors duration-300">
+      <section id="features" className="bg-slate-50 dark:bg-slate-900/50 py-24 lg:py-32 px-4 sm:px-6 transition-colors duration-300">
         <div className="max-w-7xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -561,10 +597,10 @@ const LuminaRefactored = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: <Lock size={28} />, title: "Gate B2B", desc: "Protege tus precios. Solo clientes autorizados acceden a tu catálogo.", col: "blue" },
-              { icon: <Smartphone size={28} />, title: "100% Mobile", desc: "Tus clientes pueden pedir desde su celular, en cualquier lugar.", col: "emerald" },
-              { icon: <Users size={28} />, title: "CRM de Ventas", desc: "Gestiona a tus vendedores y sus metas desde un solo lugar.", col: "blue" },
-              { icon: <FileText size={28} />, title: "CFDI 4.0", desc: "Facturación automática integrada lista para el SAT.", col: "blue" }
+              { icon: <Lock size={28} />, title: "Gate B2B", desc: "Protege tus precios. Solo clientes autorizados acceden a tu catálogo.", bg: "bg-blue-50 dark:bg-blue-900/30", text: "text-blue-600 dark:text-blue-400" },
+              { icon: <Smartphone size={28} />, title: "100% Mobile", desc: "Tus clientes pueden pedir desde su celular, en cualquier lugar.", bg: "bg-emerald-50 dark:bg-emerald-900/30", text: "text-emerald-600 dark:text-emerald-400" },
+              { icon: <Users size={28} />, title: "CRM de Ventas", desc: "Gestiona a tus vendedores y sus metas desde un solo lugar.", bg: "bg-blue-50 dark:bg-blue-900/30", text: "text-blue-600 dark:text-blue-400" },
+              { icon: <FileText size={28} />, title: "CFDI 4.0", desc: "Facturación automática integrada lista para el SAT.", bg: "bg-blue-50 dark:bg-blue-900/30", text: "text-blue-600 dark:text-blue-400" }
             ].map((feature, i) => (
               <motion.div 
                 key={i}
@@ -574,7 +610,7 @@ const LuminaRefactored = () => {
                 transition={{ delay: i * 0.1 }}
                 className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-xl transition-all hover:-translate-y-2 group"
               >
-                <div className={`p-4 bg-${feature.col}-50 dark:bg-${feature.col}-900/30 text-${feature.col}-600 dark:text-${feature.col}-400 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform`}>
+                <div className={`p-4 ${feature.bg} ${feature.text} rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform`}>
                   {feature.icon}
                 </div>
                 <h4 className="text-xl font-bold text-blue-900 dark:text-white mb-3">{feature.title}</h4>
@@ -587,15 +623,16 @@ const LuminaRefactored = () => {
         </div>
       </section>
 
-      {/* Tabla Comparativa Secundaria */}
-      <section id="comparativa-plataformas" className="py-24 lg:py-32 px-6 dark:bg-slate-900 transition-colors duration-300">
+      {/* Tabla Comparativa Secundaria - RESPONSIVE */}
+      <section id="comparativa-plataformas" className="py-24 lg:py-32 px-4 sm:px-6 dark:bg-slate-900 transition-colors duration-300">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-blue-900 dark:text-white mb-4">Lumina vs Shopify y otros</h2>
             <p className="text-lg text-slate-600 dark:text-slate-400">Por qué los fabricantes eligen una solución B2B especializada.</p>
           </div>
 
-          <div className="relative">
+          {/* Versión Desktop: Tabla */}
+          <div className="hidden sm:block relative">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-separate border-spacing-0 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl overflow-hidden bg-white dark:bg-slate-800">
                 <thead>
@@ -626,11 +663,39 @@ const LuminaRefactored = () => {
               </table>
             </div>
           </div>
+
+          {/* Versión Mobile: Cards apiladas */}
+          <div className="sm:hidden space-y-3">
+            {[
+              ["Facturación CFDI 4.0 Nativa", true, "Solo con Apps"],
+              ["Privacidad B2B (Gate)", true, "No nativo"],
+              ["CRM de Agentes de Venta", true, false],
+              ["UX Especializada", true, "Enfoque Minorista"]
+            ].map((row, i) => (
+              <div key={i} className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4">
+                <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">{row[0]}</p>
+                <div className="flex justify-between gap-4">
+                  <div className="flex-1 text-center">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mb-1 font-medium">Lumina</p>
+                    <div className="flex justify-center">
+                      {row[1] === true ? <Check className="text-emerald-500" size={20} /> : <X className="text-red-300" size={20} />}
+                    </div>
+                  </div>
+                  <div className="flex-1 text-center">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mb-1 font-medium">Shopify</p>
+                    <p className="text-xs text-slate-600 dark:text-slate-400">
+                      {row[2] === false ? <X className="text-red-300 inline-block" size={20} /> : row[2]}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ROI Calculator Section - NUEVO */}
-      <section className="py-24 px-6 bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-900 dark:to-indigo-950 text-white relative overflow-hidden transition-colors duration-300">
+      <section className="py-24 px-4 sm:px-6 bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-900 dark:to-indigo-950 text-white relative overflow-hidden transition-colors duration-300">
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
         <div className="max-w-5xl mx-auto relative z-10">
           <div className="text-center mb-12">
@@ -706,7 +771,7 @@ const LuminaRefactored = () => {
       </section>
 
       {/* Platform Mockup Section - NUEVO */}
-      <section className="py-24 px-6 bg-white dark:bg-slate-900 transition-colors duration-300 border-t border-slate-100 dark:border-slate-800">
+      <section className="py-24 px-4 sm:px-6 bg-white dark:bg-slate-900 transition-colors duration-300 border-t border-slate-100 dark:border-slate-800">
         <div className="max-w-7xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
@@ -792,7 +857,7 @@ const LuminaRefactored = () => {
       </section>
 
       {/* Pricing Section - Mejorado */}
-      <section id="pricing" className="bg-slate-900 py-24 lg:py-40 px-6 relative overflow-hidden">
+      <section id="pricing" className="bg-slate-900 py-24 lg:py-40 px-4 sm:px-6 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-slate-900 to-slate-900 -z-0"></div>
 
         <div className="max-w-7xl mx-auto relative z-10">
@@ -827,6 +892,7 @@ const LuminaRefactored = () => {
                 <span className="text-4xl font-bold">${prices.starter}</span>
                 <span className="text-slate-400"> MXN/mes</span>
                 {billingCycle === 'yearly' && <p className="text-xs text-blue-400 mt-1 font-medium">Facturado anualmente</p>}
+                <p className="text-[11px] text-slate-500 italic mt-3 border-t border-slate-700 pt-3">Ideal para probar. Cancela cuando quieras.</p>
               </div>
               <ul className="space-y-4 mb-8">
                 {["Hasta 50 productos", "1 Agente de venta", "Showroom Digital", "Soporte vía Ticket"].map((feat, i) => (
@@ -853,6 +919,7 @@ const LuminaRefactored = () => {
                   <span className="text-5xl font-extrabold">${prices.professional}</span>
                   <span className="text-slate-400"> MXN/mes</span>
                   {billingCycle === 'yearly' && <p className="text-xs text-blue-400 mt-1 font-medium">Facturado anualmente</p>}
+                  <p className="text-[11px] text-slate-400 italic mt-3 border-t border-slate-700 pt-3">La opción sin riesgo de los que ya facturan +$1M.</p>
                 </div>
                 <ul className="space-y-4 mb-10">
                   {[
@@ -901,7 +968,7 @@ const LuminaRefactored = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 lg:py-32 bg-slate-50 px-6">
+      <section className="py-24 lg:py-32 bg-slate-50 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-blue-900 mb-4">Preguntas Frecuentes</h2>
@@ -934,9 +1001,9 @@ const LuminaRefactored = () => {
       </section>
 
       {/* Footer CTA Mejorado */}
-      <section className="py-32 bg-gradient-to-br from-blue-600 to-blue-800 text-white relative overflow-hidden">
+      <section className="py-32 px-4 sm:px-6 bg-gradient-to-br from-blue-600 to-blue-800 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-white text-sm font-bold mb-8">
             <Sparkles size={16} />
             <span>Prueba sin riesgo por 14 días</span>
@@ -952,15 +1019,17 @@ const LuminaRefactored = () => {
               onClick={() => setIsModalOpen(true)}
               className="bg-white text-blue-600 px-12 py-5 rounded-2xl font-bold text-xl hover:bg-blue-50 shadow-2xl transition-all hover:scale-105 flex items-center justify-center gap-3"
             >
-              Comenzar Prueba Gratis
-              <ArrowRight />
+              👉 QUIERO MI SHOWROOM EN 24 HORAS
             </button>
             <button className="flex items-center justify-center gap-3 text-white font-bold text-xl px-12 py-5 border-2 border-white rounded-2xl hover:bg-white/10 transition-all">
               <MessageCircle />
               Hablar con Ventas
             </button>
           </div>
-          <p className="text-blue-200 text-sm flex items-center justify-center gap-4">
+          <p className="text-blue-100 text-xs mb-6">
+            ✅ Setup gratis en 24 horas. No necesitas tarjeta de crédito para comenzar.
+          </p>
+          <p className="text-blue-200 text-sm flex items-center justify-center gap-4 hidden">
             <span>✓ Sin tarjeta de crédito</span>
             <span>•</span>
             <span>✓ Garantía 30 días</span>
@@ -969,6 +1038,78 @@ const LuminaRefactored = () => {
           </p>
         </div>
       </section>
+
+      {/* Strategic Trust Section - NUEVO */}
+      <section className="bg-slate-50 dark:bg-slate-900/50 py-16 px-4 sm:px-6 border-b border-slate-200 dark:border-slate-800">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Trust Badge 1 - Seguridad */}
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg flex items-center justify-center shrink-0">
+                  <Shield size={24} className="text-emerald-600 dark:text-emerald-400" />
+                </div>
+                <div>
+                  <p className="font-bold text-slate-900 dark:text-white text-sm mb-1">Datos 100% Seguros</p>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Encriptación SSL 256-bit. Tus datos y los de tus clientes protegidos.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Trust Badge 2 - Geográfico */}
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center shrink-0">
+                  <MapPin size={24} className="text-blue-600 dark:text-blue-400" />
+                </div>
+                <div>
+                  <p className="font-bold text-slate-900 dark:text-white text-sm mb-1">Fabricantes de León</p>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">500+ empresas locales confían en Lumina para crecer.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Trust Badge 3 - SAT/Certificación */}
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-amber-100 dark:bg-amber-900/30 rounded-lg flex items-center justify-center shrink-0">
+                  <CheckCircle2 size={24} className="text-amber-600 dark:text-amber-400" />
+                </div>
+                <div>
+                  <p className="font-bold text-slate-900 dark:text-white text-sm mb-1">SAT CFDI 4.0 Certificado</p>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Validado con proveedores autorizados del SAT.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Trust Badge 4 - Garantía */}
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center shrink-0">
+                  <Award size={24} className="text-red-600 dark:text-red-400" />
+                </div>
+                <div>
+                  <p className="font-bold text-slate-900 dark:text-white text-sm mb-1">Garantía 30 Días</p>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Si no satisface, devolvemos 100% sin preguntas.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Floating CTA Button - Mobile Only */}
+      <div className="sm:hidden fixed bottom-6 right-4 z-40 animate-bounce">
+        <button
+          onClick={() => {
+            const pricingSection = document.getElementById('pricing');
+            pricingSection?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-full shadow-2xl shadow-blue-600/50 flex items-center gap-2 text-sm transition-all active:scale-95"
+        >
+          💡 Ver Planes
+        </button>
+      </div>
 
       {/* Footer Completo - NUEVO */}
       <footer className="bg-slate-900 text-slate-300 pt-20 pb-10">
