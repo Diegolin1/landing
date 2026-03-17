@@ -133,7 +133,7 @@ const LuminaRefactored = () => {
       name: "Roberto García",
       role: "Director Comercial",
       company: "Calzado García León",
-      image: "/testimonial-1.jpg",
+      image: "/logos/alpina.png",
       rating: 5,
       text: "Pasamos de enviar PDFs por WhatsApp a tener un catálogo profesional que nuestros clientes consultan 24/7. Aumentamos 40% en pedidos recurrentes."
     },
@@ -141,7 +141,7 @@ const LuminaRefactored = () => {
       name: "María Fernanda Ruiz",
       role: "Gerente de Ventas",
       company: "Textiles del Bajío",
-      image: "/testimonial-2.jpg",
+      image: "/logos/flexi.png",
       rating: 5,
       text: "La facturación CFDI 4.0 automática nos ahorra 15 horas a la semana. Recuperamos la inversión en el primer mes."
     },
@@ -149,7 +149,7 @@ const LuminaRefactored = () => {
       name: "Carlos Mendoza",
       role: "CEO",
       company: "Distribuidora MX",
-      image: "/testimonial-3.jpg",
+      image: "/logos/emyco.png",
       rating: 5,
       text: "El CRM de vendedores transformó nuestra operación. Ahora sabemos exactamente qué vendedor genera más, en tiempo real."
     }
@@ -448,72 +448,72 @@ const LuminaRefactored = () => {
 
             {/* Container del slider */}
             <div className="overflow-hidden">
-              <motion.div
-                animate={{ x: [0, -2000] }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="flex gap-8 md:gap-12"
-              >
-                {[
-                  { name: "Grupo Alpina", color: "from-blue-600 to-indigo-600" },
-                  { name: "Flexi", color: "from-purple-600 to-pink-600" },
-                  { name: "Emyco", color: "from-emerald-600 to-teal-600" },
-                  { name: "Arturo Cuervo", color: "from-orange-600 to-red-600" },
-                  { name: "Botas Milenarias", color: "from-amber-600 to-orange-600" },
-                  { name: "Baeza & Estrada", color: "from-blue-700 to-blue-500" },
-                  { name: "Sandi Zapatos", color: "from-red-600 to-pink-600" },
-                  { name: "Wilson Calzado", color: "from-indigo-600 to-purple-600" },
-                  { name: "Escada Shoes", color: "from-green-600 to-emerald-600" },
-                  { name: "León Leather Co.", color: "from-yellow-600 to-amber-600" }
-                ].map((company, i) => (
-                  <div
-                    key={i}
-                    className="flex-shrink-0 w-48 h-32 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center gap-4 group cursor-pointer"
+              <div className="relative">
+                {/* Shadow overlays para efecto fade */}
+                <div className="absolute left-0 top-0 z-20 w-16 h-full bg-gradient-to-r from-slate-50 dark:from-slate-900/50 to-transparent pointer-events-none"></div>
+                <div className="absolute right-0 top-0 z-20 w-16 h-full bg-gradient-to-l from-slate-50 dark:from-slate-900/50 to-transparent pointer-events-none"></div>
+
+                {/* Container del slider */}
+                <div className="overflow-hidden">
+                  <motion.div
+                    animate={{ x: [0, -1200] }}
+                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                    className="flex gap-8 md:gap-12"
                   >
-                    {/* Logo símbolo */}
-                    <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${company.color} flex items-center justify-center text-white font-black text-2xl shadow-lg group-hover:scale-110 transition-transform`}>
-                      {company.name.charAt(0)}{company.name.split(" ")[1]?.charAt(0) || company.name.charAt(1)}
-                    </div>
-                    {/* Nombre */}
-                    <div className="text-center">
-                      <p className="text-sm font-bold text-slate-800 dark:text-slate-100 text-center line-clamp-2">
-                        {company.name}
-                      </p>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">León, Gto.</p>
-                    </div>
-                  </div>
-                ))}
-                
-                {/* Duplicamos para efecto infinito suave */}
-                {[
-                  { name: "Grupo Alpina", color: "from-blue-600 to-indigo-600" },
-                  { name: "Flexi", color: "from-purple-600 to-pink-600" },
-                  { name: "Emyco", color: "from-emerald-600 to-teal-600" },
-                  { name: "Arturo Cuervo", color: "from-orange-600 to-red-600" },
-                  { name: "Botas Milenarias", color: "from-amber-600 to-orange-600" },
-                  { name: "Baeza & Estrada", color: "from-blue-700 to-blue-500" },
-                  { name: "Sandi Zapatos", color: "from-red-600 to-pink-600" },
-                  { name: "Wilson Calzado", color: "from-indigo-600 to-purple-600" },
-                  { name: "Escada Shoes", color: "from-green-600 to-emerald-600" },
-                  { name: "León Leather Co.", color: "from-yellow-600 to-amber-600" }
-                ].map((company, i) => (
-                  <div
-                    key={`dup-${i}`}
-                    className="flex-shrink-0 w-48 h-32 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center gap-4 group cursor-pointer"
-                  >
-                    {/* Logo símbolo */}
-                    <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${company.color} flex items-center justify-center text-white font-black text-2xl shadow-lg group-hover:scale-110 transition-transform`}>
-                      {company.name.charAt(0)}{company.name.split(" ")[1]?.charAt(0) || company.name.charAt(1)}
-                    </div>
-                    {/* Nombre */}
-                    <div className="text-center">
-                      <p className="text-sm font-bold text-slate-800 dark:text-slate-100 text-center line-clamp-2">
-                        {company.name}
-                      </p>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">León, Gto.</p>
-                    </div>
-                  </div>
-                ))}
-              </motion.div>
+                    {[
+                      { name: "Grupo Alpina", logo: "/logos/alpina.png" },
+                      { name: "Flexi", logo: "/logos/flexi.png" },
+                      { name: "Emyco", logo: "/logos/emyco.png" },
+                      { name: "Arturo Cuervo", logo: "/logos/arturo-cuervo.png" },
+                      { name: "Botas Milenarias", logo: "/logos/botas-milenarias.jpg" },
+                      { name: "Baeza & Estrada", logo: "/logos/baeza-estrada.png" }
+                    ].map((company, i) => (
+                      <div
+                        key={i}
+                        className="flex-shrink-0 w-48 h-32 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center gap-4 group cursor-pointer"
+                      >
+                        {/* Logo real */}
+                        <div className="w-16 h-16 rounded-xl bg-white dark:bg-slate-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform overflow-hidden">
+                          <img src={company.logo} alt={company.name + ' logo'} className="w-full h-full object-contain" />
+                        </div>
+                        {/* Nombre */}
+                        <div className="text-center">
+                          <p className="text-sm font-bold text-slate-800 dark:text-slate-100 text-center line-clamp-2">
+                            {company.name}
+                          </p>
+                          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">León, Gto.</p>
+                        </div>
+                      </div>
+                    ))}
+                    {/* Duplicamos para efecto infinito suave */}
+                    {[
+                      { name: "Grupo Alpina", logo: "/logos/alpina.png" },
+                      { name: "Flexi", logo: "/logos/flexi.png" },
+                      { name: "Emyco", logo: "/logos/emyco.png" },
+                      { name: "Arturo Cuervo", logo: "/logos/arturo-cuervo.png" },
+                      { name: "Botas Milenarias", logo: "/logos/botas-milenarias.jpg" },
+                      { name: "Baeza & Estrada", logo: "/logos/baeza-estrada.png" }
+                    ].map((company, i) => (
+                      <div
+                        key={`dup-${i}`}
+                        className="flex-shrink-0 w-48 h-32 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center gap-4 group cursor-pointer"
+                      >
+                        {/* Logo real */}
+                        <div className="w-16 h-16 rounded-xl bg-white dark:bg-slate-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform overflow-hidden">
+                          <img src={company.logo} alt={company.name + ' logo'} className="w-full h-full object-contain" />
+                        </div>
+                        {/* Nombre */}
+                        <div className="text-center">
+                          <p className="text-sm font-bold text-slate-800 dark:text-slate-100 text-center line-clamp-2">
+                            {company.name}
+                          </p>
+                          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">León, Gto.</p>
+                        </div>
+                      </div>
+                    ))}
+                  </motion.div>
+                </div>
+              </div>
             </div>
           </div>
 
