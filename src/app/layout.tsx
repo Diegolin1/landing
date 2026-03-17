@@ -107,7 +107,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         
         {/* Theme color for mobile browsers */}
         <meta name="theme-color" content="#0f172a" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
       <body className={inter.className}>{children}</body>
