@@ -36,6 +36,19 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 
 const LuminaRefactored = () => {
+        {/* Sticky CTA Desktop Only */}
+        <div className="hidden sm:block fixed bottom-8 right-8 z-40 animate-bounce">
+          <button
+            onClick={() => {
+              const pricingSection = document.getElementById('pricing');
+              pricingSection?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full shadow-2xl shadow-blue-600/50 flex items-center gap-2 text-lg transition-all active:scale-95"
+            aria-label="Ver planes de Lumina"
+          >
+            💡 Ver Planes
+          </button>
+        </div>
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
@@ -254,6 +267,10 @@ const LuminaRefactored = () => {
               <Sparkles size={14} className="fill-white" />
               <span>✨ Plataforma B2B #1 en México 2024</span>
             </div>
+            {/* H1 SEO visible */}
+            <h1 className="text-3xl md:text-5xl font-extrabold text-blue-900 dark:text-white mb-4 mt-2">
+              Automatiza pedidos y facturas B2B con Lumina
+            </h1>
 
             {/* Título principal - Ajustado al Copywriting */}
             <h1 className="text-5xl lg:text-7xl font-extrabold text-blue-900 dark:text-white leading-[1.05] mb-8 tracking-tight">
@@ -271,20 +288,28 @@ const LuminaRefactored = () => {
                 <button
                   onClick={() => setIsModalOpen(true)}
                   className="bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-700 text-white px-8 py-5 rounded-2xl font-bold text-lg hover:shadow-2xl hover:shadow-blue-500/30 hover:-translate-y-1 transition-all flex items-center justify-center gap-3 group relative overflow-hidden"
+                  aria-label="Solicita tu demo gratis"
                 >
                   <span className="relative z-10 flex items-center gap-3">
-                    Reclamar mi acceso gratuito
+                    Solicita tu demo gratis
                     <ArrowRight className="group-hover:translate-x-2 transition-transform" />
                   </span>
                 </button>
                 <button
                   onClick={() => setVideoModalOpen(true)}
                   className="bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 border-2 border-blue-600 dark:border-blue-400 px-8 py-5 rounded-2xl font-bold text-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all flex items-center justify-center gap-3 group shadow-lg"
+                  aria-label="Ver demo de Lumina"
                 >
                   <Play size={20} className="fill-blue-600 dark:fill-blue-400" />
                   Ver Demo
                 </button>
               </div>
+                {/* Garantía visible cerca del CTA */}
+                <div className="mt-2">
+                  <span className="inline-block bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 font-bold text-xs px-4 py-2 rounded-full border border-emerald-200 dark:border-emerald-800">
+                    Garantía 30 días, sin riesgo.
+                  </span>
+                </div>
               
               {/* Prueba Social Instantánea */}
               <div className="flex items-center gap-3 mt-2 px-2">
@@ -298,7 +323,7 @@ const LuminaRefactored = () => {
                   ))}
                 </div>
                 <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
-                  Únete a <span className="text-blue-600 dark:text-blue-400 font-bold">+500 estudiantes de Ingeniería y Negocios</span>
+                  Únete a <span className="text-blue-600 dark:text-blue-400 font-bold">+500 fabricantes y empresas ya usan Lumina</span>
                 </p>
               </div>
             </div>
@@ -412,17 +437,17 @@ const LuminaRefactored = () => {
             Empresas y Facultades que confían en nosotros
           </p>
 
-          {/* Logos de empresas en escala de grises */}
+          {/* Logos de sectores industriales en escala de grises */}
           <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20 mb-12 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
             {[
-              "FACULTAD DE INGENIERÍA",
-              "CIENCIAS SOCIALES",
-              "ADMINISTRACIÓN",
-              "DISEÑO DIGITAL",
-              "ECONOMÍA"
-            ].map((org, i) => (
+              "Calzado",
+              "Textil",
+              "Alimentos",
+              "Electrónica",
+              "Distribución"
+            ].map((sector, i) => (
               <div key={i} className="font-black text-lg md:text-xl text-slate-500 dark:text-slate-400 tracking-tighter">
-                {org}
+                {sector}
               </div>
             ))}
           </div>
@@ -486,8 +511,8 @@ const LuminaRefactored = () => {
 
                 {/* Author info */}
                 <div className="flex items-center gap-4 pt-6 border-t border-slate-200 dark:border-slate-700">
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white font-bold text-xl">
-                    {testimonial.name.charAt(0)}
+                  <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-blue-600 dark:border-blue-400">
+                    <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover" />
                   </div>
                   <div>
                     <p className="font-bold text-blue-900 dark:text-blue-100">{testimonial.name}</p>
@@ -885,12 +910,12 @@ const LuminaRefactored = () => {
                 <p className="text-[11px] text-slate-500 italic mt-3 border-t border-slate-700 pt-3">Ideal para probar. Cancela cuando quieras.</p>
               </div>
               <ul className="space-y-4 mb-8">
-                {["Hasta 50 productos", "1 Agente de venta", "Showroom Digital", "Soporte vía Ticket"].map((feat, i) => (
-                  <li key={i} className="flex gap-3 text-sm text-slate-300">
-                    <Check size={18} className="text-blue-400 shrink-0" />
-                    {feat}
-                  </li>
-                ))}
+                <li className="flex gap-3 text-sm text-slate-300"><Check size={18} className="text-blue-400 shrink-0" />Hasta 50 productos</li>
+                <li className="flex gap-3 text-sm text-slate-300"><Check size={18} className="text-blue-400 shrink-0" />1 Agente de venta</li>
+                <li className="flex gap-3 text-sm text-slate-300"><Check size={18} className="text-blue-400 shrink-0" />Showroom Digital interactivo</li>
+                <li className="flex gap-3 text-sm text-slate-300"><Check size={18} className="text-blue-400 shrink-0" />Facturación CFDI 4.0 básica</li>
+                <li className="flex gap-3 text-sm text-slate-300"><Check size={18} className="text-blue-400 shrink-0" />Soporte vía Ticket</li>
+                <li className="flex gap-3 text-sm text-slate-300"><Check size={18} className="text-blue-400 shrink-0" />Portal de autoservicio 24/7</li>
               </ul>
               <button className="w-full py-4 rounded-xl font-bold border border-slate-600 hover:bg-slate-700 transition-all active:scale-95">
                 Elegir Starter
@@ -912,18 +937,13 @@ const LuminaRefactored = () => {
                   <p className="text-[11px] text-slate-400 italic mt-3 border-t border-slate-700 pt-3">La opción sin riesgo de los que ya facturan +$1M.</p>
                 </div>
                 <ul className="space-y-4 mb-10">
-                  {[
-                    "Productos ilimitados",
-                    "Hasta 10 agentes de venta",
-                    "Facturación CFDI 4.0 Ilimitada",
-                    "Gate B2B Inteligente",
-                    "Soporte Prioritario WhatsApp"
-                  ].map((feat, i) => (
-                    <li key={i} className="flex gap-3 text-slate-200">
-                      <Check size={20} className="text-blue-400 shrink-0" />
-                      {feat}
-                    </li>
-                  ))}
+                  <li className="flex gap-3 text-slate-200"><Check size={20} className="text-blue-400 shrink-0" />Productos ilimitados</li>
+                  <li className="flex gap-3 text-slate-200"><Check size={20} className="text-blue-400 shrink-0" />Hasta 10 agentes de venta</li>
+                  <li className="flex gap-3 text-slate-200"><Check size={20} className="text-blue-400 shrink-0" />Facturación CFDI 4.0 ilimitada</li>
+                  <li className="flex gap-3 text-slate-200"><Check size={20} className="text-blue-400 shrink-0" />Gate B2B Inteligente (precios por cliente)</li>
+                  <li className="flex gap-3 text-slate-200"><Check size={20} className="text-blue-400 shrink-0" />Portal de autoservicio 24/7</li>
+                  <li className="flex gap-3 text-slate-200"><Check size={20} className="text-blue-400 shrink-0" />Soporte prioritario WhatsApp & Ticket</li>
+                  <li className="flex gap-3 text-slate-200"><Check size={20} className="text-blue-400 shrink-0" />Integración SAT/PAC</li>
                 </ul>
                 <button 
                   onClick={() => setIsModalOpen(true)}
@@ -942,12 +962,14 @@ const LuminaRefactored = () => {
                 <span className="text-4xl font-bold italic">Personalizado</span>
               </div>
               <ul className="space-y-4 mb-8">
-                {["Agentes ilimitados", "Integración API / ERP", "Account Manager Dedicado", "Entrenamiento presencial"].map((feat, i) => (
-                  <li key={i} className="flex gap-3 text-sm text-slate-300">
-                    <Check size={18} className="text-blue-400 shrink-0" />
-                    {feat}
-                  </li>
-                ))}
+                <li className="flex gap-3 text-sm text-slate-300"><Check size={18} className="text-blue-400 shrink-0" />Agentes ilimitados</li>
+                <li className="flex gap-3 text-sm text-slate-300"><Check size={18} className="text-blue-400 shrink-0" />Integración API / ERP</li>
+                <li className="flex gap-3 text-sm text-slate-300"><Check size={18} className="text-blue-400 shrink-0" />Account Manager dedicado</li>
+                <li className="flex gap-3 text-sm text-slate-300"><Check size={18} className="text-blue-400 shrink-0" />Entrenamiento presencial</li>
+                <li className="flex gap-3 text-sm text-slate-300"><Check size={18} className="text-blue-400 shrink-0" />Portal de autoservicio 24/7</li>
+                <li className="flex gap-3 text-sm text-slate-300"><Check size={18} className="text-blue-400 shrink-0" />Facturación CFDI 4.0 ilimitada</li>
+                <li className="flex gap-3 text-sm text-slate-300"><Check size={18} className="text-blue-400 shrink-0" />Soporte prioritario WhatsApp & Ticket</li>
+                <li className="flex gap-3 text-sm text-slate-300"><Check size={18} className="text-blue-400 shrink-0" />Integración SAT/PAC</li>
               </ul>
               <button className="w-full py-4 rounded-xl font-bold border border-slate-600 hover:bg-slate-700 transition-all active:scale-95">
                 Contactar Ventas
@@ -1008,13 +1030,19 @@ const LuminaRefactored = () => {
             <button
               onClick={() => setIsModalOpen(true)}
               className="bg-white text-blue-600 px-12 py-5 rounded-2xl font-bold text-xl hover:bg-blue-50 shadow-2xl transition-all hover:scale-105 flex items-center justify-center gap-3"
+              aria-label="Solicita tu showroom en 24 horas"
             >
               👉 QUIERO MI SHOWROOM EN 24 HORAS
             </button>
-            <button className="flex items-center justify-center gap-3 text-white font-bold text-xl px-12 py-5 border-2 border-white rounded-2xl hover:bg-white/10 transition-all">
+            <a
+              href="https://wa.me/5214771234567?text=Hola,%20quiero%20más%20información%20sobre%20Lumina%20B2B"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-3 text-white font-bold text-xl px-12 py-5 border-2 border-white rounded-2xl hover:bg-white/10 transition-all"
+            >
               <MessageCircle />
               Hablar con Ventas
-            </button>
+            </a>
           </div>
           <p className="text-blue-100 text-xs mb-6">
             ✅ Setup gratis en 24 horas. No necesitas tarjeta de crédito para comenzar.
