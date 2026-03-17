@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeftIcon, CalendarIcon, UserIcon, ClockIcon, ShareIcon } from "lucide-react";
+import { ArrowLeftIcon, CalendarIcon, UserIcon, ClockIcon } from "lucide-react";
 import { getBlogPost, getBlogPosts } from "@/utils/blog";
 import Markdown from "markdown-to-jsx";
 import { BlogPostSchema } from "@/components/Schema";

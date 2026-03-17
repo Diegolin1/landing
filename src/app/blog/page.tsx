@@ -1,6 +1,4 @@
-import Link from "next/link";
 import BlogClientWrapper from "@/components/BlogClientWrapper";
-import NewsletterSignup from "@/components/NewsletterSignup";
 import { getBlogPosts } from "@/utils/blog";
 
 export default function BlogPage() {

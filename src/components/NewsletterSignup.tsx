@@ -20,7 +20,7 @@ export default function NewsletterSignup() {
       setIsSuccess(true);
       setEmail("");
       setTimeout(() => setIsSuccess(false), 5000);
-    } catch (err) {
+    } catch {
       setError("Error al suscribirse. Intenta de nuevo.");
     } finally {
       setIsLoading(false);

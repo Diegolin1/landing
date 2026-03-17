@@ -45,7 +45,7 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="md:col-span-1">
             <Link href="/" className="text-2xl font-bold flex items-center gap-2 mb-4 hover:opacity-80 transition-opacity">
-              <span className="text-primary tracking-tighter">///</span>
+              <span className="text-primary tracking-tighter">{"///"}</span>
               <span>Lumina</span>
             </Link>
             <p className="text-textMuted text-sm leading-relaxed mb-6">

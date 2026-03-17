@@ -36,7 +36,7 @@ export function getBlogPosts(): BlogPost[] {
     return {
       slug,
       content,
-      ...(data as BlogPostMeta),
+      ...(data as unknown as BlogPostMeta),
     } as BlogPost;
   });
 
@@ -58,7 +58,7 @@ export function getBlogPost(slug: string): BlogPost | null {
   return {
     slug,
     content,
-    ...(data as BlogPostMeta),
+    ...(data as unknown as BlogPostMeta),
   } as BlogPost;
 }
 

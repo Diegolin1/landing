@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { ArrowRight, ShoppingCart, BarChart3, ShieldCheck, Lock, FileText, TrendingUp } from "lucide-react";
+import { Lock, FileText, TrendingUp } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
 import { scrollToDemoBooking } from "../utils/scroll";
 

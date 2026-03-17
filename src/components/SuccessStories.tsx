@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { TrendingUpIcon, UsersIcon, ClockIcon } from "lucide-react";
+import { TrendingUpIcon, ClockIcon } from "lucide-react";
 
 interface CaseStudy {
   company: string;
@@ -156,7 +156,7 @@ export default function SuccessStories() {
             ))}
           </div>
           <p className="text-lg md:text-xl text-white mb-6 max-w-3xl mx-auto italic font-medium">
-            "Aumentamos nuestras ventas de $25K a $82K en 6 meses. Ya no estamos compitiendo por precio, ahora somos los que eligen nuestros clientes por eficiencia"
+            &ldquo;Aumentamos nuestras ventas de $25K a $82K en 6 meses. Ya no estamos compitiendo por precio, ahora somos los que eligen nuestros clientes por eficiencia&rdquo;
           </p>
           <div>
             <p className="font-bold text-white">Roberto García</p>

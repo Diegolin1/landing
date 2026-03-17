@@ -15,13 +15,13 @@ declare module "gray-matter" {
     excerpt?: boolean | ((file: GrayMatterFile<T>, options: GrayMatterOption<T>) => string);
     excerpt_separator?: string;
     engines?: {
-      [index: string]: (input: string) => object;
+      [index: string]: (input: string) => Record<string, unknown>;
     };
     language?: string;
     delimiters?: string | [string, string];
   }
 
-  function matter<T = any>(
+  function matter<T = Record<string, unknown>>(
     input: string | Buffer,
     options?: GrayMatterOption<T>
   ): GrayMatterFile<T>;

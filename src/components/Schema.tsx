@@ -23,11 +23,11 @@ export function BlogPostSchema({
   try {
     const d = new Date(date);
     isoDate = !isNaN(d.getTime()) ? d.toISOString() : new Date().toISOString();
-  } catch (e) {
+  } catch {
     isoDate = new Date().toISOString();
   }
-  
-  const readTimeMinutes = parseInt(readTime.split(" ")[0]) || 5;
+
+  const parsedReadTime = parseInt(readTime.split(" ")[0]) || 5;
   const baseUrl = "https://lumina.mx"; // Update with your domain
 
   const schema = {
@@ -45,6 +45,7 @@ export function BlogPostSchema({
     },
     datePublished: isoDate,
     dateModified: isoDate,
+    timeRequired: `PT${parsedReadTime}M`,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${baseUrl}/blog/${slug}`,

@@ -8,30 +8,20 @@ import {
   Shield,
   Smartphone,
   Users,
-  Zap,
   BarChart3,
   Clock,
   Lock,
   ArrowRight,
-  ChevronRight,
   MessageCircle,
   FileText,
-  AlertCircle,
   Menu,
   ChevronDown,
   Play,
   TrendingUp,
   Star,
   Award,
-  Target,
-  DollarSign,
   Sparkles,
   CheckCircle2,
-  Package,
-  CreditCard,
-  Layers,
-  Truck,
-  Globe,
   Mail,
   Phone,
   MapPin,
@@ -491,7 +481,7 @@ const LuminaRefactored = () => {
 
                 {/* Testimonial text */}
                 <p className="text-slate-700 dark:text-slate-300 font-medium leading-relaxed mb-8 italic text-lg">
-                  "{testimonial.text}"
+                  &ldquo;{testimonial.text}&rdquo;
                 </p>
 
                 {/* Author info */}
@@ -574,7 +564,7 @@ const LuminaRefactored = () => {
           <div className="mt-12 p-8 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-3xl text-white text-center shadow-xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
             <p className="text-xl font-bold italic relative z-10">
-              "Lumina eliminó el caos de pedidos por WhatsApp y nos permitió recuperar 15 horas a la semana de trabajo administrativo."
+              &ldquo;Lumina elimino el caos de pedidos por WhatsApp y nos permitio recuperar 15 horas a la semana de trabajo administrativo.&rdquo;
             </p>
           </div>
         </div>

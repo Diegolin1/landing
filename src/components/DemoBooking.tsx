@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Calendar, Clock, User, Mail, Phone } from "lucide-react";
+import { Calendar, Clock, User } from "lucide-react";
 import { useState } from "react";
 
 export default function DemoBooking() {

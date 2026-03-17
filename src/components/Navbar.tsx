@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Menu, X, ChevronDown, BookOpenIcon, GiftIcon } from "lucide-react";
 import { scrollToDemoBooking } from "../utils/scroll";
@@ -7,13 +7,13 @@ import { scrollToDemoBooking } from "../utils/scroll";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  if (typeof window !== "undefined") {
-    window.addEventListener("scroll", () => {
-      setIsScrolled(window.scrollY > 10);
-    });
-  }
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 10);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const solutionLinks = [
     { label: "Gestión de Ventas", href: "#caracteristicas" },
@@ -34,7 +34,7 @@ export default function Navbar() {
       <Link href="/" className="flex items-center gap-2 group cursor-pointer">
         <div className="relative">
           <div className="text-2xl font-bold flex items-center gap-1">
-            <span className="text-primary tracking-tighter group-hover:scale-110 transition-transform">///</span>
+            <span className="text-primary tracking-tighter group-hover:scale-110 transition-transform">{"///"}</span>
             <span className="tracking-wide group-hover:text-primary transition-colors">Lumina</span>
           </div>
           <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
@@ -68,10 +68,10 @@ export default function Navbar() {
         <a href="#precios" className="px-4 py-2 text-textMuted hover:text-white transition-colors rounded-lg hover:bg-primary/5">
           Planes
         </a>
-        <a href="/blog" className="px-4 py-2 text-textMuted hover:text-white transition-colors rounded-lg hover:bg-primary/5 flex items-center gap-1">
+        <Link href="/blog" className="px-4 py-2 text-textMuted hover:text-white transition-colors rounded-lg hover:bg-primary/5 flex items-center gap-1">
           <BookOpenIcon size={16} />
           Blog
-        </a>
+        </Link>
 
         {/* Divider */}
         <div className="w-px h-6 bg-borderDark mx-2" />
@@ -106,6 +106,7 @@ export default function Navbar() {
       <button
         className="lg:hidden text-textMuted hover:text-white transition-colors p-2"
         onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? "Cerrar menu" : "Abrir menu"}
       >
         {isOpen ? <X size={24} /> : <Menu size={24} />}
       </button>

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { TrendingUp, Clock, DollarSign, Calendar } from "lucide-react";
+import { Clock, DollarSign, Calendar } from "lucide-react";
 
 export default function ROICalculator() {
   const [ordersPerMonth, setOrdersPerMonth] = useState(50);

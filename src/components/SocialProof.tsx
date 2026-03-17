@@ -111,7 +111,7 @@ export default function SocialProof() {
                 </div>
 
                 {/* Quote */}
-                <p className="text-textMuted mb-6 italic">"{testimonial.content}"</p>
+                <p className="text-textMuted mb-6 italic">&ldquo;{testimonial.content}&rdquo;</p>
 
                 {/* Author */}
                 <div className="flex items-center gap-3">
