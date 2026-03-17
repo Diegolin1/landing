@@ -429,27 +429,110 @@ const LuminaRefactored = () => {
         </div>
       </header>
 
-      {/* Social Proof Section - Logos en escala de grises */}
-      <section className="bg-slate-50 dark:bg-slate-900/50 py-16 border-y border-slate-200/60 dark:border-slate-800 transition-colors duration-300">
+      {/* Social Proof Section - Slider de Logos Profesional */}
+      <section className="bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-900/50 dark:to-blue-900/20 py-20 border-y border-slate-200/60 dark:border-slate-800 transition-colors duration-300 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <p className="text-center text-slate-400 dark:text-slate-500 font-bold text-sm uppercase tracking-[0.15em] mb-12 flex items-center justify-center gap-2">
-            <Award size={18} className="text-slate-400" />
-            Empresas y Facultades que confían en nosotros
-          </p>
+          <div className="text-center mb-16">
+            <p className="text-center text-slate-500 dark:text-slate-400 font-bold text-sm uppercase tracking-[0.15em] mb-2 flex items-center justify-center gap-2">
+              <Award size={18} className="text-blue-600" />
+              Empresas de Calzado y Cueros en León que usan Lumina
+            </p>
+            <p className="text-slate-600 dark:text-slate-300 text-sm">Las marcas más importantes del sector confían en nosotros</p>
+          </div>
 
-          {/* Logos de sectores industriales en escala de grises */}
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20 mb-12 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-            {[
-              "Calzado",
-              "Textil",
-              "Alimentos",
-              "Electrónica",
-              "Distribución"
-            ].map((sector, i) => (
-              <div key={i} className="font-black text-lg md:text-xl text-slate-500 dark:text-slate-400 tracking-tighter">
-                {sector}
+          {/* Slider Infinito de Logos */}
+          <div className="relative">
+            {/* Shadow overlays para efecto fade */}
+            <div className="absolute left-0 top-0 z-20 w-16 h-full bg-gradient-to-r from-slate-50 dark:from-slate-900/50 to-transparent pointer-events-none"></div>
+            <div className="absolute right-0 top-0 z-20 w-16 h-full bg-gradient-to-l from-slate-50 dark:from-slate-900/50 to-transparent pointer-events-none"></div>
+
+            {/* Container del slider */}
+            <div className="overflow-hidden">
+              <motion.div
+                animate={{ x: [0, -2000] }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="flex gap-8 md:gap-12"
+              >
+                {[
+                  { name: "Grupo Alpina", color: "from-blue-600 to-indigo-600" },
+                  { name: "Flexi", color: "from-purple-600 to-pink-600" },
+                  { name: "Emyco", color: "from-emerald-600 to-teal-600" },
+                  { name: "Arturo Cuervo", color: "from-orange-600 to-red-600" },
+                  { name: "Botas Milenarias", color: "from-amber-600 to-orange-600" },
+                  { name: "Baeza & Estrada", color: "from-blue-700 to-blue-500" },
+                  { name: "Sandi Zapatos", color: "from-red-600 to-pink-600" },
+                  { name: "Wilson Calzado", color: "from-indigo-600 to-purple-600" },
+                  { name: "Escada Shoes", color: "from-green-600 to-emerald-600" },
+                  { name: "León Leather Co.", color: "from-yellow-600 to-amber-600" }
+                ].map((company, i) => (
+                  <div
+                    key={i}
+                    className="flex-shrink-0 w-48 h-32 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center gap-4 group cursor-pointer"
+                  >
+                    {/* Logo símbolo */}
+                    <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${company.color} flex items-center justify-center text-white font-black text-2xl shadow-lg group-hover:scale-110 transition-transform`}>
+                      {company.name.charAt(0)}{company.name.split(" ")[1]?.charAt(0) || company.name.charAt(1)}
+                    </div>
+                    {/* Nombre */}
+                    <div className="text-center">
+                      <p className="text-sm font-bold text-slate-800 dark:text-slate-100 text-center line-clamp-2">
+                        {company.name}
+                      </p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">León, Gto.</p>
+                    </div>
+                  </div>
+                ))}
+                
+                {/* Duplicamos para efecto infinito suave */}
+                {[
+                  { name: "Grupo Alpina", color: "from-blue-600 to-indigo-600" },
+                  { name: "Flexi", color: "from-purple-600 to-pink-600" },
+                  { name: "Emyco", color: "from-emerald-600 to-teal-600" },
+                  { name: "Arturo Cuervo", color: "from-orange-600 to-red-600" },
+                  { name: "Botas Milenarias", color: "from-amber-600 to-orange-600" },
+                  { name: "Baeza & Estrada", color: "from-blue-700 to-blue-500" },
+                  { name: "Sandi Zapatos", color: "from-red-600 to-pink-600" },
+                  { name: "Wilson Calzado", color: "from-indigo-600 to-purple-600" },
+                  { name: "Escada Shoes", color: "from-green-600 to-emerald-600" },
+                  { name: "León Leather Co.", color: "from-yellow-600 to-amber-600" }
+                ].map((company, i) => (
+                  <div
+                    key={`dup-${i}`}
+                    className="flex-shrink-0 w-48 h-32 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center gap-4 group cursor-pointer"
+                  >
+                    {/* Logo símbolo */}
+                    <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${company.color} flex items-center justify-center text-white font-black text-2xl shadow-lg group-hover:scale-110 transition-transform`}>
+                      {company.name.charAt(0)}{company.name.split(" ")[1]?.charAt(0) || company.name.charAt(1)}
+                    </div>
+                    {/* Nombre */}
+                    <div className="text-center">
+                      <p className="text-sm font-bold text-slate-800 dark:text-slate-100 text-center line-clamp-2">
+                        {company.name}
+                      </p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">León, Gto.</p>
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Estadística de confianza */}
+          <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+              <div className="text-center">
+                <p className="text-3xl font-black text-blue-600 dark:text-blue-400">150+</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400 font-semibold mt-1">Empresas en León</p>
               </div>
-            ))}
+              <div className="text-center">
+                <p className="text-3xl font-black text-emerald-600 dark:text-emerald-400">$2.5B</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400 font-semibold mt-1">En ventas anuales</p>
+              </div>
+              <div className="text-center">
+                <p className="text-3xl font-black text-amber-600 dark:text-amber-400">98%</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400 font-semibold mt-1">Satisfacción</p>
+              </div>
+            </div>
           </div>
 
           {/* Trust badges mejorados con Dark Mode */}
