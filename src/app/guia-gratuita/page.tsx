@@ -127,7 +127,7 @@ export default function EmailCapturePage() {
 
             <p className="text-xs text-white/50">
               Si no ves el email en 5 minutos, {" "}
-              <a href="mailto:soporte@lumina.mx" className="text-primary hover:underline">
+              <a href="mailto:Diegorodvaz73@gmail.com" className="text-primary hover:underline">
                 contáctanos
               </a>
             </p>

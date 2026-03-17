@@ -34,7 +34,7 @@ export default function StructuredData() {
       ],
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+52-477-123-4567",
+        "telephone": "+52-4776633068",
         "contactType": "Customer Service",
         "areaServed": "MX",
         "availableLanguage": ["Spanish"]

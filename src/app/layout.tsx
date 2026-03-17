@@ -93,7 +93,7 @@ export const metadata: Metadata = {
     images: ["https://lumina.mx/twitter-image.png"],
   },
   verification: {
-    google: "tu-codigo-google-search-console",
+    google: "google-site-verification-code",
   },
 };
 

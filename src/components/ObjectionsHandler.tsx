@@ -31,7 +31,7 @@ export default function ObjectionsHandler() {
     {
       question: "¿Y si mi modelo de negocio es diferente? ¿Puede customizarse?",
       answer:
-        "Claro. Lumina maneja desde modelos simples (venta directa) hasta complejos (multi-tienda, comisiones, dropshipping, franquicias). Escríbenos a ventas@lumina.com y vemos si casamos.",
+        "Claro. Lumina maneja desde modelos simples (venta directa) hasta complejos (multi-tienda, comisiones, dropshipping, franquicias). Escríbenos a Diegorodvaz73@gmail.com y vemos si casamos.",
     },
   ];
 
@@ -118,7 +118,7 @@ export default function ObjectionsHandler() {
             ¿Tienes una pregunta que no está aquí?
           </p>
           <a
-            href="mailto:ventas@lumina.com"
+            href="mailto:Diegorodvaz73@gmail.com"
             className="inline-block text-primary hover:text-primary/80 font-semibold transition-colors border-b border-primary hover:border-primary/60"
           >
             Contáctanos sin compromiso →

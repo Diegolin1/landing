@@ -1168,11 +1168,11 @@ const LuminaRefactored = () => {
               <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-2">
                   <Mail size={16} className="text-blue-400" />
-                  <a href="mailto:hola@lumina.mx" className="hover:text-blue-400">hola@lumina.mx</a>
+                  <a href="mailto:Diegorodvaz73@gmail.com" className="hover:text-blue-400">Diegorodvaz73@gmail.com</a>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone size={16} className="text-blue-400" />
-                  <a href="tel:+524771234567" className="hover:text-blue-400">+52 477 123 4567</a>
+                  <a href="tel:+524776633068" className="hover:text-blue-400">+52 477 663 3068</a>
                 </div>
                 <div className="flex items-start gap-2">
                   <MapPin size={16} className="text-blue-400 mt-1 shrink-0" />

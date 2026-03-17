@@ -111,7 +111,7 @@ export default function FAQ() {
             ¿Tienes una pregunta que no respondemos aquí?
           </p>
           <a
-            href="mailto:soporte@lumina.mx"
+            href="mailto:Diegorodvaz73@gmail.com"
             className="inline-block px-8 py-4 rounded-lg bg-surface border border-borderDark hover:border-primary hover:bg-surface text-white font-medium text-lg transition-all"
           >
             Contacta a nuestro equipo
