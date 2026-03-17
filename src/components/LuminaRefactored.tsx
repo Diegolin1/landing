@@ -440,80 +440,95 @@ const LuminaRefactored = () => {
             <p className="text-slate-600 dark:text-slate-300 text-sm">Las marcas más importantes del sector confían en nosotros</p>
           </div>
 
-          {/* Slider Infinito de Logos */}
-          <div className="relative">
-            {/* Shadow overlays para efecto fade */}
-            <div className="absolute left-0 top-0 z-20 w-16 h-full bg-gradient-to-r from-slate-50 dark:from-slate-900/50 to-transparent pointer-events-none"></div>
-            <div className="absolute right-0 top-0 z-20 w-16 h-full bg-gradient-to-l from-slate-50 dark:from-slate-900/50 to-transparent pointer-events-none"></div>
+          {/* Slider Infinito Mejorado - 6 Empresas */}
+          <div className="relative h-48 flex items-center">
+            {/* Gradient Overlays para efecto fade profesional */}
+            <div className="absolute left-0 top-0 z-20 w-20 md:w-32 h-full bg-gradient-to-r from-slate-50 dark:from-slate-900/50 via-slate-50/0 dark:via-slate-900/0 to-transparent pointer-events-none"></div>
+            <div className="absolute right-0 top-0 z-20 w-20 md:w-32 h-full bg-gradient-to-l from-slate-50 dark:from-slate-900/50 via-slate-50/0 dark:via-slate-900/0 to-transparent pointer-events-none"></div>
 
             {/* Container del slider */}
-            <div className="overflow-hidden">
-              <div className="relative">
-                {/* Shadow overlays para efecto fade */}
-                <div className="absolute left-0 top-0 z-20 w-16 h-full bg-gradient-to-r from-slate-50 dark:from-slate-900/50 to-transparent pointer-events-none"></div>
-                <div className="absolute right-0 top-0 z-20 w-16 h-full bg-gradient-to-l from-slate-50 dark:from-slate-900/50 to-transparent pointer-events-none"></div>
-
-                {/* Container del slider */}
-                <div className="overflow-hidden">
+            <div className="overflow-hidden w-full">
+              <motion.div
+                animate={{ x: [0, -1800] }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="flex gap-6 md:gap-8 px-4"
+              >
+                {/* Primera iteración de 6 empresas */}
+                {[
+                  { name: "Arturo Cuervo", logo: "/logos/arturo-cuervo.png" },
+                  { name: "Botas Milenarias", logo: "/logos/botas-milenarias.jpg" },
+                  { name: "Baeza & Estrada", logo: "/logos/baeza-estrada.png" },
+                  { name: "Grupo Alpina", logo: "/logos/alpina.png" },
+                  { name: "Flexi", logo: "/logos/flexi.png" },
+                  { name: "Emyco", logo: "/logos/emyco.png" }
+                ].map((company, i) => (
                   <motion.div
-                    animate={{ x: [0, -1200] }}
-                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                    className="flex gap-8 md:gap-12"
+                    key={i}
+                    whileHover={{ y: -8 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="flex-shrink-0 w-56 bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group cursor-pointer"
                   >
-                    {[
-                      { name: "Grupo Alpina", logo: "/logos/alpina.png" },
-                      { name: "Flexi", logo: "/logos/flexi.png" },
-                      { name: "Emyco", logo: "/logos/emyco.png" },
-                      { name: "Arturo Cuervo", logo: "/logos/arturo-cuervo.png" },
-                      { name: "Botas Milenarias", logo: "/logos/botas-milenarias.jpg" },
-                      { name: "Baeza & Estrada", logo: "/logos/baeza-estrada.png" }
-                    ].map((company, i) => (
-                      <div
-                        key={i}
-                        className="flex-shrink-0 w-48 h-32 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center gap-4 group cursor-pointer"
-                      >
-                        {/* Logo real */}
-                        <div className="w-16 h-16 rounded-xl bg-white dark:bg-slate-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform overflow-hidden">
-                          <img src={company.logo} alt={company.name + ' logo'} className="w-full h-full object-contain" />
-                        </div>
-                        {/* Nombre */}
-                        <div className="text-center">
-                          <p className="text-sm font-bold text-slate-800 dark:text-slate-100 text-center line-clamp-2">
-                            {company.name}
-                          </p>
-                          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">León, Gto.</p>
-                        </div>
+                    {/* Fondo degradado suave */}
+                    <div className="h-2 bg-gradient-to-r from-blue-600 to-indigo-600"></div>
+                    
+                    {/* Contenido */}
+                    <div className="p-6 flex flex-col items-center justify-center h-40">
+                      {/* Container de Logo con fondo limpio */}
+                      <div className="w-24 h-24 rounded-2xl bg-gray-50 dark:bg-slate-900 flex items-center justify-center mb-4 shadow-md group-hover:shadow-lg transition-all group-hover:scale-110 duration-300">
+                        <img 
+                          src={company.logo} 
+                          alt={company.name + ' logo'} 
+                          className="w-20 h-20 object-contain" 
+                        />
                       </div>
-                    ))}
-                    {/* Duplicamos para efecto infinito suave */}
-                    {[
-                      { name: "Grupo Alpina", logo: "/logos/alpina.png" },
-                      { name: "Flexi", logo: "/logos/flexi.png" },
-                      { name: "Emyco", logo: "/logos/emyco.png" },
-                      { name: "Arturo Cuervo", logo: "/logos/arturo-cuervo.png" },
-                      { name: "Botas Milenarias", logo: "/logos/botas-milenarias.jpg" },
-                      { name: "Baeza & Estrada", logo: "/logos/baeza-estrada.png" }
-                    ].map((company, i) => (
-                      <div
-                        key={`dup-${i}`}
-                        className="flex-shrink-0 w-48 h-32 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center gap-4 group cursor-pointer"
-                      >
-                        {/* Logo real */}
-                        <div className="w-16 h-16 rounded-xl bg-white dark:bg-slate-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform overflow-hidden">
-                          <img src={company.logo} alt={company.name + ' logo'} className="w-full h-full object-contain" />
-                        </div>
-                        {/* Nombre */}
-                        <div className="text-center">
-                          <p className="text-sm font-bold text-slate-800 dark:text-slate-100 text-center line-clamp-2">
-                            {company.name}
-                          </p>
-                          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">León, Gto.</p>
-                        </div>
-                      </div>
-                    ))}
+                      
+                      {/* Nombre de la empresa */}
+                      <p className="text-sm font-bold text-slate-800 dark:text-slate-100 text-center">
+                        {company.name}
+                      </p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">León, Gto.</p>
+                    </div>
                   </motion.div>
-                </div>
-              </div>
+                ))}
+
+                {/* Segunda iteración para efecto infinito sin saltos */}
+                {[
+                  { name: "Arturo Cuervo", logo: "/logos/arturo-cuervo.png" },
+                  { name: "Botas Milenarias", logo: "/logos/botas-milenarias.jpg" },
+                  { name: "Baeza & Estrada", logo: "/logos/baeza-estrada.png" },
+                  { name: "Grupo Alpina", logo: "/logos/alpina.png" },
+                  { name: "Flexi", logo: "/logos/flexi.png" },
+                  { name: "Emyco", logo: "/logos/emyco.png" }
+                ].map((company, i) => (
+                  <motion.div
+                    key={`dup-${i}`}
+                    whileHover={{ y: -8 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="flex-shrink-0 w-56 bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group cursor-pointer"
+                  >
+                    {/* Fondo degradado suave */}
+                    <div className="h-2 bg-gradient-to-r from-blue-600 to-indigo-600"></div>
+                    
+                    {/* Contenido */}
+                    <div className="p-6 flex flex-col items-center justify-center h-40">
+                      {/* Container de Logo con fondo limpio */}
+                      <div className="w-24 h-24 rounded-2xl bg-gray-50 dark:bg-slate-900 flex items-center justify-center mb-4 shadow-md group-hover:shadow-lg transition-all group-hover:scale-110 duration-300">
+                        <img 
+                          src={company.logo} 
+                          alt={company.name + ' logo'} 
+                          className="w-20 h-20 object-contain" 
+                        />
+                      </div>
+                      
+                      {/* Nombre de la empresa */}
+                      <p className="text-sm font-bold text-slate-800 dark:text-slate-100 text-center">
+                        {company.name}
+                      </p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">León, Gto.</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
             </div>
           </div>
 
