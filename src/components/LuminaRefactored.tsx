@@ -185,7 +185,7 @@ const LuminaRefactored = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex gap-10 text-sm font-bold text-slate-500 dark:text-slate-400">
-            <a href="#solucion" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-2">Solución</a>
+            <a href="#features" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-2">Solución</a>
             <a href="#features" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-2">Funciones</a>
             <a href="#comparativa" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-2">Comparativa</a>
             <a href="#pricing" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-2">Precios</a>
@@ -223,7 +223,7 @@ const LuminaRefactored = () => {
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 w-full bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 shadow-2xl animate-in slide-in-from-top duration-300">
             <div className="flex flex-col p-6 gap-4 font-bold text-slate-600 dark:text-slate-300">
-              <a href="#solucion" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-slate-50 dark:border-slate-800">Solución</a>
+              <a href="#features" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-slate-50 dark:border-slate-800">Solución</a>
               <a href="#features" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-slate-50 dark:border-slate-800">Funciones</a>
               <a href="#comparativa" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-slate-50 dark:border-slate-800">Comparativa</a>
               <a href="#pricing" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-slate-50 dark:border-slate-800">Precios</a>
