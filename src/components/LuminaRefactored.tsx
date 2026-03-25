@@ -791,7 +791,7 @@ const LuminaRefactored = () => {
                 onClick={() => setIsModalOpen(true)}
                 className="bg-white text-brand-600 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-brand-50 transition-all shadow-glass hover:scale-105 active:scale-95"
               >
-                💰 Recuperar <span className="underline underline-offset-2 decoration-brand-300">${calculateROI().recovered.toLocaleString()} MXN</span> al mes → Agendar Demo
+                Recuperar <span className="font-black">${calculateROI().recovered.toLocaleString()} MXN</span> al mes — Agendar Demo
               </button>
               <p className="text-brand-200 text-xs mt-3">Sin tarjeta de crédito. Setup en 24 horas.</p>
             </div>
@@ -1076,7 +1076,7 @@ const LuminaRefactored = () => {
               className="bg-white text-brand-600 px-12 py-5 rounded-2xl font-bold text-xl hover:bg-brand-50 shadow-glass transition-all hover:scale-105 flex items-center justify-center gap-3"
               aria-label="Solicita tu showroom en 24 horas"
             >
-              👉 QUIERO MI SHOWROOM EN 24 HORAS
+              Quiero mi Showroom en 24 Horas
             </button>
             <a
               href="https://wa.me/5214771234567?text=Hola,%20quiero%20más%20información%20sobre%20Lumina%20B2B"
@@ -1089,7 +1089,7 @@ const LuminaRefactored = () => {
             </a>
           </div>
           <p className="text-brand-100 text-xs mb-6">
-            ✅ Setup gratis en 24 horas. No necesitas tarjeta de crédito para comenzar.
+              ✓ Setup gratuito en 24 horas. Sin tarjeta de crédito para comenzar.
           </p>
           <p className="text-brand-200 text-sm flex items-center justify-center gap-4 hidden">
             <span>✓ Sin tarjeta de crédito</span>
@@ -1162,7 +1162,7 @@ const LuminaRefactored = () => {
 
       {/* Sticky CTA — Desktop + Mobile */}
       <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
-        {/* Desktop: botón completo */}
+        {/* Desktop */}
         <button
           onClick={() => {
             const pricingSection = document.getElementById('pricing');
@@ -1171,9 +1171,9 @@ const LuminaRefactored = () => {
           className="hidden sm:flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 px-6 rounded-full shadow-xl shadow-brand-600/40 hover:shadow-brand-600/60 hover:scale-105 transition-all active:scale-95 text-sm"
           aria-label="Ver planes de Lumina"
         >
-          Ver Planes →
+          Ver Planes <ArrowRight size={16} />
         </button>
-        {/* Mobile: botón compacto */}
+        {/* Mobile */}
         <button
           onClick={() => {
             const pricingSection = document.getElementById('pricing');
@@ -1181,7 +1181,7 @@ const LuminaRefactored = () => {
           }}
           className="sm:hidden bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 px-5 rounded-full shadow-xl shadow-brand-600/40 hover:scale-105 transition-all active:scale-95 text-sm"
         >
-          💡 Planes
+          Planes
         </button>
       </div>
 
@@ -1270,7 +1270,7 @@ const LuminaRefactored = () => {
           <div className="border-t border-brand-800 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-sm text-stone-500 text-center md:text-left">
-                © 2025 Lumina B2B. Todos los derechos reservados. Hecho con ❤️ en México.
+                © 2025 Lumina B2B. Todos los derechos reservados. Hecho con dedicación en México.
               </p>
               <div className="flex items-center gap-6 text-sm">
                 <a href="#" className="hover:text-brand-400 transition-colors">Términos</a>
@@ -1294,26 +1294,29 @@ const LuminaRefactored = () => {
             onClick={() => !isSubmitting && setIsModalOpen(false)}
           ></div>
           <div className="bg-white dark:bg-brand-800 rounded-[2rem] shadow-glass w-full max-w-lg relative z-10 overflow-hidden animate-in zoom-in-95 duration-300 border dark:border-stone-700">
-            <div className="bg-gradient-to-r from-brand-600 to-brand-600 p-8 text-white relative">
-              <button 
-                onClick={() => setIsModalOpen(false)}
-                className="absolute top-6 right-6 p-2 hover:bg-white/10 rounded-full transition-colors"
-                disabled={isSubmitting}
-              >
-                <X size={24} />
-              </button>
-              <h3 className="text-3xl font-bold mb-2">Acceso Gratuito</h3>
-              <p className="text-brand-100">Únete a la comunidad B2B y ahorra tiempo desde el primer día.</p>
+            <div className="relative">
+              {/* Accent bar */}
+              <div className="h-1.5 w-full bg-gradient-to-r from-brand-500 via-brand-600 to-brand-700" />
+              <div className="p-7 pb-5">
+                <button 
+                  onClick={() => setIsModalOpen(false)}
+                  className="absolute top-5 right-5 p-2 hover:bg-stone-100 dark:hover:bg-brand-700 rounded-full transition-colors"
+                  disabled={isSubmitting}
+                >
+                  <X size={20} className="text-stone-400" />
+                </button>
+                <h3 className="text-2xl font-bold text-brand-900 dark:text-white mb-1">Solicitar Demo Gratuita</h3>
+                <p className="text-sm text-stone-500 dark:text-stone-400">Nuestro equipo te contacta en menos de 2 horas.</p>
+              </div>
             </div>
-            
-            <div className="p-8">
+            <div className="px-7 pb-7">
               {isSuccess ? (
                 <div className="text-center py-12 animate-in zoom-in-95 duration-500">
-                  <div className="w-20 h-20 bg-gold-100 dark:bg-gold-900/30 text-gold-600 dark:text-gold-400 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Check size={40} />
+                  <div className="w-16 h-16 bg-brand-50 dark:bg-brand-900/40 text-brand-600 dark:text-brand-400 rounded-full flex items-center justify-center mx-auto mb-5">
+                    <Check size={32} strokeWidth={2.5} />
                   </div>
-                  <h4 className="text-2xl font-bold text-brand-950 dark:text-white mb-2">¡Solicitud recibida!</h4>
-                  <p className="text-stone-600 dark:text-stone-400 text-lg">Pronto estaremos en contacto.</p>
+                  <h4 className="text-xl font-bold text-brand-900 dark:text-white mb-2">Solicitud recibida</h4>
+                  <p className="text-stone-500 dark:text-stone-400">Te contactaremos en menos de 2 horas hábiles.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-3">
@@ -1379,10 +1382,10 @@ const LuminaRefactored = () => {
                     {isSubmitting ? (
                       <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                     ) : (
-                      "👉 Agendar mi Demo Gratuita"
+                      <span className="flex items-center gap-2">Agendar mi Demo Gratuita <ArrowRight size={16} /></span>
                     )}
                   </button>
-                  <p className="text-center text-xs text-stone-400 mt-1">Sin tarjeta · Setup en 24 hrs · Garantía 30 días</p>
+                  <p className="text-center text-xs text-stone-400 mt-2">Sin tarjeta de crédito · Setup en 24 hrs · Garantía 30 días</p>
                 </form>
               )}
             </div>
