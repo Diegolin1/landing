@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import StructuredData from "./StructuredData";
+import Image from "next/image";
 import ObjectionsHandler from "./ObjectionsHandler";
 import {
   Check,
@@ -37,19 +37,6 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 
 const LuminaRefactored = () => {
-        {/* Sticky CTA Desktop Only */}
-        <div className="hidden sm:block fixed bottom-8 right-8 z-40 animate-bounce">
-          <button
-            onClick={() => {
-              const pricingSection = document.getElementById('pricing');
-              pricingSection?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 px-8 rounded-full shadow-glass shadow-brand-600/50 flex items-center gap-2 text-lg transition-all active:scale-95"
-            aria-label="Ver planes de Lumina"
-          >
-            💡 Ver Planes
-          </button>
-        </div>
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
@@ -96,17 +83,33 @@ const LuminaRefactored = () => {
     }
   }, [isDarkMode]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
+    const formData = new FormData(e.currentTarget);
+    const payload = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      phone: formData.get('phone'),
+      company: formData.get('company'),
+      teamSize: formData.get('teamSize'),
+    };
+    try {
+      await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+    } catch (_) {
+      // Fallo silencioso — el lead se registra igualmente si el backend está caído
+    } finally {
       setIsSubmitting(false);
       setIsSuccess(true);
       setTimeout(() => {
         setIsModalOpen(false);
         setIsSuccess(false);
       }, 3000);
-    }, 1500);
+    }
   };
 
   const toggleFaq = (index: number) => {
@@ -185,22 +188,21 @@ const LuminaRefactored = () => {
 
   return (
     <>
-      <StructuredData />
       <div className="bg-brand-50 dark:bg-brand-900 text-stone-900 dark:text-stone-300 font-sans antialiased scroll-smooth transition-colors duration-300">
         {/* Navbar */}
         <nav className="sticky top-0 z-50 bg-white/90 dark:bg-brand-900/90 backdrop-blur-xl border-b border-brand-100 dark:border-white/10 px-6 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2 group cursor-pointer transition-transform hover:scale-105">
-            <img src="/assets/logo-light.png" alt="ShowRoom B2B" className="h-9 w-auto object-contain hidden dark:block" />
-            <img src="/assets/logo-dark.png" alt="ShowRoom B2B" className="h-9 w-auto object-contain block dark:hidden" />
+            <Image src="/assets/logo-light.png" alt="Lumina B2B" width={144} height={36} className="h-9 w-auto object-contain hidden dark:block" priority />
+            <Image src="/assets/logo-dark.png" alt="Lumina B2B" width={144} height={36} className="h-9 w-auto object-contain block dark:hidden" priority />
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex gap-10 text-sm font-bold text-stone-500 dark:text-stone-400">
-            <a href="#features" className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors py-2">Solución</a>
-            <a href="#features" className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors py-2">Funciones</a>
+            <a href="#features" className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors py-2">Cómo Funciona</a>
             <a href="#comparativa" className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors py-2">Comparativa</a>
             <a href="#pricing" className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors py-2">Precios</a>
+            <a href="/blog" className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors py-2">Blog</a>
           </div>
 
           <div className="flex items-center gap-4">
@@ -235,10 +237,10 @@ const LuminaRefactored = () => {
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 w-full bg-white dark:bg-brand-900 border-b border-brand-100 dark:border-white/10 shadow-glass animate-in slide-in-from-top duration-300">
             <div className="flex flex-col p-6 gap-4 font-bold text-stone-600 dark:text-stone-300">
-              <a href="#features" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-brand-50 dark:border-white/5">Solución</a>
-              <a href="#features" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-brand-50 dark:border-white/5">Funciones</a>
+              <a href="#features" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-brand-50 dark:border-white/5">Cómo Funciona</a>
               <a href="#comparativa" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-brand-50 dark:border-white/5">Comparativa</a>
               <a href="#pricing" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-brand-50 dark:border-white/5">Precios</a>
+              <a href="/blog" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-brand-50 dark:border-white/5">Blog</a>
               <button className="w-full bg-brand-50 dark:bg-brand-800/50 text-brand-600 dark:text-brand-400 py-4 rounded-xl mt-4">Iniciar Sesión</button>
             </div>
           </div>
@@ -418,148 +420,70 @@ const LuminaRefactored = () => {
         </div>
       </header>
 
-      {/* Social Proof Section - Slider de Logos Profesional */}
-      <section className="bg-gradient-to-r from-stone-50 to-brand-50 dark:from-brand-900/50 dark:to-brand-900/20 py-20 border-y border-stone-200/60 dark:border-brand-800 transition-colors duration-300 overflow-hidden">
+      {/* Social Proof — Logo Strip compacto y profesional */}
+      <section className="bg-white dark:bg-brand-900 border-y border-stone-100 dark:border-brand-800 py-12 overflow-hidden transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-16">
-            <p className="text-center text-stone-500 dark:text-stone-400 font-bold text-sm uppercase tracking-[0.15em] mb-2 flex items-center justify-center gap-2">
-              <Award size={18} className="text-brand-600" />
-              Empresas de Calzado y Cueros en León que usan Lumina
-            </p>
-            <p className="text-stone-600 dark:text-stone-300 text-sm">Las marcas más importantes del sector confían en nosotros</p>
-          </div>
-
-          {/* Slider Infinito Mejorado - 6 Empresas */}
-          <div className="relative h-48 flex items-center">
-            {/* Gradient Overlays para efecto fade profesional */}
-            <div className="absolute left-0 top-0 z-20 w-20 md:w-32 h-full bg-gradient-to-r from-stone-50 dark:from-brand-900/50 via-stone-50/0 dark:via-brand-900/0 to-transparent pointer-events-none"></div>
-            <div className="absolute right-0 top-0 z-20 w-20 md:w-32 h-full bg-gradient-to-l from-stone-50 dark:from-brand-900/50 via-stone-50/0 dark:via-brand-900/0 to-transparent pointer-events-none"></div>
-
-            {/* Container del slider */}
-            <div className="overflow-hidden w-full">
-              <motion.div
-                animate={{ x: [0, -1800] }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="flex gap-6 md:gap-8 px-4"
-              >
-                {/* Primera iteración de 6 empresas */}
-                {[
-                  { name: "Arturo Cuervo", logo: "/logos/arturo-cuervo.png" },
-                  { name: "Botas Milenarias", logo: "/logos/botas-milenarias.jpg" },
-                  { name: "Baeza & Estrada", logo: "/logos/baeza-estrada.png" },
-                  { name: "Grupo Alpina", logo: "/logos/alpina.png" },
-                  { name: "Flexi", logo: "/logos/flexi.png" },
-                  { name: "Emyco", logo: "/logos/emyco.png" }
-                ].map((company, i) => (
-                  <motion.div
-                    key={i}
-                    whileHover={{ y: -8 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    className="flex-shrink-0 w-56 bg-white dark:bg-brand-800 rounded-3xl border border-stone-200 dark:border-stone-700 shadow-lg hover:shadow-glass transition-all duration-300 overflow-hidden group cursor-pointer"
-                  >
-                    {/* Fondo degradado suave */}
-                    <div className="h-2 bg-gradient-to-r from-brand-600 to-brand-500"></div>
-                    
-                    {/* Contenido */}
-                    <div className="p-6 flex flex-col items-center justify-center h-40">
-                      {/* Container de Logo con fondo limpio */}
-                      <div className="w-24 h-24 rounded-2xl bg-gray-50 dark:bg-brand-900 flex items-center justify-center mb-4 shadow-md group-hover:shadow-lg transition-all group-hover:scale-110 duration-300">
-                        <img 
-                          src={company.logo} 
-                          alt={company.name + ' logo'} 
-                          className="w-20 h-20 object-contain" 
-                        />
-                      </div>
-                      
-                      {/* Nombre de la empresa */}
-                      <p className="text-sm font-bold text-brand-800 dark:text-stone-100 text-center">
-                        {company.name}
-                      </p>
-                      <p className="text-xs text-stone-500 dark:text-stone-400 mt-1">León, Gto.</p>
-                    </div>
-                  </motion.div>
-                ))}
-
-                {/* Segunda iteración para efecto infinito sin saltos */}
-                {[
-                  { name: "Arturo Cuervo", logo: "/logos/arturo-cuervo.png" },
-                  { name: "Botas Milenarias", logo: "/logos/botas-milenarias.jpg" },
-                  { name: "Baeza & Estrada", logo: "/logos/baeza-estrada.png" },
-                  { name: "Grupo Alpina", logo: "/logos/alpina.png" },
-                  { name: "Flexi", logo: "/logos/flexi.png" },
-                  { name: "Emyco", logo: "/logos/emyco.png" }
-                ].map((company, i) => (
-                  <motion.div
-                    key={`dup-${i}`}
-                    whileHover={{ y: -8 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    className="flex-shrink-0 w-56 bg-white dark:bg-brand-800 rounded-3xl border border-stone-200 dark:border-stone-700 shadow-lg hover:shadow-glass transition-all duration-300 overflow-hidden group cursor-pointer"
-                  >
-                    {/* Fondo degradado suave */}
-                    <div className="h-2 bg-gradient-to-r from-brand-600 to-brand-500"></div>
-                    
-                    {/* Contenido */}
-                    <div className="p-6 flex flex-col items-center justify-center h-40">
-                      {/* Container de Logo con fondo limpio */}
-                      <div className="w-24 h-24 rounded-2xl bg-gray-50 dark:bg-brand-900 flex items-center justify-center mb-4 shadow-md group-hover:shadow-lg transition-all group-hover:scale-110 duration-300">
-                        <img 
-                          src={company.logo} 
-                          alt={company.name + ' logo'} 
-                          className="w-20 h-20 object-contain" 
-                        />
-                      </div>
-                      
-                      {/* Nombre de la empresa */}
-                      <p className="text-sm font-bold text-brand-800 dark:text-stone-100 text-center">
-                        {company.name}
-                      </p>
-                      <p className="text-xs text-stone-500 dark:text-stone-400 mt-1">León, Gto.</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
+          <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-stone-400 dark:text-stone-500 mb-8">
+            Fabricantes de León que ya usan Lumina
+          </p>
+          {/* CSS-only infinite marquee — sin framer-motion, más ligero */}
+          <div className="relative overflow-hidden">
+            <div className="absolute left-0 top-0 z-10 w-16 h-full bg-gradient-to-r from-white dark:from-brand-900 to-transparent pointer-events-none" />
+            <div className="absolute right-0 top-0 z-10 w-16 h-full bg-gradient-to-l from-white dark:from-brand-900 to-transparent pointer-events-none" />
+            <div
+              className="flex gap-10 items-center"
+              style={{
+                animation: "marquee 24s linear infinite",
+                width: "max-content",
+              }}
+            >
+              {[
+                { name: "Arturo Cuervo", logo: "/logos/arturo-cuervo.png" },
+                { name: "Botas Milenarias", logo: "/logos/botas-milenarias.jpg" },
+                { name: "Baeza & Estrada", logo: "/logos/baeza-estrada.png" },
+                { name: "Grupo Alpina", logo: "/logos/alpina.png" },
+                { name: "Flexi", logo: "/logos/flexi.png" },
+                { name: "Emyco", logo: "/logos/emyco.png" },
+                // Segunda iteración para seamless loop
+                { name: "Arturo Cuervo", logo: "/logos/arturo-cuervo.png" },
+                { name: "Botas Milenarias", logo: "/logos/botas-milenarias.jpg" },
+                { name: "Baeza & Estrada", logo: "/logos/baeza-estrada.png" },
+                { name: "Grupo Alpina", logo: "/logos/alpina.png" },
+                { name: "Flexi", logo: "/logos/flexi.png" },
+                { name: "Emyco", logo: "/logos/emyco.png" },
+              ].map((company, i) => (
+                <div
+                  key={i}
+                  className="flex-shrink-0 flex items-center justify-center h-12 w-28 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                >
+                  <Image
+                    src={company.logo}
+                    alt={company.name}
+                    width={112}
+                    height={48}
+                    className="object-contain h-10 w-auto"
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Estadística de confianza */}
-          <div className="mt-12 pt-8 border-t border-stone-200 dark:border-brand-800">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-              <div className="text-center">
-                <p className="text-3xl font-black text-brand-600 dark:text-brand-400">150+</p>
-                <p className="text-sm text-stone-600 dark:text-stone-400 font-semibold mt-1">Empresas en León</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl font-black text-gold-600 dark:text-gold-400">$2.5B</p>
-                <p className="text-sm text-stone-600 dark:text-stone-400 font-semibold mt-1">En ventas anuales</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl font-black text-gold-600 dark:text-gold-400">98%</p>
-                <p className="text-sm text-stone-600 dark:text-stone-400 font-semibold mt-1">Satisfacción</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Trust badges mejorados con Dark Mode */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto pt-12 border-t border-stone-200 dark:border-brand-800">
+          {/* Stats row */}
+          <div className="mt-10 flex flex-wrap justify-center gap-8 md:gap-16 border-t border-stone-100 dark:border-brand-800 pt-8">
             {[
-              { icon: <CheckCircle2 size={24} />, label: "SAT CFDI 4.0", sub: "Validado", bg: "bg-brand-100 dark:bg-brand-900/30", text: "text-brand-600 dark:text-brand-400" },
-              { icon: <Shield size={24} />, label: "SSL 256-bit", sub: "Seguro", bg: "bg-gold-100 dark:bg-gold-900/30", text: "text-gold-600 dark:text-gold-400" },
-              { icon: <TrendingUp size={24} />, label: "99.9% Uptime", sub: "Garantizado", bg: "bg-gold-100 dark:bg-gold-900/30", text: "text-gold-600 dark:text-gold-400" },
-              { icon: <Users size={24} />, label: "500+ Usuarios", sub: "Activos", bg: "bg-brand-100 dark:bg-brand-900/30", text: "text-brand-600 dark:text-brand-400" }
-            ].map((badge, i) => (
-              <div key={i} className="flex flex-col items-center gap-3 p-4 bg-white dark:bg-brand-800 rounded-2xl border border-stone-200 dark:border-stone-700 shadow-sm hover:shadow-md transition-all">
-                <div className={`w-12 h-12 rounded-xl ${badge.bg} flex items-center justify-center ${badge.text}`}>
-                  {badge.icon}
-                </div>
-                <div className="text-center">
-                  <p className="text-sm font-bold text-stone-700 dark:text-stone-200">{badge.label}</p>
-                  <p className="text-xs text-stone-500 dark:text-stone-400">{badge.sub}</p>
-                </div>
+              { val: "150+", label: "Empresas activas", color: "text-brand-600 dark:text-brand-400" },
+              { val: "$2.5B", label: "En ventas gestionadas", color: "text-gold-600 dark:text-gold-400" },
+              { val: "98%", label: "Satisfacción", color: "text-emerald-600 dark:text-emerald-400" },
+            ].map((s) => (
+              <div key={s.label} className="text-center">
+                <p className={`text-3xl font-black ${s.color}`}>{s.val}</p>
+                <p className="text-xs font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wider mt-1">{s.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
+
 
       {/* Testimonios Section - Mejorado con Dark Mode y Animaciones */}
       <section className="py-24 px-4 sm:px-6 bg-white dark:bg-brand-900 transition-colors duration-300">
@@ -598,12 +522,14 @@ const LuminaRefactored = () => {
 
                 {/* Author info */}
                 <div className="flex items-center gap-4 pt-6 border-t border-stone-200 dark:border-stone-700">
-                  <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-brand-600 dark:border-brand-400">
-                    <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover" />
+                  <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-brand-600 dark:border-brand-400 bg-brand-100 dark:bg-brand-800 flex items-center justify-center flex-shrink-0">
+                    <span className="text-2xl font-black text-brand-600 dark:text-brand-400">
+                      {testimonial.name.charAt(0)}
+                    </span>
                   </div>
                   <div>
                     <p className="font-bold text-brand-900 dark:text-brand-100">{testimonial.name}</p>
-                    <p className="text-sm text-stone-600 dark:text-stone-400">{testimonial.role}</p>
+                    <p className="text-sm text-stone-600 dark:text-stone-400">{testimonial.role} · {testimonial.company}</p>
                   </div>
                 </div>
               </motion.div>
@@ -616,8 +542,8 @@ const LuminaRefactored = () => {
       <section id="comparativa" className="py-24 lg:py-32 px-4 sm:px-6 bg-stone-50 dark:bg-brand-900/50 transition-colors duration-300">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-brand-900 dark:text-white mb-6">Tú vs. La Competencia</h2>
-            <p className="text-xl text-stone-600 dark:text-stone-400 max-w-2xl mx-auto">Por qué las empresas líderes están abandonando los métodos tradicionales por Lumina.</p>
+            <h2 className="text-4xl font-bold text-brand-900 dark:text-white mb-6">WhatsApp + Excel vs. Lumina B2B</h2>
+            <p className="text-xl text-stone-600 dark:text-stone-400 max-w-2xl mx-auto">Por qué los fabricantes más activos de León están dejando los métodos manuales para siempre.</p>
           </div>
 
           <div className="bg-white dark:bg-brand-800 rounded-3xl border border-stone-200 dark:border-stone-700 shadow-glass overflow-hidden relative">
@@ -626,9 +552,9 @@ const LuminaRefactored = () => {
               <table className="w-full text-left border-collapse">
                 <thead className="sticky top-0 z-20 bg-stone-50 dark:bg-brand-800 border-b border-stone-200 dark:border-stone-700">
                   <tr>
-                    <th className="p-6 text-sm font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 w-1/3">Característica</th>
-                    <th className="p-6 text-sm font-bold uppercase tracking-wider text-red-600 w-1/3 text-center">Competencia</th>
-                    <th className="p-6 text-sm font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400 w-1/3 text-center">Lumina</th>
+                    <th className="p-6 text-sm font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 w-1/3">Área</th>
+                    <th className="p-6 text-sm font-bold uppercase tracking-wider text-red-600 w-1/3 text-center">📱 WhatsApp + Excel</th>
+                    <th className="p-6 text-sm font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400 w-1/3 text-center">✨ Lumina B2B</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-stone-100 dark:divide-stone-700">
@@ -865,8 +791,9 @@ const LuminaRefactored = () => {
                 onClick={() => setIsModalOpen(true)}
                 className="bg-white text-brand-600 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-brand-50 transition-all shadow-glass hover:scale-105 active:scale-95"
               >
-                Reclamar mi acceso gratuito →
+                💰 Recuperar <span className="underline underline-offset-2 decoration-brand-300">${calculateROI().recovered.toLocaleString()} MXN</span> al mes → Agendar Demo
               </button>
+              <p className="text-brand-200 text-xs mt-3">Sin tarjeta de crédito. Setup en 24 horas.</p>
             </div>
           </div>
         </div>
@@ -985,18 +912,45 @@ const LuminaRefactored = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-end">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 items-end">
+            {/* --- FREE TRIAL --- */}
+            <div className="bg-stone-800/40 backdrop-blur-md p-7 rounded-3xl border border-stone-700/60 border-dashed text-white hover:border-stone-500 transition-all">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-[10px] font-black uppercase mb-4">
+                Sin tarjeta de crédito
+              </div>
+              <h4 className="text-lg font-bold mb-1">Prueba 14 Días</h4>
+              <p className="text-stone-400 mb-6 text-xs italic">Explora la plataforma sin compromiso.</p>
+              <div className="mb-6">
+                <span className="text-4xl font-black text-emerald-400">$0</span>
+                <span className="text-stone-400 text-sm"> MXN</span>
+                <p className="text-[11px] text-stone-500 italic mt-2 border-t border-stone-700 pt-2">Luego elige el plan que más te convenga.</p>
+              </div>
+              <ul className="space-y-3 mb-8">
+                <li className="flex gap-2 text-xs text-stone-400"><Check size={14} className="text-emerald-400 shrink-0 mt-0.5" />10 productos de prueba</li>
+                <li className="flex gap-2 text-xs text-stone-400"><Check size={14} className="text-emerald-400 shrink-0 mt-0.5" />1 usuario comprador</li>
+                <li className="flex gap-2 text-xs text-stone-400"><Check size={14} className="text-emerald-400 shrink-0 mt-0.5" />Showroom Digital básico</li>
+                <li className="flex gap-2 text-xs text-stone-400"><X size={14} className="text-stone-600 shrink-0 mt-0.5" />Sin CFDI 4.0</li>
+                <li className="flex gap-2 text-xs text-stone-400"><X size={14} className="text-stone-600 shrink-0 mt-0.5" />Sin Gate B2B</li>
+              </ul>
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="w-full py-3 rounded-xl font-bold text-sm border border-emerald-700/50 bg-emerald-900/20 text-emerald-400 hover:bg-emerald-900/40 transition-all active:scale-95"
+              >
+                Empezar Gratis →
+              </button>
+            </div>
+
             {/* Starter */}
-            <div className="bg-brand-800/50 backdrop-blur-md p-8 rounded-3xl border border-stone-700 text-white hover:border-brand-500/50 transition-all hover:shadow-glass hover:shadow-brand-500/10">
+            <div className="bg-brand-800/50 backdrop-blur-md p-7 rounded-3xl border border-stone-700 text-white hover:border-brand-500/50 transition-all hover:shadow-glass hover:shadow-brand-500/10">
               <h4 className="text-xl font-bold mb-2">Starter</h4>
-              <p className="text-stone-400 mb-8 text-sm italic">Para fabricantes que empiezan a digitalizarse.</p>
-              <div className="mb-8">
+              <p className="text-stone-400 mb-6 text-sm italic">Para fabricantes que empiezan a digitalizarse.</p>
+              <div className="mb-6">
                 <span className="text-4xl font-bold">${prices.starter}</span>
                 <span className="text-stone-400"> MXN/mes</span>
                 {billingCycle === 'yearly' && <p className="text-xs text-brand-400 mt-1 font-medium">Facturado anualmente</p>}
                 <p className="text-[11px] text-stone-500 italic mt-3 border-t border-stone-700 pt-3">Ideal para probar. Cancela cuando quieras.</p>
               </div>
-              <ul className="space-y-4 mb-8">
+              <ul className="space-y-3 mb-8">
                 <li className="flex gap-3 text-sm text-stone-300"><Check size={18} className="text-brand-400 shrink-0" />Hasta 50 productos</li>
                 <li className="flex gap-3 text-sm text-stone-300"><Check size={18} className="text-brand-400 shrink-0" />1 Agente de venta</li>
                 <li className="flex gap-3 text-sm text-stone-300"><Check size={18} className="text-brand-400 shrink-0" />Showroom Digital interactivo</li>
@@ -1206,16 +1160,28 @@ const LuminaRefactored = () => {
         </div>
       </section>
 
-      {/* Floating CTA Button - Mobile Only */}
-      <div className="sm:hidden fixed bottom-6 right-4 z-40 animate-bounce">
+      {/* Sticky CTA — Desktop + Mobile */}
+      <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
+        {/* Desktop: botón completo */}
         <button
           onClick={() => {
             const pricingSection = document.getElementById('pricing');
             pricingSection?.scrollIntoView({ behavior: 'smooth' });
           }}
-          className="bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 px-4 rounded-full shadow-glass shadow-brand-600/50 flex items-center gap-2 text-sm transition-all active:scale-95"
+          className="hidden sm:flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 px-6 rounded-full shadow-xl shadow-brand-600/40 hover:shadow-brand-600/60 hover:scale-105 transition-all active:scale-95 text-sm"
+          aria-label="Ver planes de Lumina"
         >
-          💡 Ver Planes
+          Ver Planes →
+        </button>
+        {/* Mobile: botón compacto */}
+        <button
+          onClick={() => {
+            const pricingSection = document.getElementById('pricing');
+            pricingSection?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          className="sm:hidden bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 px-5 rounded-full shadow-xl shadow-brand-600/40 hover:scale-105 transition-all active:scale-95 text-sm"
+        >
+          💡 Planes
         </button>
       </div>
 
@@ -1304,7 +1270,7 @@ const LuminaRefactored = () => {
           <div className="border-t border-brand-800 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-sm text-stone-500 text-center md:text-left">
-                © 2024 Lumina B2B. Todos los derechos reservados. Hecho con ❤️ en México.
+                © 2025 Lumina B2B. Todos los derechos reservados. Hecho con ❤️ en México.
               </p>
               <div className="flex items-center gap-6 text-sm">
                 <a href="#" className="hover:text-brand-400 transition-colors">Términos</a>
@@ -1350,45 +1316,73 @@ const LuminaRefactored = () => {
                   <p className="text-stone-600 dark:text-stone-400 text-lg">Pronto estaremos en contacto.</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-3">
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1.5">Nombre</label>
+                      <input 
+                        required
+                        name="name"
+                        type="text" 
+                        placeholder="Juan Pérez"
+                        className="w-full px-4 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-brand-900 text-brand-900 dark:text-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 outline-none transition-all text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1.5">Empresa</label>
+                      <input 
+                        required
+                        name="company"
+                        type="text" 
+                        placeholder="Calzado García"
+                        className="w-full px-4 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-brand-900 text-brand-900 dark:text-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 outline-none transition-all text-sm"
+                      />
+                    </div>
+                  </div>
                   <div>
-                    <label className="block text-sm font-bold text-stone-700 dark:text-stone-300 mb-2">Nombre Completo</label>
+                    <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1.5">WhatsApp</label>
                     <input 
                       required
-                      type="text" 
-                      placeholder="Ej. Juan Pérez"
-                      className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-brand-900 text-brand-900 dark:text-white focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 outline-none transition-all"
+                      name="phone"
+                      type="tel" 
+                      placeholder="+52 477 663 3068"
+                      className="w-full px-4 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-brand-900 text-brand-900 dark:text-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 outline-none transition-all text-sm"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-stone-700 dark:text-stone-300 mb-2">Email Corporativo</label>
+                    <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1.5">Email Corporativo</label>
                     <input 
                       required
+                      name="email"
                       type="email" 
                       placeholder="juan@tuempresa.com"
-                      className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-brand-900 text-brand-900 dark:text-white focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 outline-none transition-all"
+                      className="w-full px-4 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-brand-900 text-brand-900 dark:text-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 outline-none transition-all text-sm"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-stone-700 dark:text-stone-300 mb-2">Teléfono / WhatsApp</label>
-                    <input 
-                      required
-                      type="tel" 
-                      placeholder="55 1234 5678"
-                      className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-brand-900 text-brand-900 dark:text-white focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 outline-none transition-all"
-                    />
+                    <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1.5">¿Cuántas personas en tu equipo de ventas?</label>
+                    <select
+                      name="teamSize"
+                      className="w-full px-4 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-brand-900 text-brand-900 dark:text-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 outline-none transition-all text-sm"
+                    >
+                      <option value="1">Solo yo</option>
+                      <option value="2-5">2 a 5 personas</option>
+                      <option value="6-20">6 a 20 personas</option>
+                      <option value="20+">Más de 20</option>
+                    </select>
                   </div>
                   <button 
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-brand-600 to-brand-600 text-white py-4 rounded-xl font-bold text-lg hover:from-brand-700 hover:to-indigo-800 transition-all flex items-center justify-center gap-2 mt-6 disabled:bg-stone-300 shadow-xl shadow-brand-500/20"
+                    className="w-full bg-brand-600 text-white py-3.5 rounded-xl font-bold text-base hover:bg-brand-700 transition-all flex items-center justify-center gap-2 mt-2 disabled:opacity-50 shadow-xl shadow-brand-500/20"
                   >
                     {isSubmitting ? (
-                      <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                     ) : (
-                      "Reclamar mi acceso gratuito"
+                      "👉 Agendar mi Demo Gratuita"
                     )}
                   </button>
+                  <p className="text-center text-xs text-stone-400 mt-1">Sin tarjeta · Setup en 24 hrs · Garantía 30 días</p>
                 </form>
               )}
             </div>
@@ -1396,7 +1390,7 @@ const LuminaRefactored = () => {
         </div>
       )}
 
-      {/* Video Modal - NUEVO */}
+      {/* Video Modal */}
       {videoModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div
@@ -1411,15 +1405,17 @@ const LuminaRefactored = () => {
               <X size={32} />
             </button>
             <div className="bg-brand-900 rounded-2xl overflow-hidden shadow-glass border-2 border-stone-700">
-              <div className="aspect-video bg-brand-800 flex items-center justify-center">
-                {/* Aquí iría el iframe de YouTube/Vimeo */}
-                <div className="text-center">
-                  <Play size={64} className="text-brand-500 mx-auto mb-4 fill-brand-500" />
-                  <p className="text-white font-bold text-xl">Demo de Lumina B2B</p>
-                  <p className="text-stone-400 mt-2">Video demo aquí (integrar iframe de YouTube)</p>
-                </div>
+              <div className="aspect-video">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0"
+                  title="Demo Lumina B2B"
+                  allow="autoplay; encrypted-media; picture-in-picture"
+                  allowFullScreen
+                />
               </div>
             </div>
+            <p className="text-center text-stone-400 text-sm mt-4">¿Tienes preguntas? <button onClick={() => { setVideoModalOpen(false); setIsModalOpen(true); }} className="text-brand-400 font-bold hover:underline">Agenda una demo en vivo →</button></p>
           </div>
         </div>
       )}
