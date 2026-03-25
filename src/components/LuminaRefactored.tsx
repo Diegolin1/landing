@@ -261,24 +261,14 @@ const LuminaRefactored = () => {
             transition={{ duration: 0.8 }}
             className="z-10"
           >
-            {/* Badge superior */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 text-white text-xs font-bold uppercase tracking-wider mb-6 shadow-glow animate-bounce-slow">
-              <Sparkles size={14} className="fill-white" />
-              <span>✨ Plataforma B2B #1 en México 2024</span>
-            </div>
-            {/* H1 SEO visible */}
-            <h1 className="text-3xl md:text-5xl font-display font-black text-brand-900 dark:text-white mb-4 mt-2">
-              Automatiza pedidos y facturas B2B con Showroom B2B
+            {/* Título principal - Minimalista y Directo */}
+            <h1 className="text-5xl lg:text-7xl font-display font-black text-brand-900 dark:text-white leading-[1.05] mb-6 tracking-tight">
+              Automatiza tus ventas B2B
             </h1>
 
-            {/* Título principal - Ajustado al Copywriting */}
-            <h1 className="text-5xl lg:text-7xl font-display font-black text-brand-900 dark:text-white leading-[1.05] mb-8 tracking-tight">
-              Ahorra <span className="text-gradient">10 horas a la semana</span> en tus entregas
-            </h1>
-
-            {/* Subtítulo con beneficios claros - Menos Nosotros, Más Tú */}
-            <p className="text-xl text-stone-600 dark:text-stone-300 leading-relaxed mb-6 max-w-lg font-medium">
-              Toma el control total de tu negocio. Olvida el caos operativo y enfócate en lo que importa: <span className="text-brand-600 dark:text-brand-400 font-bold">hacer crecer tus ventas</span> mientras Showroom B2B automatiza tus pedidos y facturas.
+            {/* Subtítulo limpio y profesional */}
+            <p className="text-xl text-stone-600 dark:text-stone-300 leading-relaxed mb-10 max-w-xl font-medium">
+              La plataforma para fabricantes que simplifica pedidos, gestión de clientes y facturación en un solo lugar.
             </p>
 
             {/* CTAs mejorados - Azul Eléctrico y Social Proof */}
