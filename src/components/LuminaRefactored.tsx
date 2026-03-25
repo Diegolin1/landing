@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import StructuredData from "./StructuredData";
+import ObjectionsHandler from "./ObjectionsHandler";
 import {
   Check,
   X,
@@ -123,7 +124,7 @@ const LuminaRefactored = () => {
   };
 
   const prices = {
-    starter: billingCycle === 'monthly' ? 499 : 399,
+    starter: billingCycle === 'monthly' ? 1199 : 899,
     professional: billingCycle === 'monthly' ? 1299 : 999,
     enterprise: 'Personalizado'
   };
@@ -1076,6 +1077,9 @@ const LuminaRefactored = () => {
           </div>
         </div>
       </section>
+
+      {/* Objections section */}
+      <ObjectionsHandler />
 
       {/* FAQ Section */}
       <section className="py-24 lg:py-32 bg-slate-50 px-4 sm:px-6">
