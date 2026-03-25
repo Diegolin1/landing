@@ -16,15 +16,36 @@ export async function POST(req: NextRequest) {
     // const waMsg = encodeURIComponent(`🔔 Nuevo lead:\n• Nombre: ${name}\n• Empresa: ${company}\n• WhatsApp: ${phone}\n• Email: ${email}\n• Equipo: ${teamSize}`);
     // await fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${process.env.TELEGRAM_CHAT_ID}&text=${waMsg}`);
 
-    // 3. Guardar en la base de datos del SaaS backend (opcional, descomentar cuando esté disponible)
-    // await fetch(`${process.env.BACKEND_URL}/api/leads`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'x-api-key': process.env.BACKEND_API_KEY || '',
-    //   },
-    //   body: JSON.stringify({ name, email, phone, company, teamSize }),
-    // });
+    // 3. Guardar en la base de datos del SaaS backend
+    try {
+      const backendUrl = process.env.BACKEND_URL || 'https://erp-prod-b76f4dc5f060.herokuapp.com';
+      const response = await fetch(`${backendUrl}/api/leads`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // Note: Add BACKEND_API_KEY to .env if extra security is needed
+          'x-api-key': process.env.BACKEND_API_KEY || '',
+        },
+        body: JSON.stringify({ 
+          name, 
+          email, 
+          phone, 
+          company, // Matches 'companyName' mapping in controller
+          teamSize,
+          source: 'LANDING'
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('[BACKEND ERROR]', errorData);
+      } else {
+        console.log('[BACKEND SUCCESS] Lead synchronized');
+      }
+    } catch (backendErr) {
+      console.error('[BACKEND FETCH FAILED]', backendErr);
+      // We don't fail the whole request because logging/notifying might have worked
+    }
 
     return NextResponse.json({ ok: true, message: 'Lead registrado correctamente' });
   } catch (err) {
