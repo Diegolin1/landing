@@ -8,7 +8,7 @@ export default function TopBanner() {
   if (!isVisible) return null;
 
   return (
-    <div className="bg-gradient-to-r from-blue-700 via-indigo-600 to-blue-700 text-white px-4 py-2 flex items-center justify-center relative z-50">
+    <div className="bg-brand-950 border-b border-brand-500/20 text-white px-4 py-2 flex items-center justify-center relative z-50 shadow-glow">
       <div className="flex items-center gap-2 text-sm sm:text-base font-semibold animate-pulse">
         <Flame size={18} className="text-amber-400" />
         <p>

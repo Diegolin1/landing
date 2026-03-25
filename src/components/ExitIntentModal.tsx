@@ -53,7 +53,7 @@ export default function ExitIntentModal() {
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative bg-white dark:bg-slate-900 w-full max-w-lg rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden z-10"
+            className="relative bg-brand-900 w-full max-w-lg rounded-3xl shadow-glass border border-white/10 overflow-hidden z-10"
           >
             <button
               onClick={() => setIsOpen(false)}
@@ -62,13 +62,13 @@ export default function ExitIntentModal() {
               <X size={24} />
             </button>
 
-            <div className="bg-gradient-to-br from-blue-600 to-indigo-700 p-8 text-white text-center relative overflow-hidden">
+            <div className="bg-gradient-to-br from-brand-600 to-brand-500 p-8 text-white text-center relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
               <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
                 <Zap size={32} className="text-amber-400 fill-amber-400" />
               </div>
-              <h3 className="text-3xl font-black mb-2">¡Espera un segundo!</h3>
-              <p className="text-blue-100 text-lg">
+              <h3 className="text-3xl font-display font-black mb-2">¡Espera un segundo!</h3>
+              <p className="text-brand-100 text-lg">
                 No te vayas sin ver cómo se vería tu catálogo.
               </p>
             </div>
@@ -76,13 +76,13 @@ export default function ExitIntentModal() {
             <div className="p-8">
               {!isSuccess ? (
                 <>
-                  <p className="text-slate-600 dark:text-slate-300 text-center mb-6 text-sm">
-                    Déjanos tu correo y te enviaremos un <strong className="text-blue-600 dark:text-blue-400">demo interactivo personalizado</strong> donde podrás:
+                  <p className="text-stone-300 text-center mb-6 text-sm">
+                    Déjanos tu correo y te enviaremos un <strong className="text-brand-400">demo interactivo personalizado</strong> donde podrás:
                   </p>
-                  <ul className="space-y-3 mb-8 text-sm text-slate-600 dark:text-slate-300">
-                    <li className="flex gap-2 items-center"><span className="text-emerald-500">✓</span> Ver cómo funciona el Gate B2B</li>
-                    <li className="flex gap-2 items-center"><span className="text-emerald-500">✓</span> Simular una orden de compra en segundos</li>
-                    <li className="flex gap-2 items-center"><span className="text-emerald-500">✓</span> Probar la facturación CFDI 4.0 a 1 click</li>
+                  <ul className="space-y-3 mb-8 text-sm text-stone-300">
+                    <li className="flex gap-2 items-center"><span className="text-gold-400">✓</span> Ver cómo funciona el Gate B2B</li>
+                    <li className="flex gap-2 items-center"><span className="text-gold-400">✓</span> Simular una orden de compra en segundos</li>
+                    <li className="flex gap-2 items-center"><span className="text-gold-400">✓</span> Probar la facturación CFDI 4.0 a 1 click</li>
                   </ul>
 
                   <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -92,12 +92,12 @@ export default function ExitIntentModal() {
                       placeholder="tu@empresa.com"
                       value={email}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-blue-600 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-white/10 bg-brand-950 text-white focus:ring-2 focus:ring-brand-500 outline-none transition-all placeholder:text-stone-500"
                     />
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 group"
+                      className="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 group shadow-glow"
                     >
                       {isSubmitting ? (
                         "Enviando demo..."
@@ -112,11 +112,11 @@ export default function ExitIntentModal() {
                 </>
               ) : (
                 <div className="text-center py-8">
-                  <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-brand-500/20 text-brand-400 rounded-full flex items-center justify-center mx-auto mb-4">
                     <CheckCircle2 size={32} />
                   </div>
-                  <h4 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">¡Demo enviado!</h4>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm">
+                  <h4 className="text-xl font-display font-bold text-white mb-2">¡Demo enviado!</h4>
+                  <p className="text-stone-400 text-sm">
                     Revisa tu bandeja de entrada en los próximos 5 minutos.
                   </p>
                 </div>
