@@ -1,3 +1,4 @@
+import React from "react";
 import LuminaRefactored from "../components/LuminaRefactored";
 import TopBanner from "../components/TopBanner";
 import RecentActivityToasts from "../components/RecentActivityToasts";

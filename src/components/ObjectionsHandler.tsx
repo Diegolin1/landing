@@ -1,8 +1,8 @@
 "use client";
 
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { useState } from "react";
 
 export default function ObjectionsHandler() {
   const [openIndex, setOpenIndex] = useState(0);
