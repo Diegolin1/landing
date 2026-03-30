@@ -126,39 +126,6 @@ const LuminaRefactored = () => {
     return { lostToErrors, recovered, netGain, roi };
   };
 
-  const prices = {
-    starter: billingCycle === 'monthly' ? 1199 : 899,
-    professional: billingCycle === 'monthly' ? 1299 : 999,
-    enterprise: 'Personalizado'
-  };
-
-  const testimonials = [
-    {
-      name: "Roberto García",
-      role: "Director Comercial",
-      company: "Calzado García León",
-      image: "/logos/alpina.png",
-      rating: 5,
-      text: "Pasamos de enviar PDFs por WhatsApp a tener un catálogo profesional que nuestros clientes consultan 24/7. Aumentamos 40% en pedidos recurrentes."
-    },
-    {
-      name: "María Fernanda Ruiz",
-      role: "Gerente de Ventas",
-      company: "Textiles del Bajío",
-      image: "/logos/flexi.png",
-      rating: 5,
-      text: "La facturación CFDI 4.0 automática nos ahorra 15 horas a la semana. Recuperamos la inversión en el primer mes."
-    },
-    {
-      name: "Carlos Mendoza",
-      role: "CEO",
-      company: "Distribuidora MX",
-      image: "/logos/emyco.png",
-      rating: 5,
-      text: "El CRM de vendedores transformó nuestra operación. Ahora sabemos exactamente qué vendedor genera más, en tiempo real."
-    }
-  ];
-
   const faqs = [
     {
       q: "¿Cuánto tiempo toma la implementación?",
@@ -182,1243 +149,743 @@ const LuminaRefactored = () => {
     },
     {
       q: "¿Qué tipo de soporte ofrecen?",
-      a: "Todos los planes incluyen soporte por email y chat. El plan Professional incluye soporte prioritario por WhatsApp con tiempos de respuesta < 2 horas."
+      a: "Todos los planes incluyen soporte por email y chat. El plan Industrial incluye soporte prioritario por WhatsApp con tiempos de respuesta menores a 2 horas."
     }
   ];
 
   return (
     <>
-      <div className="bg-brand-50 dark:bg-brand-900 text-stone-900 dark:text-stone-300 font-sans antialiased scroll-smooth transition-colors duration-300">
-        {/* Navbar */}
-        <nav className="sticky top-0 z-50 bg-white/90 dark:bg-brand-900/90 backdrop-blur-xl border-b border-brand-100 dark:border-white/10 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-2 group cursor-pointer transition-transform hover:scale-105">
-            <Image src="/assets/logo-light.png" alt="Lumina B2B" width={144} height={36} className="h-9 w-auto object-contain hidden dark:block" priority />
-            <Image src="/assets/logo-dark.png" alt="Lumina B2B" width={144} height={36} className="h-9 w-auto object-contain block dark:hidden" priority />
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex gap-10 text-sm font-bold text-stone-500 dark:text-stone-400">
-            <a href="#features" className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors py-2">Cómo Funciona</a>
-            <a href="#comparativa" className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors py-2">Comparativa</a>
-            <a href="#pricing" className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors py-2">Precios</a>
-            <a href="/blog" className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors py-2">Blog</a>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <button 
-              onClick={() => setIsDarkMode(!isDarkMode)}
-              className="p-2 text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-brand-800 rounded-lg transition-colors"
-              aria-label="Toggle Dark Mode"
-            >
-              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
-            <button className="hidden sm:block text-brand-600 dark:text-brand-400 font-bold text-sm px-4 py-2 hover:bg-brand-50 dark:hover:bg-brand-900/30 rounded-lg transition-colors">
-              Iniciar Sesión
-            </button>
-            <button 
-              onClick={() => setIsModalOpen(true)}
-              className="bg-brand-500 text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-brand-600 transition-all shadow-glow active:scale-95"
-            >
-              Agenda tu Demo
-            </button>
-            
-            {/* Mobile Menu Button */}
-            <button 
-              className="md:hidden p-2 text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-brand-800 rounded-lg"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
-          </div>
+      <div className="bg-brand-900 text-stone-300 font-sans antialiased scroll-smooth transition-colors duration-500 overflow-x-hidden">
+        {/* Top Announcement Bar - LinkedIn Style */}
+        <div className="bg-brand-600 px-4 py-2 text-center text-[10px] md:text-xs font-bold tracking-[0.1em] text-white uppercase overflow-hidden relative group cursor-pointer">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+          Prueba Gratuita de 14 días para fabricantes del Bajío · Sin tarjeta de crédito
         </div>
 
-        {/* Mobile Menu Overlay */}
-        {isMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-white dark:bg-brand-900 border-b border-brand-100 dark:border-white/10 shadow-glass animate-in slide-in-from-top duration-300">
-            <div className="flex flex-col p-6 gap-4 font-bold text-stone-600 dark:text-stone-300">
-              <a href="#features" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-brand-50 dark:border-white/5">Cómo Funciona</a>
-              <a href="#comparativa" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-brand-50 dark:border-white/5">Comparativa</a>
-              <a href="#pricing" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-brand-50 dark:border-white/5">Precios</a>
-              <a href="/blog" onClick={() => setIsMenuOpen(false)} className="py-4 border-b border-brand-50 dark:border-white/5">Blog</a>
-              <button className="w-full bg-brand-50 dark:bg-brand-800/50 text-brand-600 dark:text-brand-400 py-4 rounded-xl mt-4">Iniciar Sesión</button>
+        {/* Navbar Premium */}
+        <nav className="sticky top-0 z-50 bg-brand-900/80 backdrop-blur-2xl border-b border-white/[0.05] px-6 py-4">
+          <div className="max-w-7xl mx-auto flex justify-between items-center">
+            <div className="flex items-center gap-10">
+              <div className="flex items-center gap-2 group cursor-pointer">
+                <Image src="/assets/logo-light.png" alt="Lumina B2B" width={130} height={32} className="h-8 w-auto object-contain" priority />
+              </div>
+
+              {/* Desktop Menu - Apple Style */}
+              <div className="hidden lg:flex gap-8 text-[13px] font-semibold text-stone-400">
+                <a href="#features" className="hover:text-white transition-colors">Infraestructura</a>
+                <a href="#comparativa" className="hover:text-white transition-colors">Diferencial B2B</a>
+                <a href="#pricing" className="hover:text-white transition-colors">Planes</a>
+                <a href="/blog" className="hover:text-white transition-colors">Blog Industrial</a>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-6">
+              <button 
+                onClick={() => setIsDarkMode(!isDarkMode)}
+                className="p-2 text-stone-400 hover:text-white transition-colors"
+                aria-label="Toggle Theme"
+              >
+                {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
+              </button>
+              
+              <div className="hidden sm:flex items-center gap-6">
+                <button 
+                  onClick={() => setIsModalOpen(true)}
+                  className="bg-white text-brand-900 px-6 py-2.5 rounded-full font-bold text-[13px] hover:bg-stone-100 transition-all active:scale-95"
+                >
+                  Agendar Auditoría
+                </button>
+              </div>
+              
+              <button 
+                className="lg:hidden p-2 text-stone-400 hover:text-white"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+              >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
             </div>
           </div>
-        )}
-      </nav>
+        </nav>
 
-      {/* Hero Section - Refinado, minimalista y profesional */}
-      <header className="relative pt-24 pb-32 lg:pt-32 lg:pb-40 bg-stone-50 dark:bg-brand-950 transition-colors duration-300">
-        {/* Efectos de fondo sutiles */}
-        <div className="absolute inset-0 overflow-hidden -z-10 bg-[url('/grid-pattern.svg')] opacity-5">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand-500/10 dark:bg-brand-500/10 rounded-full blur-[100px] pointer-events-none"></div>
-        </div>
+        {/* Hero Section — Harvard/Stripe Style */}
+        <header className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-brand-900 pt-20 pb-20">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-brand-500/10 blur-[120px] rounded-full -z-10 animate-pulse"></div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="z-10"
-          >
-            {/* Título principal - Minimalista y Directo */}
-            <h1 className="text-5xl lg:text-7xl font-display font-black text-brand-900 dark:text-white leading-[1.05] mb-6 tracking-tight">
-              Automatiza tus ventas B2B
-            </h1>
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left z-10"
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-8">
+                <span className="flex h-2 w-2 rounded-full bg-brand-400 animate-ping"></span>
+                <span className="text-[10px] font-bold tracking-widest text-brand-200 uppercase">La Infraestructura de Ventas para León GTO</span>
+              </div>
 
-            {/* Subtítulo limpio y profesional */}
-            <p className="text-xl text-stone-600 dark:text-stone-300 leading-relaxed mb-10 max-w-xl font-medium">
-              La plataforma para fabricantes que simplifica pedidos, gestión de clientes y facturación en un solo lugar.
-            </p>
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.9] mb-8 tracking-tighter italic">
+                Soberanía <br /> Comercial <span className="text-brand-400">B2B</span>.
+              </h1>
 
-            {/* CTAs mejorados - Azul Eléctrico y Social Proof */}
-            <div className="flex flex-col gap-4 mb-8">
-              <div className="flex flex-col sm:flex-row gap-4">
+              <p className="text-lg md:text-xl text-stone-400 leading-relaxed mb-10 max-w-xl font-medium">
+                La plataforma de pedidos y facturación diseñada exclusivamente para <span className="text-white">fabricantes del Bajío</span>. Digitaliza tu catálogo y domina SAPICA/ANPIC.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                 <button
                   onClick={() => setIsModalOpen(true)}
-                  className="bg-brand-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-brand-700 hover:shadow-lg transition-all flex items-center justify-center gap-3 group"
-                  aria-label="Solicita tu demo gratis"
+                  className="bg-white text-brand-900 px-10 py-5 rounded-full font-bold text-[15px] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all flex items-center justify-center gap-3 group"
                 >
-                  <span className="flex items-center gap-2">
-                    Solicita tu demo gratis
-                    <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-                  </span>
+                  Iniciar Auditoría de Ventas
+                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </button>
                 <button
                   onClick={() => setVideoModalOpen(true)}
-                  className="bg-white dark:bg-stone-900 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-800 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-stone-50 dark:hover:bg-stone-800 transition-all flex items-center justify-center gap-3"
-                  aria-label="Ver demo de Lumina"
+                  className="bg-brand-900/50 backdrop-blur-md text-white border border-white/10 px-10 py-5 rounded-full font-bold text-[15px] hover:bg-white/5 transition-all flex items-center justify-center gap-3"
                 >
-                  <Play size={20} className="fill-stone-400" />
-                  Ver Demo
+                  <Play size={18} className="fill-white" />
+                  Ver Demo Industrial
                 </button>
               </div>
-                <div className="mt-4">
-                  <span className="inline-block text-stone-500 dark:text-stone-400 text-sm font-medium">
-                    Garantía 30 días, sin riesgo.
-                  </span>
+
+              <div className="mt-16 flex flex-col gap-6 w-full items-center lg:items-start opacity-70">
+                <p className="text-[10px] font-bold tracking-[0.2em] text-stone-500 uppercase">Respaldo de Fabricantes en Guanajuato</p>
+                <div className="flex flex-wrap justify-center lg:justify-start gap-8 grayscale brightness-200">
+                  <div className="text-xl font-black text-white/50 italic tracking-tighter">FLEXI</div>
+                  <div className="text-xl font-black text-white/50 italic tracking-tighter">EMYCO</div>
+                  <div className="text-xl font-black text-white/50 italic tracking-tighter">ALPINA</div>
                 </div>
-              
-              {/* Prueba Social Instantánea */}
-              <div className="flex items-center gap-3 mt-2 px-2">
-                <div className="flex -space-x-2">
-                  {[1,2,3,4].map(i => (
-                    <div key={i} className="w-8 h-8 rounded-full border-2 border-white dark:border-brand-900 bg-stone-200 dark:bg-stone-700 overflow-hidden">
-                      <div className="w-full h-full bg-brand-100 dark:bg-brand-900/30 flex items-center justify-center text-[10px] font-bold text-brand-600">
-                        {String.fromCharCode(64 + i)}
-                      </div>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.3 }}
+              className="lg:col-span-5 hidden lg:block relative"
+            >
+              <div className="glass-premium rounded-[2rem] p-6 border-white/20 relative overflow-hidden">
+                <div className="space-y-6">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="glass-card p-4 rounded-2xl bg-white/5">
+                      <p className="text-[10px] text-stone-500 font-bold uppercase mb-1">Hoy</p>
+                      <p className="text-2xl font-black text-white">$142,500</p>
                     </div>
-                  ))}
+                    <div className="glass-card p-4 rounded-2xl bg-white/5">
+                      <p className="text-[10px] text-stone-500 font-bold uppercase mb-1">Pedidos</p>
+                      <p className="text-2xl font-black text-white">418</p>
+                    </div>
+                  </div>
+                  <div className="h-40 bg-white/5 rounded-2xl flex items-center justify-center">
+                    <BarChart3 size={40} className="text-brand-500/50" />
+                  </div>
                 </div>
-                <p className="text-sm font-medium text-stone-600 dark:text-stone-400">
-                  Únete a <span className="text-brand-600 dark:text-brand-400 font-bold">+500 fabricantes y empresas ya usan Lumina</span>
-                </p>
               </div>
-            </div>
+            </motion.div>
+          </div>
+        </header>
 
-            {/* Trust indicators */}
-            <div className="flex flex-wrap items-center gap-6 pt-6 border-t border-stone-200 dark:border-brand-800">
-              <div className="flex items-center gap-2 text-sm text-stone-600 dark:text-stone-400">
-                <Shield size={18} className="text-gold-500" />
-                <span className="font-semibold">Sin tarjeta</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-stone-600 dark:text-stone-400">
-                <Clock size={18} className="text-brand-500" />
-                <span className="font-semibold">Setup rápido</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-stone-600 dark:text-stone-400">
-                <Award size={18} className="text-gold-500" />
-                <span className="font-semibold">Garantía total</span>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Sección de video/demo con un diseño más sobrio */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="bg-white dark:bg-stone-900 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-xl p-4 md:p-6 transform transition-transform duration-500">
-              <div className="relative bg-stone-900 rounded-xl aspect-video w-full flex flex-col items-center justify-center border border-stone-800 overflow-hidden group cursor-pointer"
-                onClick={() => setVideoModalOpen(true)}
+        {/* Dynamic Partner Marquee */}
+        <section className="bg-brand-900 border-y border-white/[0.03] py-16 transition-colors duration-500">
+          <div className="max-w-7xl mx-auto px-6">
+            <p className="text-center text-[10px] font-bold uppercase tracking-[0.4em] text-stone-600 mb-12">
+              LA INFRAESTRUCTURA DE CONFIANZA DEL BAJÍO
+            </p>
+            <div className="relative overflow-hidden group">
+              <div
+                className="flex gap-20 items-center animate-marquee-premium"
+                style={{ width: "max-content" }}
               >
-                {/* Video placeholder con efecto sutil */}
-                <div className="absolute inset-0 bg-brand-900/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                
-                {/* Dashboard Mockup Simulation Behind */}
-                <div className="absolute inset-0 p-6 opacity-30 flex flex-col gap-4">
-                  <div className="flex justify-between items-center border-b border-white/10 pb-4">
-                    <div className="flex gap-2">
-                      <div className="w-3 h-3 bg-red-500/50 rounded-full"></div>
-                      <div className="w-3 h-3 bg-gold-500/50 rounded-full"></div>
-                      <div className="w-3 h-3 bg-gold-500/50 rounded-full"></div>
-                    </div>
-                    <div className="h-4 w-24 bg-white/20 rounded-full"></div>
-                  </div>
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="h-16 bg-brand-500/20 rounded-xl border border-white/10"></div>
-                    <div className="h-16 bg-white/10 rounded-xl border border-white/10"></div>
-                    <div className="h-16 bg-white/10 rounded-xl border border-white/10"></div>
-                  </div>
-                  <div className="flex-1 bg-white/5 rounded-xl border border-white/10 p-4">
-                    <div className="w-full h-full border-t border-l border-white/10 rounded-tl-lg"></div>
-                  </div>
-                </div>
-
-                <div className="relative z-10 text-center">
-                  <p className="text-white font-bold text-base mb-6">3 Momentos que van a cambiar tu negocio:</p>
-                  <div className="grid grid-cols-3 gap-3 max-w-xl mx-auto">
-                    {[
-                      { icon: Lock, title: "Catálogo Privado 24/7", desc: "Tus clientes ven precios únicos" },
-                      { icon: FileText, title: "Factura en 1 Click", desc: "CFDI 4.0 automático" },
-                      { icon: TrendingUp, title: "CRM de Vendedores", desc: "Ve quién vende qué en vivo" }
-                    ].map((item, idx) => (
-                      <div
-                        key={idx}
-                        onClick={() => setVideoModalOpen(true)}
-                        className="p-4 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-brand-400/50 rounded-lg cursor-pointer transition-all transform hover:scale-105 group"
-                      >
-                        <div className="w-10 h-10 bg-brand-600/60 rounded-lg flex items-center justify-center mx-auto mb-2">
-                          <item.icon size={20} className="text-white" />
-                        </div>
-                        <p className="text-white font-semibold text-xs mb-1">{item.title}</p>
-                        <p className="text-brand-200 text-[11px]">{item.desc}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Glassmorphism Decorative Elements */}
-                <div className="absolute bottom-6 left-6 right-6 flex justify-between gap-4">
-                  <div className="h-12 w-32 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl"></div>
-                  <div className="h-12 w-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full"></div>
-                </div>
-              </div>
-
-              {/* Mini stats con Glassmorphism */}
-              <div className="grid grid-cols-3 gap-4 mt-6">
                 {[
-                  { label: "Empresas", value: "500+", textColor: "text-brand-600 dark:text-brand-400" },
-                  { label: "Ventas MXN", value: "100M+", textColor: "text-gold-600 dark:text-gold-400" },
-                  { label: "Rating", value: "4.9/5", textColor: "text-gold-600 dark:text-gold-400" }
-                ].map((stat, i) => (
-                  <div key={i} className="text-center p-3 bg-white/50 dark:bg-stone-700/50 backdrop-blur-md border border-white/50 dark:border-stone-600/50 rounded-xl">
-                    <p className={`text-xl font-bold ${stat.textColor}`}>{stat.value}</p>
-                    <p className="text-[10px] text-stone-600 dark:text-stone-400 font-bold uppercase tracking-wider">{stat.label}</p>
+                  "Arturo Cuervo", "Botas Milenarias", "Baeza & Estrada", "Grupo Alpina", "Flexi", "Emyco", 
+                  "Arturo Cuervo", "Botas Milenarias", "Baeza & Estrada", "Grupo Alpina", "Flexi", "Emyco"
+                ].map((name, i) => (
+                  <div key={i} className="flex-shrink-0 flex items-center justify-center grayscale opacity-30 hover:grayscale-0 hover:opacity-100 transition-all duration-700">
+                    <span className="text-xl md:text-2xl font-black tracking-tighter text-white/50 hover:text-white cursor-default select-none uppercase">
+                      {name}
+                    </span>
                   </div>
                 ))}
               </div>
             </div>
-          </motion.div>
-        </div>
-      </header>
+          </div>
+        </section>
 
-      {/* Social Proof — Logo Strip compacto y profesional */}
-      <section className="bg-white dark:bg-brand-900 border-y border-stone-100 dark:border-brand-800 py-12 overflow-hidden transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-stone-400 dark:text-stone-500 mb-8">
-            Fabricantes de León que ya usan Lumina
-          </p>
-          {/* CSS-only infinite marquee — sin framer-motion, más ligero */}
-          <div className="relative overflow-hidden">
-            <div className="absolute left-0 top-0 z-10 w-16 h-full bg-gradient-to-r from-white dark:from-brand-900 to-transparent pointer-events-none" />
-            <div className="absolute right-0 top-0 z-10 w-16 h-full bg-gradient-to-l from-white dark:from-brand-900 to-transparent pointer-events-none" />
-            <div
-              className="flex gap-10 items-center"
-              style={{
-                animation: "marquee 24s linear infinite",
-                width: "max-content",
-              }}
-            >
+        {/* Stats Section */}
+        <section className="bg-brand-900 py-12 px-6 border-b border-white/[0.03]">
+          <div className="max-w-7xl mx-auto flex flex-wrap justify-between gap-12">
+            {[
+              { val: "150+", label: "Fabricantes en Red", sub: "Guanajuato / Jalisco" },
+              { val: "$2.5B", label: "Ventas Gestionadas", sub: "MXN Transaccionados" },
+              { val: "99.9%", label: "Disponibilidad", sub: "SLA Industrial" },
+            ].map((s, i) => (
+              <div key={i} className="flex flex-col gap-1">
+                <span className="text-3xl font-black text-white leading-none">{s.val}</span>
+                <span className="text-[10px] font-bold tracking-widest text-stone-500 uppercase">{s.label}</span>
+                <span className="text-[9px] text-stone-600">{s.sub}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Bento Grid Features */}
+        <section id="features" className="bg-brand-900 py-24 lg:py-48 px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="mb-20 space-y-4 max-w-3xl">
+              <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter italic">Infraestructura Crítica.</h2>
+              <p className="text-lg text-stone-500 font-medium">No es solo software; es la columna vertebral de tu operación mayorista.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-4 auto-rows-[300px]">
+              <div className="md:col-span-6 lg:col-span-8 glass-premium rounded-[2.5rem] p-10 flex flex-col justify-end group transition-all hover:bg-white/[0.02] border-white/5 relative">
+                <div className="relative z-10">
+                  <Lock size={32} className="text-brand-400 mb-6" />
+                  <h3 className="text-3xl font-bold text-white mb-4">Soberanía de Precios (Gate B2B)</h3>
+                  <p className="text-stone-400 max-w-md">Protege tus márgenes. Controla quién ve tus precios de mayoreo con accesos restringidos por cliente.</p>
+                </div>
+              </div>
+              <div className="md:col-span-3 lg:col-span-4 glass-premium rounded-[2.5rem] p-10 flex flex-col justify-between group hover:bg-white/[0.02] border-white/5">
+                <Smartphone size={32} className="text-gold-400" />
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-2">Pedidos en Expo (PWA)</h3>
+                  <p className="text-stone-500 text-sm">Levanta pedidos en SAPICA sin internet. Sincronización automática al recuperar señal.</p>
+                </div>
+              </div>
+              <div className="md:col-span-3 lg:col-span-4 glass-premium rounded-[2.5rem] p-10 flex flex-col justify-between group hover:bg-white/[0.02] border-white/5">
+                <Users size={32} className="text-indigo-400" />
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-2">Gestión de Agentes</h3>
+                  <p className="text-stone-500 text-sm">Monitorea a tus comisionistas en tiempo real con tableros de rendimiento individual.</p>
+                </div>
+              </div>
+              <div className="md:col-span-6 lg:col-span-8 bg-brand-600 rounded-[2.5rem] p-10 flex flex-col justify-center relative overflow-hidden">
+                <FileText size={48} className="text-white mb-6" />
+                <h3 className="text-3xl font-bold text-white mb-4">Timbrado Fiscal CFDI 4.0</h3>
+                <p className="text-white/80 max-w-sm">Genera facturas legales en 1 clic directamente desde el pedido. Integración nativa con el SAT.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="bg-brand-950 py-24 lg:py-48 px-6 border-y border-white/[0.02]">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20">
+            <div className="lg:col-span-4">
+              <h2 className="text-4xl font-black text-white mb-6 tracking-tighter italic">Líderes que <br /> <span className="text-brand-400">Escalan</span>.</h2>
+              <p className="text-stone-500 font-medium leading-relaxed">Directores que transformaron sus cuellos de botella operativos en ventajas logísticas.</p>
+            </div>
+            
+            <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
-                { name: "Arturo Cuervo", logo: "/logos/arturo-cuervo.png" },
-                { name: "Botas Milenarias", logo: "/logos/botas-milenarias.jpg" },
-                { name: "Baeza & Estrada", logo: "/logos/baeza-estrada.png" },
-                { name: "Grupo Alpina", logo: "/logos/alpina.png" },
-                { name: "Flexi", logo: "/logos/flexi.png" },
-                { name: "Emyco", logo: "/logos/emyco.png" },
-                // Segunda iteración para seamless loop
-                { name: "Arturo Cuervo", logo: "/logos/arturo-cuervo.png" },
-                { name: "Botas Milenarias", logo: "/logos/botas-milenarias.jpg" },
-                { name: "Baeza & Estrada", logo: "/logos/baeza-estrada.png" },
-                { name: "Grupo Alpina", logo: "/logos/alpina.png" },
-                { name: "Flexi", logo: "/logos/flexi.png" },
-                { name: "Emyco", logo: "/logos/emyco.png" },
-              ].map((company, i) => (
-                <div
-                  key={i}
-                  className="flex-shrink-0 flex items-center justify-center h-12 w-28 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                >
-                  <Image
-                    src={company.logo}
-                    alt={company.name}
-                    width={112}
-                    height={48}
-                    className="object-contain h-10 w-auto"
-                  />
+                { 
+                  name: "Roberto González", 
+                  role: "Director de Operaciones", 
+                  company: "Manufactura de Calzado León",
+                  text: "En SAPICA pasábamos de pedidos en papel a errores de captura de 3 días. Con Lumina, el pedido entra directo al almacén mientras el cliente sigue en el stand." 
+                },
+                { 
+                  name: "Elena Vázquez", 
+                  role: "CEO", 
+                  company: "Textiles del Bajío",
+                  text: "La facturación masiva era nuestro dolor más grande. Recuperamos 20 horas hombre a la semana automatizando el CFDI 4.0 directamente de las compras web." 
+                }
+              ].map((t, i) => (
+                <div key={i} className="glass-premium p-10 rounded-[2rem] flex flex-col justify-between border-white/5">
+                  <p className="text-stone-300 font-medium leading-relaxed italic mb-8">&ldquo;{t.text}&rdquo;</p>
+                  <div>
+                    <p className="text-white font-bold">{t.name}</p>
+                    <p className="text-[11px] font-bold text-brand-400 uppercase tracking-widest mt-1">{t.role} · {t.company}</p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
+        </section>
 
-          {/* Stats row */}
-          <div className="mt-10 flex flex-wrap justify-center gap-8 md:gap-16 border-t border-stone-100 dark:border-brand-800 pt-8">
-            {[
-              { val: "150+", label: "Empresas activas", color: "text-brand-600 dark:text-brand-400" },
-              { val: "$2.5B", label: "En ventas gestionadas", color: "text-gold-600 dark:text-gold-400" },
-              { val: "98%", label: "Satisfacción", color: "text-emerald-600 dark:text-emerald-400" },
-            ].map((s) => (
-              <div key={s.label} className="text-center">
-                <p className={`text-3xl font-black ${s.color}`}>{s.val}</p>
-                <p className="text-xs font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wider mt-1">{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        {/* Comparisons & ROI */}
+        <section id="comparativa" className="py-24 lg:py-32 px-4 sm:px-6 bg-white dark:bg-stone-900 transition-colors duration-300 border-t border-stone-100 dark:border-stone-800">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-brand-900 dark:text-white mb-4">WhatsApp vs. Lumina B2B</h2>
+              <p className="text-xl text-stone-500 dark:text-stone-400 max-w-2xl mx-auto">La transición hacia un canal de ventas verdaderamente automatizado.</p>
+            </div>
 
-
-      {/* Testimonios Section - Diseño Minimalista */}
-      <section className="py-24 px-4 sm:px-6 bg-stone-50 dark:bg-brand-950 border-t border-stone-100 dark:border-stone-800 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-brand-900 dark:text-white mb-4">La elección de los líderes</h2>
-            <p className="text-xl text-stone-500 dark:text-stone-400 max-w-2xl mx-auto">Fabricantes que escalaron sus ventas con Lumina.</p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, i) => (
-              <motion.div 
-                key={i} 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-stone-50 dark:bg-brand-800/50 p-8 rounded-3xl border border-stone-200 dark:border-stone-700 shadow-lg hover:shadow-glass transition-all duration-300"
-              >
-                {/* Rating */}
-                <div className="flex gap-1 mb-6">
-                  {[...Array(testimonial.rating)].map((_, idx) => (
-                    <Star key={idx} size={20} className="fill-gold-400 text-gold-400" />
-                  ))}
-                </div>
-
-                {/* Testimonial text */}
-                <p className="text-stone-700 dark:text-stone-300 font-medium leading-relaxed mb-8 italic text-lg">
-                  &ldquo;{testimonial.text}&rdquo;
-                </p>
-
-                {/* Author info */}
-                <div className="flex items-center gap-4 pt-6 border-t border-stone-200 dark:border-stone-700">
-                  <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-brand-600 dark:border-brand-400 bg-brand-100 dark:bg-brand-800 flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl font-black text-brand-600 dark:text-brand-400">
-                      {testimonial.name.charAt(0)}
-                    </span>
-                  </div>
-                  <div>
-                    <p className="font-bold text-brand-900 dark:text-brand-100">{testimonial.name}</p>
-                    <p className="text-sm text-stone-600 dark:text-stone-400">{testimonial.role} · {testimonial.company}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Comparativa Tú vs Competencia - Limpio y Profesional */}
-      <section id="comparativa" className="py-24 lg:py-32 px-4 sm:px-6 bg-white dark:bg-stone-900 transition-colors duration-300 border-t border-stone-100 dark:border-stone-800">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-brand-900 dark:text-white mb-4">WhatsApp vs. Lumina B2B</h2>
-            <p className="text-xl text-stone-500 dark:text-stone-400 max-w-2xl mx-auto">La transición hacia un canal de ventas verdaderamente automatizado.</p>
-          </div>
-
-          <div className="bg-white dark:bg-brand-800 rounded-3xl border border-stone-200 dark:border-stone-700 shadow-glass overflow-hidden relative">
-            {/* Sticky Header Table */}
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <thead className="sticky top-0 z-20 bg-stone-50 dark:bg-brand-800 border-b border-stone-200 dark:border-stone-700">
-                  <tr>
-                    <th className="p-6 text-sm font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 w-1/3">Área</th>
-                    <th className="p-6 text-sm font-bold uppercase tracking-wider text-red-600 w-1/3 text-center">📱 WhatsApp + Excel</th>
-                    <th className="p-6 text-sm font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400 w-1/3 text-center">✨ Lumina B2B</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-stone-100 dark:divide-stone-700">
-                  {comparisonData.map((row, i) => (
-                    <tr key={i} className="hover:bg-stone-50 dark:hover:bg-brand-800/50 transition-colors">
-                      <td className="p-6 font-bold text-brand-800 dark:text-stone-200">{row.feature}</td>
-                      <td className="p-6 text-center border-x border-stone-100 dark:border-stone-700">
-                        <div className="flex flex-col items-center gap-2">
-                          <X className="text-red-500" size={32} strokeWidth={3} />
-                          <span className="text-sm text-stone-500 dark:text-stone-400 font-medium">{row.traditional}</span>
-                        </div>
-                      </td>
-                      <td className="p-6 text-center bg-brand-50/30 dark:bg-brand-900/10 relative">
-                        <div 
-                          className="flex flex-col items-center gap-2 cursor-help group"
-                          onMouseEnter={() => setHoveredFeature(i)}
-                          onMouseLeave={() => setHoveredFeature(null)}
-                        >
-                          <Check className="text-gold-500" size={32} strokeWidth={3} />
-                          <span className="text-sm text-brand-900 dark:text-brand-100 font-bold underline decoration-brand-200 decoration-dotted underline-offset-4">{row.lumina}</span>
-                          
-                          {/* Custom Tooltip */}
-                          <AnimatePresence>
-                            {hoveredFeature === i && (
-                              <motion.div
-                                initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                                animate={{ opacity: 1, y: 0, scale: 1 }}
-                                exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-64 p-4 bg-brand-900 text-white text-xs rounded-xl shadow-glass z-30 pointer-events-none"
-                              >
-                                <div className="absolute bottom-[-6px] left-1/2 -translate-x-1/2 w-3 h-3 bg-brand-900 rotate-45"></div>
-                                <p className="leading-relaxed font-medium">{row.tooltip}</p>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                        </div>
-                      </td>
+            <div className="bg-white dark:bg-brand-800 rounded-3xl border border-stone-200 dark:border-stone-700 shadow-glass overflow-hidden relative mb-24">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse">
+                  <thead className="sticky top-0 z-20 bg-stone-50 dark:bg-brand-800 border-b border-stone-200 dark:border-stone-700">
+                    <tr>
+                      <th className="p-6 text-sm font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 w-1/3">Área</th>
+                      <th className="p-6 text-sm font-bold uppercase tracking-wider text-red-600 w-1/3 text-center">📱 WhatsApp + Excel</th>
+                      <th className="p-6 text-sm font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400 w-1/3 text-center">✨ Lumina B2B</th>
                     </tr>
+                  </thead>
+                  <tbody className="divide-y divide-stone-100 dark:divide-stone-700">
+                    {comparisonData.map((row, i) => (
+                      <tr key={i} className="hover:bg-stone-50 dark:hover:bg-brand-800/50 transition-colors">
+                        <td className="p-6 font-bold text-brand-800 dark:text-stone-200">{row.feature}</td>
+                        <td className="p-6 text-center border-x border-stone-100 dark:border-stone-700">
+                          <div className="flex flex-col items-center gap-2">
+                            <X className="text-red-500" size={32} strokeWidth={3} />
+                            <span className="text-sm text-stone-500 dark:text-stone-400 font-medium">{row.traditional}</span>
+                          </div>
+                        </td>
+                        <td className="p-6 text-center bg-brand-50/30 dark:bg-brand-900/10 relative">
+                          <div 
+                            className="flex flex-col items-center gap-2 cursor-help group"
+                            onMouseEnter={() => setHoveredFeature(i)}
+                            onMouseLeave={() => setHoveredFeature(null)}
+                          >
+                            <Check className="text-gold-500" size={32} strokeWidth={3} />
+                            <span className="text-sm text-brand-900 dark:text-brand-100 font-bold underline decoration-brand-200 decoration-dotted underline-offset-4">{row.lumina}</span>
+                            
+                            <AnimatePresence>
+                              {hoveredFeature === i && (
+                                <motion.div
+                                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                  className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-64 p-4 bg-brand-900 text-white text-xs rounded-xl shadow-glass z-30 pointer-events-none"
+                                >
+                                  <div className="absolute bottom-[-6px] left-1/2 -translate-x-1/2 w-3 h-3 bg-brand-900 rotate-45"></div>
+                                  <p className="leading-relaxed font-medium">{row.tooltip}</p>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              
+              <div className="p-8 bg-gradient-to-r from-brand-600 to-brand-600 rounded-3xl text-white text-center shadow-xl relative overflow-hidden m-6">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+                <p className="text-xl font-bold italic relative z-10">
+                  &ldquo;Lumina elimino el caos de pedidos por WhatsApp y nos permitio recuperar 15 horas a la semana de trabajo administrativo.&rdquo;
+                </p>
+              </div>
+            </div>
+
+            {/* Grid de Características Cortas */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
+              {[
+                { icon: <Lock size={28} />, title: "Gate B2B", desc: "Protege tus precios. Solo clientes autorizados acceden a tu catálogo.", bg: "bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400" },
+                { icon: <Smartphone size={28} />, title: "100% Mobile", desc: "Tus clientes pueden pedir desde su celular, en cualquier lugar.", bg: "bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400" },
+                { icon: <Users size={28} />, title: "CRM de Ventas", desc: "Gestiona a tus vendedores y sus metas desde un solo lugar.", bg: "bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400" },
+                { icon: <FileText size={28} />, title: "CFDI 4.0", desc: "Facturación automática integrada lista para el SAT.", bg: "bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400" }
+              ].map((feature, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="bg-white dark:bg-stone-900 p-8 rounded-3xl border border-stone-200 dark:border-stone-800 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 group"
+                >
+                  <div className={`p-4 ${feature.bg} rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform`}>
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-brand-900 dark:text-white mb-3 tracking-tight">{feature.title}</h3>
+                  <p className="text-stone-600 dark:text-stone-400 leading-relaxed text-sm">{feature.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Financial Performance Forecast (ROI) */}
+        <section className="py-24 lg:py-48 px-6 bg-brand-900 relative overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-600/5 via-transparent to-transparent -z-0"></div>
+          
+          <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+            <div className="lg:col-span-12 xl:col-span-5 space-y-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-2">
+                <span className="text-[10px] font-bold tracking-widest text-brand-200 uppercase">Calculadora de Eficiencia Financiera</span>
+              </div>
+              <h2 className="text-4xl md:text-6xl font-black text-white leading-tight mt-4">Calcula la fuga <br /> de capital.</h2>
+              
+              <div className="space-y-6 pt-8">
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-4">Pedidos Mensuales</label>
+                  <input
+                    type="range" min="10" max="1000" step="10"
+                    value={roiInputs.orders}
+                    onChange={(e) => setRoiInputs({...roiInputs, orders: Number(e.target.value)})}
+                    className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-brand-500"
+                  />
+                  <div className="flex justify-between mt-2 text-xl font-bold text-white">
+                    <span>{roiInputs.orders}</span>
+                    <span className="text-[11px] text-stone-500 font-medium">unidades/mes</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-4">Ticket de Mayoreo Promedio (MXN)</label>
+                  <input
+                    type="range" min="1000" max="50000" step="1000"
+                    value={roiInputs.avgTicket}
+                    onChange={(e) => setRoiInputs({...roiInputs, avgTicket: Number(e.target.value)})}
+                    className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-brand-500"
+                  />
+                  <div className="flex justify-between mt-2 text-xl font-bold text-white">
+                    <span>${roiInputs.avgTicket.toLocaleString()}</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-4">% de Error Humano estimado</label>
+                  <input
+                    type="range" min="1" max="50" step="1"
+                    value={roiInputs.errorRate}
+                    onChange={(e) => setRoiInputs({...roiInputs, errorRate: Number(e.target.value)})}
+                    className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+                  />
+                  <div className="flex justify-between mt-2 text-xl font-bold text-white">
+                    <span>{roiInputs.errorRate}%</span>
+                    <span className="text-[11px] text-red-400 font-bold uppercase">Impacto en margen</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-12 xl:col-span-7 glass-premium rounded-[3rem] p-10 border-white/10 relative">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div className="space-y-8">
+                  <div className="p-8 rounded-[2rem] bg-red-500/5 border border-red-500/10">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-red-400 mb-2">Pérdida por Error Humano</p>
+                    <p className="text-5xl font-black text-red-500">${calculateROI().lostToErrors.toLocaleString()}</p>
+                    <p className="text-xs text-stone-500 mt-4">Pedidos mal surtidos y cancelaciones por falta de stock.</p>
+                  </div>
+
+                  <div className="p-8 rounded-[2rem] bg-brand-500/5 border border-brand-500/10">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-brand-400 mb-2">Recuperación con Lumina</p>
+                    <p className="text-5xl font-black text-brand-400">${calculateROI().recovered.toLocaleString()}</p>
+                    <p className="text-xs text-stone-500 mt-4">Capital recuperado mediante automatización.</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col justify-center items-center text-center p-10 bg-white/[0.02] rounded-[2rem] border border-white/5">
+                  <div className="w-32 h-32 rounded-full border-4 border-brand-500/20 flex items-center justify-center relative mb-8">
+                    <div className="absolute inset-0 border-t-4 border-brand-400 rounded-full animate-spin-slow"></div>
+                    <span className="text-4xl font-black text-white">{calculateROI().roi}%</span>
+                  </div>
+                  <h4 className="text-2xl font-bold text-white mb-2">ROI Proyectado</h4>
+                  <p className="text-sm text-stone-500 mb-10">Payback en los primeros 12 días de uso.</p>
+                  
+                  <button 
+                    onClick={() => setIsModalOpen(true)}
+                    className="w-full bg-white text-brand-900 h-16 rounded-full font-black text-sm uppercase tracking-wider hover:shadow-glow-blue transition-all"
+                  >
+                    Diagnóstico Gratuito
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing Section */}
+        <section id="pricing" className="bg-brand-900 py-24 lg:py-48 px-6 border-t border-white/[0.05]">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-24">
+              <h2 className="text-4xl md:text-7xl font-black text-white mb-8 tracking-tighter italic">Inversión en <span className="text-brand-400">Escalamiento</span>.</h2>
+              <p className="text-lg text-stone-500 max-w-2xl mx-auto font-medium">Precios transparentes diseñados para fabricantes que no aceptan límites tecnológicos.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+              {/* Plan Emprendedor */}
+              <div className="glass-premium p-10 rounded-[2.5rem] border-white/5 group hover:border-brand-500/50 transition-all flex flex-col">
+                <div className="flex justify-between items-start mb-10">
+                  <div>
+                    <h3 className="text-xl font-bold text-white">Fabricante</h3>
+                    <p className="text-xs text-stone-500 mt-1 font-bold italic uppercase tracking-widest text-emerald-400/80">Para marcas locales</p>
+                  </div>
+                </div>
+                
+                <div className="mb-10">
+                  <p className="text-5xl font-black text-white">$1,199 <span className="text-sm text-stone-500">MXN/mes</span></p>
+                </div>
+
+                <ul className="space-y-4 mb-12 flex-1">
+                  {["Catálogo Digital (Gate B2B)", "Hasta 100 productos", "1 Vendedor Master", "Levantamiento de Pedidos", "Soporte Vía Chat"].map((item, i) => (
+                    <li key={i} className="flex gap-3 text-sm text-stone-400 font-medium">
+                      <CheckCircle2 size={16} className="text-brand-400 shrink-0 mt-0.5" />
+                      {item}
+                    </li>
                   ))}
-                </tbody>
-              </table>
+                </ul>
+
+                <button 
+                  onClick={() => setIsModalOpen(true)}
+                  className="w-full h-14 rounded-full border border-white/10 text-white font-bold text-sm hover:bg-white/5 transition-all uppercase tracking-wider"
+                >
+                  Empezar ahora
+                </button>
+              </div>
+
+              {/* Plan Industrial - PRO */}
+              <div className="glass-premium p-10 rounded-[2.5rem] border-brand-500 ring-4 ring-brand-500/10 scale-105 shadow-[0_0_50px_-12px_rgba(0,132,255,0.3)] relative overflow-hidden flex flex-col z-10">
+                <div className="absolute top-0 right-0 bg-brand-500 text-white text-[10px] font-black uppercase tracking-widest px-6 py-2 rounded-bl-3xl">Pilar Comercial</div>
+                
+                <div className="flex justify-between items-start mb-10">
+                  <div>
+                    <h3 className="text-xl font-bold text-white">Industrial</h3>
+                    <p className="text-xs text-brand-400 mt-1 font-bold italic uppercase tracking-widest">Lo más solicitado en León</p>
+                  </div>
+                </div>
+                
+                <div className="mb-10">
+                  <p className="text-5xl font-black text-white">$2,499 <span className="text-sm text-stone-500">MXN/mes</span></p>
+                </div>
+
+                <ul className="space-y-4 mb-12 flex-1">
+                  {["Productos Ilimitados", "CRM de 5 Vendedores", "Facturación CFDI 4.0 Nativa", "Configuración SAPICA/ANPIC", "Capacitación en Fábrica"].map((item, i) => (
+                    <li key={i} className="flex gap-3 text-sm text-stone-300 font-bold">
+                      <CheckCircle2 size={16} className="text-gold-400 shrink-0 mt-0.5" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                <button 
+                  onClick={() => setIsModalOpen(true)}
+                  className="w-full h-14 rounded-full bg-brand-500 text-white font-black text-sm hover:bg-brand-400 transition-all uppercase tracking-wider"
+                >
+                  Dominar Mercado
+                </button>
+              </div>
+
+              {/* Plan Enterprise */}
+              <div className="glass-premium p-10 rounded-[2.5rem] border-white/5 group hover:border-brand-500/50 transition-all flex flex-col">
+                <div className="flex justify-between items-start mb-10">
+                  <div>
+                    <h3 className="text-xl font-bold text-white">Fábrica Plus</h3>
+                    <p className="text-xs text-stone-500 mt-1 font-bold italic uppercase tracking-widest">Infrastructura Robusta</p>
+                  </div>
+                </div>
+                
+                <div className="mb-10">
+                  <p className="text-5xl font-black text-white">$4,999 <span className="text-sm text-stone-500">MXN/mes</span></p>
+                </div>
+
+                <ul className="space-y-4 mb-12 flex-1">
+                  {["Integración con ERP Local", "CRM de Vendedores Ilimitado", "Múltiples Listas de Precios", "Account Manager Dedicado", "Infraestructura Cloud Prioritaria"].map((item, i) => (
+                    <li key={i} className="flex gap-3 text-sm text-stone-400 font-medium">
+                      <CheckCircle2 size={16} className="text-brand-400 shrink-0 mt-0.5" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                <button 
+                  onClick={() => setIsModalOpen(true)}
+                  className="w-full h-14 rounded-full border border-white/10 text-white font-bold text-sm hover:bg-white/5 transition-all uppercase tracking-wider"
+                >
+                  Consultar ERP
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Video Preview Mockup */}
+        <section className="py-24 px-4 sm:px-6 bg-white dark:bg-stone-900 transition-colors duration-300 border-t border-stone-100 dark:border-stone-800">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-brand-900 dark:text-white mb-6">Tu nuevo centro de comando B2B</h2>
+              <p className="text-xl text-stone-600 dark:text-stone-400 max-w-3xl mx-auto">Una interfaz diseñada para la velocidad. Sin distracciones.</p>
+            </div>
+
+            <div className="relative group cursor-pointer" onClick={() => setVideoModalOpen(true)}>
+              <div className="relative z-10 bg-stone-100 dark:bg-brand-800 rounded-[2rem] p-4 shadow-glass border-4 border-stone-200 dark:border-stone-700 aspect-video overflow-hidden">
+                <div className="absolute inset-0 bg-brand-900/40 backdrop-blur-[2px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                  <button className="bg-white text-brand-600 px-8 py-4 rounded-2xl font-black shadow-glass flex items-center gap-3">
+                    <Play size={20} className="fill-brand-600" /> VER INTERFAZ REAL
+                  </button>
+                </div>
+                <div className="w-full h-full bg-stone-200 dark:bg-brand-900/50 flex items-center justify-center">
+                  <BarChart3 size={64} className="text-stone-400 opacity-20" />
+                </div>
+              </div>
+              <div className="absolute -top-12 -right-12 w-64 h-64 bg-brand-600/10 rounded-full blur-3xl -z-10"></div>
+            </div>
+          </div>
+        </section>
+
+        {/* Objections Handler Components Hook */}
+        <ObjectionsHandler />
+
+        {/* FAQ Section */}
+        <section className="py-24 lg:py-48 px-6 bg-brand-900 border-t border-white/[0.05]">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-24">
+              <h2 className="text-4xl md:text-6xl font-black text-white italic tracking-tighter mb-6">Claridad Absoluta.</h2>
+              <p className="text-stone-500 font-medium">Respuestas directas sobre Lumina.</p>
+            </div>
+
+            <div className="space-y-4">
+              {faqs.map((faq, index) => (
+                <div key={index} className="glass-premium rounded-3xl overflow-hidden border-white/5">
+                  <button 
+                    onClick={() => toggleFaq(index)}
+                    className="w-full px-8 py-8 text-left flex justify-between items-center group"
+                  >
+                    <span className="font-bold text-lg text-white group-hover:text-brand-400 transition-colors uppercase">{faq.q}</span>
+                    <ChevronDown size={20} className={`text-white transition-transform duration-500 ${openFaqIndex === index ? 'rotate-180' : ''}`} />
+                  </button>
+                  <AnimatePresence>
+                    {openFaqIndex === index && (
+                      <motion.div 
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-8 pb-8 text-stone-400 font-medium">{faq.a}</div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="bg-brand-950 py-24 px-6 border-t border-white/[0.03]">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
+            <div className="space-y-8">
+              <div className="text-2xl font-black tracking-tighter text-white uppercase italic">
+                Lumina <span className="text-brand-500">B2B</span>
+              </div>
+              <p className="text-stone-500 text-sm font-medium">La infraestructura comercial definitiva para la industria del Bajío.</p>
+            </div>
+            
+            <div className="space-y-6">
+              <p className="text-[10px] font-bold tracking-widest text-stone-400 uppercase">Explora</p>
+              <ul className="space-y-4 text-stone-500 text-sm font-medium">
+                <li><a href="#" className="hover:text-white transition-colors">Infraestructura</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Planes</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Blog Industrial</a></li>
+              </ul>
+            </div>
+
+            <div className="space-y-6">
+              <p className="text-[10px] font-bold tracking-widest text-stone-400 uppercase">Legal</p>
+              <ul className="space-y-4 text-stone-500 text-sm font-medium">
+                <li><a href="#" className="hover:text-white transition-colors">Privacidad</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Términos de Servicio</a></li>
+              </ul>
+            </div>
+
+            <div className="space-y-6">
+              <p className="text-[10px] font-bold tracking-widest text-stone-400 uppercase">Contacto</p>
+              <p className="text-stone-500 text-sm font-medium">León, Guanajuato, México</p>
+              <p className="text-white font-black">hola@luminab2b.com</p>
             </div>
           </div>
           
-          <div className="mt-12 p-8 bg-gradient-to-r from-brand-600 to-brand-600 rounded-3xl text-white text-center shadow-xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
-            <p className="text-xl font-bold italic relative z-10">
-              &ldquo;Lumina elimino el caos de pedidos por WhatsApp y nos permitio recuperar 15 horas a la semana de trabajo administrativo.&rdquo;
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Grid de Características - Diseño Elegante */}
-      <section id="features" className="bg-stone-50 dark:bg-brand-950 py-24 lg:py-32 px-4 sm:px-6 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6"
-          >
-            <div>
-              <h2 className="text-4xl font-bold text-brand-900 dark:text-white mb-4">Todo lo que necesitas para dominar tu mercado</h2>
-              <p className="text-xl text-stone-600 dark:text-stone-400 max-w-2xl">Ahorra tiempo y elimina el error humano con herramientas diseñadas para la eficiencia.</p>
+          <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/[0.03] flex flex-col md:flex-row justify-between items-center gap-6">
+            <p className="text-[10px] text-stone-600 font-bold uppercase tracking-widest">© 2026 Lumina B2B Systems · Todos los derechos reservados</p>
+            <div className="flex gap-6">
+              <Linkedin size={18} className="text-stone-600 hover:text-white transition-colors cursor-pointer" />
+              <Instagram size={18} className="text-stone-600 hover:text-white transition-colors cursor-pointer" />
             </div>
-          </motion.div>
+          </div>
+        </footer>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { icon: <Lock size={28} />, title: "Gate B2B", desc: "Protege tus precios. Solo clientes autorizados acceden a tu catálogo.", bg: "bg-brand-50 dark:bg-brand-900/30", text: "text-brand-600 dark:text-brand-400" },
-              { icon: <Smartphone size={28} />, title: "100% Mobile", desc: "Tus clientes pueden pedir desde su celular, en cualquier lugar.", bg: "bg-brand-50 dark:bg-brand-900/30", text: "text-brand-600 dark:text-brand-400" },
-              { icon: <Users size={28} />, title: "CRM de Ventas", desc: "Gestiona a tus vendedores y sus metas desde un solo lugar.", bg: "bg-brand-50 dark:bg-brand-900/30", text: "text-brand-600 dark:text-brand-400" },
-              { icon: <FileText size={28} />, title: "CFDI 4.0", desc: "Facturación automática integrada lista para el SAT.", bg: "bg-brand-50 dark:bg-brand-900/30", text: "text-brand-600 dark:text-brand-400" }
-            ].map((feature, i) => (
+        {/* Lead Capture Modal */}
+        <AnimatePresence>
+          {isModalOpen && (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
               <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-white dark:bg-stone-900 p-8 rounded-3xl border border-stone-200 dark:border-stone-800 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 group"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 bg-brand-900/90 backdrop-blur-xl"
+                onClick={() => setIsModalOpen(false)}
+              />
+              
+              <motion.div 
+                initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                className="relative z-10 w-full max-w-xl bg-brand-800 rounded-[2.5rem] border border-white/10 p-10 shadow-2xl overflow-hidden"
               >
-                <div className={`p-4 ${feature.bg} ${feature.text} rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform`}>
-                  {feature.icon}
-                </div>
-                <h4 className="text-xl font-bold text-brand-900 dark:text-white mb-3">{feature.title}</h4>
-                <p className="text-stone-600 dark:text-stone-400 leading-relaxed text-sm">
-                  {feature.desc}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Tabla Comparativa Secundaria - RESPONSIVE */}
-      <section id="comparativa-plataformas" className="py-24 lg:py-32 px-4 sm:px-6 bg-white dark:bg-brand-950 transition-colors duration-300 border-t border-stone-100 dark:border-stone-800">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-brand-900 dark:text-white mb-4">Lumina vs Shopify y otros</h2>
-            <p className="text-lg text-stone-500 dark:text-stone-400">Por qué los fabricantes eligen una solución integrada específica B2B.</p>
-          </div>
-
-          {/* Versión Desktop: Tabla */}
-          <div className="hidden sm:block relative">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-separate border-spacing-0 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-md overflow-hidden bg-white dark:bg-stone-900">
-                <thead>
-                  <tr className="bg-stone-50 dark:bg-stone-900">
-                    <th className="p-6 text-stone-500 dark:text-stone-400 font-bold uppercase text-xs tracking-wider border-b border-stone-200 dark:border-stone-800">Característica</th>
-                    <th className="p-6 text-brand-700 dark:text-brand-400 font-bold text-lg border-b border-brand-500 bg-brand-50/30 dark:bg-brand-900/10">Lumina B2B</th>
-                    <th className="p-6 text-stone-400 font-medium border-b border-stone-200 dark:border-stone-800">Shopify/B2C</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-stone-100 dark:divide-stone-700">
-                  {[
-                    ["Facturación CFDI 4.0 Nativa", true, "Solo con Apps"],
-                    ["Privacidad B2B (Gate)", true, "No nativo"],
-                    ["CRM de Agentes de Venta", true, false],
-                    ["UX Especializada", true, "Enfoque Minorista"]
-                  ].map((row, i) => (
-                    <tr key={i}>
-                      <td className="p-6 font-semibold text-stone-700 dark:text-stone-300 text-sm">{row[0]}</td>
-                      <td className="p-6 bg-brand-50/30 dark:bg-brand-900/10">
-                        {row[1] === true ? <Check className="text-gold-500" /> : <X className="text-red-300" />}
-                      </td>
-                      <td className="p-6 text-stone-400 text-sm">
-                        {row[2] === false ? <X className="text-red-300" /> : row[2]}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* Versión Mobile: Cards apiladas */}
-          <div className="sm:hidden space-y-3">
-            {[
-              ["Facturación CFDI 4.0 Nativa", true, "Solo con Apps"],
-              ["Privacidad B2B (Gate)", true, "No nativo"],
-              ["CRM de Agentes de Venta", true, false],
-              ["UX Especializada", true, "Enfoque Minorista"]
-            ].map((row, i) => (
-              <div key={i} className="bg-white dark:bg-brand-800 rounded-xl border border-stone-200 dark:border-stone-700 p-4">
-                <p className="text-sm font-semibold text-stone-700 dark:text-stone-300 mb-3">{row[0]}</p>
-                <div className="flex justify-between gap-4">
-                  <div className="flex-1 text-center">
-                    <p className="text-xs text-stone-500 dark:text-stone-400 mb-1 font-medium">Lumina</p>
-                    <div className="flex justify-center">
-                      {row[1] === true ? <Check className="text-gold-500" size={20} /> : <X className="text-red-300" size={20} />}
+                {isSuccess ? (
+                  <div className="text-center py-10 space-y-6">
+                    <div className="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto">
+                      <CheckCircle2 size={40} />
                     </div>
+                    <h3 className="text-3xl font-black text-white">Solicitud Recibida</h3>
+                    <p className="text-stone-400">Un consultor industrial te contactará en las próximas 2 horas hábiles.</p>
                   </div>
-                  <div className="flex-1 text-center">
-                    <p className="text-xs text-stone-500 dark:text-stone-400 mb-1 font-medium">Shopify</p>
-                    <p className="text-xs text-stone-600 dark:text-stone-400">
-                      {row[2] === false ? <X className="text-red-300 inline-block" size={20} /> : row[2]}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ROI Calculator Section - Premium Design */}
-      <section className="py-24 px-4 sm:px-6 bg-brand-900 dark:bg-stone-950 text-white relative overflow-hidden transition-colors duration-300">
-        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5"></div>
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Calcula tu ROI con Lumina</h2>
-            <p className="text-xl text-brand-100">Descubre cuánto dinero estás perdiendo sin un sistema automatizado</p>
-          </div>
-
-          <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 md:p-12 border border-white/20">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-              <div>
-                <label className="block text-sm font-bold mb-3 text-brand-100">Pedidos por mes</label>
-                <input
-                  type="number"
-                  value={roiInputs.orders}
-                  onChange={(e) => setRoiInputs({...roiInputs, orders: Number(e.target.value)})}
-                  className="w-full px-4 py-3 rounded-xl bg-white/20 border-2 border-white/30 text-white text-lg font-bold focus:border-white focus:ring-4 focus:ring-white/20 outline-none transition-all"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-bold mb-3 text-brand-100">Ticket promedio (MXN)</label>
-                <input
-                  type="number"
-                  value={roiInputs.avgTicket}
-                  onChange={(e) => setRoiInputs({...roiInputs, avgTicket: Number(e.target.value)})}
-                  className="w-full px-4 py-3 rounded-xl bg-white/20 border-2 border-white/30 text-white text-lg font-bold focus:border-white focus:ring-4 focus:ring-white/20 outline-none transition-all"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-bold mb-3 text-brand-100">% de errores/pérdidas</label>
-                <input
-                  type="number"
-                  value={roiInputs.errorRate}
-                  onChange={(e) => setRoiInputs({...roiInputs, errorRate: Number(e.target.value)})}
-                  className="w-full px-4 py-3 rounded-xl bg-white/20 border-2 border-white/30 text-white text-lg font-bold focus:border-white focus:ring-4 focus:ring-white/20 outline-none transition-all"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 border-t border-white/20">
-              <div className="bg-white/10 rounded-2xl p-6 text-center">
-                <p className="text-brand-200 text-sm font-semibold mb-2">Pierdes al mes</p>
-                <p className="text-4xl font-black text-red-300">
-                  ${calculateROI().lostToErrors.toLocaleString()}
-                </p>
-              </div>
-              <div className="bg-white/10 rounded-2xl p-6 text-center">
-                <p className="text-brand-200 text-sm font-semibold mb-2">Recuperas con Lumina</p>
-                <p className="text-4xl font-black text-gold-300">
-                  ${calculateROI().recovered.toLocaleString()}
-                </p>
-              </div>
-              <div className="bg-white/10 rounded-2xl p-6 text-center">
-                <p className="text-brand-200 text-sm font-semibold mb-2">ROI Primer Mes</p>
-                <p className="text-4xl font-black text-gold-300">
-                  {calculateROI().roi}%
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-8 text-center">
-              <p className="text-brand-100 text-sm mb-6">
-                💡 <strong>Ganancia neta estimada:</strong> ${calculateROI().netGain.toLocaleString()} MXN/mes
-              </p>
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="bg-white text-brand-600 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-brand-50 transition-all shadow-glass hover:scale-105 active:scale-95"
-              >
-                <span className="font-black">${calculateROI().recovered.toLocaleString()} MXN</span> al mes
-              </button>
-              <p className="text-brand-200 text-xs mt-3">Sin tarjeta de crédito. Setup en 24 horas.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Platform Mockup Section - Premium */}
-      <section className="py-24 px-4 sm:px-6 bg-white dark:bg-stone-900 transition-colors duration-300 border-t border-stone-100 dark:border-stone-800">
-        <div className="max-w-7xl mx-auto">
-          <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-brand-900 dark:text-white mb-6">Tu nuevo centro de comando B2B</h2>
-            <p className="text-xl text-stone-600 dark:text-stone-400 max-w-3xl mx-auto">
-              Una interfaz diseñada para la velocidad. Sin distracciones, solo herramientas para <span className="text-brand-600 dark:text-brand-400 font-bold">vender más</span> y gestionar mejor.
-            </p>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="relative group"
-          >
-            {/* Mockup Frame */}
-            <div className="relative z-10 bg-stone-100 dark:bg-brand-800 rounded-[2rem] p-2 md:p-4 shadow-glass border-4 border-stone-200 dark:border-stone-700">
-              <div className="bg-white dark:bg-brand-900 rounded-2xl overflow-hidden aspect-video relative shadow-inner">
-                {/* Mockup App Interface (Visual representation) */}
-                <div className="absolute inset-0 flex">
-                  {/* Mock Sidebar */}
-                  <div className="w-[18%] bg-stone-50 dark:bg-brand-800/50 border-r border-stone-200 dark:border-stone-700 p-4 space-y-6 hidden md:block">
-                    <div className="h-8 w-full bg-brand-600 rounded-lg"></div>
-                    <div className="space-y-3">
-                      {[1,2,3,4,5,6].map(i => (
-                        <div key={i} className={`h-3 w-full rounded-full ${i === 1 ? 'bg-brand-100 dark:bg-brand-900/40' : 'bg-stone-200 dark:bg-stone-700'}`}></div>
-                      ))}
-                    </div>
-                  </div>
-                  {/* Mock Content */}
-                  <div className="flex-1 p-6 md:p-10 space-y-8 bg-white dark:bg-brand-900">
-                    <div className="flex justify-between items-center">
-                      <div className="space-y-2">
-                        <div className="h-6 w-48 bg-stone-100 dark:bg-brand-800 rounded-full"></div>
-                        <div className="h-4 w-32 bg-stone-50 dark:bg-brand-800/50 rounded-full"></div>
+                ) : (
+                  <>
+                    <h3 className="text-3xl font-black text-white mb-2">Auditoría Gratuita</h3>
+                    <p className="text-stone-400 mb-8 font-medium">Descubre cuánto capital estás perdiendo por procesos manuales.</p>
+                    
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <input name="name" placeholder="Nombre completo" required className="w-full h-14 bg-white/5 border border-white/10 rounded-2xl px-6 text-white placeholder:text-stone-600 outline-none focus:border-brand-500 transition-all font-medium" />
+                        <input name="email" type="email" placeholder="Email corporativo" required className="w-full h-14 bg-white/5 border border-white/10 rounded-2xl px-6 text-white placeholder:text-stone-600 outline-none focus:border-brand-500 transition-all font-medium" />
                       </div>
-                      <div className="h-12 w-40 bg-brand-600 rounded-2xl shadow-glow"></div>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                      {[
-                        { val: "$125,430", lab: "Ventas Hoy", col: "blue" },
-                        { val: "48", lab: "Pedidos Nuevos", col: "emerald" },
-                        { val: "92%", lab: "Eficiencia", col: "amber" }
-                      ].map((card, i) => (
-                        <div key={i} className="p-6 bg-stone-50 dark:bg-brand-800/40 rounded-2xl border border-stone-100 dark:border-stone-700">
-                          <div className={`w-8 h-8 rounded-lg bg-${card.col}-100 dark:bg-${card.col}-900/30 mb-4`}></div>
-                          <p className={`text-2xl font-black text-${card.col}-600 dark:text-${card.col}-400`}>{card.val}</p>
-                          <p className="text-xs text-stone-500 font-bold uppercase tracking-wider">{card.lab}</p>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="h-48 md:h-64 bg-stone-50 dark:bg-brand-800/40 rounded-2xl border border-stone-100 dark:border-stone-700 p-6 flex items-center justify-center">
-                       <div className="text-center space-y-4 opacity-40">
-                         <BarChart3 size={48} className="mx-auto text-stone-400" />
-                         <p className="text-sm font-bold">Gráfico de tendencias en tiempo real</p>
-                       </div>
-                    </div>
-                  </div>
-                </div>
-                {/* Realism Overlays */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-brand-600/5 via-transparent to-white/10 pointer-events-none"></div>
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-brand-900/40 backdrop-blur-[2px]">
-                   <button 
-                    onClick={() => setVideoModalOpen(true)}
-                    className="bg-white dark:bg-brand-800 text-brand-600 dark:text-brand-400 px-8 py-4 rounded-2xl font-black shadow-glass flex items-center gap-3 hover:scale-105 transition-transform"
-                   >
-                     <Play size={20} className="fill-brand-600 dark:fill-brand-400" /> VER INTERFAZ REAL
-                   </button>
-                </div>
-              </div>
+                      <input name="phone" placeholder="WhatsApp (Ej: 477...)" required className="w-full h-14 bg-white/5 border border-white/10 rounded-2xl px-6 text-white placeholder:text-stone-600 outline-none focus:border-brand-500 transition-all font-medium" />
+                      <input name="company" placeholder="Nombre de tu Fábrica / Marca" required className="w-full h-14 bg-white/5 border border-white/10 rounded-2xl px-6 text-white placeholder:text-stone-600 outline-none focus:border-brand-500 transition-all font-medium" />
+                      
+                      <div className="py-4">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-3 block">Tamaño de equipo comercial</label>
+                        <select name="teamSize" className="w-full h-14 bg-white/5 border border-white/10 rounded-2xl px-6 text-white outline-none focus:border-brand-500 transition-all font-medium appearance-none">
+                          <option value="1-5">1-5 agentes</option>
+                          <option value="6-20">6-20 agentes</option>
+                          <option value="20+">20+ agentes</option>
+                        </select>
+                      </div>
+
+                      <button 
+                        type="submit" 
+                        disabled={isSubmitting}
+                        className="w-full h-16 bg-white text-brand-900 rounded-full font-black text-sm uppercase tracking-wider hover:bg-brand-50 transition-all active:scale-95 disabled:opacity-50"
+                      >
+                        {isSubmitting ? "Enviando..." : "Confirmar Diagnóstico"}
+                      </button>
+                    </form>
+                  </>
+                )}
+              </motion.div>
             </div>
-            {/* Background decorations */}
-            <div className="absolute -top-12 -right-12 w-64 h-64 bg-brand-600/10 rounded-full blur-3xl -z-10 animate-pulse"></div>
-            <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-gold-600/10 rounded-full blur-3xl -z-10 animate-pulse delay-700"></div>
-          </motion.div>
-        </div>
-      </section>
+          )}
+        </AnimatePresence>
 
-      {/* Pricing Section - Elegante */}
-      <section id="pricing" className="bg-brand-950 py-24 lg:py-40 px-4 sm:px-6 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-800 via-brand-900 to-brand-950 -z-0"></div>
-
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Inversión que se paga sola</h2>
-            <p className="text-xl text-stone-300 mb-10 max-w-2xl mx-auto">Sin comisiones por venta. Sin costos ocultos. Cancela cuando quieras.</p>
-            
-            {/* Billing Toggle */}
-            <div className="flex items-center justify-center gap-4">
-              <span className={`text-sm font-bold transition-colors ${billingCycle === 'monthly' ? 'text-white' : 'text-stone-500'}`}>Mensual</span>
-              <button 
-                onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'yearly' : 'monthly')}
-                className="w-14 h-8 bg-stone-700 rounded-full p-1 relative transition-colors hover:bg-stone-600"
+        {/* Video Preview Modal */}
+        <AnimatePresence>
+          {videoModalOpen && (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+              <motion.div 
+                initial={{ opacity: 0 }} 
+                animate={{ opacity: 1 }} 
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 bg-brand-900/95 backdrop-blur-3xl"
+                onClick={() => setVideoModalOpen(false)}
+              />
+              <motion.div 
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="relative z-10 w-full max-w-6xl aspect-video rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl"
               >
-                <div className={`w-6 h-6 bg-brand-500 rounded-full shadow-lg transition-transform ${billingCycle === 'yearly' ? 'translate-x-6' : 'translate-x-0'}`}></div>
-              </button>
-              <div className="flex items-center gap-2">
-                <span className={`text-sm font-bold transition-colors ${billingCycle === 'yearly' ? 'text-white' : 'text-stone-500'}`}>Anual</span>
-                <span className="bg-gold-500/20 text-gold-400 text-[10px] font-black uppercase px-2 py-0.5 rounded-full border border-gold-500/30">
-                  Ahorra 20%
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 items-end">
-            {/* --- FREE TRIAL --- */}
-            <div className="bg-stone-800/40 backdrop-blur-md p-7 rounded-3xl border border-stone-700/60 border-dashed text-white hover:border-stone-500 transition-all">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-[10px] font-black uppercase mb-4">
-                Sin tarjeta de crédito
-              </div>
-              <h4 className="text-lg font-bold mb-1">Prueba 14 Días</h4>
-              <p className="text-stone-400 mb-6 text-xs italic">Explora la plataforma sin compromiso.</p>
-              <div className="mb-6">
-                <span className="text-4xl font-black text-emerald-400">$0</span>
-                <span className="text-stone-400 text-sm"> MXN</span>
-                <p className="text-[11px] text-stone-500 italic mt-2 border-t border-stone-700 pt-2">Luego elige el plan que más te convenga.</p>
-              </div>
-              <ul className="space-y-3 mb-8">
-                <li className="flex gap-2 text-xs text-stone-400"><Check size={14} className="text-emerald-400 shrink-0 mt-0.5" />10 productos de prueba</li>
-                <li className="flex gap-2 text-xs text-stone-400"><Check size={14} className="text-emerald-400 shrink-0 mt-0.5" />1 usuario comprador</li>
-                <li className="flex gap-2 text-xs text-stone-400"><Check size={14} className="text-emerald-400 shrink-0 mt-0.5" />Showroom Digital básico</li>
-                <li className="flex gap-2 text-xs text-stone-400"><X size={14} className="text-stone-600 shrink-0 mt-0.5" />Sin CFDI 4.0</li>
-                <li className="flex gap-2 text-xs text-stone-400"><X size={14} className="text-stone-600 shrink-0 mt-0.5" />Sin Gate B2B</li>
-              </ul>
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="w-full py-3 rounded-xl font-bold text-sm border border-emerald-700/50 bg-emerald-900/20 text-emerald-400 hover:bg-emerald-900/40 transition-all active:scale-95"
-              >
-                Empezar Gratis →
-              </button>
-            </div>
-
-            {/* Starter */}
-            <div className="bg-brand-800/50 backdrop-blur-md p-7 rounded-3xl border border-stone-700 text-white hover:border-brand-500/50 transition-all hover:shadow-glass hover:shadow-brand-500/10">
-              <h4 className="text-xl font-bold mb-2">Starter</h4>
-              <p className="text-stone-400 mb-6 text-sm italic">Para fabricantes que empiezan a digitalizarse.</p>
-              <div className="mb-6">
-                <span className="text-4xl font-bold">${prices.starter}</span>
-                <span className="text-stone-400"> MXN/mes</span>
-                {billingCycle === 'yearly' && <p className="text-xs text-brand-400 mt-1 font-medium">Facturado anualmente</p>}
-                <p className="text-[11px] text-stone-500 italic mt-3 border-t border-stone-700 pt-3">Ideal para probar. Cancela cuando quieras.</p>
-              </div>
-              <ul className="space-y-3 mb-8">
-                <li className="flex gap-3 text-sm text-stone-300"><Check size={18} className="text-brand-400 shrink-0" />Hasta 50 productos</li>
-                <li className="flex gap-3 text-sm text-stone-300"><Check size={18} className="text-brand-400 shrink-0" />1 Agente de venta</li>
-                <li className="flex gap-3 text-sm text-stone-300"><Check size={18} className="text-brand-400 shrink-0" />Showroom Digital interactivo</li>
-                <li className="flex gap-3 text-sm text-stone-300"><Check size={18} className="text-brand-400 shrink-0" />Facturación CFDI 4.0 básica</li>
-                <li className="flex gap-3 text-sm text-stone-300"><Check size={18} className="text-brand-400 shrink-0" />Soporte vía Ticket</li>
-                <li className="flex gap-3 text-sm text-stone-300"><Check size={18} className="text-brand-400 shrink-0" />Portal de autoservicio 24/7</li>
-              </ul>
-              <button className="w-full py-4 rounded-xl font-bold border border-stone-600 hover:bg-stone-700 transition-all active:scale-95">
-                Elegir Starter
-              </button>
-            </div>
-
-            {/* Professional */}
-            <div className="bg-brand-600 p-1 rounded-3xl relative transform lg:scale-105 shadow-glass">
-              <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gold-400 text-brand-900 text-xs font-black uppercase tracking-widest py-1.5 px-4 rounded-full shadow-lg">
-                Más Popular
-              </div>
-              <div className="bg-brand-900 p-8 rounded-[1.6rem] text-white">
-                <h4 className="text-2xl font-bold mb-2">Professional</h4>
-                <p className="text-stone-400 mb-8 text-sm italic">Para empresas en expansión constante.</p>
-                <div className="mb-8">
-                  <span className="text-5xl font-display font-black">${prices.professional}</span>
-                  <span className="text-stone-400"> MXN/mes</span>
-                  {billingCycle === 'yearly' && <p className="text-xs text-brand-400 mt-1 font-medium">Facturado anualmente</p>}
-                  <p className="text-[11px] text-stone-400 italic mt-3 border-t border-stone-700 pt-3">La opción sin riesgo de los que ya facturan +$1M.</p>
-                </div>
-                <ul className="space-y-4 mb-10">
-                  <li className="flex gap-3 text-stone-200"><Check size={20} className="text-brand-400 shrink-0" />Productos ilimitados</li>
-                  <li className="flex gap-3 text-stone-200"><Check size={20} className="text-brand-400 shrink-0" />Hasta 10 agentes de venta</li>
-                  <li className="flex gap-3 text-stone-200"><Check size={20} className="text-brand-400 shrink-0" />Facturación CFDI 4.0 ilimitada</li>
-                  <li className="flex gap-3 text-stone-200"><Check size={20} className="text-brand-400 shrink-0" />Gate B2B Inteligente (precios por cliente)</li>
-                  <li className="flex gap-3 text-stone-200"><Check size={20} className="text-brand-400 shrink-0" />Portal de autoservicio 24/7</li>
-                  <li className="flex gap-3 text-stone-200"><Check size={20} className="text-brand-400 shrink-0" />Soporte prioritario WhatsApp & Ticket</li>
-                  <li className="flex gap-3 text-stone-200"><Check size={20} className="text-brand-400 shrink-0" />Integración SAT/PAC</li>
-                </ul>
-                <button 
-                  onClick={() => setIsModalOpen(true)}
-                  className="w-full py-4 rounded-xl font-bold bg-brand-600 hover:bg-brand-700 shadow-xl shadow-brand-900/20 transition-all hover:scale-[1.02] active:scale-95"
-                >
-                  Probar Professional Gratis
-                </button>
-              </div>
-            </div>
-
-            {/* Enterprise */}
-            <div className="bg-brand-800/50 backdrop-blur-md p-8 rounded-3xl border border-stone-700 text-white hover:border-brand-500/50 transition-all hover:shadow-glass hover:shadow-brand-500/10">
-              <h4 className="text-xl font-bold mb-2">Enterprise</h4>
-              <p className="text-stone-400 mb-8 text-sm italic">Soluciones a medida para grandes corporativos.</p>
-              <div className="mb-8">
-                <span className="text-4xl font-bold italic">Personalizado</span>
-              </div>
-              <ul className="space-y-4 mb-8">
-                <li className="flex gap-3 text-sm text-stone-300"><Check size={18} className="text-brand-400 shrink-0" />Agentes ilimitados</li>
-                <li className="flex gap-3 text-sm text-stone-300"><Check size={18} className="text-brand-400 shrink-0" />Integración API / ERP</li>
-                <li className="flex gap-3 text-sm text-stone-300"><Check size={18} className="text-brand-400 shrink-0" />Account Manager dedicado</li>
-                <li className="flex gap-3 text-sm text-stone-300"><Check size={18} className="text-brand-400 shrink-0" />Entrenamiento presencial</li>
-                <li className="flex gap-3 text-sm text-stone-300"><Check size={18} className="text-brand-400 shrink-0" />Portal de autoservicio 24/7</li>
-                <li className="flex gap-3 text-sm text-stone-300"><Check size={18} className="text-brand-400 shrink-0" />Facturación CFDI 4.0 ilimitada</li>
-                <li className="flex gap-3 text-sm text-stone-300"><Check size={18} className="text-brand-400 shrink-0" />Soporte prioritario WhatsApp & Ticket</li>
-                <li className="flex gap-3 text-sm text-stone-300"><Check size={18} className="text-brand-400 shrink-0" />Integración SAT/PAC</li>
-              </ul>
-              <button className="w-full py-4 rounded-xl font-bold border border-stone-600 hover:bg-stone-700 transition-all active:scale-95">
-                Contactar Ventas
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Objections section */}
-      <ObjectionsHandler />
-
-      {/* FAQ Section */}
-      <section className="py-24 lg:py-32 bg-stone-50 dark:bg-brand-950 px-4 sm:px-6 transition-colors border-t border-stone-100 dark:border-stone-800">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-brand-900 mb-4">Preguntas Frecuentes</h2>
-            <p className="text-lg text-stone-600">Todo lo que necesitas saber sobre Lumina B2B.</p>
-          </div>
-          <div className="space-y-4">
-            {faqs.map((faq, index) => (
-              <div 
-                key={index} 
-                className="bg-white dark:bg-stone-900 rounded-2xl border border-stone-200 dark:border-stone-800 overflow-hidden transition-all shadow-sm hover:shadow-md"
-              >
-                <button 
-                  onClick={() => toggleFaq(index)}
-                  className="w-full px-8 py-6 text-left flex justify-between items-center gap-4"
-                >
-                  <span className="font-bold text-lg text-brand-950 dark:text-white">{faq.q}</span>
-                  <ChevronDown className={`shrink-0 text-brand-600 dark:text-brand-400 transition-transform duration-300 ${openFaqIndex === index ? 'rotate-180' : ''}`} />
-                </button>
-                <div 
-                  className={`px-8 transition-all duration-300 ease-in-out overflow-hidden ${openFaqIndex === index ? 'pb-8 max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}
-                >
-                  <p className="text-stone-600 dark:text-stone-400 leading-relaxed border-t border-stone-50 dark:border-stone-800 pt-4">
-                    {faq.a}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Footer CTA Mejorado */}
-      <section className="py-32 px-4 sm:px-6 bg-gradient-to-br from-brand-600 to-brand-800 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-white text-sm font-bold mb-8">
-            <Sparkles size={16} />
-            <span>Prueba sin riesgo por 14 días</span>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-display font-black mb-6 leading-tight">
-            Transforma tus ventas B2B <span className="text-gold-300">hoy mismo</span>
-          </h2>
-          <p className="text-xl text-brand-100 mb-12 max-w-2xl mx-auto">
-            Únete a los +500 fabricantes mexicanos que ya eliminaron el caos de WhatsApp y aumentaron sus ventas 30%.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="bg-white text-brand-600 px-12 py-5 rounded-2xl font-bold text-xl hover:bg-brand-50 shadow-glass transition-all hover:scale-105 flex items-center justify-center gap-3"
-              aria-label="Solicita tu showroom en 24 horas"
-            >
-              Quiero mi Showroom en 24 Horas
-            </button>
-            <a
-              href="https://wa.me/5214771234567?text=Hola,%20quiero%20más%20información%20sobre%20Lumina%20B2B"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-3 text-white font-bold text-xl px-12 py-5 border-2 border-white rounded-2xl hover:bg-white/10 transition-all"
-            >
-              <MessageCircle />
-              Hablar con Ventas
-            </a>
-          </div>
-          <p className="text-brand-100 text-xs mb-6">
-              ✓ Setup gratuito en 24 horas. Sin tarjeta de crédito para comenzar.
-          </p>
-          <p className="text-brand-200 text-sm flex items-center justify-center gap-4 hidden">
-            <span>✓ Sin tarjeta de crédito</span>
-            <span>•</span>
-            <span>✓ Garantía 30 días</span>
-            <span>•</span>
-            <span>✓ Cancela cuando quieras</span>
-          </p>
-        </div>
-      </section>
-
-      {/* Strategic Trust Section - Limpio */}
-      <section className="bg-stone-50 dark:bg-stone-900 py-16 px-4 sm:px-6 border-b border-t border-stone-200 dark:border-stone-800 transition-colors">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Trust Badge 1 - Seguridad */}
-            <div className="bg-white dark:bg-brand-800 rounded-2xl p-6 border border-stone-200 dark:border-stone-700 shadow-sm hover:shadow-md transition-all">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-gold-100 dark:bg-gold-900/30 rounded-lg flex items-center justify-center shrink-0">
-                  <Shield size={24} className="text-gold-600 dark:text-gold-400" />
-                </div>
-                <div>
-                  <p className="font-bold text-brand-900 dark:text-white text-sm mb-1">Datos 100% Seguros</p>
-                  <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">Encriptación SSL 256-bit. Tus datos y los de tus clientes protegidos.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Trust Badge 2 - Geográfico */}
-            <div className="bg-white dark:bg-brand-800 rounded-2xl p-6 border border-stone-200 dark:border-stone-700 shadow-sm hover:shadow-md transition-all">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-brand-100 dark:bg-brand-900/30 rounded-lg flex items-center justify-center shrink-0">
-                  <MapPin size={24} className="text-brand-600 dark:text-brand-400" />
-                </div>
-                <div>
-                  <p className="font-bold text-brand-900 dark:text-white text-sm mb-1">Fabricantes de León</p>
-                  <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">500+ empresas locales confían en Lumina para crecer.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Trust Badge 3 - SAT/Certificación */}
-            <div className="bg-white dark:bg-brand-800 rounded-2xl p-6 border border-stone-200 dark:border-stone-700 shadow-sm hover:shadow-md transition-all">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-gold-100 dark:bg-gold-900/30 rounded-lg flex items-center justify-center shrink-0">
-                  <CheckCircle2 size={24} className="text-gold-600 dark:text-gold-400" />
-                </div>
-                <div>
-                  <p className="font-bold text-brand-900 dark:text-white text-sm mb-1">SAT CFDI 4.0 Certificado</p>
-                  <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">Validado con proveedores autorizados del SAT.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Trust Badge 4 - Garantía */}
-            <div className="bg-white dark:bg-brand-800 rounded-2xl p-6 border border-stone-200 dark:border-stone-700 shadow-sm hover:shadow-md transition-all">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center shrink-0">
-                  <Award size={24} className="text-red-600 dark:text-red-400" />
-                </div>
-                <div>
-                  <p className="font-bold text-brand-900 dark:text-white text-sm mb-1">Garantía 30 Días</p>
-                  <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">Si no satisface, devolvemos 100% sin preguntas.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Sticky CTA — Desktop + Mobile */}
-      <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
-        {/* Desktop */}
-        <button
-          onClick={() => {
-            const pricingSection = document.getElementById('pricing');
-            pricingSection?.scrollIntoView({ behavior: 'smooth' });
-          }}
-          className="hidden sm:flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 px-6 rounded-full shadow-xl shadow-brand-600/40 hover:shadow-brand-600/60 hover:scale-105 transition-all active:scale-95 text-sm"
-          aria-label="Ver planes de Lumina"
-        >
-          Ver Planes <ArrowRight size={16} />
-        </button>
-        {/* Mobile */}
-        <button
-          onClick={() => {
-            const pricingSection = document.getElementById('pricing');
-            pricingSection?.scrollIntoView({ behavior: 'smooth' });
-          }}
-          className="sm:hidden bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 px-5 rounded-full shadow-xl shadow-brand-600/40 hover:scale-105 transition-all active:scale-95 text-sm"
-        >
-          Planes
-        </button>
-      </div>
-
-      {/* Footer Completo */}
-      <footer className="bg-brand-950 text-stone-400 pt-20 pb-10 border-t border-stone-800">
-        <div className="max-w-7xl mx-auto px-6">
-          {/* Grid principal */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
-            {/* Logo y descripción */}
-            <div className="lg:col-span-2">
-              <div className="flex items-center gap-2 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-brand-600 to-brand-700 rounded-xl flex items-center justify-center shadow-lg">
-                  <span className="text-white font-black text-2xl">L</span>
-                </div>
-                <span className="text-2xl font-black text-white">Lumina B2B</span>
-              </div>
-              <p className="text-stone-400 mb-6 leading-relaxed max-w-sm">
-                La plataforma #1 de showroom digital para fabricantes mexicanos. Automatiza pedidos, factura CFDI 4.0 y crece tus ventas B2B.
-              </p>
-              <div className="flex gap-4">
-                {[Facebook, Twitter, Linkedin, Instagram, Youtube].map((Icon, i) => (
-                  <a
-                    key={i}
-                    href="#"
-                    className="w-10 h-10 rounded-full bg-brand-800 hover:bg-brand-600 flex items-center justify-center transition-colors"
-                  >
-                    <Icon size={18} />
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Producto */}
-            <div>
-              <h4 className="text-white font-bold mb-4">Producto</h4>
-              <ul className="space-y-3 text-sm">
-                {['Características', 'Precios', 'Demo', 'Casos de Éxito', 'API Docs', 'Integraciones'].map((item) => (
-                  <li key={item}>
-                    <a href="#" className="hover:text-brand-400 transition-colors">{item}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Recursos */}
-            <div>
-              <h4 className="text-white font-bold mb-4">Recursos</h4>
-              <ul className="space-y-3 text-sm">
-                {['Blog', 'Guías Gratuitas', 'Webinars', 'Centro de Ayuda', 'Videos Tutoriales', 'Calculadora ROI'].map((item) => (
-                  <li key={item}>
-                    <a href="#" className="hover:text-brand-400 transition-colors">{item}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Empresa */}
-            <div>
-              <h4 className="text-white font-bold mb-4">Empresa</h4>
-              <ul className="space-y-3 text-sm mb-6">
-                {['Acerca de', 'Contacto', 'Soporte', 'Carreras', 'Términos', 'Privacidad'].map((item) => (
-                  <li key={item}>
-                    <a href="#" className="hover:text-brand-400 transition-colors">{item}</a>
-                  </li>
-                ))}
-              </ul>
-              {/* Contacto rápido */}
-              <div className="space-y-2 text-sm">
-                <div className="flex items-center gap-2">
-                  <Mail size={16} className="text-brand-400" />
-                  <a href="mailto:Diegorodvaz73@gmail.com" className="hover:text-brand-400">Diegorodvaz73@gmail.com</a>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Phone size={16} className="text-brand-400" />
-                  <a href="tel:+524776633068" className="hover:text-brand-400">+52 477 663 3068</a>
-                </div>
-                <div className="flex items-start gap-2">
-                  <MapPin size={16} className="text-brand-400 mt-1 shrink-0" />
-                  <span className="text-stone-400">León, Guanajuato, México</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Separador */}
-          <div className="border-t border-brand-800 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-sm text-stone-500 text-center md:text-left">
-                © 2025 Lumina B2B. Todos los derechos reservados. Hecho con dedicación en México.
-              </p>
-              <div className="flex items-center gap-6 text-sm">
-                <a href="#" className="hover:text-brand-400 transition-colors">Términos</a>
-                <a href="#" className="hover:text-brand-400 transition-colors">Privacidad</a>
-                <a href="#" className="hover:text-brand-400 transition-colors">Cookies</a>
-                <div className="flex items-center gap-2">
-                  <Shield size={14} className="text-gold-400" />
-                  <span className="text-stone-500">Seguridad SAT</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      {/* Demo Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          <div 
-            className="absolute inset-0 bg-brand-900/60 backdrop-blur-sm animate-in fade-in duration-300" 
-            onClick={() => !isSubmitting && setIsModalOpen(false)}
-          ></div>
-          <div className="bg-white dark:bg-brand-800 rounded-[2rem] shadow-glass w-full max-w-lg relative z-10 overflow-hidden animate-in zoom-in-95 duration-300 border dark:border-stone-700">
-            <div className="relative">
-              {/* Accent bar */}
-              <div className="h-1.5 w-full bg-gradient-to-r from-brand-500 via-brand-600 to-brand-700" />
-              <div className="p-7 pb-5">
-                <button 
-                  onClick={() => setIsModalOpen(false)}
-                  className="absolute top-5 right-5 p-2 hover:bg-stone-100 dark:hover:bg-brand-700 rounded-full transition-colors"
-                  disabled={isSubmitting}
-                >
-                  <X size={20} className="text-stone-400" />
-                </button>
-                <h3 className="text-2xl font-bold text-brand-900 dark:text-white mb-1">Solicitar Demo Gratuita</h3>
-                <p className="text-sm text-stone-500 dark:text-stone-400">Nuestro equipo te contacta en menos de 2 horas.</p>
-              </div>
-            </div>
-            <div className="px-7 pb-7">
-              {isSuccess ? (
-                <div className="text-center py-12 animate-in zoom-in-95 duration-500">
-                  <div className="w-16 h-16 bg-brand-50 dark:bg-brand-900/40 text-brand-600 dark:text-brand-400 rounded-full flex items-center justify-center mx-auto mb-5">
-                    <Check size={32} strokeWidth={2.5} />
-                  </div>
-                  <h4 className="text-xl font-bold text-brand-900 dark:text-white mb-2">Solicitud recibida</h4>
-                  <p className="text-stone-500 dark:text-stone-400">Te contactaremos en menos de 2 horas hábiles.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-3">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1.5">Nombre</label>
-                      <input 
-                        required
-                        name="name"
-                        type="text" 
-                        placeholder="Juan Pérez"
-                        className="w-full px-4 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-brand-900 text-brand-900 dark:text-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 outline-none transition-all text-sm"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1.5">Empresa</label>
-                      <input 
-                        required
-                        name="company"
-                        type="text" 
-                        placeholder="Calzado García"
-                        className="w-full px-4 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-brand-900 text-brand-900 dark:text-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 outline-none transition-all text-sm"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1.5">WhatsApp</label>
-                    <input 
-                      required
-                      name="phone"
-                      type="tel" 
-                      placeholder="+52 477 663 3068"
-                      className="w-full px-4 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-brand-900 text-brand-900 dark:text-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 outline-none transition-all text-sm"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1.5">Email Corporativo</label>
-                    <input 
-                      required
-                      name="email"
-                      type="email" 
-                      placeholder="juan@tuempresa.com"
-                      className="w-full px-4 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-brand-900 text-brand-900 dark:text-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 outline-none transition-all text-sm"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1.5">¿Cuántas personas en tu equipo de ventas?</label>
-                    <select
-                      name="teamSize"
-                      className="w-full px-4 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-brand-900 text-brand-900 dark:text-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 outline-none transition-all text-sm"
-                    >
-                      <option value="1">Solo yo</option>
-                      <option value="2-5">2 a 5 personas</option>
-                      <option value="6-20">6 a 20 personas</option>
-                      <option value="20+">Más de 20</option>
-                    </select>
-                  </div>
-                  <button 
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-brand-600 text-white py-3.5 rounded-xl font-bold text-base hover:bg-brand-700 transition-all flex items-center justify-center gap-2 mt-2 disabled:opacity-50 shadow-xl shadow-brand-500/20"
-                  >
-                    {isSubmitting ? (
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                    ) : (
-                      <span className="flex items-center gap-2">Agendar mi Demo Gratuita <ArrowRight size={16} /></span>
-                    )}
-                  </button>
-                  <p className="text-center text-xs text-stone-400 mt-2">Sin tarjeta de crédito · Setup en 24 hrs · Garantía 30 días</p>
-                </form>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Video Modal */}
-      {videoModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          <div
-            className="absolute inset-0 bg-brand-900/90 backdrop-blur-sm animate-in fade-in duration-300"
-            onClick={() => setVideoModalOpen(false)}
-          ></div>
-          <div className="relative z-10 w-full max-w-5xl animate-in zoom-in-95 duration-300">
-            <button
-              onClick={() => setVideoModalOpen(false)}
-              className="absolute -top-12 right-0 text-white hover:text-brand-400 transition-colors p-2"
-            >
-              <X size={32} />
-            </button>
-            <div className="bg-brand-900 rounded-2xl overflow-hidden shadow-glass border-2 border-stone-700">
-              <div className="aspect-video">
                 <iframe
                   className="w-full h-full"
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0"
-                  title="Demo Lumina B2B"
-                  allow="autoplay; encrypted-media; picture-in-picture"
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+                  allow="autoplay; encrypted-media"
                   allowFullScreen
                 />
-              </div>
+              </motion.div>
             </div>
-            <p className="text-center text-stone-400 text-sm mt-4">¿Tienes preguntas? <button onClick={() => { setVideoModalOpen(false); setIsModalOpen(true); }} className="text-brand-400 font-bold hover:underline">Agenda una demo en vivo →</button></p>
-          </div>
-        </div>
-      )}
+          )}
+        </AnimatePresence>
       </div>
     </>
   );
