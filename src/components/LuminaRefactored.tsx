@@ -34,7 +34,28 @@ import {
   Sun,
   Moon
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView, useMotionValue, useTransform, animate } from "framer-motion";
+
+const AnimatedCounter = ({ endValue, prefix = "", suffix = "" }: { endValue: number, prefix?: string, suffix?: string }) => {
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, Math.round);
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  useEffect(() => {
+    if (isInView) {
+      setTimeout(() => {
+        animate(count, endValue, { duration: 2.5, ease: "easeOut" });
+      }, 300);
+    }
+  }, [count, endValue, isInView]);
+
+  return (
+    <span ref={ref} className="inline-flex">
+      {prefix}<motion.span>{rounded}</motion.span>{suffix}
+    </span>
+  );
+};
 
 const LuminaRefactored = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -156,10 +177,11 @@ const LuminaRefactored = () => {
   return (
     <>
       <div className="bg-brand-900 text-stone-300 font-sans antialiased scroll-smooth transition-colors duration-500 overflow-x-hidden">
-        {/* Top Announcement Bar - LinkedIn Style */}
-        <div className="bg-brand-600 px-4 py-2 text-center text-[10px] md:text-xs font-bold tracking-[0.1em] text-white uppercase overflow-hidden relative group cursor-pointer">
+        {/* Top Announcement Bar - Unified Promo */}
+        <div className="bg-brand-600 px-4 py-3 text-center text-[10px] md:text-xs font-bold tracking-[0.05em] text-white uppercase overflow-hidden relative group cursor-pointer flex flex-col sm:flex-row items-center justify-center gap-2">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-          Prueba Gratuita de 14 días para fabricantes del Bajío · Sin tarjeta de crédito
+          <span className="bg-white text-brand-900 px-2 py-0.5 rounded-sm font-black text-[9px] md:text-[10px]">OFERTA DE CIERRE</span>
+          <span>Setup gratis + 14 días de prueba. Solo 3 espacios.</span>
         </div>
 
         {/* Navbar Premium */}
@@ -195,12 +217,12 @@ const LuminaRefactored = () => {
                 {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
               </button>
               
-              <div className="hidden sm:flex items-center gap-6">
+              <div className="flex items-center gap-3 sm:gap-6">
                 <button 
                   onClick={() => setIsModalOpen(true)}
-                  className="bg-white text-brand-900 px-6 py-2.5 rounded-full font-bold text-[13px] hover:bg-stone-100 transition-all active:scale-95"
+                  className="bg-brand-500 text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-black text-[11px] sm:text-[13px] hover:bg-brand-400 hover:shadow-[0_0_20px_rgba(0,132,255,0.4)] transition-all active:scale-95 uppercase tracking-wider"
                 >
-                  Agendar Auditoría
+                  Agendar Demo
                 </button>
               </div>
               
@@ -230,12 +252,14 @@ const LuminaRefactored = () => {
                 <span className="text-[10px] font-bold tracking-widest text-brand-200 uppercase">La Infraestructura de Ventas para León GTO</span>
               </div>
 
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.9] mb-8 tracking-tighter italic">
-                Soberanía <br /> Comercial <span className="text-brand-400">B2B</span>.
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.1] mb-8 tracking-tight">
+                Digitaliza tu fábrica: <br className="hidden md:block" />
+                <span className="text-brand-400 italic">pedidos y CFDI 4.0</span> <br className="hidden md:block" />
+                en una sola plataforma.
               </h1>
 
               <p className="text-lg md:text-xl text-stone-400 leading-relaxed mb-10 max-w-xl font-medium">
-                La plataforma de pedidos y facturación diseñada exclusivamente para <span className="text-white">fabricantes del Bajío</span>. Digitaliza tu catálogo y domina SAPICA/ANPIC.
+                La infraestructura B2B diseñada para <span className="text-white">fabricantes del Bajío</span>. Elimina errores manuales de WhatsApp, protege tus precios y vende 24/7.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
@@ -307,11 +331,11 @@ const LuminaRefactored = () => {
                   "Arturo Cuervo", "Botas Milenarias", "Baeza & Estrada", "Grupo Alpina", "Flexi", "Emyco", 
                   "Arturo Cuervo", "Botas Milenarias", "Baeza & Estrada", "Grupo Alpina", "Flexi", "Emyco"
                 ].map((name, i) => (
-                  <div key={i} className="flex-shrink-0 flex items-center justify-center grayscale opacity-30 hover:grayscale-0 hover:opacity-100 transition-all duration-700">
-                    <span className="text-xl md:text-2xl font-black tracking-tighter text-white/50 hover:text-white cursor-default select-none uppercase">
+                  <a href="#casos-de-exito" key={i} className="flex-shrink-0 flex items-center justify-center grayscale opacity-30 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                    <span className="text-xl md:text-2xl font-black tracking-tighter text-white/50 hover:text-brand-400 cursor-pointer select-none uppercase transition-colors">
                       {name}
                     </span>
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>
@@ -322,12 +346,12 @@ const LuminaRefactored = () => {
         <section className="bg-brand-900 py-12 px-6 border-b border-white/[0.03]">
           <div className="max-w-7xl mx-auto flex flex-wrap justify-between gap-12">
             {[
-              { val: "150+", label: "Fabricantes en Red", sub: "Guanajuato / Jalisco" },
-              { val: "$2.5B", label: "Ventas Gestionadas", sub: "MXN Transaccionados" },
-              { val: "99.9%", label: "Disponibilidad", sub: "SLA Industrial" },
+              { valComponent: <AnimatedCounter endValue={150} suffix="+" />, label: "Fabricantes en Red", sub: "Guanajuato / Jalisco" },
+              { valComponent: <AnimatedCounter endValue={2.5} prefix="$" suffix="B" />, label: "Ventas Gestionadas", sub: "MXN Transaccionados" },
+              { valComponent: <AnimatedCounter endValue={99.9} suffix="%" />, label: "Disponibilidad", sub: "SLA Industrial" },
             ].map((s, i) => (
               <div key={i} className="flex flex-col gap-1">
-                <span className="text-3xl font-black text-white leading-none">{s.val}</span>
+                <span className="text-3xl font-black text-white leading-none">{s.valComponent}</span>
                 <span className="text-[10px] font-bold tracking-widest text-stone-500 uppercase">{s.label}</span>
                 <span className="text-[9px] text-stone-600">{s.sub}</span>
               </div>
@@ -394,20 +418,25 @@ const LuminaRefactored = () => {
                   name: "Roberto González", 
                   role: "Director de Operaciones", 
                   company: "Manufactura de Calzado León",
+                  avatar: "https://i.pravatar.cc/150?img=11",
                   text: "En SAPICA pasábamos de pedidos en papel a errores de captura de 3 días. Con Lumina, el pedido entra directo al almacén mientras el cliente sigue en el stand." 
                 },
                 { 
                   name: "Elena Vázquez", 
                   role: "CEO", 
                   company: "Textiles del Bajío",
+                  avatar: "https://i.pravatar.cc/150?img=5",
                   text: "La facturación masiva era nuestro dolor más grande. Recuperamos 20 horas hombre a la semana automatizando el CFDI 4.0 directamente de las compras web." 
                 }
               ].map((t, i) => (
-                <div key={i} className="glass-premium p-10 rounded-[2rem] flex flex-col justify-between border-white/5">
+                <div key={i} className="glass-premium p-10 rounded-[2rem] flex flex-col justify-between border-white/5 relative group hover:border-brand-500/30 transition-all">
                   <p className="text-stone-300 font-medium leading-relaxed italic mb-8">&ldquo;{t.text}&rdquo;</p>
-                  <div>
-                    <p className="text-white font-bold">{t.name}</p>
-                    <p className="text-[11px] font-bold text-brand-400 uppercase tracking-widest mt-1">{t.role} · {t.company}</p>
+                  <div className="flex items-center gap-4">
+                    <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full border-2 border-brand-500/20 grayscale group-hover:grayscale-0 transition-all" />
+                    <div>
+                      <p className="text-white font-bold">{t.name}</p>
+                      <p className="text-[11px] font-bold text-brand-400 uppercase tracking-widest mt-1">{t.role} · {t.company}</p>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -424,11 +453,40 @@ const LuminaRefactored = () => {
             </div>
 
             <div className="bg-white dark:bg-brand-800 rounded-3xl border border-stone-200 dark:border-stone-700 shadow-glass overflow-hidden relative mb-24">
-              <div className="overflow-x-auto">
+              {/* Mobile View: Stacked Cards */}
+              <div className="flex flex-col gap-6 lg:hidden mb-12">
+                {comparisonData.map((row, i) => (
+                  <div key={i} className="bg-white dark:bg-stone-800 rounded-3xl border border-stone-200 dark:border-stone-700 shadow-glass p-6 group">
+                    <h3 className="font-bold text-lg text-brand-900 dark:text-white mb-6 border-b border-stone-100 dark:border-stone-700 pb-4">
+                      {row.feature}
+                    </h3>
+                    
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="flex flex-col items-center justify-center p-4 bg-stone-50/50 dark:bg-stone-900/50 rounded-2xl text-center border border-stone-100 dark:border-stone-700">
+                        <span className="text-[10px] font-bold uppercase text-stone-400 mb-3">WhatsApp</span>
+                        <X className="text-red-500 mb-2 drop-shadow-[0_0_8px_rgba(239,68,68,0.4)]" size={36} strokeWidth={3} />
+                        <span className="text-[13px] text-stone-500 dark:text-stone-400 font-medium leading-tight">{row.traditional}</span>
+                      </div>
+                      <div className="flex flex-col items-center justify-center p-4 bg-brand-50/50 dark:bg-brand-900/20 rounded-2xl text-center border border-brand-100 dark:border-brand-500/20 relative">
+                        <span className="text-[10px] font-bold uppercase text-brand-600 dark:text-brand-400 mb-3">Lumina B2B</span>
+                        <Check className="text-emerald-500 mb-2 drop-shadow-[0_0_12px_rgba(16,185,129,0.5)]" size={36} strokeWidth={3} />
+                        <span className="text-[13px] text-brand-900 dark:text-brand-100 font-bold leading-tight underline decoration-brand-200 decoration-dotted underline-offset-4">{row.lumina}</span>
+                        
+                        <div className="absolute top-2 right-2 cursor-help" title={row.tooltip}>
+                          <Sparkles size={14} className="text-brand-400" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Desktop View: Interactive Table */}
+              <div className="hidden lg:block overflow-x-auto rounded-t-3xl border-b border-stone-100 dark:border-stone-700">
                 <table className="w-full text-left border-collapse">
                   <thead className="sticky top-0 z-20 bg-stone-50 dark:bg-brand-800 border-b border-stone-200 dark:border-stone-700">
                     <tr>
-                      <th className="p-6 text-sm font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 w-1/3">Área</th>
+                      <th className="p-6 text-sm font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 w-1/3">Área de Operación</th>
                       <th className="p-6 text-sm font-bold uppercase tracking-wider text-red-600 w-1/3 text-center">📱 WhatsApp + Excel</th>
                       <th className="p-6 text-sm font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400 w-1/3 text-center bg-brand-500/5">✨ Lumina B2B</th>
                     </tr>
@@ -439,7 +497,7 @@ const LuminaRefactored = () => {
                         <td className="p-6 font-bold text-brand-800 dark:text-stone-200">{row.feature}</td>
                         <td className="p-6 text-center border-x border-stone-100 dark:border-stone-700 bg-stone-50/30">
                           <div className="flex flex-col items-center gap-2">
-                            <X className="text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.4)]" size={32} strokeWidth={3} />
+                            <X className="text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.4)]" size={40} strokeWidth={3} />
                             <span className="text-sm text-stone-500 dark:text-stone-400 font-medium">{row.traditional}</span>
                           </div>
                         </td>
@@ -449,7 +507,7 @@ const LuminaRefactored = () => {
                             onMouseEnter={() => setHoveredFeature(i)}
                             onMouseLeave={() => setHoveredFeature(null)}
                           >
-                            <Check className="text-emerald-500 drop-shadow-[0_0_12px_rgba(16,185,129,0.5)]" size={32} strokeWidth={3} />
+                            <Check className="text-emerald-500 drop-shadow-[0_0_12px_rgba(16,185,129,0.5)]" size={40} strokeWidth={3} />
                             <span className="text-sm text-brand-900 dark:text-brand-100 font-bold underline decoration-brand-200 decoration-dotted underline-offset-4">{row.lumina}</span>
                             
                             <AnimatePresence>
@@ -622,6 +680,11 @@ const LuminaRefactored = () => {
                   <p className="text-5xl font-black text-white">$1,199 <span className="text-sm text-stone-500">MXN/mes</span></p>
                 </div>
 
+                <div className="mb-8 p-4 rounded-2xl bg-emerald-500/5 border border-emerald-500/10">
+                  <p className="text-xs text-emerald-400 font-bold">🎯 Resultado esperado:</p>
+                  <p className="text-sm text-stone-300 mt-1 font-medium">Digitaliza tu catálogo y recibe pedidos 24/7 sin intervención manual.</p>
+                </div>
+
                 <ul className="space-y-4 mb-12 flex-1">
                   {["Catálogo Digital (Gate B2B)", "Hasta 100 productos", "1 Vendedor Master", "Levantamiento de Pedidos", "Soporte Vía Chat"].map((item, i) => (
                     <li key={i} className="flex gap-3 text-sm text-stone-400 font-medium">
@@ -654,6 +717,11 @@ const LuminaRefactored = () => {
                   <p className="text-5xl font-black text-white">$2,499 <span className="text-sm text-stone-500">MXN/mes</span></p>
                 </div>
 
+                <div className="mb-8 p-4 rounded-2xl bg-brand-500/10 border border-brand-500/20">
+                  <p className="text-xs text-brand-400 font-bold">🎯 Resultado esperado:</p>
+                  <p className="text-sm text-stone-200 mt-1 font-medium">Recupera <span className="font-black text-white">+20 horas al mes</span> en facturación y reduce errores de surtido al 1%.</p>
+                </div>
+
                 <ul className="space-y-4 mb-12 flex-1">
                   {["Productos Ilimitados", "CRM de 5 Vendedores", "Facturación CFDI 4.0 Nativa", "Configuración SAPICA/ANPIC", "Capacitación en Fábrica"].map((item, i) => (
                     <li key={i} className="flex gap-3 text-sm text-stone-300 font-bold">
@@ -665,7 +733,7 @@ const LuminaRefactored = () => {
 
                 <button 
                   onClick={() => setIsModalOpen(true)}
-                  className="w-full h-14 rounded-full bg-brand-500 text-white font-black text-sm hover:bg-brand-400 transition-all uppercase tracking-wider"
+                  className="w-full h-14 rounded-full bg-brand-500 text-white font-black text-sm hover:bg-brand-400 hover:shadow-[0_0_30px_rgba(0,132,255,0.4)] transition-all uppercase tracking-wider"
                 >
                   Dominar Mercado
                 </button>
@@ -682,6 +750,11 @@ const LuminaRefactored = () => {
                 
                 <div className="mb-10">
                   <p className="text-5xl font-black text-white">$4,999 <span className="text-sm text-stone-500">MXN/mes</span></p>
+                </div>
+
+                <div className="mb-8 p-4 rounded-2xl bg-stone-700/30 border border-stone-600/30">
+                  <p className="text-xs text-stone-400 font-bold">🎯 Resultado esperado:</p>
+                  <p className="text-sm text-stone-300 mt-1 font-medium">Conecta Lumina con tu ERP y <span className="text-white font-black">gestiona toda la cadena</span> de ventas sin fricciones.</p>
                 </div>
 
                 <ul className="space-y-4 mb-12 flex-1">
@@ -777,46 +850,65 @@ const LuminaRefactored = () => {
 
         {/* Footer */}
         <footer className="bg-brand-950 py-24 px-6 border-t border-white/[0.03]">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
-            <div className="space-y-8">
+          <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 lg:gap-16">
+            <div className="col-span-2 md:col-span-3 lg:col-span-2 space-y-8">
               <div className="text-2xl font-black tracking-tighter text-white uppercase italic">
                 Lumina <span className="text-brand-500">B2B</span>
               </div>
-              <p className="text-stone-500 text-sm font-medium">La infraestructura comercial definitiva para la industria del Bajío.</p>
+              <p className="text-stone-500 text-sm font-medium max-w-xs leading-relaxed">La infraestructura comercial definitiva para fabricantes que quieren crecer sin límites tecnológicos.</p>
+              <div className="flex gap-5">
+                <Linkedin size={18} className="text-stone-600 hover:text-brand-400 transition-colors cursor-pointer" />
+                <Instagram size={18} className="text-stone-600 hover:text-brand-400 transition-colors cursor-pointer" />
+                <Youtube size={18} className="text-stone-600 hover:text-brand-400 transition-colors cursor-pointer" />
+              </div>
             </div>
-            
-            <div className="space-y-6">
-              <p className="text-[10px] font-bold tracking-widest text-stone-400 uppercase">Explora</p>
-              <ul className="space-y-4 text-stone-500 text-sm font-medium">
-                <li><a href="#" className="hover:text-white transition-colors">Infraestructura</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Planes</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Blog Industrial</a></li>
+
+            <div className="space-y-5">
+              <p className="text-[10px] font-black tracking-widest text-stone-400 uppercase">Producto</p>
+              <ul className="space-y-3 text-stone-500 text-sm font-medium">
+                <li><a href="#features" className="hover:text-white transition-colors">Infraestructura</a></li>
+                <li><a href="#comparativa" className="hover:text-white transition-colors">Diferencial B2B</a></li>
+                <li><a href="#pricing" className="hover:text-white transition-colors">Planes</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Changelog</a></li>
               </ul>
             </div>
 
-            <div className="space-y-6">
-              <p className="text-[10px] font-bold tracking-widest text-stone-400 uppercase">Legal</p>
-              <ul className="space-y-4 text-stone-500 text-sm font-medium">
-                <li><a href="#" className="hover:text-white transition-colors">Privacidad</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Términos de Servicio</a></li>
+            <div className="space-y-5">
+              <p className="text-[10px] font-black tracking-widest text-stone-400 uppercase">Recursos</p>
+              <ul className="space-y-3 text-stone-500 text-sm font-medium">
+                <li><a href="/blog" className="hover:text-white transition-colors">Blog Industrial</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Casos de Éxito</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Guía SAPICA/ANPIC</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Soporte</a></li>
               </ul>
             </div>
 
-            <div className="space-y-6">
-              <p className="text-[10px] font-bold tracking-widest text-stone-400 uppercase">Contacto</p>
-              <p className="text-stone-500 text-sm font-medium">León, Guanajuato, México</p>
-              <p className="text-white font-black">hola@luminab2b.com</p>
+            <div className="space-y-5">
+              <p className="text-[10px] font-black tracking-widest text-stone-400 uppercase">Contacto</p>
+              <ul className="space-y-3 text-sm">
+                <li className="text-stone-500 font-medium">León, Guanajuato, México</li>
+                <li><a href="mailto:hola@luminab2b.com" className="text-white font-black hover:text-brand-400 transition-colors">hola@luminab2b.com</a></li>
+                <li>
+                  <a 
+                    href="#" 
+                    onClick={() => setIsModalOpen(true)}
+                    className="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 text-brand-400 px-3 py-1.5 rounded-full text-xs font-bold hover:bg-brand-500/20 transition-all"
+                  >
+                    📅 Agendar Demo
+                  </a>
+                </li>
+                <li className="text-[10px] font-bold uppercase text-stone-600 pt-2">Legal</li>
+                <li><a href="#" className="text-stone-600 hover:text-white transition-colors text-xs">Privacidad</a></li>
+                <li><a href="#" className="text-stone-600 hover:text-white transition-colors text-xs">Términos</a></li>
+              </ul>
             </div>
           </div>
-          
-          <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/[0.03] flex flex-col md:flex-row justify-between items-center gap-6">
+
+          <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/[0.03] flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="text-[10px] text-stone-600 font-bold uppercase tracking-widest">© 2026 Lumina B2B Systems · Todos los derechos reservados</p>
-            <div className="flex gap-6">
-              <Linkedin size={18} className="text-stone-600 hover:text-white transition-colors cursor-pointer" />
-              <Instagram size={18} className="text-stone-600 hover:text-white transition-colors cursor-pointer" />
-            </div>
           </div>
         </footer>
+
 
         {/* Lead Capture Modal */}
         <AnimatePresence>
