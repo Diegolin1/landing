@@ -33,6 +33,16 @@ export default function ObjectionsHandler() {
       answer:
         "Claro. Lumina maneja desde modelos simples (venta directa) hasta complejos (multi-tienda, comisiones, dropshipping, franquicias). Escríbenos a Diegorodvaz73@gmail.com y vemos si casamos.",
     },
+    {
+      question: "🐘 'Mis vendedores van a sentir que la app les roba su trabajo.'",
+      answer:
+        "Todo lo contrario — Lumina los convierte en gerentes de cuenta. Antes talachaban 4 horas al día en WhatsApp, Excel y llamadas de seguimiento. Con Lumina, un vendedor puede gestionar el doble de clientes en la mitad del tiempo. No pierde comisiones: las multiplica. Los equipos de ventas que usan Lumina venden en promedio 35% más en sus primeros 90 días.",
+    },
+    {
+      question: "🐘 'Mis clientes no saben usar tecnología.'",
+      answer:
+        "Si saben usar WhatsApp, saben usar Lumina. Es así de simple. La interfaz para el comprador es una URL privada — sin descargas, sin contraseñas complicadas, sin curva de aprendizaje. Les mandas el link por WhatsApp y en 2 minutos ya están navegando tu catálogo y levantando pedidos. El 100% de los compradores de nuestros clientes lo adoptan sin fricción en la primera semana.",
+    },
   ];
 
   const containerVariants = {
