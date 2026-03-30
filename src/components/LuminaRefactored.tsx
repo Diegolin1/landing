@@ -167,7 +167,14 @@ const LuminaRefactored = () => {
           <div className="max-w-7xl mx-auto flex justify-between items-center">
             <div className="flex items-center gap-10">
               <div className="flex items-center gap-2 group cursor-pointer">
-                <Image src="/assets/logo-light.png" alt="Lumina B2B" width={130} height={32} className="h-8 w-auto object-contain" priority />
+                <Image 
+                  src="/assets/logo-light.png" 
+                  alt="Lumina B2B" 
+                  width={130} 
+                  height={32} 
+                  className="h-8 w-auto object-contain" 
+                  priority={true} 
+                />
               </div>
 
               {/* Desktop Menu - Apple Style */}
@@ -344,7 +351,13 @@ const LuminaRefactored = () => {
                   <p className="text-stone-400 max-w-md">Protege tus márgenes. Controla quién ve tus precios de mayoreo con accesos restringidos por cliente.</p>
                 </div>
               </div>
-              <div className="md:col-span-3 lg:col-span-4 glass-premium rounded-[2.5rem] p-10 flex flex-col justify-between group hover:bg-white/[0.02] border-white/5">
+              <div className="md:col-span-3 lg:col-span-4 glass-premium rounded-[2.5rem] p-10 flex flex-col justify-between group hover:bg-white/[0.02] border-white/5 relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 transition-opacity">
+                  <div className="flex items-center gap-2 px-2 py-1 rounded bg-emerald-500/20 text-emerald-400 text-[8px] font-bold uppercase tracking-widest">
+                    <div className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse"></div>
+                    Syncing...
+                  </div>
+                </div>
                 <Smartphone size={32} className="text-gold-400" />
                 <div>
                   <h3 className="text-xl font-bold text-white mb-2">Pedidos en Expo (PWA)</h3>
@@ -417,26 +430,26 @@ const LuminaRefactored = () => {
                     <tr>
                       <th className="p-6 text-sm font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 w-1/3">Área</th>
                       <th className="p-6 text-sm font-bold uppercase tracking-wider text-red-600 w-1/3 text-center">📱 WhatsApp + Excel</th>
-                      <th className="p-6 text-sm font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400 w-1/3 text-center">✨ Lumina B2B</th>
+                      <th className="p-6 text-sm font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400 w-1/3 text-center bg-brand-500/5">✨ Lumina B2B</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-stone-100 dark:divide-stone-700">
                     {comparisonData.map((row, i) => (
                       <tr key={i} className="hover:bg-stone-50 dark:hover:bg-brand-800/50 transition-colors">
                         <td className="p-6 font-bold text-brand-800 dark:text-stone-200">{row.feature}</td>
-                        <td className="p-6 text-center border-x border-stone-100 dark:border-stone-700">
+                        <td className="p-6 text-center border-x border-stone-100 dark:border-stone-700 bg-stone-50/30">
                           <div className="flex flex-col items-center gap-2">
-                            <X className="text-red-500" size={32} strokeWidth={3} />
+                            <X className="text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.4)]" size={32} strokeWidth={3} />
                             <span className="text-sm text-stone-500 dark:text-stone-400 font-medium">{row.traditional}</span>
                           </div>
                         </td>
-                        <td className="p-6 text-center bg-brand-50/30 dark:bg-brand-900/10 relative">
+                        <td className="p-6 text-center bg-brand-500/10 relative">
                           <div 
                             className="flex flex-col items-center gap-2 cursor-help group"
                             onMouseEnter={() => setHoveredFeature(i)}
                             onMouseLeave={() => setHoveredFeature(null)}
                           >
-                            <Check className="text-gold-500" size={32} strokeWidth={3} />
+                            <Check className="text-emerald-500 drop-shadow-[0_0_12px_rgba(16,185,129,0.5)]" size={32} strokeWidth={3} />
                             <span className="text-sm text-brand-900 dark:text-brand-100 font-bold underline decoration-brand-200 decoration-dotted underline-offset-4">{row.lumina}</span>
                             
                             <AnimatePresence>
@@ -550,35 +563,36 @@ const LuminaRefactored = () => {
               </div>
             </div>
 
-            <div className="lg:col-span-12 xl:col-span-7 glass-premium rounded-[3rem] p-10 border-white/10 relative">
+            <div className="lg:col-span-12 xl:col-span-7 glass-premium rounded-[3rem] p-10 border-white/10 relative shadow-[0_0_50px_-12px_rgba(0,132,255,0.2)]">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div className="space-y-8">
-                  <div className="p-8 rounded-[2rem] bg-red-500/5 border border-red-500/10">
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-red-400 mb-2">Pérdida por Error Humano</p>
-                    <p className="text-5xl font-black text-red-500">${calculateROI().lostToErrors.toLocaleString()}</p>
-                    <p className="text-xs text-stone-500 mt-4">Pedidos mal surtidos y cancelaciones por falta de stock.</p>
+                  <div className="p-8 rounded-[2rem] bg-red-500/5 border border-red-500/10 group transition-all hover:bg-red-500/10">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-red-400 mb-2">Fuga de Capital Anualizada</p>
+                    <p className="text-5xl font-black text-red-500">${(calculateROI().lostToErrors * 12).toLocaleString()}</p>
+                    <p className="text-xs text-stone-500 mt-4 leading-relaxed font-medium">Capital perdido en devoluciones, errores de surtido y cancelaciones por falta de stock.</p>
                   </div>
 
-                  <div className="p-8 rounded-[2rem] bg-brand-500/5 border border-brand-500/10">
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-brand-400 mb-2">Recuperación con Lumina</p>
-                    <p className="text-5xl font-black text-brand-400">${calculateROI().recovered.toLocaleString()}</p>
-                    <p className="text-xs text-stone-500 mt-4">Capital recuperado mediante automatización.</p>
+                  <div className="p-8 rounded-[2rem] bg-brand-500/5 border border-brand-500/10 group transition-all hover:bg-brand-500/10">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-brand-400 mb-2">Recuperación Directa con Lumina</p>
+                    <p className="text-5xl font-black text-brand-400">${(calculateROI().recovered * 12).toLocaleString()}</p>
+                    <p className="text-xs text-stone-500 mt-4 leading-relaxed font-medium">Utilidad neta recuperada mediante la digitalización de procesos.</p>
                   </div>
                 </div>
 
-                <div className="flex flex-col justify-center items-center text-center p-10 bg-white/[0.02] rounded-[2rem] border border-white/5">
+                <div className="flex flex-col justify-center items-center text-center p-10 bg-white/[0.02] rounded-[2rem] border border-white/5 relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <div className="w-32 h-32 rounded-full border-4 border-brand-500/20 flex items-center justify-center relative mb-8">
                     <div className="absolute inset-0 border-t-4 border-brand-400 rounded-full animate-spin-slow"></div>
                     <span className="text-4xl font-black text-white">{calculateROI().roi}%</span>
                   </div>
                   <h4 className="text-2xl font-bold text-white mb-2">ROI Proyectado</h4>
-                  <p className="text-sm text-stone-500 mb-10">Payback en los primeros 12 días de uso.</p>
+                  <p className="text-sm text-stone-500 mb-10 font-medium">Retorno de inversión en menos de <span className="text-white font-bold">12 días</span> de operación.</p>
                   
                   <button 
                     onClick={() => setIsModalOpen(true)}
-                    className="w-full bg-white text-brand-900 h-16 rounded-full font-black text-sm uppercase tracking-wider hover:shadow-glow-blue transition-all"
+                    className="w-full bg-white text-brand-900 h-16 rounded-full font-black text-sm uppercase tracking-wider hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all relative z-10"
                   >
-                    Diagnóstico Gratuito
+                    Detener la Fuga de Capital
                   </button>
                 </div>
               </div>
@@ -674,7 +688,15 @@ const LuminaRefactored = () => {
                   {["Integración con ERP Local", "CRM de Vendedores Ilimitado", "Múltiples Listas de Precios", "Account Manager Dedicado", "Infraestructura Cloud Prioritaria"].map((item, i) => (
                     <li key={i} className="flex gap-3 text-sm text-stone-400 font-medium">
                       <CheckCircle2 size={16} className="text-brand-400 shrink-0 mt-0.5" />
-                      {item}
+                      <div className="flex flex-col">
+                        {item}
+                        {item === "Infraestructura Cloud Prioritaria" && (
+                          <div className="flex items-center gap-2 mt-2 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 transition-all cursor-crosshair">
+                            <Image src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" width={24} height={15} className="brightness-200" />
+                            <Image src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Microsoft_Azure_Logo.svg" alt="Azure" width={24} height={15} className="brightness-200" />
+                          </div>
+                        )}
+                      </div>
                     </li>
                   ))}
                 </ul>

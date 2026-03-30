@@ -118,7 +118,7 @@ export default function ObjectionsHandler() {
             ¿Tienes una pregunta que no está aquí?
           </p>
           <a
-            href="mailto:Diegorodvaz73@gmail.com"
+            href="mailto:hola@luminab2b.com"
             className="inline-block text-primary hover:text-primary/80 font-semibold transition-colors border-b border-primary hover:border-primary/60"
           >
             Contáctanos sin compromiso →
