@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,28 +6,28 @@
 
 @layer base {
   body {
-    @apply bg-brand-900 text-stone-300 font-sans antialiased;
+    @apply bg-brand-950 text-stone-300 font-sans antialiased;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight text-white;
+    @apply font-display tracking-tight text-stone-900 dark:text-white;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-glass;
+    @apply bg-white/70 dark:bg-brand-950/70 backdrop-blur-xl border border-stone-200/50 dark:border-white/10 shadow-glass;
   }
 
   .glass-dark {
-    @apply bg-brand-900/80 backdrop-blur-xl border border-white/5 shadow-glass-dark;
+    @apply bg-brand-950/80 backdrop-blur-2xl border border-white/5 shadow-glass-dark;
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-500 to-brand-300;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-brand-300;
   }
   
   .text-gradient-gold {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-gold-400 to-gold-600;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-stone-600 to-stone-400 dark:from-stone-300 dark:to-stone-500;
   }
 }/* Estilos base mejorados */
 body {
