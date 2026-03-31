@@ -133,27 +133,27 @@ const LuminaRefactored = () => {
   const faqs = [
     {
       q: "¿Cuánto tiempo toma la implementación?",
-      a: "Típicamente puedes estar operando en menos de 24 horas. Nuestro equipo te ayuda con la carga masiva de tus primeros productos y la configuración del Gate B2B."
+      a: "Típicamente puedes estar operando en menos de 24 horas. Nuestro equipo te ayuda con la carga inicial de tus productos, configuración de catálogos y acceso a tus primeros clientes."
     },
     {
       q: "¿Mis clientes necesitan descargar una App?",
-      a: "No. Lumina es una Progressive Web App (PWA). Tus clientes acceden vía URL privada, pero la experiencia es fluida y rápida como una aplicación nativa, optimizada para móviles."
+      a: "No. Gestory funciona desde el navegador de cualquier celular o computadora. Tus clientes acceden a su portal privado con solo un enlace — sin instalaciones ni complicaciones."
     },
     {
-      q: "¿Cómo funciona la integración con el SAT?",
-      a: "Lumina se conecta nativamente con proveedores autorizados de certificación (PAC). Al marcar un pedido como pagado, puedes generar la factura CFDI 4.0 con un solo clic."
+      q: "¿Cómo funciona la facturación electrónica?",
+      a: "Gestory se conecta con el SAT para emitir facturas CFDI 4.0 automáticamente. Al registrar un pago, puedes timbrar la factura con un solo clic, sin usar otro programa."
     },
     {
       q: "¿Puedo tener diferentes precios para diferentes clientes?",
-      a: "Sí. Nuestra función de Gate B2B te permite asignar niveles de precio o descuentos específicos por grupo de clientes, protegiendo siempre tus márgenes."
+      a: "Sí. Puedes crear listas de precios personalizadas por cliente o grupo. Cada comprador verá únicamente sus precios asignados, protegiendo siempre tus márgenes."
     },
     {
       q: "¿Ofrecen garantía de satisfacción?",
-      a: "Sí, ofrecemos garantía de 30 días. Si Lumina no cumple tus expectativas, te devolvemos el 100% de tu inversión, sin preguntas."
+      a: "Sí, ofrecemos garantía de 30 días. Si Gestory no cumple tus expectativas, te devolvemos el 100% de tu inversión, sin preguntas."
     },
     {
       q: "¿Qué tipo de soporte ofrecen?",
-      a: "Todos los planes incluyen soporte por email y chat. El plan Industrial incluye soporte prioritario por WhatsApp con tiempos de respuesta menores a 2 horas."
+      a: "Todos los planes incluyen soporte por email y chat. El plan Profesional incluye soporte prioritario por WhatsApp con tiempos de respuesta menores a 2 horas."
     }
   ];
 
@@ -168,37 +168,29 @@ const LuminaRefactored = () => {
         </div>
 
         {/* Navbar Premium */}
-        <nav className="sticky top-0 z-50 bg-brand-900/80 backdrop-blur-2xl border-b border-white/[0.05] px-6 py-4">
+        <nav className="sticky top-0 z-50 bg-brand-900/90 backdrop-blur-2xl border-b border-white/[0.07] px-6 py-4">
           <div className="max-w-7xl mx-auto flex justify-between items-center">
             <div className="flex items-center gap-10">
               <div className="flex items-center gap-2 group cursor-pointer">
                 <LogoDinamico />
               </div>
 
-              {/* Desktop Menu - Apple Style */}
+              {/* Desktop Menu */}
               <div className="hidden lg:flex gap-8 text-[13px] font-semibold text-stone-400">
-                <a href="#features" className="hover:text-white transition-colors">Infraestructura</a>
-                <a href="#comparativa" className="hover:text-white transition-colors">Diferencial B2B</a>
-                <a href="#pricing" className="hover:text-white transition-colors">Planes</a>
-                <a href="/blog" className="hover:text-white transition-colors">Blog Industrial</a>
+                <a href="#features" className="hover:text-white transition-colors">Funciones</a>
+                <a href="#comparativa" className="hover:text-white transition-colors">¿Cómo Funciona?</a>
+                <a href="#pricing" className="hover:text-white transition-colors">Planes y Precios</a>
+                <a href="/blog" className="hover:text-white transition-colors">Blog</a>
               </div>
             </div>
 
             <div className="flex items-center gap-6">
-              <button 
-                onClick={() => setIsDarkMode(!isDarkMode)}
-                className="p-2 text-stone-400 hover:text-white transition-colors"
-                aria-label="Toggle Theme"
-              >
-                {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
-              </button>
-              
               <div className="flex items-center gap-3 sm:gap-6">
                 <button 
                   onClick={() => setIsModalOpen(true)}
                   className="bg-brand-500 text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-black text-[11px] sm:text-[13px] hover:bg-brand-400 hover:shadow-[0_0_20px_rgba(0,132,255,0.4)] transition-all active:scale-95 uppercase tracking-wider"
                 >
-                  Agendar Demo
+                  Solicitar Demo
                 </button>
               </div>
               
@@ -281,11 +273,11 @@ const LuminaRefactored = () => {
               {state?.success === false && !state.errors && (<p className="text-red-400 text-sm mt-[-2rem] mb-10 font-bold">{state.message}</p>)}
 
               <div className="opacity-70 flex items-center gap-8 saturate-0 brightness-200">
-                <div className="text-sm font-bold tracking-wider text-white">Integración Inmediata con ERP:</div>
+                <div className="text-sm font-bold tracking-wider text-white">Compatible con:</div>
                 <div className="flex gap-6">
                   <div className="text-lg font-black italic">SAP</div>
-                  <div className="text-lg font-black italic">ORACLE</div>
-                  <div className="text-lg font-black italic">MICROSOFT</div>
+                  <div className="text-lg font-black italic">EXCEL</div>
+                  <div className="text-lg font-black italic">CONTPAQ</div>
                 </div>
               </div>
             </motion.div>
@@ -293,14 +285,17 @@ const LuminaRefactored = () => {
         </header>
 
         {/* Dynamic Partner Marquee */}
-        <section className="bg-brand-900 border-y border-white/[0.03] py-16 transition-colors duration-500">
+        <section className="bg-brand-900 border-y border-white/[0.05] py-20 transition-colors duration-500">
           <div className="max-w-7xl mx-auto px-6">
-            <p className="text-center text-[10px] font-bold uppercase tracking-[0.4em] text-stone-600 mb-12">
-              LA INFRAESTRUCTURA DE CONFIANZA DEL BAJÍO
+            <p className="text-center text-[11px] font-bold uppercase tracking-[0.4em] text-stone-500 mb-14">
+              Empresas que ya confían en Gestory
             </p>
-            <div className="relative overflow-hidden group">
+            {/* Edge fade masks */}
+            <div className="relative overflow-hidden">
+              <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-brand-900 to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-brand-900 to-transparent z-10 pointer-events-none" />
               <div
-                className="flex gap-24 items-center animate-marquee-premium"
+                className="flex gap-20 items-center animate-marquee-premium"
                 style={{ width: "max-content" }}
               >
                 {[
@@ -310,7 +305,6 @@ const LuminaRefactored = () => {
                   { src: "/logos/botas-milenarias.jpg", alt: "Botas Milenarias" },
                   { src: "/logos/emyco.png", alt: "Emyco" },
                   { src: "/logos/flexi.png", alt: "Flexi" },
-                  // Duplicados para el loop infinito del marquee
                   { src: "/logos/alpina.png", alt: "Grupo Alpina" },
                   { src: "/logos/arturo-cuervo.png", alt: "Arturo Cuervo" },
                   { src: "/logos/baeza-estrada.png", alt: "Baeza & Estrada" },
@@ -318,13 +312,16 @@ const LuminaRefactored = () => {
                   { src: "/logos/emyco.png", alt: "Emyco" },
                   { src: "/logos/flexi.png", alt: "Flexi" },
                 ].map((logo, i) => (
-                  <div key={i} className="flex-shrink-0 flex items-center justify-center grayscale opacity-30 hover:grayscale-0 hover:opacity-100 transition-all duration-500 transform hover:scale-110">
-                    <Image 
-                      src={logo.src} 
-                      alt={logo.alt} 
-                      width={160} 
-                      height={60} 
-                      className="h-12 w-auto object-contain brightness-200 contrast-75 hover:brightness-100 hover:contrast-100 transition-all"
+                  <div
+                    key={i}
+                    className="flex-shrink-0 flex items-center justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 hover:scale-110"
+                  >
+                    <Image
+                      src={logo.src}
+                      alt={logo.alt}
+                      width={220}
+                      height={90}
+                      className="h-16 w-auto object-contain brightness-200 hover:brightness-100 transition-all"
                     />
                   </div>
                 ))}

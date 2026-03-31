@@ -63,7 +63,11 @@ body {
 }
 
 .animate-marquee-premium {
-  animation: marquee-premium 40s linear infinite;
+  animation: marquee-premium 30s linear infinite;
+}
+
+.animate-marquee-premium:hover {
+  animation-play-state: paused;
 }
 
 /* Subtlest entrance */
