@@ -30,9 +30,9 @@ export const FeaturesBento = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-brand-navy-surface to-transparent z-0"></div>
             <div className="relative z-10">
               <Lock size={40} className="text-brand-orange-cta mb-6" />
-              <h3 className="text-3xl font-bold text-white mb-4">Soberanía de Precios</h3>
+              <h3 className="text-3xl font-bold text-white mb-4">Módulo de eCommerce Incluido</h3>
               <p className="text-stone-300 max-w-md">
-                Protege tus márgenes. Controla quién ve tus precios de mayoreo con accesos restringidos por cliente y listas de precios segmentadas en tiempo real.
+                Tu propio portal de ventas personalizado. Tus clientes entran con su cuenta, ven sus precios asignados y te hacen pedidos directos sin necesidad de triangular llamadas.
               </p>
             </div>
           </motion.div>
@@ -46,10 +46,9 @@ export const FeaturesBento = () => {
             className="col-span-1 lg:col-span-2 bg-brand-navy-surface/50 backdrop-blur-sm rounded-3xl p-8 flex flex-col justify-between group border border-white/10 relative"
           >
             <Smartphone size={32} className="text-brand-aqua-accent" />
-            <div>
-              <h3 className="text-xl font-bold text-white mb-2">PWA Optimizada</h3>
+              <h3 className="text-xl font-bold text-white mb-2">Vende Desde el Celular</h3>
               <p className="text-stone-400 text-sm">
-                Pedidos sin latencia, funcionando de manera asíncrona incluso cuando pierdes conexión.
+                Tus agentes podrán tomar pedidos directamente desde el dispositivo móvil, sin papeles.
               </p>
             </div>
           </motion.div>
@@ -64,8 +63,8 @@ export const FeaturesBento = () => {
           >
             <Users size={32} className="text-indigo-400" />
             <div>
-              <h3 className="text-xl font-bold text-white mb-2">Comisionistas</h3>
-              <p className="text-stone-400 text-sm">Monitorea rendimiento.</p>
+              <h3 className="text-xl font-bold text-white mb-2">Control de Personal</h3>
+              <p className="text-stone-400 text-sm">Asigna rutas y metas comerciales.</p>
             </div>
           </motion.div>
 
@@ -79,8 +78,8 @@ export const FeaturesBento = () => {
           >
             <FileText size={32} className="text-brand-orange-cta" />
             <div>
-              <h3 className="text-xl font-bold text-white mb-2">Facturación CFDI</h3>
-              <p className="text-brand-orange-cta text-sm">Automatizado al 100%.</p>
+              <h3 className="text-xl font-bold text-white mb-2">Facturas Listas</h3>
+              <p className="text-brand-orange-cta text-sm">Timbrado de nómina / pedidos automático.</p>
             </div>
           </motion.div>
         </div>

@@ -5,7 +5,7 @@ import Image from "next/image";
 import ObjectionsHandler from "./ObjectionsHandler";
 import { LogoDinamico } from "./LogoDinamico";
 import { FeaturesBento } from "./BentoGridFeatures";
-import { submitLead } from "@/app/actions/leadActions";
+import { submitLead, submitAuditLead } from "@/app/actions/leadActions";
 import { cn } from "@/utils/cn";
 import {
   Check,
@@ -66,14 +66,13 @@ const LuminaRefactored = () => {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const [roiInputs, setRoiInputs] = useState({ orders: 50, avgTicket: 5000, errorRate: 15 });
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
 
   const [state, formAction, isPending] = useActionState(submitLead, null);
+  const [modalState, modalAction, isModalPending] = useActionState(submitAuditLead, null);
 
   const comparisonData = [
     {
@@ -110,34 +109,12 @@ const LuminaRefactored = () => {
     }
   }, [isDarkMode]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    const formData = new FormData(e.currentTarget);
-    const payload = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      phone: formData.get('phone'),
-      company: formData.get('company'),
-      teamSize: formData.get('teamSize'),
-    };
-    try {
-      await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-    } catch (_) {
-      // Fallo silencioso — el lead se registra igualmente si el backend está caído
-    } finally {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      setTimeout(() => {
-        setIsModalOpen(false);
-        setIsSuccess(false);
-      }, 3000);
+  useEffect(() => {
+    if (modalState?.success) {
+      const timer = setTimeout(() => setIsModalOpen(false), 3000);
+      return () => clearTimeout(timer);
     }
-  };
+  }, [modalState?.success]);
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -186,8 +163,8 @@ const LuminaRefactored = () => {
         {/* Top Announcement Bar - Unified Promo */}
         <div className="bg-brand-600 px-4 py-3 text-center text-[10px] md:text-xs font-bold tracking-[0.05em] text-white uppercase overflow-hidden relative group cursor-pointer flex flex-col sm:flex-row items-center justify-center gap-2">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-          <span className="bg-white text-brand-900 px-2 py-0.5 rounded-sm font-black text-[9px] md:text-[10px]">OFERTA DE CIERRE</span>
-          <span>Setup gratis + 14 días de prueba. Solo 3 espacios.</span>
+          <span className="bg-white text-brand-900 px-2 py-0.5 rounded-sm font-black text-[9px] md:text-[10px]">OFERTA DE INICIO</span>
+          <span>Configuración gratuita + 14 días de prueba. Inicia hoy.</span>
         </div>
 
         {/* Navbar Premium */}
@@ -261,16 +238,16 @@ const LuminaRefactored = () => {
             >
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-brand-aqua-accent/30 mb-8 backdrop-blur-md">
                 <span className="flex h-2 w-2 rounded-full bg-brand-aqua-accent animate-pulse"></span>
-                <span className="text-[10px] font-bold tracking-widest text-brand-aqua-accent uppercase">Plataforma SaaS B2B de Alta Conversión</span>
+                <span className="text-[10px] font-bold tracking-widest text-brand-aqua-accent uppercase">SISTEMA INTEGRAL PARA NEGOCIOS Y FABRICANTES</span>
               </div>
 
               <h1 className="text-fluid-h1 font-black text-brand-text-primary leading-[1.05] tracking-tight mb-8">
-                Smart. <br className="hidden md:block" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-aqua-accent to-[#5a7bf0]">Efficient.</span> Integrated.
+                Vende Más. <br className="hidden md:block" />
+                No Te <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-aqua-accent to-[#5a7bf0]">Estanques.</span>
               </h1>
 
               <p className="text-xl md:text-2xl text-stone-300 leading-relaxed mb-12 max-w-2xl font-medium">
-                La plataforma omnicanal que transforma tu operación manual en un embudo de ventas industrial altamente automatizado.
+                La plataforma que centraliza tu operación: automatiza pedidos, facturación y el control de tus agentes de ventas. Todo en un solo lugar.
               </p>
 
               {/* Micro-form de conversión directa (Hero) */}
@@ -404,8 +381,8 @@ const LuminaRefactored = () => {
         <section id="comparativa" className="py-24 lg:py-32 px-4 sm:px-6 bg-white dark:bg-stone-900 transition-colors duration-300 border-t border-stone-100 dark:border-stone-800">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-brand-900 dark:text-white mb-4">WhatsApp vs. Lumina B2B</h2>
-              <p className="text-xl text-stone-500 dark:text-stone-400 max-w-2xl mx-auto">La transición hacia un canal de ventas verdaderamente automatizado.</p>
+              <h2 className="text-4xl font-bold text-brand-900 dark:text-white mb-4">WhatsApp vs. Gestory</h2>
+              <p className="text-xl text-stone-500 dark:text-stone-400 max-w-2xl mx-auto">La transición hacia un control total de tus ventas, agentes y operación de pedidos.</p>
             </div>
 
             <div className="bg-white dark:bg-brand-800 rounded-3xl border border-stone-200 dark:border-stone-700 shadow-glass overflow-hidden relative mb-24">
@@ -490,7 +467,7 @@ const LuminaRefactored = () => {
               <div className="p-8 bg-gradient-to-r from-brand-600 to-brand-600 rounded-3xl text-white text-center shadow-xl relative overflow-hidden m-6">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
                 <p className="text-xl font-bold italic relative z-10">
-                  &ldquo;Lumina elimino el caos de pedidos por WhatsApp y nos permitio recuperar 15 horas a la semana de trabajo administrativo.&rdquo;
+                  &ldquo;Gestory eliminó el caos de pedidos por WhatsApp. Ahora tenemos todo centralizado y sin errores humanos.&rdquo;
                 </p>
               </div>
             </div>
@@ -627,8 +604,8 @@ const LuminaRefactored = () => {
               <div className="glass-premium p-10 rounded-[2.5rem] border-white/5 group hover:border-brand-500/50 transition-all flex flex-col">
                 <div className="flex justify-between items-start mb-10">
                   <div>
-                    <h3 className="text-xl font-bold text-white">Fabricante</h3>
-                    <p className="text-xs text-stone-500 mt-1 font-bold italic uppercase tracking-widest text-emerald-400/80">Para marcas locales</p>
+                    <h3 className="text-xl font-bold text-white">Básico</h3>
+                    <p className="text-xs text-stone-500 mt-1 font-bold italic uppercase tracking-widest text-emerald-400/80">Para negocios en crecimiento</p>
                   </div>
                 </div>
                 
@@ -642,7 +619,7 @@ const LuminaRefactored = () => {
                 </div>
 
                 <ul className="space-y-4 mb-12 flex-1">
-                  {["Catálogo Digital (Gate B2B)", "Hasta 100 productos", "1 Vendedor Master", "Levantamiento de Pedidos", "Soporte Vía Chat"].map((item, i) => (
+                  {["Catálogo Digital (Módulo eCommerce)", "Hasta 100 productos", "1 Usuario Administrador", "Recepción de Pedidos Automatizada", "Soporte Vía Chat"].map((item, i) => (
                     <li key={i} className="flex gap-3 text-sm text-stone-400 font-medium">
                       <CheckCircle2 size={16} className="text-brand-400 shrink-0 mt-0.5" />
                       {item}
@@ -664,8 +641,8 @@ const LuminaRefactored = () => {
                 
                 <div className="flex justify-between items-start mb-10">
                   <div>
-                    <h3 className="text-xl font-bold text-white">Industrial</h3>
-                    <p className="text-xs text-brand-400 mt-1 font-bold italic uppercase tracking-widest">Lo más solicitado en León</p>
+                    <h3 className="text-xl font-bold text-white">Profesional</h3>
+                    <p className="text-xs text-brand-400 mt-1 font-bold italic uppercase tracking-widest">El favorito para establecer orden</p>
                   </div>
                 </div>
                 
@@ -679,7 +656,7 @@ const LuminaRefactored = () => {
                 </div>
 
                 <ul className="space-y-4 mb-12 flex-1">
-                  {["Productos Ilimitados", "CRM de 5 Vendedores", "Facturación CFDI 4.0 Nativa", "Configuración SAPICA/ANPIC", "Capacitación en Fábrica"].map((item, i) => (
+                  {["Productos Ilimitados", "5 Vendedores en Plataforma", "Facturación SAT Automática", "Configuración y Catálogo Inicial", "Capacitación en Tu Negocio"].map((item, i) => (
                     <li key={i} className="flex gap-3 text-sm text-stone-300 font-bold">
                       <CheckCircle2 size={16} className="text-gold-400 shrink-0 mt-0.5" />
                       {item}
@@ -699,8 +676,8 @@ const LuminaRefactored = () => {
               <div className="glass-premium p-10 rounded-[2.5rem] border-white/5 group hover:border-brand-500/50 transition-all flex flex-col">
                 <div className="flex justify-between items-start mb-10">
                   <div>
-                    <h3 className="text-xl font-bold text-white">Fábrica Plus</h3>
-                    <p className="text-xs text-stone-500 mt-1 font-bold italic uppercase tracking-widest">Infrastructura Robusta</p>
+                    <h3 className="text-xl font-bold text-white">Empresarial</h3>
+                    <p className="text-xs text-stone-500 mt-1 font-bold italic uppercase tracking-widest">Integración para operativas complejas</p>
                   </div>
                 </div>
                 
@@ -714,12 +691,12 @@ const LuminaRefactored = () => {
                 </div>
 
                 <ul className="space-y-4 mb-12 flex-1">
-                  {["Integración con ERP Local", "CRM de Vendedores Ilimitado", "Múltiples Listas de Precios", "Account Manager Dedicado", "Infraestructura Cloud Prioritaria"].map((item, i) => (
+                  {["Integración Empresarial a Medida", "Vendedores Ilimitados", "Múltiples Listas de Precios", "Experto Asignado a tu Cuenta", "Infraestructura de Alta Disponibilidad"].map((item, i) => (
                     <li key={i} className="flex gap-3 text-sm text-stone-400 font-medium">
                       <CheckCircle2 size={16} className="text-brand-400 shrink-0 mt-0.5" />
                       <div className="flex flex-col">
                         {item}
-                        {item === "Infraestructura Cloud Prioritaria" && (
+                        {item === "Infraestructura de Alta Disponibilidad" && (
                           <div className="flex items-center gap-2 mt-2 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 transition-all cursor-crosshair">
                             <Image src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" width={24} height={15} className="brightness-200" />
                             <Image src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Microsoft_Azure_Logo.svg" alt="Azure" width={24} height={15} className="brightness-200" />
@@ -745,8 +722,8 @@ const LuminaRefactored = () => {
         <section className="py-24 px-4 sm:px-6 bg-white dark:bg-stone-900 transition-colors duration-300 border-t border-stone-100 dark:border-stone-800">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-brand-900 dark:text-white mb-6">Tu nuevo centro de comando B2B</h2>
-              <p className="text-xl text-stone-600 dark:text-stone-400 max-w-3xl mx-auto">Una interfaz diseñada para la velocidad. Sin distracciones.</p>
+              <h2 className="text-4xl font-bold text-brand-900 dark:text-white mb-6">Tu nuevo centro de control operativo</h2>
+              <p className="text-xl text-stone-600 dark:text-stone-400 max-w-3xl mx-auto">Una interfaz diseñada para la velocidad operativa. Sin distracciones.</p>
             </div>
 
             <div className="relative group cursor-pointer" onClick={() => setVideoModalOpen(true)}>
@@ -772,8 +749,8 @@ const LuminaRefactored = () => {
         <section className="py-24 lg:py-48 px-6 bg-brand-900 border-t border-white/[0.05]">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-24">
-              <h2 className="text-4xl md:text-6xl font-black text-white italic tracking-tighter mb-6">Claridad Absoluta.</h2>
-              <p className="text-stone-500 font-medium">Respuestas directas sobre Lumina.</p>
+              <h2 className="text-4xl md:text-6xl font-black text-white italic tracking-tighter mb-6">Transparencia Total.</h2>
+              <p className="text-stone-500 font-medium">Respuestas directas sobre la plataforma Gestory.</p>
             </div>
 
             <div className="space-y-4">
@@ -809,9 +786,9 @@ const LuminaRefactored = () => {
           <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 lg:gap-16">
             <div className="col-span-2 md:col-span-3 lg:col-span-2 space-y-8">
               <div className="text-2xl font-black tracking-tighter text-white uppercase italic">
-                Lumina <span className="text-brand-500">B2B</span>
+                Gestory
               </div>
-              <p className="text-stone-500 text-sm font-medium max-w-xs leading-relaxed">La infraestructura comercial definitiva para fabricantes que quieren crecer sin límites tecnológicos.</p>
+              <p className="text-stone-500 text-sm font-medium max-w-xs leading-relaxed">La infraestructura comercial definitiva para negocios que quieren crecer sin limitantes de tecnología.</p>
               <div className="flex gap-5">
                 <Linkedin size={18} className="text-stone-600 hover:text-brand-400 transition-colors cursor-pointer" />
                 <Instagram size={18} className="text-stone-600 hover:text-brand-400 transition-colors cursor-pointer" />
@@ -823,9 +800,9 @@ const LuminaRefactored = () => {
               <p className="text-[10px] font-black tracking-widest text-stone-400 uppercase">Producto</p>
               <ul className="space-y-3 text-stone-500 text-sm font-medium">
                 <li><a href="#features" className="hover:text-white transition-colors">Infraestructura</a></li>
-                <li><a href="#comparativa" className="hover:text-white transition-colors">Diferencial B2B</a></li>
-                <li><a href="#pricing" className="hover:text-white transition-colors">Planes</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Changelog</a></li>
+                <li><a href="#comparativa" className="hover:text-white transition-colors">Diferencial Comercial</a></li>
+                <li><a href="#pricing" className="hover:text-white transition-colors">Planes y Precios</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Novedades</a></li>
               </ul>
             </div>
 
@@ -861,7 +838,7 @@ const LuminaRefactored = () => {
           </div>
 
           <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/[0.03] flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-[10px] text-stone-600 font-bold uppercase tracking-widest">© 2026 Lumina B2B Systems · Todos los derechos reservados</p>
+            <p className="text-[10px] text-stone-600 font-bold uppercase tracking-widest">© 2026 Gestory · Todos los derechos reservados</p>
           </div>
         </footer>
 
@@ -884,42 +861,60 @@ const LuminaRefactored = () => {
                 exit={{ scale: 0.9, opacity: 0, y: 20 }}
                 className="relative z-10 w-full max-w-xl bg-brand-800 rounded-[2.5rem] border border-white/10 p-10 shadow-2xl overflow-hidden"
               >
-                {isSuccess ? (
+                {modalState?.success ? (
                   <div className="text-center py-10 space-y-6">
                     <div className="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto">
                       <CheckCircle2 size={40} />
                     </div>
-                    <h3 className="text-3xl font-black text-white">Solicitud Recibida</h3>
-                    <p className="text-stone-400">Un consultor industrial te contactará en las próximas 2 horas hábiles.</p>
+                    <h3 className="text-3xl font-black text-white">{modalState.message}</h3>
+                    <p className="text-stone-400">Un especialista te contactará en las próximas 2 horas hábiles.</p>
                   </div>
                 ) : (
                   <>
-                    <h3 className="text-3xl font-black text-white mb-2">Auditoría Gratuita</h3>
-                    <p className="text-stone-400 mb-8 font-medium">Descubre cuánto capital estás perdiendo por procesos manuales.</p>
+                    <h3 className="text-3xl font-black text-white mb-2">Asesoría Gratuita</h3>
+                    <p className="text-stone-400 mb-8 font-medium">Descubre si Gestory es la solución para el desorden en tu negocio.</p>
                     
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                    <form action={modalAction} className="space-y-4">
                       <div className="grid grid-cols-2 gap-4">
-                        <input name="name" placeholder="Nombre completo" required className="w-full h-14 bg-white/5 border border-white/10 rounded-2xl px-6 text-white placeholder:text-stone-600 outline-none focus:border-brand-500 transition-all font-medium" />
-                        <input name="email" type="email" placeholder="Email corporativo" required className="w-full h-14 bg-white/5 border border-white/10 rounded-2xl px-6 text-white placeholder:text-stone-600 outline-none focus:border-brand-500 transition-all font-medium" />
+                        <div className="relative">
+                          <input name="name" placeholder="Nombre completo" required className={cn("w-full h-14 bg-white/5 border border-white/10 rounded-2xl px-6 text-white placeholder:text-stone-600 outline-none focus:border-brand-500 transition-all font-medium", modalState?.errors?.name && "border-red-500 focus:border-red-500")} />
+                          {modalState?.errors?.name && <span className="absolute -top-5 right-2 text-[10px] text-red-500">{modalState.errors.name[0]}</span>}
+                        </div>
+                        <div className="relative">
+                          <input name="email" type="email" placeholder="Email o Negocio" required className={cn("w-full h-14 bg-white/5 border border-white/10 rounded-2xl px-6 text-white placeholder:text-stone-600 outline-none focus:border-brand-500 transition-all font-medium", modalState?.errors?.email && "border-red-500 focus:border-red-500")} />
+                          {modalState?.errors?.email && <span className="absolute -top-5 right-2 text-[10px] text-red-500">{modalState.errors.email[0]}</span>}
+                        </div>
                       </div>
-                      <input name="phone" placeholder="WhatsApp (Ej: 477...)" required className="w-full h-14 bg-white/5 border border-white/10 rounded-2xl px-6 text-white placeholder:text-stone-600 outline-none focus:border-brand-500 transition-all font-medium" />
-                      <input name="company" placeholder="Nombre de tu Fábrica / Marca" required className="w-full h-14 bg-white/5 border border-white/10 rounded-2xl px-6 text-white placeholder:text-stone-600 outline-none focus:border-brand-500 transition-all font-medium" />
                       
-                      <div className="py-4">
-                        <label className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-3 block">Tamaño de equipo comercial</label>
+                      <div className="relative">
+                        <input name="phone" placeholder="Celular / WhatsApp (Ej: 477...)" required className={cn("w-full h-14 bg-white/5 border border-white/10 rounded-2xl px-6 text-white placeholder:text-stone-600 outline-none focus:border-brand-500 transition-all font-medium", modalState?.errors?.phone && "border-red-500 focus:border-red-500")} />
+                        {modalState?.errors?.phone && <span className="absolute -bottom-5 right-2 text-[10px] text-red-500">{modalState.errors.phone[0]}</span>}
+                      </div>
+
+                      <div className="relative mt-6">
+                        <input name="company" placeholder="Nombre de tu Emprendimiento / Marca" required className={cn("w-full h-14 bg-white/5 border border-white/10 rounded-2xl px-6 text-white placeholder:text-stone-600 outline-none focus:border-brand-500 transition-all font-medium", modalState?.errors?.company && "border-red-500 focus:border-red-500")} />
+                        {modalState?.errors?.company && <span className="absolute -bottom-5 right-2 text-[10px] text-red-500">{modalState.errors.company[0]}</span>}
+                      </div>
+                      
+                      <div className="py-4 mt-4">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-3 block">Vendedores o Empleados</label>
                         <select name="teamSize" className="w-full h-14 bg-white/5 border border-white/10 rounded-2xl px-6 text-white outline-none focus:border-brand-500 transition-all font-medium appearance-none">
-                          <option value="1-5">1-5 agentes</option>
-                          <option value="6-20">6-20 agentes</option>
-                          <option value="20+">20+ agentes</option>
+                          <option value="1-5">Solo yo o hasta 5 personas</option>
+                          <option value="6-20">6-20 personas</option>
+                          <option value="20+">Más de 20</option>
                         </select>
                       </div>
 
+                      {modalState?.success === false && !modalState.errors && (
+                        <p className="text-red-400 text-sm font-bold text-center mt-2">{modalState.message}</p>
+                      )}
+
                       <button 
                         type="submit" 
-                        disabled={isSubmitting}
-                        className="w-full h-16 bg-white text-brand-900 rounded-full font-black text-sm uppercase tracking-wider hover:bg-brand-50 transition-all active:scale-95 disabled:opacity-50"
+                        disabled={isModalPending}
+                        className="w-full h-16 bg-white text-brand-900 rounded-full font-black text-sm uppercase tracking-wider hover:bg-brand-50 transition-all active:scale-95 disabled:opacity-50 mt-2"
                       >
-                        {isSubmitting ? "Enviando..." : "Confirmar Diagnóstico"}
+                        {isModalPending ? "Enviando..." : "Agendar Sesión"}
                       </button>
                     </form>
                   </>
