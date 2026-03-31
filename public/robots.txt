@@ -1,0 +1,18 @@
+# Robots.txt for Lumina Landing Page
+# Allows all search engines to crawl and index the site
+
+User-agent: *
+Allow: /
+Allow: /api/
+
+# Disallow admin and private paths (if any)
+Disallow: /admin/
+Disallow: /private/
+
+# Let search engines know about the sitemap
+Sitemap: https://lumina.vercel.app/sitemap.xml
+Sitemap: https://lumina.vercel.app/sitemap.txt
+Sitemap: https://lumina.vercel.app/api/blog-sitemap
+
+# Crawl delay for respectful indexing (optional)
+Crawl-delay: 1
