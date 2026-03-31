@@ -16,10 +16,10 @@ export default function Navbar() {
   }, []);
 
   const solutionLinks = [
-    { label: "Gestión de Ventas", href: "#caracteristicas" },
-    { label: "Facturación CFDI", href: "#caracteristicas" },
-    { label: "Catálogo Digital", href: "#caracteristicas" },
-    { label: "CRM B2B", href: "#caracteristicas" },
+    { label: "Control de Pedidos", href: "#caracteristicas" },
+    { label: "Facturación Electrónica", href: "#caracteristicas" },
+    { label: "Catálogo Interactivo", href: "#caracteristicas" },
+    { label: "Portal de Clientes", href: "#caracteristicas" },
   ];
 
   return (
@@ -35,7 +35,7 @@ export default function Navbar() {
         <div className="relative">
           <div className="text-2xl font-bold flex items-center gap-1">
             <span className="text-primary tracking-tighter group-hover:scale-110 transition-transform">{"///"}</span>
-            <span className="tracking-wide group-hover:text-primary transition-colors">Lumina</span>
+            <span className="tracking-wide group-hover:text-primary transition-colors">Gestory</span>
           </div>
           <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
         </div>
@@ -46,7 +46,7 @@ export default function Navbar() {
         {/* Solution Dropdown */}
         <div className="relative group">
           <button className="flex items-center gap-1 px-4 py-2 text-textMuted hover:text-white transition-colors rounded-lg hover:bg-primary/5">
-            La Solución
+            Soluciones
             <ChevronDown size={16} className="group-hover:rotate-180 transition-transform" />
           </button>
           <div className="absolute top-full left-0 mt-2 w-48 bg-surface border border-borderDark rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2">

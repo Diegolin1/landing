@@ -300,18 +300,33 @@ const LuminaRefactored = () => {
             </p>
             <div className="relative overflow-hidden group">
               <div
-                className="flex gap-20 items-center animate-marquee-premium"
+                className="flex gap-24 items-center animate-marquee-premium"
                 style={{ width: "max-content" }}
               >
                 {[
-                  "Arturo Cuervo", "Botas Milenarias", "Baeza & Estrada", "Grupo Alpina", "Flexi", "Emyco", 
-                  "Arturo Cuervo", "Botas Milenarias", "Baeza & Estrada", "Grupo Alpina", "Flexi", "Emyco"
-                ].map((name, i) => (
-                  <a href="#casos-de-exito" key={i} className="flex-shrink-0 flex items-center justify-center grayscale opacity-30 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                    <span className="text-xl md:text-2xl font-black tracking-tighter text-white/50 hover:text-brand-400 cursor-pointer select-none uppercase transition-colors">
-                      {name}
-                    </span>
-                  </a>
+                  { src: "/logos/alpina.png", alt: "Grupo Alpina" },
+                  { src: "/logos/arturo-cuervo.png", alt: "Arturo Cuervo" },
+                  { src: "/logos/baeza-estrada.png", alt: "Baeza & Estrada" },
+                  { src: "/logos/botas-milenarias.jpg", alt: "Botas Milenarias" },
+                  { src: "/logos/emyco.png", alt: "Emyco" },
+                  { src: "/logos/flexi.png", alt: "Flexi" },
+                  // Duplicados para el loop infinito del marquee
+                  { src: "/logos/alpina.png", alt: "Grupo Alpina" },
+                  { src: "/logos/arturo-cuervo.png", alt: "Arturo Cuervo" },
+                  { src: "/logos/baeza-estrada.png", alt: "Baeza & Estrada" },
+                  { src: "/logos/botas-milenarias.jpg", alt: "Botas Milenarias" },
+                  { src: "/logos/emyco.png", alt: "Emyco" },
+                  { src: "/logos/flexi.png", alt: "Flexi" },
+                ].map((logo, i) => (
+                  <div key={i} className="flex-shrink-0 flex items-center justify-center grayscale opacity-30 hover:grayscale-0 hover:opacity-100 transition-all duration-500 transform hover:scale-110">
+                    <Image 
+                      src={logo.src} 
+                      alt={logo.alt} 
+                      width={160} 
+                      height={60} 
+                      className="h-12 w-auto object-contain brightness-200 contrast-75 hover:brightness-100 hover:contrast-100 transition-all"
+                    />
+                  </div>
                 ))}
               </div>
             </div>
