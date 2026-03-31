@@ -46,10 +46,11 @@ export const FeaturesBento = () => {
             className="col-span-1 lg:col-span-2 bg-brand-navy-surface/50 backdrop-blur-sm rounded-3xl p-8 flex flex-col justify-between group border border-white/10 relative"
           >
             <Smartphone size={32} className="text-brand-aqua-accent" />
-              <h3 className="text-xl font-bold text-white mb-2">Vende Desde el Celular</h3>
-              <p className="text-stone-400 text-sm">
-                Tus agentes podrán tomar pedidos directamente desde el dispositivo móvil, sin papeles.
-              </p>
+            <div>
+               <h3 className="text-xl font-bold text-white mb-2">Vende Desde el Celular</h3>
+               <p className="text-stone-400 text-sm">
+                 Tus agentes podrán tomar pedidos directamente desde el dispositivo móvil, sin papeles.
+               </p>
             </div>
           </motion.div>
 
