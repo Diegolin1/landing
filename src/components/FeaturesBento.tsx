@@ -1,183 +1,281 @@
 "use client";
 import { motion } from "framer-motion";
-import { Lock, Smartphone, Users, FileText, TrendingUp, Shield } from "lucide-react";
+import { Lock, FileText, Users, Smartphone, TrendingUp, Shield } from "lucide-react";
+
+const features = [
+  {
+    id: "gate-b2b",
+    icon: Lock,
+    iconBg: "#EFF6FF",
+    iconColor: "#1a56db",
+    title: "Gate B2B — Soberanía de Precios",
+    desc: "Controla quién ve tus precios. Accesos por cliente, segmentación de catálogo y lista de mayoreo privada. Tu competencia nunca verá tus márgenes.",
+    span: "col-span-1 md:col-span-2",
+    size: "large",
+    mockup: true, // muestra mini UI mockup
+  },
+  {
+    id: "cfdi",
+    icon: FileText,
+    iconBg: "#FFF7ED",
+    iconColor: "#ea580c",
+    title: "CFDI 4.0 Nativo",
+    desc: "Factura en 1 clic directamente desde el pedido. Sin salir de Lumina. XML listo para el SAT.",
+    span: "col-span-1",
+    size: "medium",
+  },
+  {
+    id: "pwa",
+    icon: Smartphone,
+    iconBg: "#F0FDF4",
+    iconColor: "#16a34a",
+    title: "Pedidos en SAPICA (PWA)",
+    desc: "Levanta pedidos en expo sin internet. Sincronización automática al recuperar señal.",
+    span: "col-span-1",
+    size: "small",
+  },
+  {
+    id: "crm",
+    icon: Users,
+    iconBg: "#FAF5FF",
+    iconColor: "#7c3aed",
+    title: "CRM de Agentes",
+    desc: "Metas, comisiones y carteras de clientes en tiempo real.",
+    span: "col-span-1",
+    size: "small",
+  },
+  {
+    id: "analytics",
+    icon: TrendingUp,
+    iconBg: "#FFFBEB",
+    iconColor: "#d97706",
+    title: "Analytics en Vivo",
+    desc: "Dashboards que muestran qué se vende, quién compra y tus oportunidades de crecimiento.",
+    span: "col-span-1",
+    size: "small",
+  },
+  {
+    id: "security",
+    icon: Shield,
+    iconBg: "#F0FDF4",
+    iconColor: "#16a34a",
+    title: "Seguridad Empresarial",
+    desc: "SSL, backups automáticos y cumplimiento de leyes fiscales mexicanas.",
+    span: "col-span-1",
+    size: "small",
+  },
+];
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: i * 0.07, ease: "easeOut" },
+  }),
+};
 
 export default function FeaturesBento() {
   return (
-    <section id="caracteristicas" className="py-24 px-6 max-w-7xl mx-auto">
-      <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-5xl font-bold mb-4">Construido para el <span className="text-primary">B2B Latino</span></h2>
-        <p className="text-textMuted max-w-2xl mx-auto text-lg">Entendemos cómo haces negocios. Herramientas diseñadas para agilizar tu operación sin complicar a tus clientes.</p>
-      </div>
+    <section id="caracteristicas" className="py-24 px-6 bg-surface-muted">
+      <div className="max-w-7xl mx-auto">
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
-        {/* 1. Gate B2B */}
-        <motion.div 
-          whileHover={{ y: -8 }} 
-          className="md:col-span-2 bg-gradient-to-br from-surface to-surface/50 border border-borderDark rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden group"
-        >
-          <div className="absolute top-6 right-6 text-primary opacity-15 group-hover:opacity-30 transition-opacity">
-            <Lock size={140} strokeWidth={1} />
-          </div>
-          
-          <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center">
-                <Lock className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="text-2xl font-bold">Gate B2B y Precios Privados</h3>
-            </div>
-            <p className="text-textMuted max-w-md">Protege tu información comercial. Asigna listas de precios específicas por cliente mayorista. Tu competencia nunca verá tu catálogo sin tu autorización.</p>
-          </div>
+        {/* ── Header ─────────────────────────────────────────────── */}
+        <div className="mb-12">
+          <span className="eyebrow flex items-center gap-2 mb-3">
+            <span className="inline-block w-4 h-px bg-primary" />
+            Plataforma completa
+          </span>
+          <h2 className="text-3xl md:text-4xl text-textPrimary mb-3" style={{ fontWeight: 500 }}>
+            Infraestructura crítica.
+          </h2>
+          <p className="text-textSecondary max-w-xl text-base md:text-lg">
+            Todo lo que necesitas para vender sin depender de WhatsApp.
+          </p>
+        </div>
 
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileHover={{ opacity: 1 }}
-            className="absolute bottom-4 right-4 bg-primary/10 border border-primary/30 rounded-lg px-3 py-1 text-xs text-primary font-medium opacity-0"
+        {/* ── Bento grid asimétrico ────────────────────────────────
+            Fila 1: Gate B2B (span-2) | CFDI (span-1)
+            Fila 2: PWA | CRM | Analytics | Security
+        */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+          {/* ── Gate B2B — card grande con mini mockup ─────────── */}
+          <motion.div
+            custom={0}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={itemVariants}
+            whileHover={{ y: -4 }}
+            className="md:col-span-2 bg-surface border border-borderLight rounded-2xl p-7 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col"
           >
-            SKU privado protegido
-          </motion.div>
-        </motion.div>
-
-        {/* 2. Móvil */}
-        <motion.div 
-          whileHover={{ y: -8 }} 
-          className="bg-gradient-to-br from-surface to-surface/50 border border-borderDark rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden group"
-        >
-          <div className="absolute top-6 right-6 text-primary opacity-15 group-hover:opacity-30 transition-opacity">
-            <Smartphone size={100} strokeWidth={1} />
-          </div>
-          
-          <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center">
-                <Smartphone className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="text-2xl font-bold">100% Móvil First</h3>
+            {/* Ícono */}
+            <div
+              className="w-11 h-11 rounded-xl flex items-center justify-center mb-5"
+              style={{ background: "#EFF6FF" }}
+            >
+              <Lock size={20} color="#1a56db" />
             </div>
-            <p className="text-textMuted text-sm">Tus clientes levantan el pedido desde cualquier celular. La compra es tan fácil que se cierra antes de que te lo pienses.</p>
-          </div>
 
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileHover={{ opacity: 1 }}
-            className="absolute bottom-4 right-4 bg-primary/10 border border-primary/30 rounded-lg px-3 py-1 text-xs text-primary font-medium opacity-0"
-          >
-            70% tráfico es móvil
-          </motion.div>
-        </motion.div>
+            <h3 className="text-lg text-textPrimary mb-2" style={{ fontWeight: 500 }}>
+              Gate B2B — Soberanía de Precios
+            </h3>
+            <p className="text-sm text-textSecondary leading-relaxed mb-5">
+              Controla quién ve tus precios. Accesos por cliente, segmentación de
+              catálogo y lista de mayoreo privada. Tu competencia nunca verá tus márgenes.
+            </p>
 
-        {/* 3. CRM */}
-        <motion.div 
-          whileHover={{ y: -8 }} 
-          className="bg-gradient-to-br from-surface to-surface/50 border border-borderDark rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden group"
-        >
-          <div className="absolute top-6 right-6 text-primary opacity-15 group-hover:opacity-30 transition-opacity">
-            <Users size={100} strokeWidth={1} />
-          </div>
-          
-          <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center">
-                <Users className="w-6 h-6 text-primary" />
+            {/* Mini mockup de estado de cliente */}
+            <div className="bg-surface-muted border border-borderLight rounded-xl p-4 flex flex-col gap-2">
+              <div className="text-[10px] font-semibold text-textMuted uppercase tracking-wider mb-1">
+                Estado de acceso · Cliente activo
               </div>
-              <h3 className="text-2xl font-bold">CRM de Vendedores</h3>
+              {[
+                { client: "FLEXI León", type: "Mayoreo A", status: true },
+                { client: "Emyco SA", type: "Mayoreo B", status: true },
+                { client: "Visitante anónimo", type: "—", status: false },
+              ].map((row) => (
+                <div
+                  key={row.client}
+                  className="flex items-center gap-3 bg-surface rounded-lg px-3 py-2 border border-borderLight"
+                >
+                  <div
+                    className={`w-2 h-2 rounded-full flex-shrink-0 ${
+                      row.status ? "bg-success" : "bg-error/60"
+                    }`}
+                  />
+                  <span className="text-xs font-medium text-textPrimary flex-1">{row.client}</span>
+                  <span className="text-[10px] text-textSecondary">{row.type}</span>
+                  <span
+                    className={`text-[9px] font-semibold px-2 py-0.5 rounded-full ${
+                      row.status
+                        ? "bg-success-light text-success"
+                        : "bg-error-light text-error"
+                    }`}
+                  >
+                    {row.status ? "Ver precios" : "Bloqueado"}
+                  </span>
+                </div>
+              ))}
             </div>
-            <p className="text-textMuted text-sm">Asigna carteras de clientes, supervisa pedidos en tiempo real y mide comisiones automáticamente.</p>
-          </div>
-
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileHover={{ opacity: 1 }}
-            className="absolute bottom-4 right-4 bg-primary/10 border border-primary/30 rounded-lg px-3 py-1 text-xs text-primary font-medium opacity-0"
-          >
-            Cartera digitalizada
           </motion.div>
-        </motion.div>
 
-        {/* 4. CFDI */}
-        <motion.div 
-          whileHover={{ y: -8 }} 
-          className="md:col-span-2 bg-gradient-to-br from-surface to-surface/50 border border-borderDark rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden group"
-        >
-          <div className="absolute top-6 right-6 text-primary opacity-15 group-hover:opacity-30 transition-opacity">
-            <FileText size={140} strokeWidth={1} />
-          </div>
-          
-          <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center">
-                <FileText className="w-6 h-6 text-primary" />
+          {/* ── CFDI — card mediana ─────────────────────────────── */}
+          <motion.div
+            custom={1}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={itemVariants}
+            whileHover={{ y: -4 }}
+            className="bg-surface border border-borderLight rounded-2xl p-7 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col"
+          >
+            <div
+              className="w-11 h-11 rounded-xl flex items-center justify-center mb-5"
+              style={{ background: "#FFF7ED" }}
+            >
+              <FileText size={20} color="#ea580c" />
+            </div>
+            <h3 className="text-base text-textPrimary mb-2" style={{ fontWeight: 500 }}>
+              CFDI 4.0 Nativo
+            </h3>
+            <p className="text-sm text-textSecondary leading-relaxed mb-5">
+              Factura en 1 clic directamente desde el pedido. Sin salir de
+              Lumina. XML y PDF listos para el SAT al instante.
+            </p>
+            {/* Mini mockup de botón de factura */}
+            <div className="mt-auto bg-surface-muted border border-borderLight rounded-xl p-4">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs text-textMuted">Pedido #4521</span>
+                <span className="text-xs font-medium text-textPrimary">$12,450 MXN</span>
               </div>
-              <h3 className="text-2xl font-bold">Facturación CFDI 4.0 Automática</h3>
-            </div>
-            <p className="text-textMuted max-w-md">Calcula el IVA al instante y emite facturas con un clic sin salir de la plataforma. Cumple con el SAT 100% de acuerdo. Archivo XML listo para comprobación fiscal.</p>
-          </div>
-
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileHover={{ opacity: 1 }}
-            className="absolute bottom-4 right-4 bg-primary/10 border border-primary/30 rounded-lg px-3 py-1 text-xs text-primary font-medium opacity-0"
-          >
-            SAT Validado
-          </motion.div>
-        </motion.div>
-
-        {/* 5. Analytics */}
-        <motion.div 
-          whileHover={{ y: -8 }} 
-          className="bg-gradient-to-br from-surface to-surface/50 border border-borderDark rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden group"
-        >
-          <div className="absolute top-6 right-6 text-primary opacity-15 group-hover:opacity-30 transition-opacity">
-            <TrendingUp size={100} strokeWidth={1} />
-          </div>
-          
-          <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center">
-                <TrendingUp className="w-6 h-6 text-primary" />
+              <div className="w-full bg-primary text-white text-xs font-medium py-2 rounded-lg text-center">
+                Timbrar CFDI 4.0 →
               </div>
-              <h3 className="text-2xl font-bold">Analytics en Vivo</h3>
-            </div>
-            <p className="text-textMuted text-sm">Dashboards que muestran exactamente qué se vende, quién compra y cuáles son tus oportunidades de crecimiento.</p>
-          </div>
-
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileHover={{ opacity: 1 }}
-            className="absolute bottom-4 right-4 bg-primary/10 border border-primary/30 rounded-lg px-3 py-1 text-xs text-primary font-medium opacity-0"
-          >
-            Datos reales
-          </motion.div>
-        </motion.div>
-
-        {/* 6. Seguridad */}
-        <motion.div 
-          whileHover={{ y: -8 }} 
-          className="bg-gradient-to-br from-surface to-surface/50 border border-borderDark rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden group"
-        >
-          <div className="absolute top-6 right-6 text-primary opacity-15 group-hover:opacity-30 transition-opacity">
-            <Shield size={100} strokeWidth={1} />
-          </div>
-          
-          <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center">
-                <Shield className="w-6 h-6 text-primary" />
+              <div className="flex items-center gap-1.5 mt-2.5">
+                <div className="w-2 h-2 rounded-full bg-success" />
+                <span className="text-[10px] text-success font-medium">
+                  UUID generado · SAT válido
+                </span>
               </div>
-              <h3 className="text-2xl font-bold">Seguridad Empresarial</h3>
             </div>
-            <p className="text-textMuted text-sm">Encriptación SSL, backups automáticos, cumplimiento de leyes fiscales mexicanas y soporte en zona horaria.</p>
-          </div>
-
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileHover={{ opacity: 1 }}
-            className="absolute bottom-4 right-4 bg-primary/10 border border-primary/30 rounded-lg px-3 py-1 text-xs text-primary font-medium opacity-0"
-          >
-            Certificado
           </motion.div>
-        </motion.div>
+
+          {/* ── Fila 2: 4 cards pequeñas ────────────────────────── */}
+          {[
+            {
+              icon: Smartphone,
+              iconBg: "#F0FDF4",
+              iconColor: "#16a34a",
+              title: "Pedidos en SAPICA (PWA)",
+              desc: "Sin internet. Levanta pedidos en expo y sincroniza al recuperar señal.",
+              tag: "Offline-first",
+              tagColor: "text-success bg-success-light",
+            },
+            {
+              icon: Users,
+              iconBg: "#FAF5FF",
+              iconColor: "#7c3aed",
+              title: "CRM de Agentes",
+              desc: "Metas, comisiones y carteras de clientes en tiempo real.",
+              tag: "Tiempo real",
+              tagColor: "text-purple-700 bg-purple-50",
+            },
+            {
+              icon: TrendingUp,
+              iconBg: "#FFFBEB",
+              iconColor: "#d97706",
+              title: "Analytics en Vivo",
+              desc: "Dashboards de ventas por agente, cliente y categoría.",
+              tag: "Live data",
+              tagColor: "text-amber-700 bg-amber-50",
+            },
+            {
+              icon: Shield,
+              iconBg: "#F0FDF4",
+              iconColor: "#16a34a",
+              title: "Seguridad Empresarial",
+              desc: "SSL, backups y cumplimiento de leyes fiscales mexicanas.",
+              tag: "Certificado MX",
+              tagColor: "text-success bg-success-light",
+            },
+          ].map((feat, i) => {
+            const Icon = feat.icon;
+            return (
+              <motion.div
+                key={feat.title}
+                custom={i + 2}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={itemVariants}
+                whileHover={{ y: -4 }}
+                className="bg-surface border border-borderLight rounded-2xl p-6 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col gap-4"
+              >
+                <div className="flex items-start justify-between">
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center"
+                    style={{ background: feat.iconBg }}
+                  >
+                    <Icon size={18} color={feat.iconColor} />
+                  </div>
+                  <span
+                    className={`text-[9px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full ${feat.tagColor}`}
+                  >
+                    {feat.tag}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-sm text-textPrimary mb-1.5" style={{ fontWeight: 500 }}>
+                    {feat.title}
+                  </h3>
+                  <p className="text-xs text-textSecondary leading-relaxed">{feat.desc}</p>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

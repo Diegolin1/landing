@@ -93,14 +93,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <meta name="theme-color" content="#0f172a" />
+        <meta name="theme-color" content="#f8fafc" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         {/* JSON-LD — server-side for full SEO impact */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       </head>
-      <body className={`${inter.variable} ${outfit.variable} font-sans bg-brand-900 text-stone-300 antialiased`}>
+      <body className={`${inter.variable} ${outfit.variable} font-sans bg-background text-textSecondary antialiased`}>
         {children}
       </body>
     </html>

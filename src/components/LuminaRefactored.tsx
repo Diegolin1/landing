@@ -32,7 +32,9 @@ import {
   Instagram,
   Youtube,
   Sun,
-  Moon
+  Moon,
+  Cloud,
+  Server
 } from "lucide-react";
 import { motion, AnimatePresence, useInView, useMotionValue, useTransform, animate } from "framer-motion";
 
@@ -176,7 +178,7 @@ const LuminaRefactored = () => {
 
   return (
     <>
-      <div className="bg-brand-900 text-stone-300 font-sans antialiased scroll-smooth transition-colors duration-500 overflow-x-hidden">
+      <div className="bg-background text-textSecondary font-sans antialiased scroll-smooth transition-colors duration-500 overflow-x-hidden">
         {/* Top Announcement Bar - Unified Promo */}
         <div className="bg-brand-600 px-4 py-3 text-center text-[10px] md:text-xs font-bold tracking-[0.05em] text-white uppercase overflow-hidden relative group cursor-pointer flex flex-col sm:flex-row items-center justify-center gap-2">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
@@ -765,8 +767,11 @@ const LuminaRefactored = () => {
                         {item}
                         {item === "Infraestructura Cloud Prioritaria" && (
                           <div className="flex items-center gap-2 mt-2 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 transition-all cursor-crosshair">
-                            <Image src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" width={24} height={15} className="brightness-200" />
-                            <Image src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Microsoft_Azure_Logo.svg" alt="Azure" width={24} height={15} className="brightness-200" />
+                            <Cloud size={14} className="text-white" />
+                            <span className="text-[10px] text-white/50">AWS</span>
+                            <div className="w-px h-3 bg-white/20 mx-1" />
+                            <Server size={14} className="text-white" />
+                            <span className="text-[10px] text-white/50">Azure</span>
                           </div>
                         )}
                       </div>

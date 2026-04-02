@@ -5,56 +5,88 @@
 @tailwind utilities;
 
 @layer base {
+  /* ── Modo claro (enterprise B2B) ─────────────────────────────── */
   body {
-    @apply bg-brand-900 text-stone-300 font-sans antialiased selection:bg-brand-500/30;
+    @apply bg-background text-textSecondary font-sans antialiased;
+    selection-color: #1a56db;
+    -webkit-selection-color: rgba(26, 86, 219, 0.15);
   }
+
+  /* Headings: máximo font-weight 600 (semibold) — nunca extrabold */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tighter text-white leading-tight;
+    @apply font-display text-textPrimary leading-tight tracking-tight;
+    font-weight: 500; /* medium — look enterprise, not dropout */
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  /* Mejorar legibilidad de texto */
+  p {
+    @apply leading-relaxed;
+  }
+}
+
+@layer components {
+  /* ── Botón primario (azul sólido) ───────────────────────────── */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-medium text-sm rounded-lg
+           hover:bg-primary-hover transition-all duration-200 shadow-sm hover:shadow-md;
+  }
+
+  /* ── Botón texto con play (hero secundario) ──────────────────── */
+  .btn-ghost-play {
+    @apply inline-flex items-center gap-2.5 px-4 py-3 text-textSecondary font-medium text-sm
+           hover:text-textPrimary transition-colors duration-200;
+  }
+
+  /* ── Botón outline azul ─────────────────────────────────────── */
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary font-medium text-sm
+           rounded-lg hover:bg-primary-light transition-all duration-200;
+  }
+
+  /* ── Card estándar B2B ──────────────────────────────────────── */
+  .card {
+    @apply bg-surface border border-borderLight rounded-xl p-6 shadow-card hover:shadow-card-hover transition-shadow duration-200;
+  }
+
+  /* ── Card azul featured (pricing popular) ───────────────────── */
+  .card-featured {
+    @apply bg-surface border-2 border-primary rounded-xl p-6 shadow-card-featured;
+  }
+
+  /* ── Eyebrow label (encima de headings) ─────────────────────── */
+  .eyebrow {
+    @apply text-xs font-semibold text-primary uppercase tracking-widest;
+  }
+
+  /* ── Pill de resultado (testimonios) ────────────────────────── */
+  .result-pill {
+    @apply inline-flex items-center gap-1.5 text-xs font-semibold text-success bg-success-light
+           px-3 py-1 rounded-full;
+  }
+
+  /* ── Badge de estado ("Más popular") ────────────────────────── */
+  .badge-popular {
+    @apply text-[10px] font-semibold bg-primary text-white px-2.5 py-0.5 rounded-full uppercase tracking-wide;
   }
 }
 
 @layer utilities {
-  .glass-premium {
-    @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
-  }
-
-  .glass-card {
-    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-glass hover:bg-white/10 transition-all duration-500;
-  }
-
+  /* Gradiente de texto azul (para accentos puntuales) */
   .text-gradient-blue {
-    @apply bg-clip-text text-transparent bg-gradient-to-br from-white via-brand-200 to-brand-400 font-black;
-  }
-  
-  .text-gradient-gold {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-gold-300 via-gold-500 to-gold-600;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-500;
   }
 
-  .shadow-glow-blue {
-    @apply shadow-[0_0_40px_-10px_rgba(0,82,255,0.3)];
-  }
-
-  .bg-mesh {
-    background-image: 
-      radial-gradient(at 0% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
-      radial-gradient(at 50% 0%, hsla(225,39%,20%,1) 0, transparent 50%), 
-      radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+  /* Glass para el footer oscuro */
+  .glass-dark {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
   }
 }
 
-/* Base styles for premium presentation */
-body {
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-  font-feature-settings: "cv02", "cv03", "cv04", "ss01";
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Premium Marquee */
-@keyframes marquee-premium {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
+/* ── Keyframes globales ──────────────────────────────────────────── */
 
 /* TopBanner shimmer */
 @keyframes shimmer {
@@ -62,21 +94,52 @@ body {
   100% { transform: translateX(200%); }
 }
 
+/* Marquee de logos */
+@keyframes marquee-premium {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Entrada suave para secciones */
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* Counter flip para stats */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
 .animate-marquee-premium {
   animation: marquee-premium 40s linear infinite;
 }
-
-/* Subtlest entrance */
-@keyframes reveal {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 .reveal-anim {
   animation: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Focus visible better feel */
+/* ── Overrides de scroll y base ─────────────────────────────────── */
+body {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+  -webkit-font-smoothing: antialiased;
+}
+
 *:focus-visible {
-  @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-brand-900;
+  @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+}
+
+/* ── Tabla mejorada (legibilidad) ───────────────────────────────── */
+table {
+  border-collapse: collapse;
+}
+
+/* ── Grid de fondo para Hero ────────────────────────────────────── */
+.hero-grid-bg {
+  background-image:
+    linear-gradient(rgba(26, 86, 219, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 86, 219, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
