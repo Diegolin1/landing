@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getBlogPosts } from "@/utils/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://lumina.mx";
+  const baseUrl = "https://gestory.com";
   const now = new Date();
 
   const staticRoutes: MetadataRoute.Sitemap = [

@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Calendar, Mail, Building, Phone } from "lucide-react";
+import { X, Calendar, Mail, Building, Phone, Users, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { useI18n } from "../../i18n";
 
 interface DemoModalProps {
   isOpen: boolean;
@@ -9,6 +11,44 @@ interface DemoModalProps {
 }
 
 export default function DemoModal({ isOpen, onClose }: DemoModalProps) {
+  const { t } = useI18n();
+  const [form, setForm] = useState({ name: "", email: "", phone: "", company: "", teamSize: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.name || !form.email || !form.phone) return;
+
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          company: form.company,
+          teamSize: form.teamSize,
+          source: "DEMO_MODAL",
+        }),
+      });
+      if (res.ok) {
+        setStatus("success");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  const resetAndClose = () => {
+    setForm({ name: "", email: "", phone: "", company: "", teamSize: "" });
+    setStatus("idle");
+    onClose();
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -18,73 +58,168 @@ export default function DemoModal({ isOpen, onClose }: DemoModalProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          onClick={onClose}
-          className="absolute inset-0 bg-textPrimary/40 backdrop-blur-sm"
+          onClick={resetAndClose}
+          className="absolute inset-0 bg-textPrimary/50 backdrop-blur-sm"
         />
         
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="relative w-full max-w-lg bg-surface rounded-2xl shadow-2xl overflow-hidden"
+          className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden"
         >
           {/* Header */}
-          <div className="bg-primary p-6 text-white relative">
+          <div className="bg-cta-gradient p-6 text-white relative">
             <button 
-              onClick={onClose}
+              onClick={resetAndClose}
               className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
             >
               <X className="h-5 w-5" />
             </button>
-            <h3 className="text-2xl font-bold font-heading mb-2">Descubre Gestory en Acción</h3>
-            <p className="text-blue-100 text-sm font-medium">
-              Agenda una videollamada de 15 minutos con un experto. Veremos tus necesidades y cómo adaptar Gestory a tu empresa.
+            <h3 className="text-xl font-bold font-heading mb-2">{t.demo.title}</h3>
+            <p className="text-blue-100/80 text-sm font-medium pr-8">
+              {t.demo.subtitle}
             </p>
           </div>
 
-          {/* Form */}
+          {/* Content */}
           <div className="p-6">
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-              <div>
-                <label className="block text-sm font-semibold text-textSecondary mb-1">Nombre Completo</label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Building className="h-5 w-5 text-textMuted" />
-                  </div>
-                  <input type="text" className="block w-full pl-10 pr-3 py-2.5 border border-borderLight rounded-lg text-sm text-textPrimary focus:ring-accent focus:border-accent outline-none transition-all" placeholder="Juan Pérez" />
-                </div>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-semibold text-textSecondary mb-1">Correo Electrónico Laboral</label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Mail className="h-5 w-5 text-textMuted" />
-                  </div>
-                  <input type="email" className="block w-full pl-10 pr-3 py-2.5 border border-borderLight rounded-lg text-sm text-textPrimary focus:ring-accent focus:border-accent outline-none transition-all" placeholder="juan@miempresa.com" />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-textSecondary mb-1">Teléfono o WhatsApp</label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Phone className="h-5 w-5 text-textMuted" />
-                  </div>
-                  <input type="tel" className="block w-full pl-10 pr-3 py-2.5 border border-borderLight rounded-lg text-sm text-textPrimary focus:ring-accent focus:border-accent outline-none transition-all" placeholder="+52 (55) 1234 5678" />
-                </div>
-              </div>
-
-              <div className="pt-2">
-                <button type="submit" className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-accent hover:bg-accent-hover transition-colors">
-                  <Calendar className="mr-2 h-5 w-5" />
-                  Solicitar mi Demo
+            {status === "success" ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="text-center py-8"
+              >
+                <CheckCircle2 className="h-14 w-14 text-success mx-auto mb-4" />
+                <h4 className="text-xl font-bold text-textPrimary mb-2">{t.demo.successTitle}</h4>
+                <p className="text-textSecondary text-sm mb-6">{t.demo.successMsg}</p>
+                <button
+                  onClick={resetAndClose}
+                  className="btn-outline text-sm"
+                >
+                  Cerrar
                 </button>
-              </div>
-              <p className="text-xs text-center text-textMuted mt-4">
-                No compartiremos tu información con terceros.
-              </p>
-            </form>
+              </motion.div>
+            ) : (
+              <form className="space-y-4" onSubmit={handleSubmit}>
+                {/* Name */}
+                <div>
+                  <label className="block text-sm font-semibold text-textSecondary mb-1.5">{t.demo.nameLabel}</label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Building className="h-4 w-4 text-textMuted" />
+                    </div>
+                    <input
+                      type="text"
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      required
+                      className="block w-full pl-10 pr-3 py-2.5 border border-borderLight rounded-xl text-sm text-textPrimary focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-all"
+                      placeholder={t.demo.namePlaceholder}
+                    />
+                  </div>
+                </div>
+                
+                {/* Email */}
+                <div>
+                  <label className="block text-sm font-semibold text-textSecondary mb-1.5">{t.demo.emailLabel}</label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Mail className="h-4 w-4 text-textMuted" />
+                    </div>
+                    <input
+                      type="email"
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      required
+                      className="block w-full pl-10 pr-3 py-2.5 border border-borderLight rounded-xl text-sm text-textPrimary focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-all"
+                      placeholder={t.demo.emailPlaceholder}
+                    />
+                  </div>
+                </div>
+
+                {/* Phone */}
+                <div>
+                  <label className="block text-sm font-semibold text-textSecondary mb-1.5">{t.demo.phoneLabel}</label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Phone className="h-4 w-4 text-textMuted" />
+                    </div>
+                    <input
+                      type="tel"
+                      value={form.phone}
+                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                      required
+                      className="block w-full pl-10 pr-3 py-2.5 border border-borderLight rounded-xl text-sm text-textPrimary focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-all"
+                      placeholder={t.demo.phonePlaceholder}
+                    />
+                  </div>
+                </div>
+
+                {/* Company */}
+                <div>
+                  <label className="block text-sm font-semibold text-textSecondary mb-1.5">{t.demo.companyLabel}</label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Building className="h-4 w-4 text-textMuted" />
+                    </div>
+                    <input
+                      type="text"
+                      value={form.company}
+                      onChange={(e) => setForm({ ...form, company: e.target.value })}
+                      className="block w-full pl-10 pr-3 py-2.5 border border-borderLight rounded-xl text-sm text-textPrimary focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-all"
+                      placeholder={t.demo.companyPlaceholder}
+                    />
+                  </div>
+                </div>
+
+                {/* Team Size */}
+                <div>
+                  <label className="block text-sm font-semibold text-textSecondary mb-1.5">{t.demo.teamSizeLabel}</label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Users className="h-4 w-4 text-textMuted" />
+                    </div>
+                    <select
+                      value={form.teamSize}
+                      onChange={(e) => setForm({ ...form, teamSize: e.target.value })}
+                      className="block w-full pl-10 pr-3 py-2.5 border border-borderLight rounded-xl text-sm text-textPrimary focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-all appearance-none bg-white"
+                    >
+                      <option value="">—</option>
+                      {t.demo.teamSizeOptions.map((opt) => (
+                        <option key={opt} value={opt}>{opt}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* Error message */}
+                {status === "error" && (
+                  <div className="flex items-center gap-2 text-sm text-error bg-error-light p-3 rounded-xl">
+                    <AlertCircle className="h-4 w-4 shrink-0" />
+                    {t.demo.errorMsg}
+                  </div>
+                )}
+
+                {/* Submit */}
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    disabled={status === "sending"}
+                    className="w-full flex justify-center items-center py-3 px-4 rounded-xl shadow-glow text-sm font-bold text-white bg-accent hover:bg-accent-hover transition-all disabled:opacity-60"
+                  >
+                    {status === "sending" ? (
+                      <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> {t.demo.sending}</>
+                    ) : (
+                      <><Calendar className="mr-2 h-5 w-5" /> {t.demo.submit}</>
+                    )}
+                  </button>
+                </div>
+                <p className="text-xs text-center text-textMuted mt-3">
+                  {t.demo.privacy}
+                </p>
+              </form>
+            )}
           </div>
         </motion.div>
       </div>
