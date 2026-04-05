@@ -42,13 +42,15 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-3">
               <Image
                 src="/logos/gestory.png"
                 alt="Gestory Logo"
-                width={160}
-                height={50}
-                className="h-10 w-auto object-contain"
+                width={240}
+                height={76}
+                className={`w-auto object-contain transition-all duration-300 ${
+                  scrolled ? "h-11 lg:h-12" : "h-12 lg:h-14"
+                }`}
                 priority
               />
             </Link>
