@@ -20,19 +20,21 @@ export default function Footer() {
     <footer className="bg-surface-dark text-textInverse border-t border-borderDark pt-16 pb-8">
       <div className="section-container">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-          {/* Brand */}
+          {/* High Impact Brand Branding */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/">
-              <Image 
-                src="/logos/gestory-white.png" 
-                alt="Gestory Logo" 
-                width={160} 
-                height={50} 
-                className="h-10 w-auto mb-5"
-                priority
-              />
+            <Link href="/" className="inline-block group mb-6">
+              <div className="animate-logo-glow">
+                <Image 
+                  src="/logos/gestory-white.png" 
+                  alt="Gestory Logo" 
+                  width={220} 
+                  height={70} 
+                  className="h-14 w-auto object-contain transition-transform group-hover:scale-105 duration-300 drop-shadow-md"
+                  priority
+                />
+              </div>
             </Link>
-            <p className="text-textMuted text-sm font-medium leading-relaxed mb-5">
+            <p className="text-textMuted text-base font-medium leading-relaxed mb-6 italic opacity-90">
               {t.footer.description}
             </p>
             <div className="flex gap-3 text-textMuted">

@@ -29,25 +29,28 @@ export default function Hero({ onOpenDemo }: HeroProps) {
             transition={{ duration: 0.6 }}
             className="text-center lg:text-left space-y-8"
           >
-            {/* Badge */}
+            {/* Premium Brand Badge */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-accent/20 shadow-sm"
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/90 backdrop-blur-md border border-accent/20 shadow-sm ring-4 ring-accent/5"
             >
-              <span className="flex h-2 w-2 rounded-full bg-success animate-pulse" />
-              <span className="text-xs font-semibold text-textSecondary">{t.hero.badge}</span>
+              <div className="flex h-5 w-5 items-center justify-center rounded-lg bg-accent/10">
+                <ShieldCheck className="h-3.5 w-3.5 text-accent" />
+              </div>
+              <span className="text-xs font-bold text-textPrimary uppercase tracking-tight">{t.hero.badge}</span>
+              <span className="flex h-1.5 w-1.5 rounded-full bg-success animate-pulse ml-1" />
             </motion.div>
             
             {/* Headline */}
             <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-heading font-extrabold text-textPrimary leading-[1.1] tracking-tight">
               {t.hero.headline}{" "}
-              <span className="text-gradient-blue">{t.hero.headlineAccent}</span>
+              <span className="text-gradient-blue relative after:absolute after:bottom-1 after:left-0 after:w-full after:h-1.5 after:bg-accent/10 after:-z-10">{t.hero.headlineAccent}</span>
             </h1>
             
             {/* Subtitle */}
-            <p className="text-lg text-textSecondary max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            <p className="text-lg text-textSecondary max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
               {t.hero.subtitle}
             </p>
             
@@ -55,30 +58,33 @@ export default function Hero({ onOpenDemo }: HeroProps) {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
               <button 
                 onClick={onOpenDemo}
-                className="btn-primary text-base px-8 py-4 rounded-xl group"
+                className="btn-primary text-base px-10 py-4 rounded-xl group relative overflow-hidden"
               >
-                {t.hero.cta1}
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:animate-[logo-shine_1.5s_infinite]" />
+                <span className="relative z-10 flex items-center font-bold">
+                  {t.hero.cta1}
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </span>
               </button>
               <Link 
                 href="#soluciones"
-                className="btn-outline text-base px-8 py-4 rounded-xl"
+                className="btn-outline text-base px-8 py-4 rounded-xl font-bold"
               >
                 {t.hero.cta2}
               </Link>
             </div>
 
-            {/* Trust checks */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 text-sm text-textMuted pt-2">
+            {/* Trust checks with brand-aligned styling */}
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 text-[13px] text-textMuted pt-2 font-medium">
               <div className="flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-success" /> {t.hero.check1}</div>
-              <div className="hidden sm:block h-4 w-px bg-borderLight" />
+              <div className="hidden sm:block h-3 w-px bg-borderLight" />
               <div className="flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-success" /> {t.hero.check2}</div>
-              <div className="hidden sm:block h-4 w-px bg-borderLight" />
+              <div className="hidden sm:block h-3 w-px bg-borderLight" />
               <div className="flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-success" /> {t.hero.check3}</div>
             </div>
           </motion.div>
 
-          {/* Right Column: Dashboard Mockup */}
+          {/* Right Column: Dashboard Mockup with Enhanced Branding */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -87,13 +93,18 @@ export default function Hero({ onOpenDemo }: HeroProps) {
           >
             {/* Main Mockup Container */}
             <div className="relative rounded-2xl bg-white border border-borderLight shadow-float overflow-hidden p-2.5">
-              {/* Browser chrome */}
+              {/* Browser chrome with Brand Recognition */}
               <div className="bg-surface-muted rounded-xl flex items-center p-2.5 border border-borderLight/60 mb-2.5 gap-2">
-                <div className="w-3 h-3 rounded-full bg-error/70" />
-                <div className="w-3 h-3 rounded-full bg-warning/70" />
-                <div className="w-3 h-3 rounded-full bg-success/70" />
-                <div className="ml-4 h-5 flex-1 max-w-[200px] bg-white border border-borderLight rounded-md mx-auto flex items-center justify-center">
-                  <span className="text-[10px] text-textMuted font-medium">app.gestory.com</span>
+                <div className="flex gap-1.5 ml-1">
+                  <div className="w-2.5 h-2.5 rounded-full bg-error/40" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-warning/40" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-success/40" />
+                </div>
+                <div className="ml-4 h-6 flex-1 max-w-[280px] bg-white border border-borderLight/80 rounded-lg mx-auto flex items-center px-3 gap-2">
+                  <div className="w-3.5 h-3.5 bg-accent rounded-sm flex items-center justify-center shrink-0">
+                    <span className="text-[7px] text-white font-black">G</span>
+                  </div>
+                  <span className="text-[11px] text-textPrimary font-bold tracking-tight">app.gestory.com</span>
                 </div>
               </div>
               

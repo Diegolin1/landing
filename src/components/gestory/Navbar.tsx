@@ -43,19 +43,29 @@ export default function Navbar({ onOpenDemo, bannerOffset = 0 }: NavbarProps) {
     >
       <div className="section-container">
         <div className="flex justify-between items-center">
-          {/* Logo */}
+          {/* Logo with Premium Brand Impact */}
           <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="flex items-center gap-3">
-              <Image
-                src="/logos/gestory.png"
-                alt="Gestory Logo"
-                width={240}
-                height={76}
-                className={`w-auto object-contain transition-all duration-300 ${
-                  scrolled ? "h-11 lg:h-12" : "h-12 lg:h-14"
-                }`}
-                priority
-              />
+            <Link href="/" className="flex items-center group">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                whileHover={{ scale: 1.05 }}
+                className="relative animate-logo-glow"
+              >
+                <div className="relative overflow-hidden rounded-lg animate-logo-shine">
+                  <Image
+                    src="/logos/gestory.png"
+                    alt="Gestory Logo"
+                    width={280}
+                    height={88}
+                    className={`w-auto object-contain transition-all duration-300 drop-shadow-sm group-hover:drop-shadow-md ${
+                      scrolled ? "h-14 lg:h-16" : "h-16 lg:h-18"
+                    }`}
+                    priority
+                  />
+                </div>
+              </motion.div>
             </Link>
           </div>
 
