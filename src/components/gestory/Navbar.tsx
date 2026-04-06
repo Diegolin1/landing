@@ -94,12 +94,6 @@ export default function Navbar({ onOpenDemo, bannerOffset = 0 }: NavbarProps) {
               <span className="uppercase text-xs font-bold">{locale === "es" ? "EN" : "ES"}</span>
             </button>
 
-            <Link
-              href="https://saas.gestory.com/login"
-              className="text-sm font-medium text-textSecondary hover:text-textPrimary px-4 py-2 rounded-lg transition-colors"
-            >
-              {t.nav.login}
-            </Link>
             <button
               onClick={onOpenDemo}
               className="bg-accent hover:bg-accent-hover text-white text-sm font-bold px-5 py-2.5 rounded-xl transition-all shadow-glow hover:shadow-glow-lg"
@@ -149,13 +143,6 @@ export default function Navbar({ onOpenDemo, bannerOffset = 0 }: NavbarProps) {
                 </Link>
               ))}
               <div className="border-t border-borderLight pt-3 mt-2 flex flex-col gap-2">
-                <Link
-                  href="https://saas.gestory.com/login"
-                  className="text-sm font-medium text-center text-textPrimary border border-borderLight rounded-xl py-2.5 hover:bg-surface-muted transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {t.nav.login}
-                </Link>
                 <button
                   onClick={(e) => {
                     setMobileMenuOpen(false);

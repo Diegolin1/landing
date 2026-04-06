@@ -24,25 +24,54 @@ const FinalCTA = dynamic(() => import("../components/gestory/FinalCTA"));
 const SecurityTrust = dynamic(() => import("../components/gestory/SecurityTrust"));
 const Footer = dynamic(() => import("../components/gestory/Footer"));
 
+import { useRef, useEffect } from "react";
+
 export default function Home() {
   const [isDemoOpen, setIsDemoOpen] = useState(false);
   const [isTopBannerVisible, setIsTopBannerVisible] = useState(true);
+  const [bannerHeight, setBannerHeight] = useState(0);
+  const bannerRef = useRef<HTMLDivElement>(null);
 
   const openDemo = (e?: React.MouseEvent) => {
     e?.preventDefault();
     setIsDemoOpen(true);
   };
 
+  useEffect(() => {
+    if (!isTopBannerVisible) {
+      setBannerHeight(0);
+      return;
+    }
+
+    const updateHeight = () => {
+      if (bannerRef.current) {
+        setBannerHeight(bannerRef.current.offsetHeight);
+      }
+    };
+
+    updateHeight();
+    const observer = new ResizeObserver(updateHeight);
+    if (bannerRef.current) observer.observe(bannerRef.current);
+    window.addEventListener("resize", updateHeight);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateHeight);
+    };
+  }, [isTopBannerVisible]);
+
   return (
     <I18nProvider>
       <main className="min-h-screen font-sans bg-background text-textPrimary selection:bg-accent/20 selection:text-accent scroll-smooth">
         {isTopBannerVisible && (
-          <TopBanner
-            onOpenDemo={() => setIsDemoOpen(true)}
-            onClose={() => setIsTopBannerVisible(false)}
-          />
+          <div ref={bannerRef}>
+            <TopBanner
+              onOpenDemo={() => setIsDemoOpen(true)}
+              onClose={() => setIsTopBannerVisible(false)}
+            />
+          </div>
         )}
-        <Navbar onOpenDemo={openDemo} bannerOffset={isTopBannerVisible ? 56 : 0} />
+        <Navbar onOpenDemo={openDemo} bannerOffset={bannerHeight} />
         <Hero onOpenDemo={openDemo} />
         <LogoTicker />
         <ProblemSolution />

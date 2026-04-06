@@ -31,8 +31,8 @@ export default function ProblemSolution() {
       <div className="section-container">
         <div className="section-header mb-16">
           <p className="eyebrow mb-3">{t.problem.eyebrow}</p>
-          <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-textPrimary mb-6 leading-tight">
-            {t.problem.headline}<br className="hidden md:block" />
+          <h2 className="text-2xl xs:text-3xl md:text-5xl font-heading font-extrabold text-textPrimary mb-6 leading-tight">
+            {t.problem.headline} <br className="hidden md:block" />
             {t.problem.headlineBr}
           </h2>
           <p className="text-lg text-textSecondary font-medium max-w-2xl mx-auto">

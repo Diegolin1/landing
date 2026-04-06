@@ -114,12 +114,12 @@ export default function FeaturesBento() {
   const previewLabel = isEs ? "Vista real del modulo" : "Real module preview";
 
   return (
-    <section className="section-padding bg-surface-muted" id="soluciones">
+    <section className="py-16 md:py-28 bg-surface-muted" id="soluciones">
       <div className="section-container">
         
         <div className="section-header">
           <p className="eyebrow mb-3">{t.features.eyebrow}</p>
-          <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-textPrimary mb-6">
+          <h2 className="text-2xl xs:text-3xl md:text-4xl font-heading font-extrabold text-textPrimary mb-6">
             {t.features.headline}{" "}
             <span className="text-gradient-blue">{t.features.headlineAccent}</span>
           </h2>

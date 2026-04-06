@@ -47,24 +47,24 @@ export default function TopBanner({ onOpenDemo, onClose }: TopBannerProps) {
   const { days, hours, minutes } = useEndOfMonthCountdown();
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[60] h-14 overflow-hidden border-b border-white/20 bg-gradient-to-r from-primary to-accent text-white">
+    <div className="fixed top-0 left-0 right-0 z-[60] min-h-[3.5rem] py-2 md:py-0 border-b border-white/20 bg-gradient-to-r from-primary to-accent text-white transition-all duration-300">
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full animate-shimmer" />
-      <div className="relative h-full section-container flex items-center justify-between gap-3">
+      <div className="relative min-h-[3.5rem] section-container flex flex-wrap sm:flex-nowrap items-center justify-between gap-x-4 gap-y-2 py-1">
         <div className="min-w-0 flex items-center gap-2 sm:gap-3">
           <span className="hidden sm:inline-flex items-center gap-1 rounded-full bg-white/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider">
             <Flame className="h-3 w-3 text-amber-300" />
             {t.topBanner.badge}
           </span>
-          <p className="truncate text-xs sm:text-sm font-semibold">
+          <p className="text-xs sm:text-sm font-semibold leading-relaxed">
             {t.topBanner.offer}
             <span className="hidden md:inline"> · {t.topBanner.spots}</span>
           </p>
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-          <div className="hidden sm:flex items-center gap-1.5 rounded-lg border border-white/20 bg-black/20 px-2.5 py-1 text-[11px] font-semibold">
-            <Clock3 className="h-3.5 w-3.5 text-amber-300" />
-            <span>{t.topBanner.endsIn}</span>
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0 ml-auto">
+          <div className="flex items-center gap-1.5 rounded-lg border border-white/20 bg-black/20 px-2 py-1 md:px-2.5 md:py-1 text-[10px] md:text-[11px] font-semibold whitespace-nowrap">
+            <Clock3 className="hidden xs:block h-3.5 w-3.5 text-amber-300" />
+            <span className="hidden xs:inline">{t.topBanner.endsIn}</span>
             <span className="font-bold tabular-nums">{String(days).padStart(2, "0")}d</span>
             <span className="text-white/60">:</span>
             <span className="font-bold tabular-nums">{String(hours).padStart(2, "0")}h</span>

@@ -44,7 +44,7 @@ export default function Hero({ onOpenDemo }: HeroProps) {
             </motion.div>
             
             {/* Headline */}
-            <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-heading font-extrabold text-textPrimary leading-[1.1] tracking-tight">
+            <h1 className="text-[2.2rem] xs:text-4xl md:text-5xl lg:text-[3.5rem] font-heading font-extrabold text-textPrimary leading-[1.1] tracking-tight">
               {t.hero.headline}{" "}
               <span className="text-gradient-blue relative after:absolute after:bottom-1 after:left-0 after:w-full after:h-1.5 after:bg-accent/10 after:-z-10">{t.hero.headlineAccent}</span>
             </h1>
@@ -55,7 +55,7 @@ export default function Hero({ onOpenDemo }: HeroProps) {
             </p>
             
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+            <div className="flex flex-col xs:flex-row gap-4 justify-center lg:justify-start pt-2">
               <button 
                 onClick={onOpenDemo}
                 className="btn-primary text-base px-10 py-4 rounded-xl group relative overflow-hidden"

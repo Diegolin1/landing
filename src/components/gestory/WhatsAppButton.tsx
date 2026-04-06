@@ -44,7 +44,7 @@ export default function WhatsAppButton() {
         )}
       </AnimatePresence>
 
-      <div className="hidden sm:flex items-center gap-2 bg-white border border-borderLight rounded-full px-3 py-1.5 shadow-card">
+      <div className="hidden md:flex items-center gap-2 bg-white border border-borderLight rounded-full px-3 py-1.5 shadow-card">
         <span className="h-2 w-2 rounded-full bg-success animate-pulse" />
         <span className="text-[11px] font-semibold text-textSecondary">{t.whatsapp.schedule}</span>
       </div>
