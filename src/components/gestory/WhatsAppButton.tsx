@@ -31,17 +31,23 @@ export default function WhatsAppButton() {
               <X className="h-3.5 w-3.5" />
             </button>
             <p className="text-sm font-medium text-textPrimary pr-4">{t.whatsapp.tooltip}</p>
+            <p className="text-xs text-textMuted mt-1">{t.whatsapp.schedule}</p>
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-3 block text-center text-xs font-bold text-white bg-[#25D366] hover:bg-[#20BD5A] rounded-lg py-2 transition-colors"
             >
-              WhatsApp →
+              {t.whatsapp.cta} →
             </a>
           </motion.div>
         )}
       </AnimatePresence>
+
+      <div className="hidden sm:flex items-center gap-2 bg-white border border-borderLight rounded-full px-3 py-1.5 shadow-card">
+        <span className="h-2 w-2 rounded-full bg-success animate-pulse" />
+        <span className="text-[11px] font-semibold text-textSecondary">{t.whatsapp.schedule}</span>
+      </div>
 
       {/* Button */}
       <motion.button

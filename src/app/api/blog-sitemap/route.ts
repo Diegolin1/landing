@@ -2,7 +2,7 @@ import { getBlogPosts } from "@/utils/blog";
 
 export async function GET() {
   const posts = getBlogPosts();
-  const baseUrl = "https://lumina.mx";
+  const baseUrl = "https://gestory.com";
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

@@ -33,7 +33,7 @@ export default function BlogClientWrapper({ posts, categories }: BlogClientWrapp
             <ArrowLeftIcon size={20} />
             Volver al inicio
           </Link>
-          <h1 className="text-2xl font-bold text-white">Blog Lumina</h1>
+          <h1 className="text-2xl font-bold text-white">Blog Gestory</h1>
           <div className="w-32" />
         </nav>
       </header>
@@ -43,10 +43,10 @@ export default function BlogClientWrapper({ posts, categories }: BlogClientWrapp
         {/* Hero Section */}
         <section className="mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Aprende a Vender Más
+            Guias para operar y escalar con ERP + POS
           </h2>
           <p className="text-xl text-white/70 max-w-2xl">
-            Artículos educativos para vendedores B2B. Estrategias, tips, y guías prácticas para crecer tu negocio.
+            Contenido practico sobre CFDI 4.0, POS offline, inventario multi-almacen y operaciones B2B en Mexico.
           </p>
         </section>
 
@@ -56,7 +56,7 @@ export default function BlogClientWrapper({ posts, categories }: BlogClientWrapp
             <SearchIcon className="absolute left-4 top-4 text-white/40" size={20} />
             <input
               type="text"
-              placeholder="Buscar artículos..."
+              placeholder="Buscar guias, CFDI, POS offline..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-12 pr-6 py-3 rounded-xl bg-surface border border-borderDark text-white placeholder:text-white/40 focus:outline-none focus:border-primary/50 transition-colors"

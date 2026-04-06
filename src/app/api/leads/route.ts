@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { sendEmail } from '../../../utils/sendEmail';
 
 export async function POST(req: NextRequest) {
   try {
@@ -17,6 +18,24 @@ export async function POST(req: NextRequest) {
     // await fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${process.env.TELEGRAM_CHAT_ID}&text=${waMsg}`);
 
     // 3. Guardar en la base de datos del SaaS backend
+    // 2.5. Enviar correo a destinatario
+    try {
+      await sendEmail({
+        to: process.env.EMAIL_TO || 'diegorodvaz73@gmail.com',
+        subject: 'Nuevo lead desde landing Gestory',
+        html: `<h2>Nuevo lead recibido</h2>
+          <ul>
+            <li><b>Nombre:</b> ${name}</li>
+            <li><b>Email:</b> ${email}</li>
+            <li><b>Teléfono:</b> ${phone}</li>
+            <li><b>Empresa:</b> ${company || ''}</li>
+            <li><b>Tamaño de equipo:</b> ${teamSize || ''}</li>
+            <li><b>Fecha:</b> ${new Date().toLocaleString()}</li>
+          </ul>`
+      });
+    } catch (mailErr) {
+      console.error('[EMAIL ERROR]', mailErr);
+    }
     try {
       const backendUrl = process.env.BACKEND_URL || 'https://erp-prod-b76f4dc5f060.herokuapp.com';
       const response = await fetch(`${backendUrl}/api/leads`, {

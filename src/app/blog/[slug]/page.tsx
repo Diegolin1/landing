@@ -75,7 +75,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <ArrowLeftIcon size={20} />
             Volver al blog
           </Link>
-          <h1 className="text-xl font-bold text-white">Blog Lumina</h1>
+          <h1 className="text-xl font-bold text-white">Blog Gestory</h1>
           <div className="w-32" />
         </nav>
       </header>
@@ -172,15 +172,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           {/* CTA Section */}
           <div className="bg-surface border border-borderDark rounded-2xl p-8 mb-12">
-            <h3 className="text-2xl font-bold text-white mb-4">¿Listo para vender más?</h3>
+            <h3 className="text-2xl font-bold text-white mb-4">¿Listo para operar con mas control?</h3>
             <p className="text-white/70 mb-6">
-              Implementa estas estrategias en tu negocio con Lumina. Prueba gratis 14 días.
+              Implementa estas practicas con Gestory y conecta ventas, inventario y facturacion en una sola plataforma.
             </p>
             <Link
               href="/"
               className="inline-block px-6 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg transition-colors"
             >
-              Comenzar Trial Gratis
+              Agendar demo de Gestory
             </Link>
           </div>
         </article>

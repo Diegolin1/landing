@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, Shield } from "lucide-react";
+import { Check, Shield, X } from "lucide-react";
 import { useI18n } from "../../i18n";
 
 interface PricingProps {
@@ -10,7 +10,7 @@ interface PricingProps {
 }
 
 export default function Pricing({ onOpenDemo }: PricingProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [isAnnual, setIsAnnual] = useState(false);
 
   const monthlyPrices = [990, 2490];
@@ -37,7 +37,7 @@ export default function Pricing({ onOpenDemo }: PricingProps) {
     },
     {
       name: t.pricing.plan3Name,
-      price: t.pricing.plan3Cta === "Agendar Demo" ? "A la medida" : "Custom",
+      price: locale === "es" ? "A la medida" : "Custom",
       period: "",
       description: t.pricing.plan3Desc,
       features: t.pricing.plan3Features,
@@ -45,6 +45,127 @@ export default function Pricing({ onOpenDemo }: PricingProps) {
       popular: false,
     },
   ];
+
+  const comparison =
+    locale === "es"
+      ? {
+          title: "Comparativa rapida vs alternativas comunes",
+          subtitle: "Visualiza por que el plan Pro tiene mejor retorno para operaciones multi-canal.",
+          note: "Comparacion de referencia basada en configuraciones comunes del mercado mexicano. Puede variar segun paquetes, modulos y volumen.",
+          columns: {
+            feature: "Capacidad",
+            gestory: "Gestory",
+            legacy: "Aspel / Contpaqi",
+            cloud: "Bind ERP",
+          },
+          rows: [
+            {
+              feature: "POS offline con sincronizacion",
+              gestory: true,
+              legacy: "Parcial",
+              cloud: "Parcial",
+            },
+            {
+              feature: "Auto-facturacion CFDI 4.0 con QR",
+              gestory: true,
+              legacy: false,
+              cloud: "Add-on",
+            },
+            {
+              feature: "Portal B2B con listas por cliente",
+              gestory: true,
+              legacy: false,
+              cloud: "Limitado",
+            },
+            {
+              feature: "Inventario multi-almacen en tiempo real",
+              gestory: true,
+              legacy: "Con modulo",
+              cloud: true,
+            },
+            {
+              feature: "Onboarding guiado + soporte WhatsApp",
+              gestory: true,
+              legacy: "Variable",
+              cloud: "Variable",
+            },
+            {
+              feature: "Costo mensual referencia",
+              gestory: "Desde $2,490",
+              legacy: "Variable + modulos",
+              cloud: "Desde $2,999",
+            },
+          ],
+        }
+      : {
+          title: "Quick comparison vs common alternatives",
+          subtitle: "See why Pro usually offers stronger payback for multi-channel operations.",
+          note: "Directional market reference based on common Mexico-based setups. Actual values vary by package, add-ons and volume.",
+          columns: {
+            feature: "Capability",
+            gestory: "Gestory",
+            legacy: "Aspel / Contpaqi",
+            cloud: "Bind ERP",
+          },
+          rows: [
+            {
+              feature: "Offline POS with sync",
+              gestory: true,
+              legacy: "Partial",
+              cloud: "Partial",
+            },
+            {
+              feature: "CFDI 4.0 self-invoicing via QR",
+              gestory: true,
+              legacy: false,
+              cloud: "Add-on",
+            },
+            {
+              feature: "B2B portal with customer pricing",
+              gestory: true,
+              legacy: false,
+              cloud: "Limited",
+            },
+            {
+              feature: "Real-time multi-warehouse inventory",
+              gestory: true,
+              legacy: "With module",
+              cloud: true,
+            },
+            {
+              feature: "Guided onboarding + WhatsApp support",
+              gestory: true,
+              legacy: "Variable",
+              cloud: "Variable",
+            },
+            {
+              feature: "Reference monthly cost",
+              gestory: "From $2,490",
+              legacy: "Variable + add-ons",
+              cloud: "From $2,999",
+            },
+          ],
+        };
+
+  const renderCell = (value: boolean | string, isGestory = false) => {
+    if (typeof value === "boolean") {
+      return value ? (
+        <span className="inline-flex items-center justify-center rounded-full bg-success-light p-1">
+          <Check className="h-4 w-4 text-success" />
+        </span>
+      ) : (
+        <span className="inline-flex items-center justify-center rounded-full bg-surface-muted p-1">
+          <X className="h-4 w-4 text-textMuted" />
+        </span>
+      );
+    }
+
+    return (
+      <span className={`text-xs sm:text-sm font-semibold ${isGestory ? "text-accent" : "text-textSecondary"}`}>
+        {value}
+      </span>
+    );
+  };
 
   return (
     <section className="section-padding bg-background" id="precios">
@@ -143,6 +264,56 @@ export default function Pricing({ onOpenDemo }: PricingProps) {
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45 }}
+          className="mt-12 max-w-6xl mx-auto"
+        >
+          <div className="rounded-2xl border border-borderLight bg-white overflow-hidden shadow-card">
+            <div className="px-6 py-5 border-b border-borderLight bg-surface-muted">
+              <h3 className="text-lg font-bold text-textPrimary">{comparison.title}</h3>
+              <p className="text-sm text-textSecondary mt-1">{comparison.subtitle}</p>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="min-w-full text-left">
+                <thead className="bg-white">
+                  <tr className="border-b border-borderLight">
+                    <th className="px-4 sm:px-6 py-4 text-xs font-bold uppercase tracking-wider text-textMuted">
+                      {comparison.columns.feature}
+                    </th>
+                    <th className="px-4 sm:px-6 py-4 text-xs font-bold uppercase tracking-wider text-accent">
+                      {comparison.columns.gestory}
+                    </th>
+                    <th className="px-4 sm:px-6 py-4 text-xs font-bold uppercase tracking-wider text-textMuted">
+                      {comparison.columns.legacy}
+                    </th>
+                    <th className="px-4 sm:px-6 py-4 text-xs font-bold uppercase tracking-wider text-textMuted">
+                      {comparison.columns.cloud}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparison.rows.map((row) => (
+                    <tr key={row.feature} className="border-b border-borderLight/70 last:border-b-0">
+                      <td className="px-4 sm:px-6 py-4 text-sm font-semibold text-textPrimary">
+                        {row.feature}
+                      </td>
+                      <td className="px-4 sm:px-6 py-4">{renderCell(row.gestory, true)}</td>
+                      <td className="px-4 sm:px-6 py-4">{renderCell(row.legacy)}</td>
+                      <td className="px-4 sm:px-6 py-4">{renderCell(row.cloud)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p className="text-xs text-textMuted mt-3 px-1">{comparison.note}</p>
+        </motion.div>
 
         {/* Guarantee */}
         <motion.div

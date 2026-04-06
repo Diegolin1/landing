@@ -10,6 +10,11 @@ export default function Footer() {
 
   const productAnchors = ["#soluciones", "#soluciones", "#soluciones", "#soluciones"];
   const companyAnchors = ["#security", "#faq", "#precios"];
+  const legalLinks = [
+    { label: t.footer.legalLinks[0], href: "https://saas.gestory.com/terminos" },
+    { label: t.footer.legalLinks[1], href: "https://saas.gestory.com/privacidad" },
+    { label: t.footer.legalLinks[2], href: "https://saas.gestory.com/aviso-legal" },
+  ];
 
   return (
     <footer className="bg-surface-dark text-textInverse border-t border-borderDark pt-16 pb-8">
@@ -68,6 +73,11 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/blog" className="text-sm text-textMuted hover:text-white font-medium transition-colors">
+                  {t.nav.blog}
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -75,11 +85,16 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-white mb-4 tracking-wider uppercase text-xs">{t.footer.legal}</h4>
             <ul className="space-y-2.5">
-              {t.footer.legalLinks.map((link) => (
-                <li key={link}>
-                  <Link href="#" className="text-sm text-textMuted hover:text-white font-medium transition-colors">
-                    {link}
-                  </Link>
+              {legalLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-textMuted hover:text-white font-medium transition-colors"
+                  >
+                    {link.label}
+                  </a>
                 </li>
               ))}
             </ul>

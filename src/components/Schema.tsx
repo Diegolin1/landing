@@ -28,7 +28,7 @@ export function BlogPostSchema({
   }
 
   const parsedReadTime = parseInt(readTime.split(" ")[0]) || 5;
-  const baseUrl = "https://lumina.mx"; // Update with your domain
+  const baseUrl = "https://gestory.com";
 
   const schema = {
     "@context": "https://schema.org",
@@ -50,7 +50,7 @@ export function BlogPostSchema({
       "@type": "WebPage",
       "@id": `${baseUrl}/blog/${slug}`,
     },
-    keywords: "B2B, ventas, mexico, empresas",
+    keywords: "ERP Mexico, POS offline, CFDI 4.0, B2B, inventario",
     articleBody: content.substring(0, 1000), // First 1000 chars
   };
 
@@ -71,7 +71,7 @@ export function WebPageSchema({
   title,
   description,
 }: WebPageSchemaProps): ReactNode {
-  const baseUrl = "https://lumina.mx";
+  const baseUrl = "https://gestory.com";
 
   const schema = {
     "@context": "https://schema.org",

@@ -9,9 +9,10 @@ import { useI18n } from "../../i18n";
 
 interface NavbarProps {
   onOpenDemo?: (e?: React.MouseEvent) => void;
+  bannerOffset?: number;
 }
 
-export default function Navbar({ onOpenDemo }: NavbarProps) {
+export default function Navbar({ onOpenDemo, bannerOffset = 0 }: NavbarProps) {
   const { t, locale, toggleLocale } = useI18n();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -28,11 +29,13 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
     { name: t.nav.modules, href: "#soluciones" },
     { name: t.nav.pricing, href: "#precios" },
     { name: t.nav.faq, href: "#faq" },
+    { name: t.nav.blog, href: "/blog" },
   ];
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      style={{ top: `${bannerOffset}px` }}
+      className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled
           ? "bg-white/80 backdrop-blur-xl shadow-sm border-b border-borderLight/50 py-3"
           : "bg-transparent py-5"

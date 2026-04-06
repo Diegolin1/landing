@@ -41,6 +41,7 @@ export default function LogoTicker() {
                 alt={logo.name}
                 width={120}
                 height={40}
+                sizes="(max-width: 768px) 96px, 120px"
                 className="h-8 md:h-10 w-auto object-contain"
               />
             </div>

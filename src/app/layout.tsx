@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     default: "Gestory | ERP y Punto de Venta para Empresas en Crecimiento",
     template: "%s | Gestory"
   },
-  description: "Plataforma SaaS de gestión integral. Inventario multi-almacén, punto de venta POS, facturación CFDI 4.0, portal B2B y reportes en tiempo real. Agenda tu demo gratis.",
+  description: "Gestory centraliza POS offline, inventario multi-almacen, pedidos B2B y facturacion CFDI 4.0 para empresas que venden en multiples canales.",
   keywords: [
     "ERP México", "punto de venta POS", "inventario multi-almacén", "facturación CFDI 4.0",
     "software de gestión empresarial", "SaaS México", "portal B2B mayoristas",
@@ -45,14 +45,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website", locale: "es_MX", url: "https://gestory.com", siteName: "Gestory",
     title: "Gestory | ERP y Punto de Venta para Empresas en Crecimiento",
-    description: "Controla inventario, ventas, facturación y sucursales desde una sola plataforma. Agenda tu demo gratis — 30 días sin costo.",
-    images: [{ url: "https://gestory.com/og-image.png", width: 1200, height: 630, alt: "Gestory — ERP y Punto de Venta", type: "image/png" }],
+    description: "Escala ventas sin perder control: POS offline, auto-facturacion QR e inventario sincronizado por sucursal.",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Gestory ERP y POS para empresas" }],
   },
   twitter: {
     card: "summary_large_image", site: "@GestoryApp", creator: "@GestoryApp",
     title: "Gestory | ERP + POS + Facturación CFDI 4.0",
-    description: "Controla inventario, ventas y facturación desde una sola plataforma. Agenda tu demo gratis.",
-    images: ["https://gestory.com/twitter-image.png"],
+    description: "Agenda una demo de 15 min y calcula el ahorro real de operar con Gestory.",
+    images: ["/twitter-image"],
   },
 };
 
@@ -70,7 +70,41 @@ const organizationSchema = {
   },
   "description": "Plataforma SaaS de gestión integral para empresas. Inventario multi-almacén, POS, facturación CFDI 4.0, portal B2B y reportes en tiempo real.",
   "url": "https://gestory.com",
-  "softwareVersion": "2.0"
+  "softwareVersion": "2.0",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "500",
+    "bestRating": "5"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Organization",
+        "name": "Calzado Alpina"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "Reduccion de errores de inventario de hasta 85% tras centralizar sucursales y reportes en Gestory."
+    },
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Organization",
+        "name": "Distribuidora Baeza"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "4.8",
+        "bestRating": "5"
+      },
+      "reviewBody": "Operacion fiscal mas agil con CFDI 4.0 automatizado y trazabilidad de facturacion por pedido."
+    }
+  ]
 };
 
 const faqSchema = {
@@ -88,6 +122,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className="scroll-smooth">
       <head>
+        <link rel="dns-prefetch" href="//saas.gestory.com" />
+        <link rel="preconnect" href="https://saas.gestory.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <meta name="theme-color" content="#f8fafc" />
