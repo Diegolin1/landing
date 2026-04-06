@@ -28,8 +28,8 @@ export const metadata: Metadata = {
     "gestión de inventarios", "POS offline", "CRM ventas", "listas de precios",
     "Gestory", "ERP en la nube", "software empresarial México"
   ],
-  authors: [{ name: "Gestory", url: "https://gestory.com" }],
-  creator: "Gestory",
+  authors: [{ name: "Diego Rodríguez", url: "https://gestory.com" }],
+  creator: "Diego Rodríguez",
   publisher: "Gestory",
   applicationName: "Gestory",
   referrer: "origin-when-cross-origin",
@@ -65,7 +65,7 @@ const organizationSchema = {
   "offers": { "@type": "AggregateOffer", "priceCurrency": "MXN", "lowPrice": "990", "highPrice": "2490", "offerCount": "3" },
   "author": {
     "@type": "Organization", "name": "Gestory", "url": "https://gestory.com",
-    "contactPoint": { "@type": "ContactPoint", "telephone": "+52-4776633068", "contactType": "Customer Service", "areaServed": "MX", "availableLanguage": ["Spanish", "English"] },
+    "contactPoint": { "@type": "ContactPoint", "telephone": "+52-4776633068", "contactType": "Sales and Support", "areaServed": "MX", "availableLanguage": ["Spanish", "English"] },
     "address": { "@type": "PostalAddress", "addressLocality": "León", "addressRegion": "Guanajuato", "addressCountry": "MX" }
   },
   "description": "Plataforma SaaS de gestión integral para empresas. Inventario multi-almacén, POS, facturación CFDI 4.0, portal B2B y reportes en tiempo real.",

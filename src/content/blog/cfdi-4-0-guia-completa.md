@@ -1,4 +1,4 @@
-﻿---
+---
 title: "GuÃ­a Completa: CFDI 4.0 para Vendedores B2B en MÃ©xico"
 description: "Todo lo que necesitas saber sobre facturaciÃ³n electrÃ³nica CFDI 4.0 sin complicaciones. GuÃ­a prÃ¡ctica para PYMES."
 date: "2026-03-12"
@@ -94,7 +94,7 @@ Con facturaciÃ³n digital:
 
 **Ahorro: $1,800-3,500 pesos/mes**
 
-## La Realidad: Lumina + CFDI
+## La Realidad: Gestory + CFDI
 
 No necesitas ser "tech-savvy" para facturar en CFDI 4.0. Los sistemas modernos hacen el trabajo pesado:
 
@@ -111,8 +111,8 @@ No necesitas ser "tech-savvy" para facturar en CFDI 4.0. Los sistemas modernos h
 
 1. **Registra tus datos en el SAT** (si no lo has hecho)
 2. **Consulta con tu contador** sobre facturaciÃ³n digital
-3. **Prueba un sistema** como Lumina 14 dÃ­as gratis
+3. **Prueba un sistema** como Gestory 30 días gratis
 4. **Mide el ahorro** de tiempo y errores
 
 
-**Â¿Preguntas?** [Contacta a nuestro equipo](mailto:soporte@lumina.mx) â€” Respondemos en espaÃ±ol en zona horaria mexicana.
+**¿Preguntas?** [Contacta a nuestro equipo](mailto:Diegorodvaz73@gmail.com) — Respondemos en español en zona horaria mexicana.

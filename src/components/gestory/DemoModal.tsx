@@ -109,10 +109,14 @@ export default function DemoModal({ isOpen, onClose }: DemoModalProps) {
     }
 
     setStatus("sending");
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
+
     try {
       const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
         body: JSON.stringify({
           name: form.name,
           email: form.email,
@@ -122,12 +126,14 @@ export default function DemoModal({ isOpen, onClose }: DemoModalProps) {
           source: "DEMO_MODAL",
         }),
       });
+      clearTimeout(timeoutId);
       if (res.ok) {
         setStatus("success");
       } else {
         setStatus("error");
       }
-    } catch {
+    } catch (err) {
+      clearTimeout(timeoutId);
       setStatus("error");
     }
   };

@@ -15,19 +15,25 @@ export default function FinalCTA() {
     if (!form.name || !form.email || !form.phone) return;
     
     setStatus("sending");
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
+
     try {
       const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
         body: JSON.stringify({ ...form, source: "FINAL_CTA" }),
       });
+      clearTimeout(timeoutId);
       if (res.ok) {
         setStatus("success");
         setForm({ name: "", email: "", phone: "" });
       } else {
         setStatus("error");
       }
-    } catch {
+    } catch (err) {
+      clearTimeout(timeoutId);
       setStatus("error");
     }
   };

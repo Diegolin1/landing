@@ -1,4 +1,4 @@
-﻿---
+---
 title: "CÃ³mo Estructurar Listas de Precios Mayoristas Que Realmente Venden"
 description: "Estrategia de precios para B2B: mÃ¡rgenes, volÃºmenes y segmentaciÃ³n. Aumenta ventas en 30% sin bajar precios."
 date: "2026-03-10"
@@ -118,7 +118,7 @@ En 6-12 meses, puedes tener 2-3 clientes VIP = $25,000-37,500/mes garantizados.
 - Margen variable (de 20% a 60%)
 - Contabilidad confusa
 
-### Con Sistema (Lumina):
+### Con Sistema (Gestory):
 - Precios centralizados en plataforma
 - Cliente VE su precio antes de pedir
 - Margen siempre consistente
@@ -164,7 +164,7 @@ Si tienes todo, **tu conversion subirÃ¡ automÃ¡ticamente 30%** porque:
 4. **Comunica a tu equipo:** Todos deben saber estos precios
 5. **Implementa en tu plataforma** (si tienes)
 
-[En Lumina, esto toma 15 minutos.](/) Prueba 14 dÃ­as gratis.
+[En Gestory, esto toma 15 minutos.](/) Prueba 30 días gratis.
 
 
-**Â¿Ya tienes estructura de precios?** [CuÃ©ntanos](mailto:soporte@lumina.mx) â€” Te ayudamos a validarla y mejorar mÃ¡rgenes.
+**¿Ya tienes estructura de precios?** [Cuéntanos](mailto:Diegorodvaz73@gmail.com) — Te ayudamos a validarla y mejorar márgenes.

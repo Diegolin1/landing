@@ -1,4 +1,4 @@
-﻿---
+---
 title: "5 Errores que Cometen los Fabricantes al Vender por Mayoreo"
 description: "Los errores mÃ¡s costosos en ventas mayoristas y cÃ³mo evitarlos. Recupera hasta $50,000 mensuales en ventas perdidas."
 date: "2026-03-11"
@@ -98,7 +98,7 @@ Un fabricante tÃ­pico con estos 5 errores:
 
 ## CÃ³mo Evitarlos: La SoluciÃ³n Integral
 
-Una plataforma como Lumina **elimina TODOS estos errores de una vez**:
+Una plataforma como Gestory **elimina TODOS estos errores de una vez**:
 
 âœ… CatÃ¡logo accesible 24/7  
 âœ… Precios centralizados (sin confusiÃ³n)  
@@ -123,7 +123,7 @@ Una plataforma como Lumina **elimina TODOS estos errores de una vez**:
 
 **Si respondiste "No" a 3+:** EstÃ¡s perdiendo dinero. 
 
-[Prueba Lumina gratis por 14 dÃ­as.](/) Mide el ahorro real.
+[Prueba Gestory gratis por 30 días.](/) Mide el ahorro real.
 
 
-**Â¿Reconociste alguno de estos errores en tu operaciÃ³n?** [Escribe aquÃ­](mailto:soporte@lumina.mx) â€” Consultores gratuitos te ayudan a identificar exactamente cuÃ¡nto estÃ¡s perdiendo.
+**¿Reconociste alguno de estos errores en tu operación?** [Escribe aquí](mailto:Diegorodvaz73@gmail.com) — Consultores gratuitos te ayudan a identificar exactamente cuánto estás perdiendo.

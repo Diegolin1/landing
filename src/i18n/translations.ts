@@ -290,7 +290,7 @@ export const translations = {
     demo: {
       title: "Descubre Gestory en Acción",
       subtitle:
-        "Agenda una llamada de 15 minutos con un experto. Veremos tus necesidades y cómo adaptar Gestory a tu empresa.",
+        "Agenda una llamada de 15 minutos con Diego Rodríguez. Veremos tus necesidades y cómo adaptar Gestory a tu empresa.",
       step1: "Paso 1 de 2",
       step2: "Paso 2 de 2",
       step1Title: "¿Cómo te podemos contactar?",
@@ -313,12 +313,12 @@ export const translations = {
       privacy: "No compartiremos tu información con terceros.",
       successTitle: "¡Demo agendada!",
       successMsg:
-        "Un asesor te contactará en las próximas 24 horas para confirmar tu videollamada.",
+        "Diego Rodríguez te contactará en las próximas 24 horas para confirmar tu videollamada.",
       errorMsg: "Hubo un error. Intenta de nuevo o escríbenos por WhatsApp.",
     },
     // WhatsApp
     whatsapp: {
-      tooltip: "¿Quieres una demo del plan Multi-Sucursal?",
+      tooltip: "¿Quieres hablar con Diego Rodríguez sobre el plan Multi-Sucursal?",
       schedule: "Lun-Vie · 9:00 a 18:00 (CDMX)",
       cta: "Hablar con ventas",
       message: "Hola, vi la landing de Gestory y quiero una demo del plan Multi-Sucursal. ¿Me comparten disponibilidad?",
@@ -595,7 +595,7 @@ export const translations = {
     demo: {
       title: "See Gestory in Action",
       subtitle:
-        "Schedule a 15-minute call with an expert. We'll review your needs and how to adapt Gestory for your business.",
+        "Schedule a 15-minute call with Diego Rodríguez. We'll review your needs and how to adapt Gestory for your business.",
       step1: "Step 1 of 2",
       step2: "Step 2 of 2",
       step1Title: "How can we contact you?",
@@ -618,11 +618,11 @@ export const translations = {
       privacy: "We won't share your information with third parties.",
       successTitle: "Demo booked!",
       successMsg:
-        "An advisor will contact you within 24 hours to confirm your call.",
+        "Diego Rodríguez te contactará en las próximas 24 horas para confirmar tu videollamada.",
       errorMsg: "There was an error. Try again or write us on WhatsApp.",
     },
     whatsapp: {
-      tooltip: "Want a demo of the Multi-Branch plan?",
+      tooltip: "Want to talk with Diego Rodríguez about the Multi-Branch plan?",
       schedule: "Mon-Fri · 9:00 AM to 6:00 PM (CDMX)",
       cta: "Talk to sales",
       message: "Hi, I saw the Gestory landing page and I want a demo of the Multi-Branch plan. Can you share availability?",
