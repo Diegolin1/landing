@@ -111,35 +111,23 @@ export default function ProblemSolution() {
               </span>
             </div>
 
-            <div className="relative h-56 rounded-2xl border border-borderLight overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-error-light/80 via-white to-error-light/50 p-5 sm:p-6">
-                <p className="text-[11px] font-bold uppercase tracking-wider text-error mb-3">
-                  {t.problem.problemTitle}
-                </p>
-                <ul className="space-y-2 text-xs sm:text-sm text-textSecondary font-medium">
-                  {t.problem.problemItems.slice(0, 3).map((item) => (
-                    <li key={item} className="flex items-start gap-2">
-                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-error shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div
-                className="absolute inset-y-0 left-0 overflow-hidden border-r-2 border-white/80"
-                style={{ width: `${comparison}%` }}
-              >
-                <div className="h-full min-w-full bg-gradient-to-br from-success-light/70 via-white to-primary-light/50 p-5 sm:p-6">
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-success mb-3">
-                    {t.problem.solutionTitle}
-                  </p>
-                  <ul className="space-y-2 text-xs sm:text-sm text-textPrimary font-semibold">
-                    {t.problem.solutionItems.slice(0, 3).map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-0.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-success text-white shrink-0">
-                          <Check className="h-2.5 w-2.5" />
-                        </span>
+            <div className="relative h-64 sm:h-64 rounded-2xl border border-borderLight overflow-hidden shadow-inner bg-white">
+              {/* LAYER 1 (Bottom): The "After" state (Solution) */}
+              {/* This is what is revealed as the slider moves right to left (increasing the Solution area) */}
+              <div className="absolute inset-0 bg-gradient-to-br from-success-light/90 via-white to-primary-light/40 p-6 sm:p-7 flex flex-col justify-center">
+                <div className="relative z-0">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-success text-white shadow-sm ring-4 ring-success/10">
+                      <Check className="h-3 w-3" />
+                    </span>
+                    <p className="text-[11px] font-extrabold uppercase tracking-widest text-success">
+                      {t.problem.solutionTitle}
+                    </p>
+                  </div>
+                  <ul className="space-y-2.5 text-xs sm:text-[14px] text-textPrimary font-semibold">
+                    {t.problem.solutionItems.slice(0, 4).map((item) => (
+                      <li key={item} className="flex items-start gap-2.5 drop-shadow-sm">
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-success/60 shrink-0" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -147,27 +135,68 @@ export default function ProblemSolution() {
                 </div>
               </div>
 
-              <div
-                className="absolute top-0 bottom-0 w-0.5 bg-white/90 pointer-events-none"
-                style={{ left: `calc(${comparison}% - 1px)` }}
+              {/* LAYER 2 (Top Overlay): The "Before" state (Problem) */}
+              {/* As comparison% increases, this layer covers the Solution from the left */}
+              <div 
+                className="absolute inset-y-0 left-0 overflow-hidden border-r-[3px] border-white/90 z-10 shadow-2xl transition-all duration-75 ease-out"
+                style={{ width: `${comparison}%` }}
               >
-                <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-8 w-8 rounded-full bg-white border border-borderLight shadow-card flex items-center justify-center text-textMuted text-xs font-bold">
-                  ||
+                <div className="h-full min-w-full bg-gradient-to-br from-error-light/95 via-white to-error-light/70 p-6 sm:p-7 flex flex-col justify-center backdrop-blur-[1px]">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-error-light items-center justify-center ring-4 ring-error/5">
+                      <div className="h-2 w-2 bg-error rounded-full animate-pulse" />
+                    </span>
+                    <p className="text-[11px] font-extrabold uppercase tracking-widest text-error">
+                      {t.problem.problemTitle}
+                    </p>
+                  </div>
+                  <ul className="space-y-2.5 text-xs sm:text-[14px] text-textSecondary font-medium">
+                    {t.problem.problemItems.slice(0, 4).map((item) => (
+                      <li key={item} className="flex items-start gap-2.5 opacity-80">
+                        <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-error shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* SLIDER HANDLE INDICATOR */}
+              <div 
+                className="absolute top-0 bottom-0 pointer-events-none z-20 group"
+                style={{ left: `calc(${comparison}% - 1.5px)` }}
+              >
+                <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 h-10 w-10 rounded-full bg-white border-2 border-primary shadow-xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                  <div className="flex gap-0.5">
+                    <div className="h-3 w-0.5 bg-primary/40 rounded-full" />
+                    <div className="h-3 w-0.5 bg-primary/80 rounded-full" />
+                    <div className="h-3 w-0.5 bg-primary/40 rounded-full" />
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="mt-4">
+            <div className="mt-6 px-2">
               <input
                 type="range"
-                min={18}
-                max={92}
+                min={0}
+                max={100}
                 value={comparison}
                 onChange={(event) => setComparison(Number(event.target.value))}
-                className="w-full accent-accent"
+                className="w-full h-2 bg-surface-muted rounded-lg appearance-none cursor-pointer accent-primary hover:accent-primary-dark transition-all shadow-inner"
                 aria-label={isEs ? "Comparador antes y despues" : "Before and after comparison"}
               />
-              <p className="text-xs text-textMuted mt-2">{sliderCopy.hint}</p>
+              <div className="flex justify-between items-center mt-2">
+                <p className="text-[10px] text-textMuted font-medium italic opacity-70">
+                  {sliderCopy.hint}
+                </p>
+                <div className="flex items-center gap-1.5 p-1 bg-surface-muted rounded-md px-2">
+                  <div className={`h-1.5 w-1.5 rounded-full ${comparison > 50 ? 'bg-error animate-pulse' : 'bg-success'}`} />
+                  <span className="text-[9px] font-bold uppercase tracking-tighter text-textMuted">
+                    {comparison > 50 ? 'Status: Crisis' : 'Status: Gestory'}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
