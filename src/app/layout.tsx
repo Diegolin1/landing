@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, 'max-video-preview': -1, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
   alternates: { canonical: 'https://gestory.com', languages: { 'es-MX': 'https://gestory.com', 'en': 'https://gestory.com' } },
-  icons: { icon: "/favicon.ico", shortcut: "/favicon.ico", apple: "/apple-touch-icon.png" },
+
   openGraph: {
     type: "website", locale: "es_MX", url: "https://gestory.com", siteName: "Gestory",
     title: "Gestory | ERP y Punto de Venta para Empresas en Crecimiento",
