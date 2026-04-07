@@ -49,10 +49,6 @@ export const translations = {
       stockExact: "Stock Exacto",
       multiWarehouse: "Multi-Almacén Activo",
     },
-    // Logo Ticker
-    logoTicker: {
-      title: "Empresas que confían en Gestory y sus integraciones",
-    },
     // Problem / Solution
     problem: {
       eyebrow: "Tu Tiempo Libre",

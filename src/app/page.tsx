@@ -5,7 +5,6 @@ import dynamic from "next/dynamic";
 import { I18nProvider } from "../i18n";
 import Navbar from "../components/gestory/Navbar";
 import Hero from "../components/gestory/Hero";
-import LogoTicker from "../components/gestory/LogoTicker";
 import ProblemSolution from "../components/gestory/ProblemSolution";
 import HowItWorks from "../components/gestory/HowItWorks";
 import FeaturesBento from "../components/gestory/FeaturesBento";
@@ -17,7 +16,6 @@ import TopBanner from "../components/gestory/TopBanner";
 
 const Industries = dynamic(() => import("../components/gestory/Industries"));
 const Integrations = dynamic(() => import("../components/gestory/Integrations"));
-const Stats = dynamic(() => import("../components/gestory/Stats"));
 const Testimonials = dynamic(() => import("../components/gestory/Testimonials"));
 const ROICalculator = dynamic(() => import("../components/gestory/ROICalculator"));
 const FinalCTA = dynamic(() => import("../components/gestory/FinalCTA"));
@@ -73,13 +71,11 @@ export default function Home() {
         )}
         <Navbar onOpenDemo={openDemo} bannerOffset={bannerHeight} />
         <Hero onOpenDemo={openDemo} />
-        <LogoTicker />
         <ProblemSolution />
         <Industries />
         <HowItWorks />
         <FeaturesBento />
         <Integrations />
-        <Stats />
         <Testimonials />
         <ROICalculator onOpenDemo={openDemo} />
         <Pricing onOpenDemo={openDemo} />
