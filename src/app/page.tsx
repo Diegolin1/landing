@@ -16,7 +16,6 @@ import TopBanner from "../components/gestory/TopBanner";
 
 const Industries = dynamic(() => import("../components/gestory/Industries"));
 const Integrations = dynamic(() => import("../components/gestory/Integrations"));
-const Stats = dynamic(() => import("../components/gestory/Stats"));
 const Testimonials = dynamic(() => import("../components/gestory/Testimonials"));
 const ROICalculator = dynamic(() => import("../components/gestory/ROICalculator"));
 const FinalCTA = dynamic(() => import("../components/gestory/FinalCTA"));
@@ -77,7 +76,6 @@ export default function Home() {
         <HowItWorks />
         <FeaturesBento />
         <Integrations />
-        <Stats />
         <Testimonials />
         <ROICalculator onOpenDemo={openDemo} />
         <Pricing onOpenDemo={openDemo} />
