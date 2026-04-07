@@ -20,21 +20,32 @@ export async function POST(req: NextRequest) {
     // 3. Guardar en la base de datos del SaaS backend
     // 2.5. Enviar correo a destinatario
     try {
-      await sendEmail({
-        to: process.env.EMAIL_TO || 'contacto@gestory.tech',
-        subject: 'Nuevo lead desde landing Gestory',
-        html: `<h2>Nuevo lead recibido</h2>
-          <ul>
-            <li><b>Nombre:</b> ${name}</li>
-            <li><b>Email:</b> ${email}</li>
-            <li><b>Teléfono:</b> ${phone}</li>
-            <li><b>Empresa:</b> ${company || ''}</li>
-            <li><b>Tamaño de equipo:</b> ${teamSize || ''}</li>
-            <li><b>Fecha:</b> ${new Date().toLocaleString()}</li>
-          </ul>`
-      });
+      // El correo llegará a esta dirección (diegorodvaz73@gmail.com por defecto)
+      const emailTo = process.env.EMAIL_TO || 'diegorodvaz73@gmail.com';
+      
+      // Validación básica de configuración SMTP para evitar errores silenciosos
+      if (!process.env.SMTP_USER || !process.env.SMTP_PASS || !process.env.SMTP_HOST) {
+        console.warn('[EMAIL WARNING] Missing SMTP configuration. Email will not be sent.');
+      } else {
+        await sendEmail({
+          to: emailTo,
+          from: `"Gestory" <contacto@gestory.tech>`,
+          replyTo: 'contacto@gestory.tech',
+          subject: 'Nuevo lead desde landing Gestory',
+          html: `<h2>Nuevo lead recibido</h2>
+            <ul>
+              <li><b>Nombre:</b> ${name}</li>
+              <li><b>Email:</b> ${email}</li>
+              <li><b>Teléfono:</b> ${phone}</li>
+              <li><b>Empresa:</b> ${company || ''}</li>
+              <li><b>Tamaño de equipo:</b> ${teamSize || ''}</li>
+              <li><b>Fecha:</b> ${new Date().toLocaleString()}</li>
+            </ul>`
+        });
+        console.log('[EMAIL SUCCESS] Notification sent to', emailTo);
+      }
     } catch (mailErr) {
-      console.error('[EMAIL ERROR]', mailErr);
+      console.error('[EMAIL ERROR] Failed to send email notification:', mailErr);
     }
     try {
       const backendUrl = process.env.BACKEND_URL || 'https://erp-prod-b76f4dc5f060.herokuapp.com';
