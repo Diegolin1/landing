@@ -5,7 +5,6 @@ import dynamic from "next/dynamic";
 import { I18nProvider } from "../i18n";
 import Navbar from "../components/gestory/Navbar";
 import Hero from "../components/gestory/Hero";
-import LogoTicker from "../components/gestory/LogoTicker";
 import ProblemSolution from "../components/gestory/ProblemSolution";
 import HowItWorks from "../components/gestory/HowItWorks";
 import FeaturesBento from "../components/gestory/FeaturesBento";
@@ -73,7 +72,6 @@ export default function Home() {
         )}
         <Navbar onOpenDemo={openDemo} bannerOffset={bannerHeight} />
         <Hero onOpenDemo={openDemo} />
-        <LogoTicker />
         <ProblemSolution />
         <Industries />
         <HowItWorks />
