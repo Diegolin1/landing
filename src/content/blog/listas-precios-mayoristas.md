@@ -167,4 +167,4 @@ Si tienes todo, **tu conversion subirÃ¡ automÃ¡ticamente 30%** porque:
 [En Gestory, esto toma 15 minutos.](/) Prueba 30 días gratis.
 
 
-**¿Ya tienes estructura de precios?** [Cuéntanos](mailto:Diegorodvaz73@gmail.com) — Te ayudamos a validarla y mejorar márgenes.
+**¿Ya tienes estructura de precios?** [Cuéntanos](mailto:contacto@gestory.tech) — Te ayudamos a validarla y mejorar márgenes.

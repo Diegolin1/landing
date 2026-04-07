@@ -31,7 +31,7 @@ export default function ObjectionsHandler() {
     {
       question: "¿Y si mi modelo de negocio es diferente? ¿Puede customizarse?",
       answer:
-        "Claro. Lumina maneja desde modelos simples (venta directa) hasta complejos (multi-tienda, comisiones, dropshipping, franquicias). Escríbenos a Diegorodvaz73@gmail.com y vemos si casamos.",
+        "Claro. Lumina maneja desde modelos simples (venta directa) hasta complejos (multi-tienda, comisiones, dropshipping, franquicias). Escríbenos a contacto@gestory.tech y vemos si casamos.",
     },
     {
       question: "🐘 'Mis vendedores van a sentir que la app les roba su trabajo.'",

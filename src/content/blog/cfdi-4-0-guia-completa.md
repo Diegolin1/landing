@@ -115,4 +115,4 @@ No necesitas ser "tech-savvy" para facturar en CFDI 4.0. Los sistemas modernos h
 4. **Mide el ahorro** de tiempo y errores
 
 
-**¿Preguntas?** [Contacta a nuestro equipo](mailto:Diegorodvaz73@gmail.com) — Respondemos en español en zona horaria mexicana.
+**¿Preguntas?** [Contacta a nuestro equipo](mailto:contacto@gestory.tech) — Respondemos en español en zona horaria mexicana.

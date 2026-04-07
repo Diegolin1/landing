@@ -41,7 +41,7 @@ export default function Footer() {
               <a href="https://wa.me/524776633068" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors p-2 bg-white/5 rounded-lg hover:bg-white/10" aria-label="WhatsApp">
                 <Phone className="h-4 w-4" />
               </a>
-              <a href="mailto:Diegorodvaz73@gmail.com" className="hover:text-white transition-colors p-2 bg-white/5 rounded-lg hover:bg-white/10" aria-label="Email">
+              <a href="mailto:contacto@gestory.tech" className="hover:text-white transition-colors p-2 bg-white/5 rounded-lg hover:bg-white/10" aria-label="Email">
                 <Mail className="h-4 w-4" />
               </a>
               <a href="#" className="hover:text-white transition-colors p-2 bg-white/5 rounded-lg hover:bg-white/10" aria-label="LinkedIn">
@@ -107,8 +107,8 @@ export default function Footer() {
               <a href="https://wa.me/524776633068" target="_blank" rel="noopener noreferrer" className="text-sm text-textMuted hover:text-white font-medium transition-colors block mb-1">
                 +52 (477) 663 3068
               </a>
-              <a href="mailto:Diegorodvaz73@gmail.com" className="text-sm text-textMuted hover:text-white font-medium transition-colors block">
-                Diegorodvaz73@gmail.com
+              <a href="mailto:contacto@gestory.tech" className="text-sm text-textMuted hover:text-white font-medium transition-colors block">
+                contacto@gestory.tech
               </a>
             </div>
           </div>

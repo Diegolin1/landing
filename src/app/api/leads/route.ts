@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
     // 2.5. Enviar correo a destinatario
     try {
       await sendEmail({
-        to: process.env.EMAIL_TO || 'diegorodvaz73@gmail.com',
+        to: process.env.EMAIL_TO || 'contacto@gestory.tech',
         subject: 'Nuevo lead desde landing Gestory',
         html: `<h2>Nuevo lead recibido</h2>
           <ul>

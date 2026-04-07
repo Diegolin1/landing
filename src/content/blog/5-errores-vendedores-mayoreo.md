@@ -126,4 +126,4 @@ Una plataforma como Gestory **elimina TODOS estos errores de una vez**:
 [Prueba Gestory gratis por 30 días.](/) Mide el ahorro real.
 
 
-**¿Reconociste alguno de estos errores en tu operación?** [Escribe aquí](mailto:Diegorodvaz73@gmail.com) — Consultores gratuitos te ayudan a identificar exactamente cuánto estás perdiendo.
+**¿Reconociste alguno de estos errores en tu operación?** [Escribe aquí](mailto:contacto@gestory.tech) — Consultores gratuitos te ayudan a identificar exactamente cuánto estás perdiendo.
