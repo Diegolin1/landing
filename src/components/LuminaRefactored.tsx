@@ -205,8 +205,7 @@ const LuminaRefactored = () => {
               <div className="hidden lg:flex gap-8 text-[13px] font-semibold text-stone-400">
                 <a href="#features" className="hover:text-white transition-colors">Infraestructura</a>
                 <a href="#comparativa" className="hover:text-white transition-colors">Diferencial B2B</a>
-                <a href="#pricing" className="hover:text-white transition-colors">Planes</a>
-                <a href="/blog" className="hover:text-white transition-colors">Blog Industrial</a>
+                 <a href="#pricing" className="hover:text-white transition-colors">Planes</a>
               </div>
             </div>
 
@@ -881,8 +880,7 @@ const LuminaRefactored = () => {
             <div className="space-y-5">
               <p className="text-[10px] font-black tracking-widest text-stone-400 uppercase">Recursos</p>
               <ul className="space-y-3 text-stone-500 text-sm font-medium">
-                <li><a href="/blog" className="hover:text-white transition-colors">Blog Industrial</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Casos de Éxito</a></li>
+                 <li><a href="#" className="hover:text-white transition-colors">Casos de Éxito</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Guía SAPICA/ANPIC</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Soporte</a></li>
               </ul>

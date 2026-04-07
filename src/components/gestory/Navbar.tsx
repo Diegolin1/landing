@@ -29,7 +29,6 @@ export default function Navbar({ onOpenDemo, bannerOffset = 0 }: NavbarProps) {
     { name: t.nav.modules, href: "#soluciones" },
     { name: t.nav.pricing, href: "#precios" },
     { name: t.nav.faq, href: "#faq" },
-    { name: t.nav.blog, href: "/blog" },
   ];
 
   return (

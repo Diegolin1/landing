@@ -1,26 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BookOpenIcon, BarChart3Icon, UsersIcon, AwardIcon } from "lucide-react";
-import { getBlogPosts } from "@/utils/blog";
+import { ShieldCheckIcon, HeadphonesIcon, UsersIcon, AwardIcon } from "lucide-react";
 
 export default function TrustSignals() {
-  const posts = getBlogPosts();
-  const totalWords = posts.reduce((acc, post) => {
-    return acc + (post.content.split(/\s+/).length || 0);
-  }, 0);
-
   const stats = [
     {
-      icon: BookOpenIcon,
-      label: "Artículos Publicados",
-      value: posts.length.toString(),
+      icon: ShieldCheckIcon,
+      label: "Uptime SLA",
+      value: "99.9%",
       color: "from-blue-500 to-cyan-500",
     },
     {
-      icon: BarChart3Icon,
-      label: "Palabras de Valor",
-      value: `${(totalWords / 1000).toFixed(0)}K+`,
+      icon: HeadphonesIcon,
+      label: "Soporte 24/7",
+      value: "15min",
       color: "from-green-500 to-emerald-500",
     },
     {
