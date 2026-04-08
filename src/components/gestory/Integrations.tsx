@@ -1,11 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CheckCircle2, Link2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { useI18n } from "../../i18n";
 
 export default function Integrations() {
   const { locale } = useI18n();
+
+  const integrations = [
+    { name: "Facturapi", logo: "https://facturapi.io/img/facturapi-logo.png" },
+    { name: "Mercado Pago", logo: "https://http2.mlstatic.com/static/org-img/homesnw/mercado-pago-logo.png" },
+    { name: "Mercado Libre", logo: "https://http2.mlstatic.com/frontend-assets/ui-navigation/5.19.7/mercado-libre-logo@2x.png" },
+    { name: "Clip", logo: "https://www.clip.mx/favicon.ico" },
+    { name: "Stripe", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/1190px-Stripe_Logo%2C_revised_2016.svg.png" },
+    { name: "OXXO", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/OXXO.svg/1024px-OXXO.svg.png" },
+  ];
 
   const content =
     locale === "es"
@@ -14,7 +23,6 @@ export default function Integrations() {
           headline: "Conecta Gestory con tu operación actual",
           subtitle:
             "Integra facturación, cobros y canales de venta sin reescribir procesos desde cero.",
-          chips: ["Facturapi", "Mercado Pago", "Mercado Libre", "Clip", "Stripe", "Amazon AWS"],
           bullets: [
             "Facturación CFDI 4.0 conectada con PAC",
             "Cobros online y conciliación de pedidos",
@@ -26,7 +34,6 @@ export default function Integrations() {
           headline: "Connect Gestory with your current stack",
           subtitle:
             "Unify invoicing, payments and sales channels without rebuilding your operation.",
-          chips: ["Facturapi", "Mercado Pago", "Mercado Libre", "Clip", "Stripe", "Amazon AWS"],
           bullets: [
             "CFDI 4.0 invoicing connected to certified PAC",
             "Online payments and order reconciliation",
@@ -47,17 +54,21 @@ export default function Integrations() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8">
-            {content.chips.map((item, idx) => (
+            {integrations.map((integration, idx) => (
               <motion.div
-                key={item}
+                key={integration.name}
                 initial={{ opacity: 0, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.35, delay: idx * 0.05 }}
-                className="rounded-xl border border-borderLight bg-surface px-3 py-3 text-sm font-semibold text-textPrimary text-center flex items-center justify-center gap-2"
+                className="rounded-xl border border-borderLight bg-surface px-4 py-4 text-sm font-semibold text-textPrimary text-center flex flex-col items-center justify-center gap-3 hover:border-accent hover:bg-white transition-all duration-300"
               >
-                <Link2 className="h-4 w-4 text-accent" />
-                {item}
+                <img 
+                  src={integration.logo} 
+                  alt={`${integration.name} logo`} 
+                  className="h-8 w-auto object-contain"
+                />
+                <span>{integration.name}</span>
               </motion.div>
             ))}
           </div>
