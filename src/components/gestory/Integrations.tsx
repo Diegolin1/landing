@@ -8,12 +8,12 @@ export default function Integrations() {
   const { locale } = useI18n();
 
   const integrations = [
-    { name: "Facturapi", logo: "https://facturapi.io/img/facturapi-logo.png" },
-    { name: "Mercado Pago", logo: "https://http2.mlstatic.com/static/org-img/homesnw/mercado-pago-logo.png" },
-    { name: "Mercado Libre", logo: "https://http2.mlstatic.com/frontend-assets/ui-navigation/5.19.7/mercado-libre-logo@2x.png" },
-    { name: "Clip", logo: "https://www.clip.mx/favicon.ico" },
-    { name: "Stripe", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/1190px-Stripe_Logo%2C_revised_2016.svg.png" },
-    { name: "OXXO", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/OXXO.svg/1024px-OXXO.svg.png" },
+    { name: "Facturapi", icon: "📄" },
+    { name: "Mercado Pago", icon: "💰" },
+    { name: "Mercado Libre", icon: "🛒" },
+    { name: "Clip", icon: "💳" },
+    { name: "Stripe", icon: "🔐" },
+    { name: "OXXO", icon: "🏪" },
   ];
 
   const content =
@@ -63,11 +63,7 @@ export default function Integrations() {
                 transition={{ duration: 0.35, delay: idx * 0.05 }}
                 className="rounded-xl border border-borderLight bg-surface px-4 py-4 text-sm font-semibold text-textPrimary text-center flex flex-col items-center justify-center gap-3 hover:border-accent hover:bg-white transition-all duration-300"
               >
-                <img 
-                  src={integration.logo} 
-                  alt={`${integration.name} logo`} 
-                  className="h-8 w-auto object-contain"
-                />
+                <span className="text-2xl">{integration.icon}</span>
                 <span>{integration.name}</span>
               </motion.div>
             ))}
