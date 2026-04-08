@@ -29,8 +29,6 @@ export async function POST(req: NextRequest) {
       } else {
         await sendEmail({
           to: emailTo,
-          from: `"Gestory" <contacto@gestory.tech>`,
-          replyTo: 'contacto@gestory.tech',
           subject: 'Nuevo lead desde landing Gestory',
           html: `<h2>Nuevo lead recibido</h2>
             <ul>
