@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/admin/", "/private/"],
     },
-    sitemap: [`${baseUrl}/sitemap.xml`, `${baseUrl}/api/blog-sitemap`],
+    sitemap: [`${baseUrl}/sitemap.xml`],
     host: baseUrl,
   };
 }

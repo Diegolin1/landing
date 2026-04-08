@@ -10,31 +10,38 @@ export default function Footer() {
 
   const productAnchors = ["#soluciones", "#soluciones", "#soluciones", "#soluciones"];
   const companyAnchors = ["#security", "#faq", "#precios"];
+  const legalLinks = [
+    { label: t.footer.legalLinks[0], href: "https://saas.gestory.com/terminos" },
+    { label: t.footer.legalLinks[1], href: "https://saas.gestory.com/privacidad" },
+    { label: t.footer.legalLinks[2], href: "https://saas.gestory.com/aviso-legal" },
+  ];
 
   return (
     <footer className="bg-surface-dark text-textInverse border-t border-borderDark pt-16 pb-8">
       <div className="section-container">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-          {/* Brand */}
+          {/* High Impact Brand Branding */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/">
-              <Image 
-                src="/logos/gestory-white.png" 
-                alt="Gestory Logo" 
-                width={160} 
-                height={50} 
-                className="h-10 w-auto mb-5"
-                priority
-              />
+            <Link href="/" className="inline-block group mb-6">
+              <div className="animate-logo-glow">
+                <Image 
+                  src="/logos/gestory-white.png" 
+                  alt="Gestory Logo" 
+                  width={220} 
+                  height={70} 
+                  className="h-14 w-auto object-contain transition-transform group-hover:scale-105 duration-300 drop-shadow-md"
+                  priority
+                />
+              </div>
             </Link>
-            <p className="text-textMuted text-sm font-medium leading-relaxed mb-5">
+            <p className="text-textMuted text-base font-medium leading-relaxed mb-6 italic opacity-90">
               {t.footer.description}
             </p>
             <div className="flex gap-3 text-textMuted">
               <a href="https://wa.me/524776633068" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors p-2 bg-white/5 rounded-lg hover:bg-white/10" aria-label="WhatsApp">
                 <Phone className="h-4 w-4" />
               </a>
-              <a href="mailto:contacto@gestory.com" className="hover:text-white transition-colors p-2 bg-white/5 rounded-lg hover:bg-white/10" aria-label="Email">
+              <a href="mailto:contacto@gestory.tech" className="hover:text-white transition-colors p-2 bg-white/5 rounded-lg hover:bg-white/10" aria-label="Email">
                 <Mail className="h-4 w-4" />
               </a>
               <a href="#" className="hover:text-white transition-colors p-2 bg-white/5 rounded-lg hover:bg-white/10" aria-label="LinkedIn">
@@ -75,11 +82,16 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-white mb-4 tracking-wider uppercase text-xs">{t.footer.legal}</h4>
             <ul className="space-y-2.5">
-              {t.footer.legalLinks.map((link) => (
-                <li key={link}>
-                  <Link href="#" className="text-sm text-textMuted hover:text-white font-medium transition-colors">
-                    {link}
-                  </Link>
+              {legalLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-textMuted hover:text-white font-medium transition-colors"
+                  >
+                    {link.label}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -90,8 +102,8 @@ export default function Footer() {
               <a href="https://wa.me/524776633068" target="_blank" rel="noopener noreferrer" className="text-sm text-textMuted hover:text-white font-medium transition-colors block mb-1">
                 +52 (477) 663 3068
               </a>
-              <a href="mailto:contacto@gestory.com" className="text-sm text-textMuted hover:text-white font-medium transition-colors block">
-                contacto@gestory.com
+              <a href="mailto:contacto@gestory.tech" className="text-sm text-textMuted hover:text-white font-medium transition-colors block">
+                contacto@gestory.tech
               </a>
             </div>
           </div>

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, X, ChevronDown, BookOpenIcon } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { scrollToDemoBooking } from "../utils/scroll";
 
 export default function Navbar() {
@@ -68,10 +68,7 @@ export default function Navbar() {
         <a href="#precios" className="px-4 py-2 text-textSecondary hover:text-textPrimary transition-colors rounded-lg hover:bg-surface-muted">
           Planes
         </a>
-        <Link href="/blog" className="px-4 py-2 text-textSecondary hover:text-textPrimary transition-colors rounded-lg hover:bg-surface-muted flex items-center gap-1.5">
-          <BookOpenIcon size={14} />
-          Blog
-        </Link>
+
       </nav>
 
       {/* Desktop CTAs */}
@@ -125,10 +122,7 @@ export default function Navbar() {
             <a href="#precios" onClick={() => setIsOpen(false)} className="px-3 py-2 text-sm text-textSecondary hover:text-textPrimary hover:bg-surface-muted rounded-lg transition-colors">
               Planes
             </a>
-            <Link href="/blog" onClick={() => setIsOpen(false)} className="px-3 py-2 text-sm text-textSecondary hover:text-textPrimary hover:bg-surface-muted rounded-lg transition-colors flex items-center gap-2">
-              <BookOpenIcon size={14} />
-              Blog
-            </Link>
+
 
             <div className="pt-3 border-t border-borderLight space-y-2">
               <a href="/login" className="block px-3 py-2 text-sm text-textSecondary hover:text-textPrimary hover:bg-surface-muted rounded-lg transition-colors">

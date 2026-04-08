@@ -5,7 +5,8 @@ import { Lock, DatabaseBackup, ActivitySquare, Server } from "lucide-react";
 import { useI18n } from "../../i18n";
 
 export default function SecurityTrust() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
+  const isEs = locale === "es";
 
   const points = [
     {
@@ -25,8 +26,10 @@ export default function SecurityTrust() {
     },
     {
       icon: <Server className="h-5 w-5 text-warning" />,
-      title: t.security.privacy,
-      desc: t.security.privacyDesc,
+      title: isEs ? "Aislamiento multi-tenant" : "Multi-tenant isolation",
+      desc: isEs
+        ? "Cada empresa opera en un tenant aislado con controles de acceso por rol y separacion logica de datos."
+        : "Each company runs in an isolated tenant with role-based access controls and logical data separation.",
     },
   ];
 
@@ -64,6 +67,23 @@ export default function SecurityTrust() {
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.35, delay: 0.2 }}
+          className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-5"
+        >
+          <p className="text-xs uppercase tracking-wider font-bold text-blue-200 mb-2">
+            {isEs ? "Arquitectura de confianza" : "Trusted architecture"}
+          </p>
+          <p className="text-sm text-blue-100/70">
+            {isEs
+              ? "Gestory corre sobre infraestructura cloud con monitoreo continuo, respaldos diarios y politicas de acceso por tenant para proteger operaciones sensibles."
+              : "Gestory runs on cloud infrastructure with continuous monitoring, daily backups and tenant-level access policies to protect sensitive operations."}
+          </p>
+        </motion.div>
       </div>
     </section>
   );

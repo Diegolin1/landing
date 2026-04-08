@@ -29,9 +29,9 @@ export default function NewsletterSignup() {
 
   return (
     <section className="bg-surface border border-borderDark rounded-2xl p-8">
-      <h3 className="text-2xl font-bold text-white mb-2">Newsletter Lumina</h3>
+      <h3 className="text-2xl font-bold text-white mb-2">Newsletter Gestory</h3>
       <p className="text-white/70 mb-6">
-        Recibe estrategias de ventas B2B directas a tu inbox. Una vez a la semana.
+        Recibe guias de ERP, CFDI y operaciones multi-canal directo a tu inbox. Una vez a la semana.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">

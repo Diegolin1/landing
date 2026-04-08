@@ -118,6 +118,45 @@
   animation: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* ── Brand Animations ───────────────────────────────────────────── */
+
+@keyframes logo-shine {
+  from { left: -100%; }
+  to { left: 100%; }
+}
+
+.animate-logo-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-logo-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: skewX(-25deg);
+  animation: logo-shine 3s infinite;
+}
+
+@keyframes logo-glow {
+  0% { filter: drop-shadow(0 0 0px rgba(37, 99, 235, 0)); }
+  50% { filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.3)); }
+  100% { filter: drop-shadow(0 0 0px rgba(37, 99, 235, 0)); }
+}
+
+.animate-logo-glow {
+  animation: logo-glow 4s ease-in-out infinite;
+}
+
 /* ── Focus states ───────────────────────────────────────────────── */
 *:focus-visible {
   @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-background;

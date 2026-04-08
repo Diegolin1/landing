@@ -13,13 +13,21 @@ export const translations = {
       bookDemo: "Agendar Demo",
       bookDemoFree: "Agendar Demo Gratis",
     },
+    topBanner: {
+      badge: "Oferta limitada",
+      offer: "Setup y migración inicial GRATIS por lanzamiento",
+      spots: "Solo 3 espacios este mes",
+      endsIn: "Termina en",
+      cta: "Quiero esta oferta",
+      close: "Cerrar banner promocional",
+    },
     // Hero
     hero: {
       badge: "Prueba Gestory 30 días — si no te convence, no pagas nada",
       headline: "Todo tu negocio en un",
       headlineAccent: "solo lugar",
       subtitle:
-        "Controla inventario, ventas, facturación y sucursales desde una sola plataforma. Gestory conecta tu tienda física con tus ventas online y funciona en días, no meses.",
+        "Opera POS incluso sin internet, emite CFDI 4.0 con auto-facturación QR, controla inventario multi-almacén y toma pedidos B2B desde una sola plataforma.",
       cta1: "Agendar Demo Gratis",
       cta2: "Ver cómo funciona",
       check1: "30 días sin costo",
@@ -39,10 +47,6 @@ export const translations = {
       invoiced: "Facturado",
       stockExact: "Stock Exacto",
       multiWarehouse: "Multi-Almacén Activo",
-    },
-    // Logo Ticker
-    logoTicker: {
-      title: "Empresas que confían en Gestory y sus integraciones",
     },
     // Problem / Solution
     problem: {
@@ -281,7 +285,11 @@ export const translations = {
     demo: {
       title: "Descubre Gestory en Acción",
       subtitle:
-        "Agenda una llamada de 15 minutos con un experto. Veremos tus necesidades y cómo adaptar Gestory a tu empresa.",
+        "Agenda una llamada de 15 minutos con Diego Rodríguez. Veremos tus necesidades y cómo adaptar Gestory a tu empresa.",
+      step1: "Paso 1 de 2",
+      step2: "Paso 2 de 2",
+      step1Title: "¿Cómo te podemos contactar?",
+      step2Title: "Personaliza tu demo (opcional)",
       nameLabel: "Nombre Completo",
       namePlaceholder: "Juan Pérez",
       emailLabel: "Correo Electrónico",
@@ -292,18 +300,23 @@ export const translations = {
       companyPlaceholder: "Mi Empresa S.A. de C.V.",
       teamSizeLabel: "Tamaño del equipo",
       teamSizeOptions: ["1-5 empleados", "6-20 empleados", "21-50 empleados", "50+ empleados"],
+      continue: "Continuar",
+      back: "Atrás",
+      optionalHint: "Este último paso nos ayuda a prepararte una demostración más precisa.",
       submit: "Solicitar mi Demo",
       sending: "Enviando...",
       privacy: "No compartiremos tu información con terceros.",
       successTitle: "¡Demo agendada!",
       successMsg:
-        "Un asesor te contactará en las próximas 24 horas para confirmar tu videollamada.",
+        "Diego Rodríguez te contactará en las próximas 24 horas para confirmar tu videollamada.",
       errorMsg: "Hubo un error. Intenta de nuevo o escríbenos por WhatsApp.",
     },
     // WhatsApp
     whatsapp: {
-      tooltip: "¿Dudas? Escríbenos",
-      message: "Hola, me interesa conocer más sobre Gestory para mi empresa.",
+      tooltip: "¿Quieres hablar con Diego Rodríguez sobre el plan Multi-Sucursal?",
+      schedule: "Lun-Vie · 9:00 a 18:00 (CDMX)",
+      cta: "Hablar con ventas",
+      message: "Hola, vi la landing de Gestory y quiero una demo del plan Multi-Sucursal. ¿Me comparten disponibilidad?",
     },
   },
   en: {
@@ -317,12 +330,20 @@ export const translations = {
       bookDemo: "Book Demo",
       bookDemoFree: "Book Free Demo",
     },
+    topBanner: {
+      badge: "Limited offer",
+      offer: "Free setup + initial migration for new accounts",
+      spots: "Only 3 slots left this month",
+      endsIn: "Ends in",
+      cta: "Claim this offer",
+      close: "Close promotional banner",
+    },
     hero: {
       badge: "Try Gestory for 30 days — if you don't love it, you don't pay",
       headline: "Your entire business in",
       headlineAccent: "one place",
       subtitle:
-        "Control inventory, sales, invoicing and branches from one platform. Gestory connects your physical store with your online sales and works in days, not months.",
+        "Run POS even offline, automate CFDI 4.0 invoicing with QR self-service, control multi-warehouse inventory and capture B2B orders from one platform.",
       cta1: "Book Free Demo",
       cta2: "See how it works",
       check1: "30 days free",
@@ -568,7 +589,11 @@ export const translations = {
     demo: {
       title: "See Gestory in Action",
       subtitle:
-        "Schedule a 15-minute call with an expert. We'll review your needs and how to adapt Gestory for your business.",
+        "Schedule a 15-minute call with Diego Rodríguez. We'll review your needs and how to adapt Gestory for your business.",
+      step1: "Step 1 of 2",
+      step2: "Step 2 of 2",
+      step1Title: "How can we contact you?",
+      step2Title: "Customize your demo (optional)",
       nameLabel: "Full Name",
       namePlaceholder: "John Doe",
       emailLabel: "Email Address",
@@ -579,17 +604,22 @@ export const translations = {
       companyPlaceholder: "My Company Inc.",
       teamSizeLabel: "Team size",
       teamSizeOptions: ["1-5 employees", "6-20 employees", "21-50 employees", "50+ employees"],
+      continue: "Continue",
+      back: "Back",
+      optionalHint: "This final step helps us tailor the demo to your operation.",
       submit: "Request my Demo",
       sending: "Sending...",
       privacy: "We won't share your information with third parties.",
       successTitle: "Demo booked!",
       successMsg:
-        "An advisor will contact you within 24 hours to confirm your call.",
+        "Diego Rodríguez te contactará en las próximas 24 horas para confirmar tu videollamada.",
       errorMsg: "There was an error. Try again or write us on WhatsApp.",
     },
     whatsapp: {
-      tooltip: "Questions? Chat with us",
-      message: "Hi, I'd like to know more about Gestory for my business.",
+      tooltip: "Want to talk with Diego Rodríguez about the Multi-Branch plan?",
+      schedule: "Mon-Fri · 9:00 AM to 6:00 PM (CDMX)",
+      cta: "Talk to sales",
+      message: "Hi, I saw the Gestory landing page and I want a demo of the Multi-Branch plan. Can you share availability?",
     },
   },
 };

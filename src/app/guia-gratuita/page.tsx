@@ -115,19 +115,11 @@ export default function EmailCapturePage() {
               </p>
             </div>
 
-            <div className="bg-background/50 border border-borderDark rounded-lg p-6">
-              <p className="text-white/70 text-sm mb-4">Mientras esperas, lee nuestros artículos educativos:</p>
-              <Link
-                href="/blog"
-                className="inline-block px-6 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg transition-colors"
-              >
-                Ir al Blog
-              </Link>
-            </div>
+
 
             <p className="text-xs text-white/50">
               Si no ves el email en 5 minutos, {" "}
-              <a href="mailto:Diegorodvaz73@gmail.com" className="text-primary hover:underline">
+              <a href="mailto:contacto@gestory.tech" className="text-primary hover:underline">
                 contáctanos
               </a>
             </p>

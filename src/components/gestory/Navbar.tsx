@@ -9,9 +9,10 @@ import { useI18n } from "../../i18n";
 
 interface NavbarProps {
   onOpenDemo?: (e?: React.MouseEvent) => void;
+  bannerOffset?: number;
 }
 
-export default function Navbar({ onOpenDemo }: NavbarProps) {
+export default function Navbar({ onOpenDemo, bannerOffset = 0 }: NavbarProps) {
   const { t, locale, toggleLocale } = useI18n();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -32,7 +33,8 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      style={{ top: `${bannerOffset}px` }}
+      className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled
           ? "bg-white/80 backdrop-blur-xl shadow-sm border-b border-borderLight/50 py-3"
           : "bg-transparent py-5"
@@ -40,19 +42,29 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
     >
       <div className="section-container">
         <div className="flex justify-between items-center">
-          {/* Logo */}
+          {/* Logo with Premium Brand Impact */}
           <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="flex items-center gap-3">
-              <Image
-                src="/logos/gestory.png"
-                alt="Gestory Logo"
-                width={240}
-                height={76}
-                className={`w-auto object-contain transition-all duration-300 ${
-                  scrolled ? "h-11 lg:h-12" : "h-12 lg:h-14"
-                }`}
-                priority
-              />
+            <Link href="/" className="flex items-center group">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                whileHover={{ scale: 1.05 }}
+                className="relative animate-logo-glow"
+              >
+                <div className="relative overflow-hidden rounded-lg animate-logo-shine">
+                  <Image
+                    src="/logos/gestory.png"
+                    alt="Gestory Logo"
+                    width={280}
+                    height={88}
+                    className={`w-auto object-contain transition-all duration-300 drop-shadow-sm group-hover:drop-shadow-md ${
+                      scrolled ? "h-14 lg:h-16" : "h-16 lg:h-18"
+                    }`}
+                    priority
+                  />
+                </div>
+              </motion.div>
             </Link>
           </div>
 
@@ -81,12 +93,6 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
               <span className="uppercase text-xs font-bold">{locale === "es" ? "EN" : "ES"}</span>
             </button>
 
-            <Link
-              href="https://saas.gestory.com/login"
-              className="text-sm font-medium text-textSecondary hover:text-textPrimary px-4 py-2 rounded-lg transition-colors"
-            >
-              {t.nav.login}
-            </Link>
             <button
               onClick={onOpenDemo}
               className="bg-accent hover:bg-accent-hover text-white text-sm font-bold px-5 py-2.5 rounded-xl transition-all shadow-glow hover:shadow-glow-lg"
@@ -136,13 +142,6 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
                 </Link>
               ))}
               <div className="border-t border-borderLight pt-3 mt-2 flex flex-col gap-2">
-                <Link
-                  href="https://saas.gestory.com/login"
-                  className="text-sm font-medium text-center text-textPrimary border border-borderLight rounded-xl py-2.5 hover:bg-surface-muted transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {t.nav.login}
-                </Link>
                 <button
                   onClick={(e) => {
                     setMobileMenuOpen(false);

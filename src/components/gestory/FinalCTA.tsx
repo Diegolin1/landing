@@ -15,19 +15,25 @@ export default function FinalCTA() {
     if (!form.name || !form.email || !form.phone) return;
     
     setStatus("sending");
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
+
     try {
       const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
         body: JSON.stringify({ ...form, source: "FINAL_CTA" }),
       });
+      clearTimeout(timeoutId);
       if (res.ok) {
         setStatus("success");
         setForm({ name: "", email: "", phone: "" });
       } else {
         setStatus("error");
       }
-    } catch {
+    } catch (err) {
+      clearTimeout(timeoutId);
       setStatus("error");
     }
   };
@@ -72,7 +78,7 @@ export default function FinalCTA() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
               onSubmit={handleSubmit}
-              className="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto"
+              className="grid grid-cols-1 sm:grid-cols-12 gap-3 max-w-5xl mx-auto items-stretch"
             >
               <input
                 type="text"
@@ -80,7 +86,7 @@ export default function FinalCTA() {
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 placeholder={t.finalCta.namePlaceholder}
                 required
-                className="flex-1 px-4 py-3.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-blue-200/50 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
+                className="sm:col-span-3 px-4 py-3.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-blue-200/50 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
               />
               <input
                 type="email"
@@ -88,7 +94,7 @@ export default function FinalCTA() {
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 placeholder={t.finalCta.emailPlaceholder}
                 required
-                className="flex-1 px-4 py-3.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-blue-200/50 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
+                className="sm:col-span-3 px-4 py-3.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-blue-200/50 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
               />
               <input
                 type="tel"
@@ -96,12 +102,12 @@ export default function FinalCTA() {
                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
                 placeholder={t.finalCta.phonePlaceholder}
                 required
-                className="flex-1 px-4 py-3.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-blue-200/50 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
+                className="sm:col-span-3 px-4 py-3.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-blue-200/50 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
               />
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="px-8 py-3.5 bg-white text-primary font-bold text-sm rounded-xl hover:bg-blue-50 transition-all disabled:opacity-60 flex items-center justify-center gap-2 whitespace-nowrap shadow-lg"
+                className="sm:col-span-3 px-8 py-3.5 bg-white text-primary font-bold text-sm rounded-xl hover:bg-blue-50 transition-all disabled:opacity-60 flex items-center justify-center gap-2 whitespace-nowrap shadow-lg"
               >
                 {status === "sending" ? (
                   <><Loader2 className="h-4 w-4 animate-spin" /> {t.finalCta.sending}</>

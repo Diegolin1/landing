@@ -4,7 +4,7 @@ export default function StructuredData() {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Lumina B2B",
+    "name": "Gestory",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web",
     "offers": {
@@ -23,9 +23,9 @@ export default function StructuredData() {
     },
     "author": {
       "@type": "Organization",
-      "name": "Lumina",
-      "url": "https://lumina.mx",
-      "logo": "https://lumina.mx/logo.png",
+      "name": "Gestory",
+      "url": "https://gestory.com",
+      "logo": "https://gestory.com/logo.png",
       "sameAs": [
         "https://facebook.com/luminamx",
         "https://twitter.com/luminamx",
@@ -35,7 +35,7 @@ export default function StructuredData() {
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+52-4776633068",
-        "contactType": "Customer Service",
+        "contactType": "Sales and Support",
         "areaServed": "MX",
         "availableLanguage": ["Spanish"]
       },
