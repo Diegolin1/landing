@@ -209,7 +209,15 @@ export default function DemoModal({ isOpen, onClose }: DemoModalProps) {
               >
                 <CheckCircle2 className="h-14 w-14 text-success mx-auto mb-4" />
                 <h4 className="text-xl font-bold text-textPrimary mb-2">{t.demo.successTitle}</h4>
-                <p className="text-textSecondary text-sm mb-6">{t.demo.successMsg}</p>
+                <p className="text-textSecondary text-sm mb-4">{t.demo.successMsg}</p>
+                <div className="bg-accent-light/10 border border-accent-light/30 rounded-lg p-3 mb-6 text-left">
+                  <p className="text-xs text-textSecondary">
+                    {locale === "es" 
+                      ? "📧 Te contactaremos en breve a: " 
+                      : "📧 We'll contact you soon at: "}
+                    <span className="font-semibold text-textPrimary">{form.email}</span>
+                  </p>
+                </div>
                 <button
                   onClick={resetAndClose}
                   className="btn-outline text-sm"
