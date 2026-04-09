@@ -34,7 +34,7 @@ export default function Navbar({ onOpenDemo, bannerOffset = 0 }: NavbarProps) {
   return (
     <nav
       style={{ top: `${bannerOffset}px` }}
-      className={`fixed w-full z-40 transition-all duration-300 ${
+      className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled
           ? "bg-white/80 backdrop-blur-xl shadow-sm border-b border-borderLight/50 py-3"
           : "bg-transparent py-5"

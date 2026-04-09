@@ -47,7 +47,7 @@ export default function TopBanner({ onOpenDemo, onClose }: TopBannerProps) {
   const { days, hours, minutes } = useEndOfMonthCountdown();
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 min-h-[3.5rem] py-2 md:py-0 border-b border-white/20 bg-gradient-to-r from-primary to-accent text-white transition-all duration-300">
+    <div className="fixed top-0 left-0 right-0 z-[60] min-h-[3.5rem] py-2 md:py-0 border-b border-white/20 bg-gradient-to-r from-primary to-accent text-white transition-all duration-300">
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full animate-shimmer" />
       <div className="relative min-h-[3.5rem] section-container flex flex-wrap sm:flex-nowrap items-center justify-between gap-x-4 gap-y-2 py-1">
         <div className="min-w-0 flex items-center gap-2 sm:gap-3">

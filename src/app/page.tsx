@@ -60,7 +60,7 @@ export default function Home() {
 
   return (
     <I18nProvider>
-      <main className="min-h-screen font-sans bg-background text-textPrimary selection:bg-accent/20 selection:text-accent scroll-smooth pt-32">
+      <main className="min-h-screen font-sans bg-background text-textPrimary selection:bg-accent/20 selection:text-accent scroll-smooth">
         {isTopBannerVisible && (
           <div ref={bannerRef}>
             <TopBanner
