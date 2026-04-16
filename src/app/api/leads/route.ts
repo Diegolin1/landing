@@ -20,17 +20,20 @@ export async function POST(req: NextRequest) {
     // 3. Guardar en la base de datos del SaaS backend
     // 2.5. Enviar correo a destinatario
     try {
-      // El correo llegará a esta dirección (diegorodvaz73@gmail.com por defecto)
-      const emailTo = process.env.EMAIL_TO || 'diegorodvaz73@gmail.com';
-      
-      // Validación básica de configuración SMTP para evitar errores silenciosos
-      if (!process.env.SMTP_USER || !process.env.SMTP_PASS || !process.env.SMTP_HOST) {
-        console.warn('[EMAIL WARNING] Missing SMTP configuration. Email will not be sent.');
+      const emailTo = process.env.EMAIL_TO || process.env.SMTP_USER;
+      const hasSmtpConfig = Boolean(
+        process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS
+      );
+
+      if (!emailTo) {
+        console.warn('[EMAIL WARNING] Missing EMAIL_TO and SMTP_USER. Skipping email notification.');
+      } else if (!hasSmtpConfig) {
+        console.warn('[EMAIL WARNING] Missing SMTP configuration. Skipping email notification.');
       } else {
         await sendEmail({
           to: emailTo,
-          from: `"Gestory" <contacto@gestory.tech>`,
-          replyTo: 'contacto@gestory.tech',
+          from: process.env.EMAIL_FROM || '"Gestory" <contacto@gestory.tech>',
+          replyTo: process.env.EMAIL_REPLY_TO || 'contacto@gestory.tech',
           subject: 'Nuevo lead desde landing Gestory',
           html: `<h2>Nuevo lead recibido</h2>
             <ul>
@@ -42,10 +45,9 @@ export async function POST(req: NextRequest) {
               <li><b>Fecha:</b> ${new Date().toLocaleString()}</li>
             </ul>`
         });
-        console.log('[EMAIL SUCCESS] Notification sent to', emailTo);
       }
     } catch (mailErr) {
-      console.error('[EMAIL ERROR] Failed to send email notification:', mailErr);
+      console.error('[EMAIL ERROR]', mailErr);
     }
     try {
       const backendUrl = process.env.BACKEND_URL || 'https://erp-prod-b76f4dc5f060.herokuapp.com';
